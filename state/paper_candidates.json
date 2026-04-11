@@ -83,7 +83,19 @@
       "target_section": "discussion",
       "discovered_at": "2026-04-11T07:46:42.740270Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.36922/eer025440076",
+      "title": "A machine-learning framework for virus early warning from weather and urban sustainability signals",
+      "venue": null,
+      "pub_date": "2026-04-09",
+      "abstract": "Cities shape mosquito and arboviral risk through the way heat, water, vegetation, and drainage are managed. We present a fully reproducible early-warning pipeline that predicts trap&amp;ndash;week West Nile virus (WNV) positivity one to two weeks ahead using programmatically accessible sources (Socrata WNV pools and Meteostat weather), and a graph-aware post-hoc smoothing that enforces spatial coherence of predicted risks. Because direct API access to the Chicago portal requires a Socrata App Token, all reported experiments use an offline, synthetic trap&amp;ndash;week panel that mirrors a Chicago-like spatio-seasonal structure, while we ship turn-key code to re-run the identical analysis on the real data once a token is provided. Across forward-chaining evaluations, gradient boosting with",
+      "score": 9,
+      "reason": "WNV early warning w/ weather lag, API data, spatial smoothing, gradient boosting—direct parallel to our FSI-HCPS pipeline",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-11T13:11:01.227479Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-11T07:46:42.740270Z"
+  "last_run": "2026-04-11T13:11:01.227479Z"
 }
