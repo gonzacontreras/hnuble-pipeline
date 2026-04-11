@@ -29,8 +29,10 @@
       "status": "not_yet_run"
     },
     "w7": {
-      "last_run": null,
-      "status": "not_yet_run"
+      "last_run": "2026-04-11T07:45:54.118706Z",
+      "checked": 10,
+      "errors": 1,
+      "retractions": 0
     },
     "w8": {
       "last_run": null,
