@@ -6,6 +6,9 @@ on:
     paths:
       - 'docs/**'
       - 'state/**'
+      - '.github/workflows/deploy-pages.yml'
+  schedule:
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 concurrency:
