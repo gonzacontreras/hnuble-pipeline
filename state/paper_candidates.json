@@ -1,3 +1,89 @@
 {
-  "items": []
+  "items": [
+    {
+      "id": "10.5194/egusphere-2026-1169",
+      "title": "Short-Term Management of Water-Damage Claim Risk Using Ensemble Precipitation Forecasts",
+      "venue": null,
+      "pub_date": "2026-03-31",
+      "abstract": "Abstract. Insurers are increasingly challenged by weather-related claims arising from property damage, yet they lack adequate tools for near-term planning because traditional actuarial models do not incorporate real-time weather forecasts. This study demonstrates that incorporating ensemble precipitation forecasts improves short-range (1–4 days ahead) predictions of property insurance claim counts, thereby enabling proactive risk management. We present a forecasting framework for two Norwegian cities, Bergen and Oslo, using precipitation forecasts to predict days exceeding operationally significant thresholds. The models are evaluated by their forecast skill and reliability in predicting claim surges, as well as by their economic value in a cost-loss decision context, illustrating the pote",
+      "score": 9,
+      "reason": "Ensemble forecasts + proper scoring (cost-loss) + 1-4 day operational prediction – exactly mirrors our FSI->HCPS warning logic",
+      "target_section": "methods",
+      "discovered_at": "2026-04-11T07:46:42.740270Z",
+      "status": "NEW"
+    },
+    {
+      "id": "29cf7a46c5",
+      "title": "ScoringBench: A Benchmark for Evaluating Tabular Foundation Models with Proper Scoring Rules",
+      "venue": null,
+      "pub_date": "2026-03-31",
+      "abstract": "Tabular foundation models such as TabPFN and TabICL already produce full predictive distributions yet prevailing regression benchmarks evaluate them almost exclusively via point estimate metrics RMSE R2 These aggregate measures often obscure model performance in the tails of the distribution a critical deficit for high stakes decision making in domains like finance and clinical research where asymmetric risk profiles are the norm We introduce ScoringBench an open benchmark that computes a comprehensive suite of proper scoring rules like CRPS CRLS Interval Score Energy Score weighted CRPS and Brier Score alongside standard point metrics providing a richer picture of probabilistic forecast quality We evaluate realTabPFNv2.5 fine tuned with different scoring rule objectives and TabICL relativ",
+      "score": 8,
+      "reason": "ScoringBench benchmark using CRPS/Brier/Interval Score for probabilistic model evaluation – supports our scoring rule choice",
+      "target_section": "methods",
+      "discovered_at": "2026-04-11T07:46:42.740270Z",
+      "status": "NEW"
+    },
+    {
+      "id": "10.3390/atmos17040371",
+      "title": "Improving Probabilistic Lightning Forecasts Through Ensemble Postprocessing with Mesoscale Information",
+      "venue": null,
+      "pub_date": "2026-04-03",
+      "abstract": "Accurate short-term lightning forecasting requires reliable representations of both lightning occurrence and intensity, as well as the underlying convective processes. While ensemble prediction systems (EPSs) provide valuable probabilistic information, their ability to resolve mesoscale and convective-scale variability remains limited. In this study, we assess the added value of mesoscale information for probabilistic lightning forecasting over eastern China. A mesoscale ensemble is constructed from deterministic forecasts of the China Meteorological Administration (CMA) Mesoscale Model (MESO) using spatiotemporal neighborhood and time-lagged techniques and is combined with predictors from the CMA Regional Ensemble Prediction System (REPS). Lightning occurrence and counts are modeled withi",
+      "score": 8,
+      "reason": "Lightning EPS + mesoscale ensemble + probabilistic calibration – parallel early-warning system with lagged predictors",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-11T07:46:42.740270Z",
+      "status": "NEW"
+    },
+    {
+      "id": "2d8f0d7efe",
+      "title": "TimeSeek: Temporal Reliability of Agentic Forecasters",
+      "venue": null,
+      "pub_date": "2026-04-05",
+      "abstract": "We introduce TimeSeek, a benchmark for studying how the reliability of agentic LLM forecasters changes over a prediction market's lifecycle. We evaluate 10 frontier models on 150 CFTC-regulated Kalshi binary markets at five temporal checkpoints, with and without web search, for 15,000 forecasts total. Models are most competitive early in a market's life and on high-uncertainty markets, but much less competitive near resolution and on strong-consensus markets. Web search improves pooled Brier Skill Score (BSS) for every model overall, yet hurts in 12% of model-checkpoint pairs, indicating that retrieval is helpful on average but not uniformly so. Simple two-model ensembles reduce error without surpassing the market overall. These descriptive results motivate time-aware evaluation and select",
+      "score": 7,
+      "reason": "TimeSeek: temporal reliability + Brier Skill Score + model performance at lifecycle checkpoints – validates BSS use",
+      "target_section": "methods",
+      "discovered_at": "2026-04-11T07:46:42.740270Z",
+      "status": "NEW"
+    },
+    {
+      "id": "10.62311/nesx/rp1-30042026",
+      "title": "Geometric-Topological Quantum-AI for Continuous Wearable Biosensing, Physiological State Mapping, and Early Cardiometabolic Risk Prediction",
+      "venue": null,
+      "pub_date": "2026-04-05",
+      "abstract": "Abstract: This study investigates whether a geometric-topological Quantum-AI framework can improve early cardiometabolic risk prediction from continuous wearable biosensing streams. The manuscript integrates wrist-derived heart rate, nocturnal heart rate variability, daily step count, sleep duration, sleep regularity, and oxygen saturation into a physiological state-space representation that is treated as a curved manifold rather than a flat feature table. Topological summaries are extracted to preserve recurrent and transitional structure in physiological trajectories, while a quantum-kernel classifier is used to encode nonlinear interactions between autonomic, metabolic, and behavioural signatures that are difficult to separate with conventional clinical scores. The study is written in t",
+      "score": 7,
+      "reason": "Wearable biosensing + state-space + early risk prediction + calibration – conceptual parallel for lagged physiological signals",
+      "target_section": "intro",
+      "discovered_at": "2026-04-11T07:46:42.740270Z",
+      "status": "NEW"
+    },
+    {
+      "id": "10.62311/nesx/rp2-30032026",
+      "title": "Earth System Foundation Models for Predicting Extreme Climate Events Through Integrated Satellite, Oceanic, and Land-Surface Intelligence",
+      "venue": null,
+      "pub_date": "2026-03-30",
+      "abstract": "Abstract: This study investigates the scientific and operational potential of Earth system foundation models for anticipating extreme climate events through the joint assimilation and representation of atmospheric, oceanic, and land-surface information. The manuscript develops a rigorous synthesis framework built on real observational and reanalysis data sources, including ERA5, SMAP, NOAA OISST v2.1, GPM IMERG, MODIS surface products, and the NOAA IBTrACS archive. Rather than treating weather, ocean, and land processes as isolated forecasting domains, the proposed framework formalizes extreme-event prediction as a multiscale sequence-learning problem in which precursor signals propagate across coupled geophysical subsystems. Particular attention is given to rapidly intensifying tropical c",
+      "score": 7,
+      "reason": "Earth system precursor signals + satellite indices + extreme events + multi-scale – reinforces FSI satellite approach",
+      "target_section": "intro",
+      "discovered_at": "2026-04-11T07:46:42.740270Z",
+      "status": "NEW"
+    },
+    {
+      "id": "10.35234/fumbd.1790288",
+      "title": "Satellite-Driven Machine Learning Approaches for Rainfall Forecasting in Support of Smart Irrigation: The Case of Ankara and Samsun",
+      "venue": null,
+      "pub_date": "2026-03-29",
+      "abstract": "Accurate rainfall forecasting is essential for agriculture, water management, and disaster preparedness, and its importance is further amplified by increasing climate variability. Traditional approaches often fail to adequately capture the nonlinear and highly variable nature of rainfall, particularly at the local scale. This study investigates the effectiveness of machine learning techniques for daily rainfall prediction in Ankara and Samsun, Türkiye, to support smart irrigation systems. Rainfall time series derived from the PERSIANN satellite dataset (2020–2024) were enriched with lagged values, rolling statistics, dry-spell indices, and seasonal encodings. Multiple models, including Linear Regression, Random Forest, Support Vector Regression (SVR), Gradient Boosting, and XGBoost, were c",
+      "score": 7,
+      "reason": "Satellite rainfall ML + lagged features + smart irrigation – similar lagged remote-sensing architecture for operational use",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-11T07:46:42.740270Z",
+      "status": "NEW"
+    }
+  ],
+  "last_run": "2026-04-11T07:46:42.740270Z"
 }

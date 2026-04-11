@@ -5,8 +5,9 @@
       "status": "not_yet_run"
     },
     "w1": {
-      "last_run": null,
-      "status": "not_yet_run"
+      "last_run": "2026-04-11T07:46:42.740270Z",
+      "scanned": 22,
+      "new_candidates": 7
     },
     "w2": {
       "last_run": null,
