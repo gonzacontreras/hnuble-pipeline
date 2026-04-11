@@ -212,6 +212,7 @@ const EIGHT_MODELS = [
 
 // State
 let manuscript = null;
+let controlText = null;
 let improvedText = null;
 let improvementLog = null;
 let eidScore = null;
@@ -245,14 +246,17 @@ async function fetchText(path){
 }
 
 async function boot(){
+  // CONTROL (immutable v5_v3 CLEAN BASELINE) — fetched as both structured JSON
+  // (for stats/metadata) and raw markdown (for word-level diff vs IMPROVED).
   manuscript = await fetchJson("state/manuscript_v5_condensed.json");
+  controlText = await fetchText("state/manuscript_control.md");
   improvedText = await fetchText("state/manuscript_improved.md");
   improvementLog = await fetchJson("state/improvement_log.json");
   eidScore = await fetchJson("state/eid_score.json");
   modelEval = await fetchJson("state/model_evaluation.json");
 
-  if(!manuscript){
-    $("#diff-body").innerHTML = `<div class="diff-banner-msg"><strong>Error</strong>No se pudo cargar <code>state/manuscript_v5_condensed.json</code>. Ejecuta <code>python scripts/build_manuscript_json.py</code>.</div>`;
+  if(!manuscript || !controlText){
+    $("#diff-body").innerHTML = `<div class="diff-banner-msg"><strong>Error</strong>No se pudo cargar el manuscrito CONTROL. Verifica <code>state/manuscript_v5_condensed.json</code> y <code>state/manuscript_control.md</code>.</div>`;
     return;
   }
 
@@ -271,27 +275,26 @@ async function boot(){
 }
 
 // ------- Diff ---------------------------------------------------------------
-function manuscriptAsText(){
-  if(!manuscript) return "";
-  return manuscript.paragraphs
-    .filter(p => p.is_main_text)
-    .map(p => p.text)
-    .join("\n\n");
-}
+// CONTROL = immutable v5_v3 CLEAN BASELINE markdown (state/manuscript_control.md)
+// IMPROVED = mutable copy that W14 orchestrator updates with each annotation
+//             (state/manuscript_improved.md)
+// Word-level diff is computed between these two raw markdowns so the format
+// is consistent on both sides.
 
 function renderDiff(){
   const body = $("#diff-body");
-  const currentText = manuscriptAsText();
-
-  if(!improvedText){
+  const currentText = controlText || "";
+  // If improved is identical to control (initial state, no W14 runs yet),
+  // show the no-changes banner.
+  if(!improvedText || improvedText === currentText){
     body.innerHTML = `
       <div class="diff-banner-msg">
         <strong>W14 Orchestrator aún no ha generado mejoras.</strong>
-        Dispara una anotación desde <a href="paper-current.html">paper-current.html</a> para iniciar el pipeline. Mientras tanto, la columna izquierda muestra el manuscrito actual.
+        Dispara una anotación desde <a href="paper-current.html">paper-current.html</a> para iniciar el pipeline. Mientras tanto, la columna izquierda muestra el manuscrito CONTROL inmutable (v5_v3 CLEAN BASELINE S61).
       </div>
       <div class="diff-split">
-        <div class="diff-col left"><h4>Current (v5 CONDENSED)</h4><div id="diff-left-content"></div></div>
-        <div class="diff-col right"><h4>Improved (pending)</h4><em style="color:var(--muted)">— sin cambios —</em></div>
+        <div class="diff-col left"><h4>Control (v5_v3 CLEAN BASELINE)</h4><div id="diff-left-content"></div></div>
+        <div class="diff-col right"><h4>Improved (pending)</h4><em style="color:var(--muted)">— sin cambios todavía —</em></div>
       </div>`;
     $("#diff-left-content").textContent = currentText;
     return;

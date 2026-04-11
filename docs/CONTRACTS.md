@@ -2,6 +2,41 @@
 
 Documentación de los mensajes y estructuras que fluyen entre frontend, workflows y state files.
 
+## 0. CONTROL vs IMPROVED — separación inviolable del manuscrito
+
+> **REGLA FUNDAMENTAL**: el manuscrito vive en dos archivos paralelos con roles estrictamente separados. Esta separación es **obligatoria** y W14 jamás debe romperla.
+
+| Rol | Archivo | Mutabilidad | Source of truth | Lo lee |
+|-----|---------|-------------|-----------------|--------|
+| **CONTROL** (baseline inmutable) | `state/manuscript_control.md` | **NUNCA** se modifica tras inicialización | `BASELINE_S61_MASTER_CONTROL.md` sección 5 (sha256 `d10d564e...`) → equiv `MANUSCRITO_EID_v5_v3_CLEAN_S61_BASELINE.docx` (sha256 `9ca07741...`, 5106 words / 3469 main text) | `paper-current.html` (anotación) + `paper-improved.html` (base de diff) |
+| **IMPROVED** (mutable, va creciendo) | `state/manuscript_improved.md` | W14 lo reescribe en cada anotación procesada (validator 5-fase obligatorio) | Init = copia idéntica del CONTROL → cada run de W14 aplica edits propuestos validados | `paper-improved.html` (lado derecho del diff) |
+| **CONTROL JSON estructurado** | `state/manuscript_v5_condensed.json` | Regenera solo si el CONTROL md cambia (el cual NO debería cambiar) | Parser `scripts/build_manuscript_from_baseline.py` lee BASELINE sección 5 | `paper-current.html` (renderiza párrafos enumerados con metadata) |
+
+### Inicialización (S61, esta sesión)
+
+1. `BASELINE_S61_MASTER_CONTROL.md` (raíz proyecto, sha `d10d564e...`) tiene el manuscrito post-contamination-fix en sección 5
+2. Script `build_manuscript_from_baseline.py` extrae sección 5 → escribe `state/manuscript_v5_condensed.json` (44 párrafos, 9 secciones, 39 main text paragraphs, 3044 words main text parsed vs 3469 oficial Word COM — delta -425 explicado por tablas/figuras no expandidas en BASELINE markdown)
+3. Mismo extracto literal → `state/manuscript_control.md` (178 líneas, 3377w raw markdown)
+4. Copia bit-a-bit → `state/manuscript_improved.md` (sha256 idéntico al control: `29632d96...`)
+
+### Inmutabilidad enforced
+
+- **W14 orchestrator** (`scripts/w14_master_orchestrator.py`) escribe únicamente a `state/manuscript_improved.md` y `state/improvement_log.json`. Líneas 485, 499, 719 verifican esto.
+- **Si Gonzalo edita CONTROL accidentalmente**: re-ejecutar `python scripts/build_manuscript_from_baseline.py` regenera el JSON, y un comando `cp state/manuscript_v5_condensed.json` no aplica acá — necesita re-extraer del BASELINE markdown. Para `manuscript_control.md` re-extraer manualmente del BASELINE.
+- **Diff base**: `paper-improved.html` carga AMBOS markdowns (`controlText` + `improvedText`) y hace word-level diff con `diff-match-patch`. Cuando son idénticos (estado inicial pre-W14), muestra banner "sin cambios todavía".
+
+### Cuándo se actualiza el CONTROL (excepción)
+
+Solo si el manuscrito BASELINE cambia upstream (ej: Gonzalo decide reemplazar el v5_v3 CLEAN por un v6 más nuevo). En ese caso:
+1. Reemplazar `BASELINE_S61_MASTER_CONTROL.md` con la nueva versión
+2. Actualizar `EXPECTED_BASELINE_SHA` y `EXPECTED_DOCX_SHA` en `scripts/build_manuscript_from_baseline.py`
+3. Re-ejecutar el parser
+4. Re-extraer manualmente la nueva sección 5 a `manuscript_control.md`
+5. Reset `manuscript_improved.md` a copia idéntica del nuevo control
+6. Documentar el cambio aquí en CONTRACTS.md con la fecha y razón
+
+---
+
 ## 1. `annotation_message_v1` — Frontend → ntfy → W12
 
 Contrato del payload que `docs/paper-current.html` envía vía POST a `https://ntfy.sh/hnuble-annot-<secret>`.
