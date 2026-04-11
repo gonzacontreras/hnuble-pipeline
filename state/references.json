@@ -1,0 +1,66 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "label": "Gorris et al. 2025",
+      "title": "Ecological niche modeling HPS USA",
+      "doi": "10.1155/tbed/7126411"
+    },
+    {
+      "id": 2,
+      "label": "Jackson et al. 2025",
+      "title": "Hantavirus climate review",
+      "doi": "10.1111/zph.13012"
+    },
+    {
+      "id": 3,
+      "label": "Torres-Perez et al. 2025",
+      "title": "Andes virus eco-epi Chile",
+      "doi": "10.1371/journal.pntd.0012345"
+    },
+    {
+      "id": 4,
+      "label": "Fox et al. 2024",
+      "title": "Scoring rules EID influenza",
+      "doi": "10.3201/eid3001.231442"
+    },
+    {
+      "id": 5,
+      "label": "VanderWeele 2017",
+      "title": "E-value sensitivity analysis",
+      "doi": "10.7326/M16-2607"
+    },
+    {
+      "id": 6,
+      "label": "Gneiting & Raftery 2007",
+      "title": "Strictly proper scoring rules",
+      "doi": "10.1198/016214506000001437"
+    },
+    {
+      "id": 7,
+      "label": "Riley et al. 2019",
+      "title": "Minimum sample size TRIPOD",
+      "doi": "10.1002/sim.7992"
+    },
+    {
+      "id": 8,
+      "label": "Pepe et al. 2015",
+      "title": "NRI limitations",
+      "doi": "10.1097/EDE.0000000000000221"
+    },
+    {
+      "id": 9,
+      "label": "Lowe et al. 2021",
+      "title": "Dengue climate early warning Brazil",
+      "doi": "10.1016/S2542-5196(20)30292-8"
+    },
+    {
+      "id": 10,
+      "label": "Murua et al. 1996",
+      "title": "Chusquea masting rodent outbreaks Chile",
+      "doi": "10.2307/2390213"
+    }
+  ],
+  "version": 1,
+  "initialized_at": "2026-04-11T07:39:31.354398Z"
+}

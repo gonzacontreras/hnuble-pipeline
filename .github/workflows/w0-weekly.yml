@@ -1,0 +1,39 @@
+name: W0 Weekly Recon
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: w0-weekly
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  recon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python scripts/w0_reconnaissance.py
+      - name: Commit state updates
+        run: |
+          git config user.name "hnuble-bot"
+          git config user.email "bot@hnuble.io"
+          git add state/
+          if git diff --staged --quiet; then
+            echo "no state changes"
+          else
+            git commit -m "W0: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi

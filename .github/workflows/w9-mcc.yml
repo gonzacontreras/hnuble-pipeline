@@ -1,0 +1,57 @@
+name: W9 Memory Cross-Checker
+
+on:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: 'Trigger source (w3|w5|baseline|manual)'
+        required: false
+        default: 'manual'
+      input_file:
+        description: 'Optional baseline findings JSON path'
+        required: false
+        default: ''
+  repository_dispatch:
+    types: [mcc-run]
+
+concurrency:
+  group: w9-mcc
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  classify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          W9_INPUT_FILE: ${{ github.event.inputs.input_file }}
+        run: python scripts/w9_memory_crosschecker.py
+      - name: Commit state updates
+        run: |
+          git config user.name "hnuble-bot"
+          git config user.email "bot@hnuble.io"
+          git add state/
+          if git diff --staged --quiet; then
+            echo "no state changes"
+          else
+            git commit -m "W9: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
+      - name: Trigger W10 if queue has items
+        run: |
+          if [ -s state/w10_queue.json ] && python -c "import json,sys; sys.exit(0 if len(json.load(open('state/w10_queue.json')).get('items',[]))>0 else 1)"; then
+            gh workflow run w10-bu.yml
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,39 @@
+name: W1 Papers Watcher
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: w1-papers
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python scripts/w1_papers_watcher.py
+      - name: Commit state updates
+        run: |
+          git config user.name "hnuble-bot"
+          git config user.email "bot@hnuble.io"
+          git add state/
+          if git diff --staged --quiet; then
+            echo "no state changes"
+          else
+            git commit -m "W1: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi

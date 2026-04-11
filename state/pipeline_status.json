@@ -1,0 +1,49 @@
+{
+  "workflows": {
+    "w0": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w1": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w2": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w3": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w4": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w5": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w6": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w7": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w8": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w9": {
+      "last_run": null,
+      "status": "not_yet_run"
+    },
+    "w10": {
+      "last_run": null,
+      "status": "not_yet_run"
+    }
+  },
+  "initialized_at": "2026-04-11T07:39:31.354398Z"
+}

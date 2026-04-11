@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hnuble-pipeline · dashboard</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:1100px;margin:1em auto;padding:0 1em;color:#222}
+  h1{margin-bottom:0}
+  .sub{color:#666}
+  table{width:100%;border-collapse:collapse;margin-top:1em;font-size:.95em}
+  th,td{text-align:left;padding:.5em .7em;border-bottom:1px solid #e1e4e8}
+  th{background:#f7f8fa}
+  .ok{color:#0a7a2f;font-weight:600}
+  .warn{color:#c47400;font-weight:600}
+  .err{color:#b00020;font-weight:600}
+  .stale{color:#888}
+  .meta{display:flex;gap:2em;margin-top:.5em;color:#555;flex-wrap:wrap}
+  .meta span{background:#f7f8fa;padding:.3em .6em;border-radius:4px}
+  .nav{margin-top:.5em}
+  .nav a{margin-right:1em;color:#06f}
+  footer{margin-top:3em;color:#888;font-size:.85em}
+</style>
+</head>
+<body>
+<h1>Pipeline dashboard</h1>
+<p class="sub">Auto-refresh 60s · Data from <code>state/pipeline_status.json</code></p>
+<div class="nav">
+  <a href="index.html">← Home</a>
+  <a href="findings.html">Findings</a>
+  <a href="approvals.html">Approvals</a>
+  <a href="https://github.com/gonzacontreras/hnuble-pipeline">Repo</a>
+</div>
+
+<div class="meta" id="meta"></div>
+
+<table id="wf">
+  <thead><tr><th>Workflow</th><th>Descripción</th><th>Cron</th><th>Última ejecución</th><th>Resumen</th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<h2>Findings por severidad</h2>
+<div class="meta" id="findings-meta"></div>
+
+<footer><p>Canal HIL: ntfy.sh/hnuble-guardian-7k3q9mXz</p></footer>
+
+<script>
+const WF = [
+  ['w0','Weekly Recon','0 6 * * 1'],
+  ['w1','Papers Watcher','0 */12 * * *'],
+  ['w2','Language Polish','on-demand'],
+  ['w3','Bias Hunter','0 3 * * *'],
+  ['w4','Figure Iterator','on-demand'],
+  ['w5','Reviewer Virtuals','0 4 * * *'],
+  ['w6','Model Stability','0 2 * * *'],
+  ['w7','Retraction Check','0 */6 * * *'],
+  ['w8','HIL ntfy','*/30 * * * *'],
+  ['w9','Memory Cross-Checker','reactivo'],
+  ['w10','Blindaje Upgrader','reactivo'],
+];
+
+async function loadJSON(path){
+  try{
+    const r = await fetch(path + '?ts=' + Date.now());
+    if(!r.ok) return null;
+    return await r.json();
+  }catch(e){ return null; }
+}
+
+function fmtAgo(ts){
+  if(!ts) return '<span class="stale">never</span>';
+  const d = new Date(ts);
+  const delta = (Date.now() - d.getTime())/1000;
+  if(delta < 60) return Math.round(delta)+'s ago';
+  if(delta < 3600) return Math.round(delta/60)+'m ago';
+  if(delta < 86400) return Math.round(delta/3600)+'h ago';
+  return Math.round(delta/86400)+'d ago';
+}
+
+async function refresh(){
+  const status = await loadJSON('state/pipeline_status.json') || {workflows:{}};
+  const findings = await loadJSON('state/findings.json') || {items:[]};
+  const approvals = await loadJSON('state/pending_approvals.json') || {items:[]};
+
+  const tbody = document.querySelector('#wf tbody');
+  tbody.innerHTML = '';
+  for(const [id,label,cron] of WF){
+    const data = (status.workflows||{})[id] || {};
+    const last = data.last_run;
+    const summary = Object.entries(data)
+      .filter(([k])=>!['last_run','status'].includes(k))
+      .map(([k,v])=>`${k}=${typeof v==='object'?JSON.stringify(v):v}`)
+      .join(' · ');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><b>${id.toUpperCase()}</b></td><td>${label}</td><td><code>${cron}</code></td><td>${fmtAgo(last)}</td><td>${summary||'—'}</td>`;
+    tbody.appendChild(tr);
+  }
+
+  const items = findings.items||[];
+  const by = {HIGH:0,MED:0,LOW:0,URGENT:0};
+  const byStatus = {};
+  for(const f of items){
+    const s = (f.severity||'MED').toUpperCase();
+    by[s] = (by[s]||0)+1;
+    const st = f.status || 'UNKNOWN';
+    byStatus[st] = (byStatus[st]||0)+1;
+  }
+  const fm = document.getElementById('findings-meta');
+  fm.innerHTML = `<span class="err">URGENT: ${by.URGENT||0}</span>
+                  <span class="warn">HIGH: ${by.HIGH||0}</span>
+                  <span>MED: ${by.MED||0}</span>
+                  <span>LOW: ${by.LOW||0}</span>
+                  <span>Total: ${items.length}</span>`;
+
+  const pending = (approvals.items||[]).filter(a=>a.status==='PENDING_HIL').length;
+  const m = document.getElementById('meta');
+  m.innerHTML = `<span><b>Findings:</b> ${items.length}</span>
+                 <span><b>HIL pending:</b> ${pending}</span>
+                 <span><b>Last update:</b> ${new Date().toLocaleTimeString()}</span>`;
+}
+
+refresh();
+setInterval(refresh, 60000);
+</script>
+</body>
+</html>

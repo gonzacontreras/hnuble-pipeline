@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hnuble-pipeline · findings</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:1200px;margin:1em auto;padding:0 1em;color:#222}
+  h1{margin-bottom:0}
+  .sub{color:#666}
+  .filters{margin:1em 0;display:flex;gap:.5em;flex-wrap:wrap}
+  .filters button{padding:.4em .8em;border:1px solid #ccc;background:#fff;border-radius:4px;cursor:pointer}
+  .filters button.active{background:#06f;color:#fff;border-color:#06f}
+  .card{background:#f7f8fa;border-left:4px solid #888;border-radius:4px;padding:.8em 1em;margin-bottom:.8em}
+  .card.HIGH{border-left-color:#c47400}
+  .card.URGENT{border-left-color:#b00020}
+  .card.MED{border-left-color:#06f}
+  .card.LOW{border-left-color:#888}
+  .card h3{margin:0 0 .3em;font-size:1em}
+  .card .meta{color:#666;font-size:.85em;margin-bottom:.3em}
+  .card p{margin:.3em 0;font-size:.95em}
+  .tag{display:inline-block;padding:.1em .5em;border-radius:3px;font-size:.75em;margin-right:.3em;background:#e1e4e8}
+  .tag.blindado{background:#c6f6d5;color:#22543d}
+  .tag.parcial{background:#feebc8;color:#7b341e}
+  .tag.nuevo{background:#bee3f8;color:#2c5282}
+  .tag.contra{background:#fed7d7;color:#742a2a}
+  .nav{margin-top:.5em}
+  .nav a{margin-right:1em;color:#06f}
+</style>
+</head>
+<body>
+<h1>Findings</h1>
+<p class="sub">Hallazgos activos del pipeline · auto-refresh 60s</p>
+<div class="nav">
+  <a href="index.html">← Home</a>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="approvals.html">Approvals</a>
+</div>
+
+<div class="filters" id="filters">
+  <button class="active" data-sev="ALL">Todos</button>
+  <button data-sev="URGENT">URGENT</button>
+  <button data-sev="HIGH">HIGH</button>
+  <button data-sev="MED">MED</button>
+  <button data-sev="LOW">LOW</button>
+</div>
+
+<div id="list"></div>
+
+<script>
+let data = [];
+let currentSev = 'ALL';
+
+async function load(){
+  try{
+    const r = await fetch('state/findings.json?ts=' + Date.now());
+    const j = await r.json();
+    data = j.items || [];
+    render();
+  }catch(e){
+    document.getElementById('list').innerHTML = '<p>No se pudo cargar findings.json</p>';
+  }
+}
+
+function render(){
+  const list = document.getElementById('list');
+  const items = currentSev === 'ALL' ? data : data.filter(f => (f.severity||'').toUpperCase() === currentSev);
+  if(!items.length){ list.innerHTML = '<p>No hay findings.</p>'; return; }
+  list.innerHTML = items.map(f => {
+    const sev = (f.severity||'MED').toUpperCase();
+    const cls = (f.mcc_classification||'').toLowerCase();
+    const tagClass = {BLINDADO:'blindado',PARCIAL:'parcial',NUEVO:'nuevo',CONTRADICCION:'contra'}[f.mcc_classification] || '';
+    return `
+      <div class="card ${sev}">
+        <div class="meta">
+          <span class="tag">${sev}</span>
+          ${f.mcc_classification?`<span class="tag ${tagClass}">${f.mcc_classification}</span>`:''}
+          <span>${f.source||''}</span> · <code>${f.id||''}</code>
+          ${f.taxonomy?` · ${f.taxonomy}`:''}
+        </div>
+        <h3>${f.title||'(sin título)'}</h3>
+        ${f.evidence?`<p><b>Evidence:</b> ${f.evidence}</p>`:''}
+        ${f.mechanism?`<p><b>Mechanism:</b> ${f.mechanism}</p>`:''}
+        ${f.fix_hint?`<p><b>Fix:</b> ${f.fix_hint}</p>`:''}
+        ${f.mcc_rationale?`<p><b>MCC:</b> ${f.mcc_rationale}</p>`:''}
+      </div>`;
+  }).join('');
+}
+
+document.querySelectorAll('#filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSev = btn.dataset.sev;
+    render();
+  });
+});
+
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>
