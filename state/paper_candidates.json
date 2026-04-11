@@ -95,7 +95,19 @@
       "target_section": "discussion",
       "discovered_at": "2026-04-11T13:11:01.227479Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.3390/en19071701",
+      "title": "Mathematical Analysis Methods for Quantitative Scenario Generation of Renewable Power Output: A Comprehensive Review",
+      "venue": null,
+      "pub_date": "2026-03-31",
+      "abstract": "As the proportion of renewable power continues to increase, its inherent intermittency and volatility pose serious challenges to the security and stability of power systems. Scenario generation technology serves as a key tool supporting decision-making methods such as stochastic optimization and risk analysis. By generating representative power output scenarios, it can effectively characterize the uncertainty of renewable power output. This paper systematically reviews mainstream methods for the scenario generation of renewable power output, categorizing them into two major classes: sampling-based methods and model-based methods. Among them, sampling-based methods include Monte Carlo sampling, Latin hypercube sampling (LHS), Markov chains (MCs), and Copula functions. Model-based methods en",
+      "score": 7,
+      "reason": "Scenario generation for stochastic optimization under uncertainty—conceptual parallel for FSI lag uncertainty",
+      "target_section": "intro",
+      "discovered_at": "2026-04-11T19:18:05.961924Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-11T13:11:01.227479Z"
+  "last_run": "2026-04-11T19:18:05.961924Z"
 }
