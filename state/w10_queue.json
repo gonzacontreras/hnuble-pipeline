@@ -1,3 +1,442 @@
 {
-  "items": []
+  "items": [
+    {
+      "id": "S59-TOP5-02",
+      "source": "S59-B2",
+      "severity": "HIGH",
+      "taxonomy": "reporting-misframing",
+      "title": "RPS presented as +1.3% skill when CI overlaps null",
+      "evidence": "L123: 'RPS skill +1.3%' but bootstrap CI includes null",
+      "mechanism": "Inflated skill claim could trigger reviewer rejection of scoring rule section",
+      "fix_hint": "Reframe as '2 of 3 scoring rules positive; RPS skill not distinguishable from null'",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "S57, S49_nivel2, Auditoria_Q1_S50 logged but snippets empty. Missing explicit CI-null overlap sentence + Q1 cite for L123 RPS claim.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "project_sesion_code_S57.md",
+        "project_sesion_code_S49_nivel2.md",
+        "06_Auditorias/Auditoria_Q1_S50_cierre.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-TOP5-03",
+      "source": "S59-B5",
+      "severity": "HIGH",
+      "taxonomy": "statistical",
+      "title": "BSS CI is percentile, not BCa",
+      "evidence": "T_BLINDAJE_BSS_CI_S57.csv uses boot percentile instead of BCa",
+      "mechanism": "Inconsistency with PR-AUC (which uses BCa) -> reviewer flag",
+      "fix_hint": "Re-run with boot::boot.ci(type='bca'); addendum v1.3",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "S57 + Auditoria_Q1_S50 + audit_findings logged, snippets empty. Missing Q1 cite distinguishing percentile vs BCa for BSS CI.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "project_sesion_code_S57.md",
+        "06_Auditorias/Auditoria_Q1_S50_cierre.md",
+        "audit_findings.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-TOP5-04",
+      "source": "S59-B2",
+      "severity": "HIGH",
+      "taxonomy": "misattribution",
+      "title": "Ortiz 2004 cited as source for 3-5x national incidence ratio",
+      "evidence": "L45 cites Ortiz 2004 but Ortiz reports rodent seroprevalence VIII Region, not national HCPS incidence",
+      "mechanism": "Factual misattribution -> reviewer flags as data fabrication",
+      "fix_hint": "Replace with MINSAL Bulletin + direct calculation",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "S57_completa_contextualizada, S55_sesgos_56, S37, 04_sesgos_vacios logged, snippets empty. Missing explicit manuscript phrase correcting Ortiz 2004 scope.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "reference_biblio_S57_completa_contextualizada.md",
+        "project_S55_sesgos_56_completos.md",
+        "project_sesion_code_S37.md",
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-TOP5-05",
+      "source": "S59-B3",
+      "severity": "HIGH",
+      "taxonomy": "DAG",
+      "title": "DAG: FSI_R5 (exposure) lacks direct arrow to SCPH_cases",
+      "evidence": "R1_DAG_dagitty.txt has FSI_R5 without -> SCPH_cases edge; adjustment set becomes formally incorrect",
+      "mechanism": "Legacy S37 issue; reviewer with DAG expertise will catch it",
+      "fix_hint": "Add arrow + supplementary note explaining semantics",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "audit_findings, S57_biblio, S52, RedTeam, Auditoria_Q1_S50 logged, snippets empty. Missing DAG-correction calculation + Q1 DAG methods cite.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "audit_findings.md",
+        "reference_biblio_S57_completa_contextualizada.md",
+        "project_sesion_code_S52.md",
+        "04_Parte_I_EcoEpi/RedTeam_ReviewerAnticipation.md",
+        "06_Auditorias/Auditoria_Q1_S50_cierre.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B1-01",
+      "source": "S59-B1",
+      "severity": "HIGH",
+      "taxonomy": "measurement",
+      "title": "Case definition drift MINSAL 2002-2024 (IgM pre-2012 vs RT-PCR post-2012)",
+      "evidence": "Case definition changed when RT-PCR became standard",
+      "mechanism": "Differential sensitivity over time -> spurious temporal trend",
+      "fix_hint": "Sensitivity analysis restricting to 2012+, report delta",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "audit_findings, S57_biblio, S52, RedTeam logged, snippets empty. Missing Q1 MINSAL 2012 RT-PCR policy cite + manuscript phrase acknowledging drift.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "audit_findings.md",
+        "reference_biblio_S57_completa_contextualizada.md",
+        "project_sesion_code_S52.md",
+        "04_Parte_I_EcoEpi/RedTeam_ReviewerAnticipation.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B1-02",
+      "source": "S59-B1",
+      "severity": "HIGH",
+      "taxonomy": "selection",
+      "title": "Winner's curse lag 5 + biological confusion 18-24m vs 5m",
+      "evidence": "Lag 5 chosen from scan of multiple lags",
+      "mechanism": "Post-hoc lag selection inflates effect size",
+      "fix_hint": "Document pre-specification lineage; report all lags' IRR for transparency",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "project_S55_sesgos_56_completos + 04_sesgos_vacios logged, snippets empty. Missing FDR-adjusted p-value calculation for lag-scan winner's curse.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "project_S55_sesgos_56_completos.md",
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B1-03",
+      "source": "S59-B1",
+      "severity": "HIGH",
+      "taxonomy": "measurement",
+      "title": "FSI compound formula (NDMI+NDVI+NBR2) weights undocumented",
+      "evidence": "FSI computation script does not cite a formal paper for the weighting",
+      "mechanism": "Custom index without precedent -> reviewer suspicion of tuning",
+      "fix_hint": "Cite Bortman 1999 or provide sensitivity analysis with alternative weights",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "S37 logged, snippet empty. Missing Q1 remote-sensing cite justifying NDMI+NDVI+NBR2 weights for FSI compound index.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "project_sesion_code_S37.md",
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B1-R3-01",
+      "source": "S59-B1",
+      "severity": "HIGH",
+      "taxonomy": "administrative",
+      "title": "SEREMI Maule pre-2018 (Nuble split from Maule)",
+      "evidence": "Before 2018 all Nuble cases reported under Maule",
+      "mechanism": "Geographic attribution requires back-allocation",
+      "fix_hint": "Describe back-allocation procedure explicitly in methods",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "S50 + 04_sesgos_vacios logged, snippets empty. Missing manuscript phrase clarifying pre-2018 Maule aggregation for Nuble cases.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "project_sesion_code_S50.md",
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B2-F-03",
+      "source": "S59-B2",
+      "severity": "HIGH",
+      "taxonomy": "supremacy-claim",
+      "title": "'First satellite-triggered multi-agency protocol' claim without systematic search",
+      "evidence": "Discussion claims 'first' without Scopus/WoS search documentation",
+      "mechanism": "Unsupported supremacy claim -> reviewer rejection",
+      "fix_hint": "Replace 'first' with 'to our knowledge among the first'; document search terms",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Vault ref Paper_EID_Final.md empty snippet. Discussion claim exists but no Scopus/WoS search documentation found.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "04_Parte_I_EcoEpi/Paper_EID_Final.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B3-002",
+      "source": "S59-B3",
+      "severity": "HIGH",
+      "taxonomy": "DAG",
+      "title": "E-values without named biological confounders",
+      "evidence": "E-values 2.07 and 2.30 reported without named confounders",
+      "mechanism": "Uninterpretable E-value -> reviewer flag",
+      "fix_hint": "Name agricultural activity, surveillance intensity, rural tourism",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Audit ref 04_sesgos_vacios.md empty snippet. E-values mentioned but no named confounders documented.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B5-3.1",
+      "source": "S59-B5",
+      "severity": "HIGH",
+      "taxonomy": "statistical",
+      "title": "theta not propagated in bootstrap BSS",
+      "evidence": "Bootstrap holds theta fixed -> CI underestimates uncertainty",
+      "mechanism": "Overconfident CI",
+      "fix_hint": "Parametric bootstrap refitting inside each iteration",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior refs project_sesion_code_S57.md and Auditoria_Q1_S50_cierre.md have empty snippets. Theta bootstrap issue flagged but no Q1 citation or manuscript phrase.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "project_sesion_code_S57.md",
+        "06_Auditorias/Auditoria_Q1_S50_cierre.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B1-05",
+      "source": "S59-B1",
+      "severity": "MED",
+      "title": "Immortal time rolling windows",
+      "evidence": "Rolling 3m FSI windows overlap with case observation",
+      "mechanism": "Immortal time bias underestimates IRR",
+      "fix_hint": "Use lag-only windows without lead",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Multiple refs (audit_findings.md, project_sesion_code_S49_nivel2.md, RedTeam_ReviewerAnticipation.md) all empty snippets. Immortal time flagged but no integrated phrase.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "audit_findings.md",
+        "project_sesion_code_S49_nivel2.md",
+        "04_Parte_I_EcoEpi/RedTeam_ReviewerAnticipation.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B1-06",
+      "source": "S59-B1",
+      "severity": "MED",
+      "title": "Omission of null lags",
+      "evidence": "Only significant lags reported",
+      "mechanism": "Selection bias on reported lags",
+      "fix_hint": "Report all lags 0-12 in supplementary",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior refs project_sesion_code_S49_nivel2.md and 04_sesgos_vacios.md empty snippets. Null lags omission noted but no Q1 citation.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "project_sesion_code_S49_nivel2.md",
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B1-07",
+      "source": "S59-B1",
+      "severity": "MED",
+      "title": "Bortman calibration fold-by-fold not tested",
+      "evidence": "Fold-wise calibration not in supplementary",
+      "mechanism": "Potential fold heterogeneity masks miscalibration",
+      "fix_hint": "Add fold-wise calibration table",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Multiple refs (project_sesion_code_S37.md, RedTeam, audit_findings, 04_sesgos_vacios) all empty snippets. Bortman calibration issue exists but no manuscript integration.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "project_sesion_code_S37.md",
+        "04_Parte_I_EcoEpi/RedTeam_ReviewerAnticipation.md",
+        "audit_findings.md",
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B1-08",
+      "source": "S59-B1",
+      "severity": "MED",
+      "title": "Ward binary Simpson",
+      "evidence": "Ward clustering uses binary distance",
+      "mechanism": "Loses gradient information",
+      "fix_hint": "Compare with Gower distance",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Audit ref 04_sesgos_vacios.md empty snippet. Ward binary Simpson flagged but no specific calculation or citation documented.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B2-F-04",
+      "source": "S59-B2",
+      "severity": "MED",
+      "title": "DCA circular (same OOS dataset)",
+      "evidence": "Decision curve analysis uses same test set",
+      "mechanism": "Circular validation",
+      "fix_hint": "Report DCA with train-test split disclosure",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior audit flag in 04_sesgos_vacios, but no Q1 citation or manuscript phrase integrated.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B2-F-05",
+      "source": "S59-B2",
+      "severity": "MED",
+      "title": "Table 1 70.9% vs Table 2 68.1% inconsistency",
+      "evidence": "Two tables report BSS with different denominators",
+      "mechanism": "Reviewer will spot",
+      "fix_hint": "Harmonize via footnote",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior audit flag + session snippets exist, but no Q1 citation or explicit manuscript phrase.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "04_sesgos_vacios.md",
+        "project_sesion_code_S58.md",
+        "reference_biblio_S57_completa_contextualizada.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B5-2.4",
+      "source": "S59-B5",
+      "severity": "MED",
+      "title": "AR(1) cases not included as predictor",
+      "evidence": "No autoregressive term in model",
+      "mechanism": "Unmodeled temporal autocorrelation",
+      "fix_hint": "Add AR(1) sensitivity",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior audit + RedTeam snippets exist, but no Q1 citation or manuscript phrase integrated.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "audit_findings.md",
+        "04_Parte_I_EcoEpi/RedTeam_ReviewerAnticipation.md",
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B5-5.4",
+      "source": "S59-B5",
+      "severity": "MED",
+      "title": "XGBoost/RF comparison absent",
+      "evidence": "No ML benchmark",
+      "mechanism": "Reviewer may demand",
+      "fix_hint": "Add supplementary comparison",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior audit flag in 04_sesgos_vacios, but no Q1 citation or manuscript phrase.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B1-R3-04",
+      "source": "S59-B1",
+      "severity": "LOW",
+      "title": "Tier 3 P(T3|T2) not reported",
+      "evidence": "Conditional probability missing",
+      "mechanism": "Minor",
+      "fix_hint": "Add to supplementary",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Audit file 04_sesgos_vacios.md suggests awareness of the gap, but no Q1 citation or specific calculation for P(T3|T2) conditional probability exists.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B2-F-08",
+      "source": "S59-B2",
+      "severity": "LOW",
+      "title": "Table 1 missing N denominator",
+      "evidence": "Table 1 percentages without N in footnote",
+      "mechanism": "Cosmetic",
+      "fix_hint": "Add N to footnote",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Audit file 04_sesgos_vacios.md and S58 snippet suggest awareness of Table 1 issue, but no explicit N-denominator citation or manuscript phrase present.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "04_sesgos_vacios.md",
+        "project_sesion_code_S58.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "S59-B3-006",
+      "source": "S59-B3",
+      "severity": "LOW",
+      "title": "Formal mediation analysis absent",
+      "evidence": "No VanderWeele mediation",
+      "mechanism": "Out of scope",
+      "fix_hint": "Declare as out of scope",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-11T00:00:00Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "VanderWeele reference exists (S51, S37), audit_findings.md logs it, but no explicit calculation or integrated manuscript phrase for formal mediation analysis.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "reference_biblio_S51_completa.md",
+        "audit_findings.md",
+        "04_sesgos_vacios.md"
+      ],
+      "mcc_at": "2026-04-11T07:53:31.497247Z"
+    }
+  ]
 }
