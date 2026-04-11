@@ -1,5 +1,89 @@
 {
-  "memory": [],
-  "vault": [],
-  "audit": []
+  "description": "Seeded memory bundle: verbatim excerpts from project memory/ and obsidian_vault/ covering baseline findings. Populated 2026-04-11 from S59 MASTER. Extend by running a local bundler script from the main project directory.",
+  "memory": [
+    {
+      "file": "project_sesion_code_S57.md",
+      "text": "Bootstrap BSS CI (Tier1 68.2% [61.7-74.0], Tier2 36.5% [25.4-56.6]) computed via boot::boot.ci type=percentile. Tier 1 BSS=0.6815 confirmed with 14-fold CV. Parametric bootstrap refit (NB2 theta propagation) pending as Nivel 2 hardening for S59.",
+      "tags": ["BSS", "bootstrap", "CI", "percentile", "BCa", "theta"]
+    },
+    {
+      "file": "project_sesion_code_S50.md",
+      "text": "Lag 5 decision BLINDADO S50: contraste ventanas p=0.37 no significativo. Opcion A (lag focal 5m) es la unica defendible. Lag 5 es lag OPERACIONAL no biologico. Chusquea masting 18-24 years es un fenomeno distinto que no se confunde con el lag operacional. Framework operacional SEREMI/CONAF/SAG requiere lag 5.",
+      "tags": ["lag", "Chusquea", "masting", "bifasico", "Opcion A"]
+    },
+    {
+      "file": "audit_findings.md",
+      "text": "DAG-NEW-001 (legacy S37): FSI_R5 (exposure) no tiene flecha directa a SCPH_cases en R1_DAG_dagitty.txt. dagitty calcula adjustment set incluyendo Rodent_density como confundente (en vez de mediador). Problema estructural no resuelto. PENDIENTE desde S37 hasta ahora.",
+      "tags": ["DAG", "FSI_R5", "SCPH_cases", "dagitty", "adjustment set"]
+    },
+    {
+      "file": "reference_biblio_S57_completa_contextualizada.md",
+      "text": "Ortiz 2004 CORREGIDO S57: NO es fuente de incidencia nacional HCPS. Ortiz reporta seroprevalencia en roedores VIII Region (34.5% O. longicaudatus). Reemplazado en manuscrito por MINSAL Boletin Epidemiologico + calculo directo Reyes 2019 (nacional 0.3-0.4/100k). 3 refs reemplazadas, 1 autoria corregida (Van Calster->Minus), 28 DOIs agregados.",
+      "tags": ["Ortiz 2004", "misattribution", "incidencia nacional", "MINSAL", "Reyes 2019"]
+    },
+    {
+      "file": "project_sesion_code_S49_nivel2.md",
+      "text": "RPS skill +1.3% presentado como mejora pero CI overlaps null. Red-team Ataque 7: 'RPS no distinguible del null'. Reframe honesto: 2 de 3 scoring rules (LogScore y Brier) son positivos. RPS es neutro. Fox 2024 EID usa el mismo framing. Integrado al AMF §8.15.",
+      "tags": ["RPS", "scoring rules", "null", "LogScore", "Brier", "Fox 2024"]
+    },
+    {
+      "file": "reference_biblio_S51_completa.md",
+      "text": "E-value FSI 2.07 VanderWeele 2017 IC95 1.38 verificado matematicamente. Para t2m 2.30 IC95 1.15. Sin embargo NO se nombran confundentes biologicos especificos (actividad agricola estacional, vigilancia temporal, turismo rural). Limitacion declarada en AMF paragrafo 9.",
+      "tags": ["E-value", "VanderWeele", "confounder", "actividad agricola", "surveillance"]
+    },
+    {
+      "file": "project_sesion_code_S52.md",
+      "text": "Drift definicion caso MINSAL 2002-2024: pre-2012 basado en IgM, post-2012 en RT-PCR. Sensibilidad analitica aumenta post-2012. Sensitivity analysis restringido a 2012+ muestra identical direction (IRR FSI 0.72 vs 0.73 del full dataset). Declaracion en Methods 2.1.",
+      "tags": ["case definition", "MINSAL", "IgM", "RT-PCR", "drift", "sensitivity"]
+    },
+    {
+      "file": "project_S55_sesgos_56_completos.md",
+      "text": "56 sesgos totales S55. 26 blindados, 24 parcialmente, 6 no blindados (solo proyeccion MC). Winner's curse lag 5 MITIGADO: lag 5 pre-especificado desde S22, documentado en Zenodo pre-registration. Ascertainment bias temporal: declarado en Limitations 4, year FE incluido como sensitivity.",
+      "tags": ["winner curse", "lag 5", "pre-specification", "ascertainment", "year FE"]
+    },
+    {
+      "file": "project_sesion_code_S58.md",
+      "text": "Tier1 BSS corregido 68.2 a 68.1% en S58 P01. Table 1 y Table 2 estaban inconsistentes (70.9% vs 68.1%). Armonizado con footnote explicando denominador BSS. Plagio check local Jaccard 0.0002. 3 checklists (STROBE 95%, TRIPOD+AI 95.8%, EPIFORGE 100%).",
+      "tags": ["BSS", "Tier1", "68.1", "Table 1", "Table 2", "STROBE", "TRIPOD"]
+    },
+    {
+      "file": "project_sesion_code_S37.md",
+      "text": "FSI formula compuesta (NDMI+NDVI+NBR2). Pesos NO documentados en paper fuente. Bortman 1999 boletin (cited pero no es un paper peer-reviewed). Sensitivity analysis con pesos alternativos: resultado robusto dentro de +/- 10% del IRR central. Declaracion en Supplementary S3.",
+      "tags": ["FSI", "NDMI", "NDVI", "NBR2", "Bortman", "compound index", "sensitivity"]
+    }
+  ],
+  "vault": [
+    {
+      "file": "04_Parte_I_EcoEpi/Paper_EID_Final.md",
+      "text": "Discussion L102: 'To our knowledge among the first satellite-triggered multi-agency HCPS early warning protocols in Chile' (softened from original 'first' after S56 red-team). No systematic WoS/Scopus search documented, but scope search performed in PubMed for 'satellite' + 'hantavirus' + 'operational' shows 0 hits 2020-2026.",
+      "tags": ["first", "supremacy", "multi-agency", "Scopus", "WoS"]
+    },
+    {
+      "file": "04_Parte_I_EcoEpi/RedTeam_ReviewerAnticipation.md",
+      "text": "Objection R1-04 pre-armed: 'Case definition drift 2012 IgM->RT-PCR'. Response: sensitivity restricted to post-2012 shows identical direction (IRR 0.72 vs 0.73). Included in Supplementary Figure S2.",
+      "tags": ["case definition", "RT-PCR", "drift", "sensitivity"]
+    },
+    {
+      "file": "06_Auditorias/Auditoria_Q1_S50_cierre.md",
+      "text": "12 semaforos verdes, 5 amarillos, 6 rojos cerrados. Rojo DAG-NEW-001 (FSI_R5 arrow) PENDIENTE. Amarillo BSS BCa PENDIENTE (resolucion S57 addendum). LAG 5 VERDE blindado con contrast ventanas p=0.37 + bootstrap IRR 0.701 [0.551, 0.910].",
+      "tags": ["DAG", "BSS", "BCa", "lag 5", "semaforo"]
+    }
+  ],
+  "audit": [
+    {
+      "file": "audit_findings.md",
+      "text": "DAG-NEW-001 legacy S37: FSI_R5 exposure arrow. Status: OPEN 2026-04-11. Impact: adjustment set formally incorrect if Rodent_density treated as confounder instead of mediator. Fix: add edge FSI_R5 -> SCPH_cases in R1_DAG_dagitty.txt + supplementary note.",
+      "tags": ["DAG", "FSI_R5", "legacy", "S37", "R1_DAG_dagitty"]
+    },
+    {
+      "file": "04_sesgos_vacios.md",
+      "text": "Bias #12: FSI compound formula. Status: PARCIAL. Sensitivity analysis done but Bortman 1999 is a bulletin not peer-reviewed paper. Mitigation: cite Bortman as methodological precedent + alternative weights robustness check in Supplementary S3.",
+      "tags": ["FSI", "Bortman", "compound", "sensitivity"]
+    },
+    {
+      "file": "04_sesgos_vacios.md",
+      "text": "Bias #23: Winner's curse lag 5. Status: BLINDADO. Mitigation: (a) lag 5 pre-specified S22 before any model fit, (b) Zenodo pre-registration SHA256 ledger, (c) all lags 0-12 reported in Supplementary Table S2 with direction and CI.",
+      "tags": ["winner curse", "lag 5", "pre-specification", "Zenodo"]
+    }
+  ]
 }
