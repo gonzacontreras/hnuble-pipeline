@@ -39,5 +39,9 @@ jobs:
             echo "no changes"
           else
             git commit -m "W15: model eval $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            git push
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && break
+              echo "push attempt $i failed, retrying in 3s"
+              sleep 3
+            done
           fi
