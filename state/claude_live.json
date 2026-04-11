@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "heartbeat_sequence": 4,
-  "updated_at": "2026-04-11T14:35:28Z",
+  "heartbeat_sequence": 6,
+  "updated_at": "2026-04-11T17:53:44Z",
   "session": "S61",
   "session_deadline": "2026-04-14T06:00:00Z",
-  "current_block": "B6",
+  "current_block": "W12",
   "current_block_label": "Smoke tests + deploy Pages + handoff (última etapa)",
-  "overall_status": "running",
+  "overall_status": "done",
   "agent": "Claude Opus 4.6 (1M context)",
   "methodology": "5-fase anti-bypass + M14 + multi-agent paralelo + multiprocessing.Pool(8)",
   "sub_blocks": [
@@ -95,7 +95,7 @@
     "Deploy Pages trigger manual · verificación URL pública",
     "HANDOFF.md con guía 5 pasos · ntfy notif final 'Sistema LIVE'"
   ],
-  "tool_calls_total": 45,
+  "tool_calls_total": 46,
   "files_touched": [
     "pipeline/repo/state/claude_live.json",
     "pipeline/repo/state/schemas/claude_live.schema.json",
