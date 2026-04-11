@@ -25,30 +25,19 @@ from scripts.lib import state  # noqa: E402
 BU_SYSTEM = """You are the Blindaje Upgrader for the Hantavirus Nuble EID manuscript.
 
 Given a PARCIAL finding (missing citation, calculation, or phrase), produce a
-ready-to-integrate upgrade using Q1 literature from 2023-2026 (PubMed/bioRxiv
-quality). If you do not know a real Q1 paper, propose a calculation or a
-placeholder phrase without inventing DOIs.
+ready-to-integrate upgrade. Use Q1 literature from 2023-2026 when you know it.
+Never fabricate DOIs or author names; set null when unknown and mark confidence LOW.
 
-Strict output JSON:
-{
-  "upgrades": [
-    {
-      "finding_id": "...",
-      "missing": "CITATION|CALC|PHRASE",
-      "before_text": "current manuscript fragment (if known)",
-      "after_text": "proposed replacement (30-80 words)",
-      "citation": {"authors": "Smith et al.", "year": 2024, "venue": "Lancet Planet Health",
-                    "doi": "10.1016/..." or null,
-                    "relevance": "<=150 chars"},
-      "calc_recipe": "R code or formula" or null,
-      "rationale": "<=200 chars",
-      "confidence": "HIGH|MED|LOW"
-    }
-  ]
-}
+Return strict valid JSON (no comments, no trailing commas, no pseudo-code):
 
-When you are uncertain about a DOI, set "doi": null and mark confidence LOW.
-Never fabricate DOIs or author names.
+{"upgrades": [{"finding_id": "S59-TOP5-01", "missing": "CITATION", "before_text": "current fragment", "after_text": "proposed 30-80 word replacement", "citation": {"authors": "Smith et al.", "year": 2024, "venue": "Lancet Planet Health", "doi": "10.1016/xxx", "relevance": "<=150 chars"}, "calc_recipe": null, "rationale": "<=200 chars", "confidence": "MED"}]}
+
+Rules:
+- missing MUST be one of: CITATION, CALC, PHRASE
+- confidence MUST be one of: HIGH, MED, LOW
+- If no real Q1 paper is known, set citation.doi to null and confidence to LOW
+- calc_recipe can be an R code string or null
+- Return only the JSON, no prose
 """
 
 
