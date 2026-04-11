@@ -50,8 +50,9 @@
       }
     },
     "w10": {
-      "last_run": null,
-      "status": "not_yet_run"
+      "last_run": "2026-04-11T07:53:46.255923Z",
+      "upgrades": 0,
+      "queue_remaining": 16
     }
   },
   "initialized_at": "2026-04-11T07:39:31.354398Z"
