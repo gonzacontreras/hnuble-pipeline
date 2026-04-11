@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "heartbeat_sequence": 20,
-  "updated_at": "2026-04-11T19:26:09Z",
+  "heartbeat_sequence": 26,
+  "updated_at": "2026-04-11T19:28:38Z",
   "session": "S61",
   "session_deadline": "2026-04-14T06:00:00Z",
-  "current_block": "W15",
+  "current_block": "W13",
   "current_block_label": "EID Scorer",
   "overall_status": "done",
   "agent": "Claude Opus 4.6 (1M context)",
@@ -12,7 +12,7 @@
   "sub_blocks": [
     {
       "id": "W13.load",
-      "label": "Load manuscript + refs",
+      "label": "Load manuscript + refs + model_eval",
       "agent_type": "main",
       "status": "done",
       "output_refs": [
@@ -21,8 +21,8 @@
     },
     {
       "id": "W13.score",
-      "label": "Score 11 components",
-      "agent_type": "sonnet x10",
+      "label": "Score 13 components",
+      "agent_type": "sonnet x11",
       "status": "done",
       "detail": "asyncio fan-out",
       "output_refs": [
@@ -55,7 +55,7 @@
     "Deploy Pages trigger manual · verificación URL pública",
     "HANDOFF.md con guía 5 pasos · ntfy notif final 'Sistema LIVE'"
   ],
-  "tool_calls_total": 52,
+  "tool_calls_total": 54,
   "files_touched": [
     "pipeline/repo/state/claude_live.json",
     "pipeline/repo/state/schemas/claude_live.schema.json",
