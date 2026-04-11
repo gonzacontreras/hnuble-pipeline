@@ -40,8 +40,14 @@
       "status": "not_yet_run"
     },
     "w9": {
-      "last_run": null,
-      "status": "not_yet_run"
+      "last_run": "2026-04-11T07:49:24.653502Z",
+      "classified": 35,
+      "counts": {
+        "BLINDADO": 0,
+        "PARCIAL": 0,
+        "NUEVO": 35,
+        "CONTRADICCION": 0
+      }
     },
     "w10": {
       "last_run": null,
