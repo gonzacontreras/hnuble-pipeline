@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AnnotationMessageV1",
+  "description": "Wire contract v1 for ntfy payloads emitted by the paper-current.html frontend when Gonzalo highlights a paragraph. W12 validates every incoming message against this schema before enqueuing it into annotations.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "annotation_id",
+    "para_id",
+    "selection_start",
+    "selection_end",
+    "selected_text",
+    "color",
+    "comment",
+    "ts",
+    "schema_version"
+  ],
+  "properties": {
+    "annotation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Unique id of the annotation, e.g. UUIDv4 or ts-<random>."
+    },
+    "para_id": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 60,
+      "description": "Paragraph id within paper-current.html. Empirically parser emits ~43 main-text paragraphs for v5 CONDENSED; upper bound of 60 absorbs table splits."
+    },
+    "selection_start": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Character offset where the selection starts within the paragraph."
+    },
+    "selection_end": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Character offset where the selection ends. Must be strictly greater than selection_start."
+    },
+    "selected_text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "description": "Verbatim text selected by Gonzalo (1..2000 chars)."
+    },
+    "color": {
+      "type": "string",
+      "enum": ["yellow", "green", "red"],
+      "description": "Highlight color: yellow=note, green=approve, red=fix."
+    },
+    "comment": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 2000,
+      "description": "Free-form comment attached to the annotation (0..2000 chars)."
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Browser-side ISO8601 timestamp when the annotation was created."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "v1",
+      "description": "Wire contract version. Must be the literal string 'v1'."
+    },
+    "user_agent": {
+      "type": "string",
+      "maxLength": 512,
+      "description": "User agent string of the browser that produced the annotation."
+    },
+    "para_section": {
+      "type": "string",
+      "maxLength": 64,
+      "description": "Frontend hint for the section label of the paragraph (e.g. Abstract, Results)."
+    },
+    "prior_annotations_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "How many annotations Gonzalo has already produced in this browser session."
+    }
+  }
+}

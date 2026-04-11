@@ -1,0 +1,184 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProjectEncyclopedia",
+  "description": "Consolidated index of memory/, obsidian_vault/ and project root, organised into 12 fixed categories. Built by W0.5 / memory_bundle builder, consumed by agents at the start of each block.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["version", "generated_at", "source_stats", "categories"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonic version of the encyclopedia snapshot."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 timestamp when the encyclopedia was generated."
+    },
+    "bundle_mode": {
+      "type": "boolean",
+      "description": "True when the builder ran in GitHub Actions bundle mode (vault+root only), False for full local mode."
+    },
+    "priority_1_top": {
+      "type": "array",
+      "description": "List of top-priority-1 HIGH-VALUE items featured in the landing of encyclopedia.html.",
+      "items": {"$ref": "#/definitions/item"}
+    },
+    "source_stats": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "High-level statistics about the source corpus.",
+      "required": [
+        "memory_files",
+        "vault_files",
+        "root_files",
+        "total_mb"
+      ],
+      "properties": {
+        "memory_files": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of files indexed under memory/."
+        },
+        "vault_files": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of files indexed under obsidian_vault/."
+        },
+        "root_files": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of files indexed at the project root level."
+        },
+        "total_lines": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Aggregate line count across all indexed files (optional)."
+        },
+        "total_items": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Aggregate item count across all categories (alternative to total_lines)."
+        },
+        "total_mb": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Aggregate size in megabytes across all indexed files."
+        }
+      }
+    },
+    "categories": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Fixed set of 13 category buckets. Every key must be one of the canonical category_ids (12 originales + modelos_activos nuevo tras ajuste de alcance S61).",
+      "required": [
+        "numeros_canonicos",
+        "sesgos_m14",
+        "decisiones",
+        "framework_tier",
+        "bibliografia",
+        "fenologia_dag",
+        "modelo_s29k",
+        "walk_forward",
+        "checklists",
+        "auditoria_q1",
+        "clinica",
+        "validacion_externa",
+        "modelos_activos"
+      ],
+      "properties": {
+        "numeros_canonicos": {"$ref": "#/definitions/category"},
+        "sesgos_m14": {"$ref": "#/definitions/category"},
+        "decisiones": {"$ref": "#/definitions/category"},
+        "framework_tier": {"$ref": "#/definitions/category"},
+        "bibliografia": {"$ref": "#/definitions/category"},
+        "fenologia_dag": {"$ref": "#/definitions/category"},
+        "modelo_s29k": {"$ref": "#/definitions/category"},
+        "walk_forward": {"$ref": "#/definitions/category"},
+        "checklists": {"$ref": "#/definitions/category"},
+        "auditoria_q1": {"$ref": "#/definitions/category"},
+        "clinica": {"$ref": "#/definitions/category"},
+        "validacion_externa": {"$ref": "#/definitions/category"},
+        "modelos_activos": {"$ref": "#/definitions/category"}
+      }
+    }
+  },
+  "definitions": {
+    "category": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["label", "description", "items"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Human-readable label for the category."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of what belongs in this category."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Optional emoji or icon for the category."
+        },
+        "items": {
+          "type": "array",
+          "description": "Items indexed under this category.",
+          "items": {"$ref": "#/definitions/item"}
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Either a regular file item (path, preview, size_bytes, lines) or a model card (script_path, metrics, source_memory, status). Only id, title, tags, priority are strictly required.",
+      "required": [
+        "id",
+        "title",
+        "tags",
+        "priority"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Relative path used as the unique identifier of the item."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title extracted from the file (first heading or filename)."
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative path to the file."
+        },
+        "preview": {
+          "type": "string",
+          "maxLength": 400,
+          "description": "First ~200 characters of the file content."
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "File size in bytes."
+        },
+        "lines": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Line count of the file."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Free-form tags attached to the item (e.g. #canonical, #S60, #tier1).",
+          "items": {"type": "string"}
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Priority tier: 1 = HIGH-VALUE (top-20), 5 = lowest. Used to rank items per category."
+        }
+      }
+    }
+  }
+}

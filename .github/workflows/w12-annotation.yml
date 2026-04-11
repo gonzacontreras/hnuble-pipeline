@@ -1,0 +1,43 @@
+name: W12 Annotation Listener
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: w12-annot
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - name: Poll ntfy and dispatch W14
+        env:
+          NTFY_TOPIC_ANNOTATIONS: ${{ secrets.NTFY_TOPIC_ANNOTATIONS }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/w12_annotation_listener.py
+      - name: Commit state
+        run: |
+          git config user.name "hnuble-bot"
+          git config user.email "bot@hnuble.io"
+          git add state/annotations.json state/claude_live.json
+          if git diff --staged --quiet; then
+            echo "no changes"
+          else
+            git commit -m "W12: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi

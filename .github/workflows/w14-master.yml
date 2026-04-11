@@ -1,0 +1,56 @@
+name: W14 Master Orchestrator
+
+on:
+  workflow_dispatch:
+    inputs:
+      annotation_ids:
+        description: 'Comma-separated annotation IDs'
+        required: true
+      priority:
+        description: 'Execution priority'
+        required: false
+        default: 'normal'
+
+concurrency:
+  group: w14-master
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  orchestrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - name: Run orchestrator
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          W14_ANNOTATION_IDS: ${{ github.event.inputs.annotation_ids }}
+        run: python scripts/w14_master_orchestrator.py
+      - name: Commit state
+        run: |
+          git config user.name "hnuble-bot"
+          git config user.email "bot@hnuble.io"
+          git add state/ docs/state/ || true
+          if git diff --staged --quiet; then
+            echo "no changes"
+          else
+            git commit -m "W14: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
+      - name: Cascade to downstream
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run w13-eid-scorer.yml || true
+          gh workflow run w8-hil.yml || true

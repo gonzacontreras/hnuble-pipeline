@@ -3,45 +3,163 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>hnuble-pipeline</title>
+<title>hnuble-pipeline · S61 EID submission</title>
 <style>
-  body{font-family:system-ui,sans-serif;max-width:900px;margin:2em auto;padding:0 1em;color:#222}
-  h1{margin-bottom:0}
-  .sub{color:#666;font-size:.95em}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1em;margin-top:1.5em}
-  .card{background:#f7f8fa;border:1px solid #e1e4e8;border-radius:8px;padding:1em;text-decoration:none;color:#222}
-  .card:hover{background:#eef;border-color:#8ab}
-  .card h2{margin:0 0 .3em;font-size:1.1em}
-  .card p{margin:0;color:#555;font-size:.9em}
-  footer{margin-top:3em;color:#888;font-size:.85em;border-top:1px solid #eee;padding-top:1em}
+  body{font-family:system-ui,-apple-system,sans-serif;max-width:1100px;margin:1.5em auto;padding:0 1em;color:#222;background:#fff}
+  h1{margin-bottom:.2em;font-size:1.8em}
+  .sub{color:#555;font-size:.95em;margin-top:0}
+  .live-badge{display:flex;align-items:center;gap:.6em;background:#eef5ff;border:1px solid #a8c4e0;border-radius:8px;padding:.7em 1em;margin:1em 0;font-size:.92em;flex-wrap:wrap}
+  .live-dot{width:11px;height:11px;border-radius:50%;background:#2b8a3e;box-shadow:0 0 8px #40c057;animation:pulse 2s infinite;flex-shrink:0}
+  .live-dot.idle{background:#868e96;box-shadow:none;animation:none}
+  .live-dot.error{background:#c92a2a;box-shadow:0 0 8px #e03131;animation:none}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+  .live-text{flex:1;min-width:200px}
+  .countdown{font-family:ui-monospace,Consolas,monospace;font-weight:600;color:#1864ab;margin-left:auto;font-size:.95em;white-space:nowrap}
+  .countdown.urgent{color:#c92a2a}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1em;margin-top:1.5em}
+  .card{background:#f7f8fa;border:1px solid #e1e4e8;border-radius:8px;padding:1.1em;text-decoration:none;color:#222;transition:background .15s,border-color .15s,transform .15s;display:block}
+  .card:hover,.card:focus{background:#eef4ff;border-color:#6c98c9;transform:translateY(-1px);outline:none}
+  .card:focus-visible{box-shadow:0 0 0 3px rgba(108,152,201,.45)}
+  .card h2{margin:0 0 .35em;font-size:1.08em;color:#1a1a1a}
+  .card p{margin:0;color:#4a4a4a;font-size:.88em;line-height:1.45}
+  .card .tag{display:inline-block;font-size:.72em;padding:.18em .55em;background:#e1e4e8;border-radius:3px;margin-top:.55em;color:#3a3a3a;font-weight:500}
+  .card.new{border-color:#2b8a3e;border-width:1px}
+  .card.new .tag{background:#d3f9d8;color:#1b5e20}
+  .section-label{margin:1.8em 0 .4em;font-size:.78em;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#555}
+  footer{margin-top:3em;color:#555;font-size:.85em;border-top:1px solid #e1e4e8;padding-top:1em;line-height:1.6}
+  footer code{background:#f1f3f5;padding:.15em .45em;border-radius:3px;font-size:.95em;color:#1864ab}
+  footer p{margin:.3em 0}
 </style>
 </head>
 <body>
-<h1>hnuble-pipeline</h1>
-<p class="sub">Hantavirus Ñuble 24/7 perfection pipeline · 11 workflows · 20 agents · baseline S59</p>
 
-<div class="grid">
-  <a class="card" href="dashboard.html">
+<h1>hnuble-pipeline</h1>
+<p class="sub">Hantavirus Ñuble · EID submission · pipeline 24/7 · 15 workflows · orquestación maestra W14</p>
+
+<div class="live-badge" id="live-badge" role="status" aria-live="polite" aria-atomic="true">
+  <div class="live-dot idle" id="live-dot" aria-hidden="true"></div>
+  <div class="live-text">
+    <strong id="live-block">idle</strong> &mdash; <span id="live-label">esperando trabajo</span>
+  </div>
+  <div class="countdown" id="countdown" aria-label="tiempo restante al deadline EID">&mdash;</div>
+</div>
+
+<div class="section-label">Nuevos (S61)</div>
+<div class="grid" role="list">
+  <a class="card new" href="live.html" role="listitem" aria-label="Live Status: estado de Claude Code en tiempo real">
+    <h2>Live Status</h2>
+    <p>Ver que esta haciendo Claude Code en tiempo real: bloque actual, agente activo, hallazgos y plan inmediato.</p>
+    <span class="tag">nuevo &middot; tiempo real</span>
+  </a>
+  <a class="card new" href="encyclopedia.html" role="listitem" aria-label="Enciclopedia Maestra: 397 archivos del proyecto">
+    <h2>Enciclopedia Maestra</h2>
+    <p>Navega 397 archivos del proyecto en 12 categorias: numeros canonicos, sesgos M14, decisiones, bibliografia, fenologia, modelo, checklists.</p>
+    <span class="tag">nuevo &middot; 397 archivos</span>
+  </a>
+  <a class="card new" href="paper-current.html" role="listitem" aria-label="Paper Actual: manuscrito EID v5 anotable">
+    <h2>Paper Actual</h2>
+    <p>Manuscrito EID v5 CONDENSED. Subraya en 3 colores (duda, mejora, error), escribe notas, dispara orquestacion W14 para mejorar.</p>
+    <span class="tag">nuevo &middot; anotable</span>
+  </a>
+  <a class="card new" href="paper-improved.html" role="listitem" aria-label="Paper Mejorado: diff, changelog y score EID">
+    <h2>Paper Mejorado</h2>
+    <p>Diff vs version actual, changelog por edit, score EID con 11 componentes, ranking de mayor lift potencial.</p>
+    <span class="tag">nuevo &middot; diff + score</span>
+  </a>
+  <a class="card new" href="workflow.html" role="listitem" aria-label="Mapa del Pipeline: 38 nodos interactivos Cytoscape">
+    <h2>Mapa del Pipeline</h2>
+    <p>69 nodos interactivos: 17 workflows (10 activos + 5 nuevos + 2 script-only), 10 libs, 16 state, 8 externals, 13 triggers, 5 modelos.</p>
+    <span class="tag">nuevo &middot; Cytoscape DAG</span>
+  </a>
+</div>
+
+<div class="section-label">Existentes</div>
+<div class="grid" role="list">
+  <a class="card" href="dashboard.html" role="listitem" aria-label="Dashboard de workflows W0-W10">
     <h2>Dashboard</h2>
-    <p>Live status de los 11 workflows W0-W10.</p>
+    <p>Estado de los workflows W0-W10, ultimas ejecuciones cron, resumen por workflow.</p>
+    <span class="tag">existente</span>
   </a>
-  <a class="card" href="findings.html">
+  <a class="card" href="findings.html" role="listitem" aria-label="Findings: hallazgos activos con severidad y clasificacion MCC">
     <h2>Findings</h2>
-    <p>Hallazgos activos, severidad y clasificación MCC.</p>
+    <p>Hallazgos activos con severidad (URGENT/HIGH/MED/LOW) y clasificacion MCC (BLINDADO/PARCIAL/NUEVO/CONTRADICCION).</p>
+    <span class="tag">existente</span>
   </a>
-  <a class="card" href="approvals.html">
+  <a class="card" href="approvals.html" role="listitem" aria-label="HIL Approvals: cola de aprobaciones humanas pendientes">
     <h2>HIL Approvals</h2>
-    <p>Cola de aprobaciones pendientes (blindaje upgrades).</p>
+    <p>Cola de aprobaciones humanas pendientes (blindaje upgrades generados por W10).</p>
+    <span class="tag">existente</span>
   </a>
-  <a class="card" href="https://github.com/gonzacontreras/hnuble-pipeline">
-    <h2>Código fuente</h2>
-    <p>Repo GitHub con scripts, YAMLs y estado.</p>
+  <a class="card" href="https://github.com/gonzacontreras/hnuble-pipeline" role="listitem" aria-label="Codigo fuente: repositorio GitHub hnuble-pipeline">
+    <h2>Codigo fuente</h2>
+    <p>Repo GitHub con workflows YAML, scripts Python, libs, state files y docs.</p>
+    <span class="tag">GitHub</span>
   </a>
 </div>
 
 <footer>
-  <p>Canal HIL: <code>ntfy.sh/hnuble-guardian-7k3q9mXz</code></p>
-  <p>Manuscrito EID · submission target 14-15 abril 2026</p>
+  <p>Canal HIL global: <code>ntfy.sh/hnuble-guardian-7k3q9mXz</code></p>
+  <p>Canal anotaciones: <code>ntfy.sh/hnuble-annot-&lt;secret&gt;</code> (frontend &rarr; W12 listener)</p>
+  <p>Deadline EID: <strong>2026-04-14 06:00 UTC</strong> &middot; Actualizacion pagina cada 30 min via <code>deploy-pages.yml</code></p>
+  <p>Contrato annotation_message_v1 documentado en <a href="CONTRACTS.md">CONTRACTS.md</a></p>
 </footer>
+
+<script>
+"use strict";
+const DEADLINE = new Date('2026-04-14T06:00:00Z');
+const REFRESH_MS = 5000;
+
+async function fetchLive(){
+  try{
+    const r = await fetch('state/claude_live.json?ts=' + Date.now(), {cache:'no-store'});
+    if(!r.ok) throw new Error('http ' + r.status);
+    return await r.json();
+  }catch(e){
+    return null;
+  }
+}
+
+function formatETA(deadline){
+  const now = new Date();
+  const diffMs = deadline - now;
+  if(diffMs <= 0) return 'DEADLINE PASADO';
+  const days = Math.floor(diffMs / 86400000);
+  const hours = Math.floor((diffMs % 86400000) / 3600000);
+  const mins = Math.floor((diffMs % 3600000) / 60000);
+  return days + 'd ' + hours + 'h ' + mins + 'm remaining';
+}
+
+function isUrgent(deadline){
+  return (deadline - new Date()) < 24 * 3600 * 1000;
+}
+
+async function refresh(){
+  const live = await fetchLive();
+  const dot = document.getElementById('live-dot');
+  const blockEl = document.getElementById('live-block');
+  const labelEl = document.getElementById('live-label');
+  const cdEl = document.getElementById('countdown');
+
+  if(live){
+    const status = (live.overall_status || 'idle').toLowerCase();
+    let cls = 'live-dot';
+    if(status === 'error' || status === 'failed') cls += ' error';
+    else if(status !== 'running' && status !== 'active') cls += ' idle';
+    dot.className = cls;
+    blockEl.textContent = live.current_block || 'none';
+    labelEl.textContent = live.current_block_label || live.current_agent || 'idle';
+  }else{
+    dot.className = 'live-dot idle';
+    blockEl.textContent = 'offline';
+    labelEl.textContent = 'no se pudo leer claude_live.json';
+  }
+
+  cdEl.textContent = formatETA(DEADLINE);
+  cdEl.className = 'countdown' + (isUrgent(DEADLINE) ? ' urgent' : '');
+}
+
+refresh();
+setInterval(refresh, REFRESH_MS);
+</script>
 </body>
 </html>

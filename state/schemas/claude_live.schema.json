@@ -1,0 +1,199 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ClaudeLiveState",
+  "description": "Live tracking of Claude Code session state for the Hantavirus Nuble pipeline. Written by the main Claude Code instance and polled by W0/W12/W14. Monotonic version + heartbeat_sequence guarantee staleness detection.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "heartbeat_sequence",
+    "updated_at",
+    "session",
+    "current_block",
+    "current_block_label",
+    "overall_status",
+    "agent",
+    "methodology",
+    "sub_blocks",
+    "current_findings",
+    "next_planned",
+    "tool_calls_total",
+    "files_touched"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonically increasing schema version of this state document. Must never decrease."
+    },
+    "heartbeat_sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonically increasing heartbeat counter, bumped on every write by Claude Code."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 timestamp of the last write."
+    },
+    "session": {
+      "type": "string",
+      "description": "Session label, e.g. S61, S62."
+    },
+    "session_deadline": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Optional ISO8601 deadline for the current session (e.g. manuscript submission deadline)."
+    },
+    "current_block": {
+      "type": "string",
+      "description": "Identifier of the current block being executed (e.g. B1, B2.1)."
+    },
+    "current_block_label": {
+      "type": "string",
+      "description": "Human-readable label of the current block."
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": ["running", "idle", "blocked", "done", "error"],
+      "description": "Overall execution status of the session."
+    },
+    "agent": {
+      "type": "string",
+      "description": "Name of the active agent (e.g. claude-code-main, sub-agent-B1.1)."
+    },
+    "methodology": {
+      "type": "string",
+      "description": "Methodology or protocol in use (e.g. 5-phase anti-bypass, sequential-thinking)."
+    },
+    "sub_blocks": {
+      "type": "array",
+      "description": "List of sub-blocks composing the current block.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "label", "status", "agent_type"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Sub-block identifier (e.g. B1.1)."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable label of the sub-block."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "dispatched", "running", "done", "error"],
+            "description": "Execution status of the sub-block."
+          },
+          "agent_type": {
+            "type": "string",
+            "description": "Type of agent assigned (e.g. sonnet, haiku, opus, task-tool)."
+          },
+          "output_path": {
+            "type": "string",
+            "description": "Absolute or repo-relative path where the sub-block output is written."
+          },
+          "blocked_by": {
+            "type": "array",
+            "description": "List of sub-block IDs that must complete before this one can run.",
+            "items": {"type": "string"}
+          },
+          "output_refs": {
+            "type": "array",
+            "description": "Paths/URLs of artifacts produced by the sub-block (set by finalize()).",
+            "items": {"type": "string"}
+          },
+          "duration_s": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Wall-clock seconds spent by the sub-block."
+          },
+          "detail": {
+            "type": "string",
+            "description": "Free-form note attached to the sub-block (e.g. current activity)."
+          },
+          "error_message": {
+            "type": "string",
+            "description": "Short error message (set by error())."
+          },
+          "traceback": {
+            "type": "string",
+            "description": "Optional full traceback string on error."
+          }
+        }
+      }
+    },
+    "current_findings": {
+      "type": "array",
+      "description": "Short strings describing findings already obtained in the current block.",
+      "items": {"type": "string"}
+    },
+    "next_planned": {
+      "type": "array",
+      "description": "Short strings describing what is planned next.",
+      "items": {"type": "string"}
+    },
+    "tool_calls_total": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Cumulative count of tool calls executed in the current session."
+    },
+    "files_touched": {
+      "type": "array",
+      "description": "List of absolute or repo-relative paths of files touched in the current session.",
+      "items": {"type": "string"}
+    },
+    "active_terminal": {
+      "type": "string",
+      "description": "Identifier of the active terminal (optional)."
+    },
+    "other_terminals": {
+      "type": "array",
+      "description": "List of other terminals currently attached to the project.",
+      "items": {"type": "string"}
+    },
+    "eta_estimate": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional ETA estimate for the current block and overall work.",
+      "properties": {
+        "optimistic_wall_time_min": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Optimistic wall-clock minutes remaining."
+        },
+        "pessimistic_wall_time_min": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Pessimistic wall-clock minutes remaining."
+        },
+        "current_block_eta_min": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Expected wall-clock minutes until current block completes."
+        }
+      }
+    },
+    "m14_preflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Preflight indicators for the M14 (anti-bypass) methodology.",
+      "properties": {
+        "catalog_consulted": {
+          "type": "boolean",
+          "description": "Whether the canonical catalog was consulted before acting."
+        },
+        "catalog_path": {
+          "type": "string",
+          "description": "Path to the catalog that was consulted."
+        },
+        "findings_classified": {
+          "type": ["boolean", "string"],
+          "description": "Whether findings have been classified per M14 taxonomy. Boolean when workers set it; string allowed for human-readable notes like 'N/A (infrastructure build)'."
+        }
+      }
+    }
+  }
+}

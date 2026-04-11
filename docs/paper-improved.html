@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paper Mejorado · diff + score EID · Hantavirus Ñuble</title>
+<!-- Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/diff-match-patch@1.0.5/index.min.js" integrity="sha256-u2W5P0pMqfIo5xRzBKRivKwFTSyBz3ywyjGuCzmyhMQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" integrity="sha256-h3NHqJGz4wcKLQvv8zXVs2+8c43nMxQB/XmpMd6oGQs=" crossorigin="anonymous"></script>
+<style>
+  :root{
+    --bg:#fafbfc;
+    --paper-bg:#ffffff;
+    --ink:#1f2328;
+    --muted:#57606a;
+    --rule:#d0d7de;
+    --accent:#0969da;
+    --good:#1b5e20;
+    --bad:#b42318;
+    --warn:#a65300;
+    --panel-bg:#f7f8fa;
+    --added:#dafbe1;
+    --added-dark:#116329;
+    --removed:#ffebe9;
+    --removed-dark:#b42318;
+    --modified:#fff3b8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",Times,serif;line-height:1.65}
+  header.topbar{
+    position:sticky;top:0;z-index:10;background:#ffffffee;backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);padding:.7em 1.2em;display:flex;align-items:center;gap:1em;flex-wrap:wrap;
+    font-family:system-ui,-apple-system,sans-serif;
+  }
+  header.topbar h1{margin:0;font-size:1.05em;font-weight:600}
+  header.topbar .meta{color:var(--muted);font-size:.85em}
+  header.topbar nav{margin-left:auto;display:flex;gap:.8em;font-size:.85em;align-items:center}
+  header.topbar nav a{color:var(--accent);text-decoration:none}
+  header.topbar nav a:hover{text-decoration:underline}
+  header.topbar select{font-size:.82em;padding:.25em .4em;border:1px solid var(--rule);border-radius:4px;background:#fff;font-family:inherit}
+  .toggle-btn{
+    border:1px solid var(--rule);background:#fff;border-radius:999px;padding:.3em .9em;font-size:.82em;cursor:pointer;
+    font-family:system-ui,sans-serif
+  }
+  .toggle-btn:hover{background:#f1f3f5}
+
+  main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(420px,1.6fr);gap:1em;padding:1em;max-width:1700px;margin:0 auto}
+  @media (max-width: 1100px){ main{grid-template-columns:1fr} }
+
+  /* Diff pane */
+  .diff-pane{
+    background:var(--paper-bg);border:1px solid var(--rule);border-radius:6px;
+    overflow:hidden;min-height:400px;display:flex;flex-direction:column;
+  }
+  .diff-pane h2{margin:0;padding:.7em 1em;font-size:.95em;background:var(--panel-bg);border-bottom:1px solid var(--rule);font-family:system-ui,sans-serif}
+  .diff-split{display:grid;grid-template-columns:1fr 1fr;min-height:400px}
+  .diff-col{padding:1.3em 1.5em;font-size:.85em;line-height:1.65;overflow-y:auto;max-height:calc(100vh - 170px)}
+  .diff-col.left{border-right:1px solid var(--rule);background:#fdfdfd}
+  .diff-col.right{background:#ffffff}
+  .diff-col h4{margin:.3em 0 .5em;font-family:system-ui,sans-serif;color:var(--muted);font-size:.8em;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+  ins.diff-add{background:var(--added);color:var(--added-dark);text-decoration:none;padding:0 .1em;border-radius:2px}
+  del.diff-del{background:var(--removed);color:var(--removed-dark);text-decoration:line-through;padding:0 .1em;border-radius:2px}
+  .diff-section-banner{font-family:system-ui,sans-serif;font-weight:600;color:#0b2447;border-bottom:1px solid var(--rule);padding:.6em 0 .2em;margin:1em 0 .3em;font-size:.9em}
+  .diff-banner-msg{padding:1em 1.2em;background:#fffbe6;border:1px solid #facc15;color:#7a4e00;border-radius:4px;margin:1em;font-family:system-ui,sans-serif;font-size:.9em}
+  .diff-banner-msg strong{display:block;margin-bottom:.3em}
+
+  /* Right pane - tabs */
+  .right-pane{
+    background:var(--panel-bg);border:1px solid var(--rule);border-radius:6px;
+    display:flex;flex-direction:column;font-family:system-ui,-apple-system,sans-serif;font-size:.88em;
+  }
+  .tabs{display:flex;border-bottom:1px solid var(--rule);background:#fff;border-radius:6px 6px 0 0}
+  .tab{
+    flex:1;padding:.8em .4em;text-align:center;cursor:pointer;border-right:1px solid var(--rule);
+    font-size:.85em;font-weight:500;color:var(--muted);transition:background .12s
+  }
+  .tab:last-child{border-right:none}
+  .tab.active{color:var(--ink);background:var(--panel-bg);border-bottom:2px solid var(--accent)}
+  .tab:hover{background:#f1f3f5}
+  .tab-body{padding:1.1em 1.3em;overflow-y:auto;max-height:calc(100vh - 220px)}
+  .tab-body.hidden{display:none}
+
+  /* Score tab */
+  .score-head{text-align:center;margin-bottom:1em;padding-bottom:.9em;border-bottom:1px solid var(--rule)}
+  .score-big{font-size:2.4em;font-weight:700;color:#0b2447;line-height:1.1;font-family:system-ui,sans-serif}
+  .score-delta{font-size:.85em;color:var(--muted);margin-top:.2em}
+  .score-delta.positive{color:var(--good)}
+  .score-delta.negative{color:var(--bad)}
+  .bars{display:flex;flex-direction:column;gap:.45em;margin-top:.8em}
+  .bar-row{display:grid;grid-template-columns:9em 1fr 3.8em;gap:.5em;align-items:center;font-size:.8em}
+  .bar-label{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bar-label small{color:var(--muted);display:block;font-size:.85em}
+  .bar-track{height:12px;background:#e1e4e8;border-radius:6px;overflow:hidden;position:relative}
+  .bar-fill{height:100%;background:linear-gradient(90deg,#4c6ef5,#1864ab);border-radius:6px;transition:width .4s}
+  .bar-fill.decomp{background:linear-gradient(90deg,#7048e8,#5f3dc4)}
+  .bar-value{font-family:ui-monospace,Consolas,monospace;text-align:right;color:var(--muted);font-size:.78em}
+  .rec-card{background:#fff;border:1px solid var(--rule);border-left:3px solid var(--accent);padding:.7em .9em;margin-top:.6em;border-radius:4px}
+  .rec-card strong{display:block;font-size:.85em;color:#0b2447}
+  .rec-card p{margin:.2em 0 0;font-size:.82em;color:#24292f}
+  .rec-card .lift{float:right;font-size:.75em;color:var(--good);font-family:ui-monospace,monospace}
+  .sparkline{width:100%;height:100px;margin-top:1em;border:1px solid var(--rule);border-radius:4px;background:#fff}
+
+  /* Changelog tab */
+  .changelog-entry{border:1px solid var(--rule);border-radius:4px;margin-bottom:.7em;background:#fff}
+  .changelog-head{padding:.5em .8em;cursor:pointer;display:flex;align-items:center;gap:.6em;font-size:.82em}
+  .changelog-head:hover{background:#f1f3f5}
+  .changelog-head .ch-time{color:var(--muted);font-family:ui-monospace,monospace;font-size:.78em}
+  .changelog-head .ch-para{background:#e1e4e8;border-radius:3px;padding:.1em .4em;font-size:.72em}
+  .changelog-head .ch-badge{padding:.1em .4em;border-radius:3px;font-size:.7em}
+  .changelog-head .ch-badge.ok{background:#dafbe1;color:var(--good)}
+  .changelog-head .ch-badge.err{background:#ffebe9;color:var(--bad)}
+  .changelog-body{padding:.7em .9em;border-top:1px solid var(--rule);display:none;font-size:.8em}
+  .changelog-entry.open .changelog-body{display:block}
+  .changelog-body pre{background:var(--panel-bg);border:1px solid var(--rule);padding:.4em .6em;border-radius:3px;font-size:.78em;white-space:pre-wrap;word-break:break-word;margin:.3em 0}
+
+  /* Models tab */
+  .model-card{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:.8em 1em;margin-bottom:.7em}
+  .model-card h4{margin:0 0 .3em;font-size:.9em;color:#0b2447}
+  .model-card .script{font-family:ui-monospace,monospace;font-size:.72em;color:var(--muted);word-break:break-all}
+  .model-card .metrics{margin-top:.4em;font-size:.78em;line-height:1.5}
+  .model-card .metrics code{background:var(--panel-bg);padding:.08em .3em;border-radius:3px}
+  .model-card .badge{display:inline-block;padding:.1em .45em;border-radius:3px;font-size:.7em;font-weight:600;margin-left:.3em;vertical-align:middle}
+  .badge.blind{background:#dafbe1;color:var(--good)}
+  .badge.partial{background:#fff3b8;color:var(--warn)}
+  .badge.pending{background:#ffebe9;color:var(--bad)}
+  .placeholder{background:#fffbe6;border:1px solid #facc15;border-radius:4px;padding:.9em 1em;color:#7a4e00;font-size:.85em}
+  .loading{color:var(--muted);font-style:italic;padding:2em;text-align:center}
+
+  /* Footer */
+  footer.stats{
+    max-width:1700px;margin:1em auto;padding:.9em 1.3em;background:#fff;border:1px solid var(--rule);border-radius:6px;
+    display:flex;gap:2em;flex-wrap:wrap;font-family:system-ui,sans-serif;font-size:.82em;color:var(--muted)
+  }
+  footer.stats strong{color:var(--ink);font-weight:600}
+  footer.stats .stat{display:flex;flex-direction:column;gap:.1em}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <h1>Paper Mejorado · EID v5 (diff + score)</h1>
+  <span class="meta" id="meta-stats">cargando&hellip;</span>
+  <nav>
+    <button class="toggle-btn" id="toggle-btn" aria-label="alternar Current vs Improved">Current ↔ Improved</button>
+    <label style="font-size:.78em;color:var(--muted)">Versión:
+      <select id="version-select" aria-label="versión del manuscrito"><option value="latest">latest</option></select>
+    </label>
+    <a href="index.html">&larr; Inicio</a>
+    <a href="paper-current.html">Paper Actual</a>
+  </nav>
+</header>
+
+<main>
+  <section class="diff-pane" aria-label="diff vs current">
+    <h2>Diff · current ↔ improved</h2>
+    <div id="diff-body"><p class="loading">Cargando diff&hellip;</p></div>
+  </section>
+
+  <section class="right-pane" aria-label="score y changelog">
+    <div class="tabs" role="tablist">
+      <div class="tab active" data-tab="score" role="tab" aria-selected="true" tabindex="0">Score EID</div>
+      <div class="tab" data-tab="changelog" role="tab" tabindex="0">Changelog</div>
+      <div class="tab" data-tab="models" role="tab" tabindex="0">Modelos & Herramientas</div>
+    </div>
+    <div class="tab-body" id="tab-score">
+      <p class="loading">Cargando score&hellip;</p>
+    </div>
+    <div class="tab-body hidden" id="tab-changelog">
+      <p class="loading">Cargando changelog&hellip;</p>
+    </div>
+    <div class="tab-body hidden" id="tab-models">
+      <p class="loading">Cargando modelos&hellip;</p>
+    </div>
+  </section>
+</main>
+
+<footer class="stats" id="footer-stats">
+  <div class="stat"><strong id="stat-edits">—</strong><span>edits aplicados</span></div>
+  <div class="stat"><strong id="stat-agents">—</strong><span>agentes usados</span></div>
+  <div class="stat"><strong id="stat-time">—</strong><span>tiempo total W14</span></div>
+  <div class="stat"><strong id="stat-cost">—</strong><span>costo API estimado</span></div>
+  <div class="stat"><strong id="stat-refs">—</strong><span>refs actuales</span></div>
+  <div class="stat"><strong id="stat-words">—</strong><span>palabras actuales</span></div>
+</footer>
+
+<script>
+/* =========================================================================
+ *  paper-improved.html — B4.3
+ *  - Loads state/manuscript_v5_condensed.json (current) + state/manuscript_improved.md (improved, optional).
+ *  - Word-level diff via diff-match-patch.
+ *  - Tabs: Score EID (13 bars), Changelog, Modelos & Herramientas.
+ *  ======================================================================= */
+
+const FALLBACK_COMPONENTS = [
+  "strobe","tripod_ai","epiforge","stat_rigor","reproducibility",
+  "novelty","writing_quality","ref_quality","bias_coverage",
+  "reviewer_anticipation","journal_fit_eid"
+];
+// Extra decomposition components added in B4.3 per scope adjustment.
+const DECOMP_COMPONENTS = ["model_descriptive_rigor","model_predictive_rigor"];
+
+const EIGHT_MODELS = [
+  {key:"s29k",        name:"S29-K GLMM NB2",          script:"R/AJUSTE_GLMM_S29K.R",           metric_keys:["bss_tier1","bss_tier2","psi"]},
+  {key:"ward",        name:"Ward clustering (k=3)",  script:"R/CLUSTER_AUDIT.R",               metric_keys:["silhouette","kappa"]},
+  {key:"trilogy",     name:"Trilogía clínica",        script:"R/TRILOGIA_SCORE.R",             metric_keys:["auc","or_score"]},
+  {key:"firescph",    name:"Fire × SCPH",             script:"R/FIRE_SCPH_IRR.R",              metric_keys:["irr","paf"]},
+  {key:"cluster2023", name:"Cluster 2023 El Carmen",  script:"R/CLUSTER_2023_BAI_PERRON.R",    metric_keys:["breakpoint_date","rr_cluster"]},
+  {key:"framework",   name:"Framework operacional",   script:"R/FRAMEWORK_B38_OPERATIVO.R",    metric_keys:["lag_months","agencies"]},
+  {key:"dca",         name:"Decision Curve Analysis", script:"R/DCA_VICKERS.R",                metric_keys:["nb_tier1","nb_tier2","pt_range"]},
+  {key:"walkforward", name:"Walk-forward validation", script:"R/WALK_FORWARD_S29K.R",          metric_keys:["folds_stable","log_score_tier1"]},
+];
+
+// State
+let manuscript = null;
+let improvedText = null;
+let improvementLog = null;
+let eidScore = null;
+let modelEval = null;
+let showImproved = true;
+
+// ------- Utilities ----------------------------------------------------------
+function $(sel, root=document){ return root.querySelector(sel); }
+function $$(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+function escapeHtml(s){ return (s||"").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function formatPct(x){ return (x*100).toFixed(1)+"%"; }
+function formatDelta(x){
+  const sign = x >= 0 ? "+" : "";
+  return `${sign}${(x*100).toFixed(1)}pp`;
+}
+
+// ------- Data loading -------------------------------------------------------
+async function fetchJson(path){
+  try{
+    const r = await fetch(path, {cache:"no-store"});
+    if(!r.ok) return null;
+    return await r.json();
+  }catch(e){ return null; }
+}
+async function fetchText(path){
+  try{
+    const r = await fetch(path, {cache:"no-store"});
+    if(!r.ok) return null;
+    return await r.text();
+  }catch(e){ return null; }
+}
+
+async function boot(){
+  manuscript = await fetchJson("state/manuscript_v5_condensed.json");
+  improvedText = await fetchText("state/manuscript_improved.md");
+  improvementLog = await fetchJson("state/improvement_log.json");
+  eidScore = await fetchJson("state/eid_score.json");
+  modelEval = await fetchJson("state/model_evaluation.json");
+
+  if(!manuscript){
+    $("#diff-body").innerHTML = `<div class="diff-banner-msg"><strong>Error</strong>No se pudo cargar <code>state/manuscript_v5_condensed.json</code>. Ejecuta <code>python scripts/build_manuscript_json.py</code>.</div>`;
+    return;
+  }
+
+  const wc = manuscript.total_words;
+  const refs = manuscript.total_refs;
+  $("#meta-stats").textContent = `${manuscript.total_paragraphs} párrafos · ${wc}w · ${refs} refs`;
+  $("#stat-words").textContent = wc;
+  $("#stat-refs").textContent = refs;
+
+  renderDiff();
+  renderScore();
+  renderChangelog();
+  renderModels();
+  renderFooterStats();
+  populateVersionSelect();
+}
+
+// ------- Diff ---------------------------------------------------------------
+function manuscriptAsText(){
+  if(!manuscript) return "";
+  return manuscript.paragraphs
+    .filter(p => p.is_main_text)
+    .map(p => p.text)
+    .join("\n\n");
+}
+
+function renderDiff(){
+  const body = $("#diff-body");
+  const currentText = manuscriptAsText();
+
+  if(!improvedText){
+    body.innerHTML = `
+      <div class="diff-banner-msg">
+        <strong>W14 Orchestrator aún no ha generado mejoras.</strong>
+        Dispara una anotación desde <a href="paper-current.html">paper-current.html</a> para iniciar el pipeline. Mientras tanto, la columna izquierda muestra el manuscrito actual.
+      </div>
+      <div class="diff-split">
+        <div class="diff-col left"><h4>Current (v5 CONDENSED)</h4><div id="diff-left-content"></div></div>
+        <div class="diff-col right"><h4>Improved (pending)</h4><em style="color:var(--muted)">— sin cambios —</em></div>
+      </div>`;
+    $("#diff-left-content").textContent = currentText;
+    return;
+  }
+
+  // Perform word-level diff via diff-match-patch.
+  const dmp = new diff_match_patch();
+  // Word-mode: tokenize by running character diff first then cleaning semantic.
+  const diffs = dmp.diff_main(currentText, improvedText);
+  dmp.diff_cleanupSemantic(diffs);
+
+  // Build left (removed+equal) and right (added+equal) columns.
+  let leftHtml = "", rightHtml = "";
+  diffs.forEach(([op, txt]) => {
+    const safe = escapeHtml(txt).replace(/\n/g, "<br>");
+    if(op === 0){ // equal
+      leftHtml += safe;
+      rightHtml += safe;
+    }else if(op === -1){ // deletion (only in left)
+      leftHtml += `<del class="diff-del">${safe}</del>`;
+    }else if(op === 1){ // insertion (only in right)
+      rightHtml += `<ins class="diff-add">${safe}</ins>`;
+    }
+  });
+
+  body.innerHTML = `
+    <div class="diff-split">
+      <div class="diff-col left" id="diff-left"><h4>Current (v5 CONDENSED)</h4>${leftHtml}</div>
+      <div class="diff-col right" id="diff-right"><h4>Improved</h4>${rightHtml}</div>
+    </div>`;
+
+  // Synchronize scroll between the two columns.
+  const left = $("#diff-left"), right = $("#diff-right");
+  let syncing = false;
+  left.addEventListener("scroll", () => { if(syncing) return; syncing=true; right.scrollTop = left.scrollTop; syncing=false; });
+  right.addEventListener("scroll", () => { if(syncing) return; syncing=true; left.scrollTop = right.scrollTop; syncing=false; });
+}
+
+// ------- Score tab ----------------------------------------------------------
+function renderScore(){
+  const body = $("#tab-score");
+  if(!eidScore){
+    // Stub placeholder — let the user know W13 hasn't run yet.
+    body.innerHTML = `
+      <div class="score-head">
+        <div class="score-big">—</div>
+        <div class="score-delta">W13 EID Scorer aún no ha corrido</div>
+      </div>
+      <div class="placeholder">
+        Se calculará automáticamente cuando W13 emita <code>state/eid_score.json</code>. Mientras tanto, se muestran los 13 componentes esperados (11 canónicos + 2 de decomposición del rigor estadístico).
+      </div>
+      <div class="bars">
+        ${[...FALLBACK_COMPONENTS, ...DECOMP_COMPONENTS].map(name => `
+          <div class="bar-row">
+            <div class="bar-label">${name.replace(/_/g," ")}<small>pendiente</small></div>
+            <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+            <div class="bar-value">—</div>
+          </div>`).join("")}
+      </div>`;
+    return;
+  }
+
+  const score = eidScore.score || 0;
+  const baseline = eidScore.baseline_prior || 0.28;
+  const delta = eidScore.delta_vs_baseline ?? (score - baseline);
+  const components = eidScore.components || [];
+  const top3 = eidScore.top3_recommendations || [];
+  const deltaClass = delta >= 0 ? "positive" : "negative";
+
+  // Add synthetic decomposition bars if backend does not provide them yet.
+  // We surface the two "model_*_rigor" bars visually by duplicating the
+  // stat_rigor component at half weight each, annotated as decomposition.
+  const decompBars = [];
+  const statRigor = components.find(c => c.name === "stat_rigor");
+  if(statRigor){
+    DECOMP_COMPONENTS.forEach((name, k) => {
+      decompBars.push({
+        i: 12 + k,
+        name,
+        value: statRigor.value,
+        weight: statRigor.weight / 2,
+        lift: (statRigor.lift || 0) / 2,
+        is_decomp: true
+      });
+    });
+  }
+
+  const allBars = [...components, ...decompBars];
+
+  body.innerHTML = `
+    <div class="score-head">
+      <div class="score-big">${formatPct(score)}</div>
+      <div class="score-delta ${deltaClass}">${formatDelta(delta)} vs baseline (${formatPct(baseline)})</div>
+    </div>
+    <div class="bars">
+      ${allBars.map(c => {
+        const pct = Math.max(0, Math.min(1, c.value)) * 100;
+        return `
+          <div class="bar-row">
+            <div class="bar-label">${c.name.replace(/_/g," ")}<small>w=${(c.weight||0).toFixed(2)} · lift=${(c.lift||0).toFixed(3)}${c.is_decomp?" (decomp)":""}</small></div>
+            <div class="bar-track"><div class="bar-fill${c.is_decomp?" decomp":""}" style="width:${pct}%"></div></div>
+            <div class="bar-value">${pct.toFixed(0)}%</div>
+          </div>`;
+      }).join("")}
+    </div>
+    <h3 style="font-family:system-ui,sans-serif;font-size:.9em;margin-top:1.2em;color:#0b2447">Top 3 recomendaciones</h3>
+    ${top3.map(r => `
+      <div class="rec-card">
+        <span class="lift">+${formatPct(r.expected_lift||0)}</span>
+        <strong>${escapeHtml(r.component||"")}</strong>
+        <p>${escapeHtml(r.action||"")}</p>
+      </div>
+    `).join("")}
+    <svg class="sparkline" id="score-sparkline" viewBox="0 0 300 100" preserveAspectRatio="none"></svg>
+  `;
+
+  drawSparkline();
+}
+
+function drawSparkline(){
+  // Simple last-10-versions history if improvementLog has entries, else flat.
+  const svg = $("#score-sparkline");
+  if(!svg) return;
+  const entries = improvementLog?.entries || [];
+  // Pseudo-history: score delta over recent entries (fallback synthetic).
+  const history = [];
+  if(entries.length){
+    entries.slice(-10).forEach((e,i) => history.push({x:i, y:e.lift_estimate || 0}));
+  }else{
+    // Show the single current score as a lone dot.
+    history.push({x:0, y: eidScore?.score || 0});
+  }
+  const maxY = Math.max(...history.map(h=>h.y), 1);
+  const w = 300, h = 100, pad = 8;
+  const pts = history.map((p,i) => {
+    const x = pad + (history.length>1 ? (i/(history.length-1))*(w-2*pad) : w/2);
+    const y = h - pad - (p.y/maxY) * (h - 2*pad);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+  svg.innerHTML = `
+    <rect x="0" y="0" width="${w}" height="${h}" fill="#fff"/>
+    ${history.length>1 ? `<polyline points="${pts}" fill="none" stroke="#1864ab" stroke-width="2"/>` : ""}
+    ${history.map((p,i) => {
+      const [x,y] = pts.split(" ")[i].split(",");
+      return `<circle cx="${x}" cy="${y}" r="3" fill="#1864ab"/>`;
+    }).join("")}
+    <text x="${pad}" y="14" font-family="system-ui" font-size="10" fill="#57606a">score history (últimas ${history.length})</text>
+  `;
+}
+
+// ------- Changelog tab ------------------------------------------------------
+function renderChangelog(){
+  const body = $("#tab-changelog");
+  const entries = improvementLog?.entries || [];
+  if(entries.length === 0){
+    body.innerHTML = `<div class="placeholder">Aún no hay edits aplicados por W14. El log se puebla cuando el orchestrator corre y el validator 5-fase acepta cambios.</div>`;
+    return;
+  }
+  const sorted = entries.slice().sort((a,b) => (b.timestamp||"").localeCompare(a.timestamp||""));
+  body.innerHTML = sorted.map(e => {
+    const ok = e.validator_passed;
+    return `
+      <div class="changelog-entry">
+        <div class="changelog-head">
+          <span class="ch-time">${escapeHtml((e.timestamp||"").slice(0,19).replace("T"," "))}</span>
+          <span class="ch-para">¶${e.para_id} · ${escapeHtml(e.para_section||"")}</span>
+          <span class="ch-badge ${ok?"ok":"err"}">${ok?"validator OK":"rejected"}</span>
+          <span style="color:var(--muted);margin-left:auto;font-size:.75em">wc ${e.word_count_delta>=0?"+":""}${e.word_count_delta} · refs ${e.refs_delta>=0?"+":""}${e.refs_delta}</span>
+        </div>
+        <div class="changelog-body">
+          <div><strong>Razonamiento:</strong> ${escapeHtml(e.rationale||"")}</div>
+          <div style="margin-top:.4em"><strong>Agentes:</strong> ${(e.agents_used||[]).map(escapeHtml).join(", ")}</div>
+          <div style="margin-top:.4em"><strong>Old:</strong><pre>${escapeHtml(e.old_text||"")}</pre></div>
+          <div><strong>New:</strong><pre>${escapeHtml(e.new_text||"")}</pre></div>
+          <div style="margin-top:.4em;color:var(--muted);font-size:.75em">edit_type: <code>${escapeHtml(e.edit_type||"")}</code> · lift: ${((e.lift_estimate||0)*100).toFixed(2)}% · risk: ${escapeHtml(e.risk||"")}</div>
+        </div>
+      </div>`;
+  }).join("");
+  // Click to toggle expanded
+  $$("#tab-changelog .changelog-head").forEach(h => {
+    h.addEventListener("click", () => h.parentElement.classList.toggle("open"));
+  });
+}
+
+// ------- Modelos & Herramientas tab ----------------------------------------
+function renderModels(){
+  const body = $("#tab-models");
+  if(!modelEval){
+    body.innerHTML = `
+      <div class="placeholder">
+        <strong>W15 Model Evaluator pendiente (se generará en B5).</strong><br>
+        Cuando W15 corra, este panel mostrará las métricas en vivo de los 8 modelos/herramientas junto con su delta vs <code>canonical_facts.json</code>, estado (BLINDADO / PARCIAL / PENDIENTE), último timestamp de evaluación y recomendaciones de mejora.
+      </div>
+      <h3 style="font-family:system-ui,sans-serif;font-size:.9em;color:#0b2447;margin-top:1em">Modelos esperados</h3>
+      ${EIGHT_MODELS.map(m => `
+        <div class="model-card">
+          <h4>${escapeHtml(m.name)}<span class="badge pending">PENDIENTE</span></h4>
+          <div class="script">${escapeHtml(m.script)}</div>
+          <div class="metrics" style="color:var(--muted);font-style:italic">métricas: ${m.metric_keys.join(", ")}</div>
+        </div>
+      `).join("")}`;
+    return;
+  }
+  // modelEval schema: { models: [ { key, name, script, status, last_eval, metrics: {...}, delta_vs_canonical: {...}, recommendations: [...] } ] }
+  const models = modelEval.models || [];
+  body.innerHTML = models.map(m => {
+    const statusClass = (m.status||"").toLowerCase() === "blindado" ? "blind" :
+                        (m.status||"").toLowerCase() === "parcial" ? "partial" : "pending";
+    const metricsHtml = m.metrics
+      ? Object.entries(m.metrics).map(([k,v]) => `<div><code>${escapeHtml(k)}</code>: ${escapeHtml(String(v))}</div>`).join("")
+      : "<em>sin métricas</em>";
+    const deltaHtml = m.delta_vs_canonical
+      ? Object.entries(m.delta_vs_canonical).map(([k,v]) => `<div>Δ <code>${escapeHtml(k)}</code>: ${escapeHtml(String(v))}</div>`).join("")
+      : "";
+    const recsHtml = (m.recommendations||[]).map(r => `<li>${escapeHtml(r)}</li>`).join("");
+    return `
+      <div class="model-card">
+        <h4>${escapeHtml(m.name||m.key)} <span class="badge ${statusClass}">${escapeHtml(m.status||"?")}</span></h4>
+        <div class="script">${escapeHtml(m.script||"")}</div>
+        <div class="metrics">${metricsHtml}</div>
+        ${deltaHtml ? `<div class="metrics">${deltaHtml}</div>` : ""}
+        ${recsHtml ? `<div class="metrics"><strong>Mejoras:</strong><ul>${recsHtml}</ul></div>` : ""}
+        <div style="color:var(--muted);font-size:.72em;margin-top:.3em">last eval: ${escapeHtml(m.last_eval||"—")}</div>
+      </div>`;
+  }).join("");
+}
+
+// ------- Footer stats -------------------------------------------------------
+function renderFooterStats(){
+  const entries = improvementLog?.entries || [];
+  $("#stat-edits").textContent = entries.length;
+  const agents = new Set();
+  entries.forEach(e => (e.agents_used||[]).forEach(a => agents.add(a)));
+  $("#stat-agents").textContent = agents.size || "—";
+  $("#stat-time").textContent = "—"; // populated by W14 supervisor when available
+  $("#stat-cost").textContent = "—";
+}
+
+// ------- Version selector & toggle -----------------------------------------
+function populateVersionSelect(){
+  // Stub: currently only `latest`. W14 can extend by appending per-version snapshots in the future.
+  const sel = $("#version-select");
+  if(!sel) return;
+  if(improvementLog?.entries?.length){
+    sel.innerHTML = `<option value="latest">latest (v${improvementLog.version||"?"})</option>` +
+                    improvementLog.entries.slice(-5).map((e,i) => `<option>v${(improvementLog.version||0)-i-1}</option>`).join("");
+  }
+}
+
+// ------- Tab switching ------------------------------------------------------
+$$(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    $$(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    const name = tab.dataset.tab;
+    $("#tab-score").classList.toggle("hidden", name !== "score");
+    $("#tab-changelog").classList.toggle("hidden", name !== "changelog");
+    $("#tab-models").classList.toggle("hidden", name !== "models");
+  });
+  tab.addEventListener("keydown", (e) => {
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); tab.click(); }
+  });
+});
+
+// ------- Toggle button (current ↔ improved) --------------------------------
+$("#toggle-btn").addEventListener("click", () => {
+  showImproved = !showImproved;
+  if(!improvedText){
+    window.location.href = "paper-current.html";
+    return;
+  }
+  // Toggle visibility of the two diff columns.
+  const left = $("#diff-left"), right = $("#diff-right");
+  if(left && right){
+    left.style.display = showImproved ? "" : "block";
+    right.style.display = showImproved ? "block" : "none";
+  }
+});
+
+boot();
+</script>
+</body>
+</html>

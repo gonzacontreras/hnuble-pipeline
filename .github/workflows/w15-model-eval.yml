@@ -1,0 +1,43 @@
+name: W15 Model Evaluator
+
+on:
+  schedule:
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [model-eval]
+
+concurrency:
+  group: w15-model-eval
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - name: Evaluate models
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python scripts/w15_model_evaluator.py
+      - name: Commit state
+        run: |
+          git config user.name "hnuble-bot"
+          git config user.email "bot@hnuble.io"
+          git add state/model_evaluation.json state/claude_live.json
+          if git diff --staged --quiet; then
+            echo "no changes"
+          else
+            git commit -m "W15: model eval $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi

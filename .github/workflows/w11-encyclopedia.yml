@@ -1,0 +1,42 @@
+name: W11 Encyclopedia Builder
+
+on:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: 'Trigger source (manual|cascade)'
+        required: false
+        default: 'manual'
+
+concurrency:
+  group: w11-encyclopedia
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - name: Build encyclopedia (bundle_mode)
+        env:
+          GITHUB_ACTIONS: 'true'
+        run: python scripts/w11_encyclopedia_builder.py
+      - name: Commit state updates
+        run: |
+          git config user.name "hnuble-bot"
+          git config user.email "bot@hnuble.io"
+          git add state/encyclopedia.json docs/encyc/ || true
+          if git diff --staged --quiet; then
+            echo "no encyclopedia changes"
+          else
+            git commit -m "W11 encyclopedia: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi

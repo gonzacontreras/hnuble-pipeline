@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hnuble-pipeline · Enciclopedia Maestra</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg-panel:#161b22;
+    --bg-panel-alt:#1c2128;
+    --bg-card:#22272e;
+    --border:#30363d;
+    --border-strong:#484f58;
+    --text:#c9d1d9;
+    --text-dim:#8b949e;
+    --text-strong:#f0f6fc;
+    --accent:#58a6ff;
+    --accent-dim:#388bfd;
+    --ok:#3fb950;
+    --warn:#d29922;
+    --err:#f85149;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;font-size:13.5px;line-height:1.45;height:100%}
+  a{color:var(--accent);text-decoration:none}
+  a:hover,a:focus{text-decoration:underline}
+  .app{display:flex;flex-direction:column;height:100vh}
+  header{display:flex;align-items:center;gap:1em;padding:.7em 1em;background:var(--bg-panel);border-bottom:1px solid var(--border);flex-wrap:wrap}
+  header h1{margin:0;font-size:1em;color:var(--text-strong);font-weight:600;white-space:nowrap}
+  header .nav{display:flex;gap:1em;font-size:.88em;color:var(--text-dim);flex-wrap:wrap}
+  header .search-wrap{flex:1;min-width:220px;max-width:520px}
+  header input[type=search]{width:100%;background:var(--bg);border:1px solid var(--border-strong);color:var(--text);padding:.5em .8em;border-radius:4px;font-family:inherit;font-size:.9em}
+  header input[type=search]:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+  header .stats{color:var(--text-dim);font-size:.78em;white-space:nowrap}
+  main{flex:1;display:grid;grid-template-columns:25% 40% 35%;gap:0;overflow:hidden}
+  main > section{overflow-y:auto;border-right:1px solid var(--border);padding:1em}
+  main > section:last-child{border-right:none}
+  main > section::-webkit-scrollbar{width:10px}
+  main > section::-webkit-scrollbar-track{background:var(--bg)}
+  main > section::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:5px}
+  section h2{margin:0 0 .6em;font-size:.72em;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border);padding-bottom:.4em}
+  /* left: tree */
+  .tree{list-style:none;padding:0;margin:0}
+  .tree .cat{padding:.55em .6em;border-radius:4px;cursor:pointer;margin-bottom:.3em;border:1px solid transparent;background:var(--bg-panel);display:flex;align-items:center;gap:.5em;transition:all .15s}
+  .tree .cat:hover{background:var(--bg-panel-alt);border-color:var(--border)}
+  .tree .cat.active{background:var(--bg-card);border-color:var(--accent);color:var(--text-strong)}
+  .tree .cat .icon{display:inline-block;width:1.2em;text-align:center;color:var(--accent);font-weight:700}
+  .tree .cat .label{flex:1;font-size:.87em}
+  .tree .cat .count{font-size:.72em;color:var(--text-dim);background:var(--bg);padding:.1em .4em;border-radius:3px;border:1px solid var(--border)}
+  .cat-desc{color:var(--text-dim);font-size:.75em;padding:.4em .6em .8em;line-height:1.4}
+  /* middle: items */
+  .item{padding:.65em .8em;border:1px solid var(--border);background:var(--bg-panel);border-radius:4px;margin-bottom:.5em;cursor:pointer;transition:all .15s}
+  .item:hover{background:var(--bg-panel-alt);border-color:var(--border-strong)}
+  .item.active{background:var(--bg-card);border-color:var(--accent)}
+  .item .title{color:var(--text-strong);font-size:.92em;font-weight:600;line-height:1.3;margin-bottom:.2em;word-break:break-word}
+  .item .preview{color:var(--text-dim);font-size:.78em;line-height:1.35;margin-top:.3em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .item .meta{display:flex;gap:.5em;align-items:center;flex-wrap:wrap;font-size:.7em;color:var(--text-dim);margin-top:.35em}
+  .badge{display:inline-block;padding:.1em .45em;border-radius:3px;font-size:.7em;font-weight:600;letter-spacing:.03em}
+  .badge.p1{background:rgba(63,185,80,.15);color:var(--ok);border:1px solid rgba(63,185,80,.3)}
+  .badge.p2{background:rgba(88,166,255,.15);color:var(--accent);border:1px solid rgba(88,166,255,.3)}
+  .badge.p3,.badge.p4,.badge.p5{background:rgba(139,148,158,.15);color:var(--text-dim);border:1px solid var(--border)}
+  .badge.blindado{background:rgba(63,185,80,.15);color:var(--ok);border:1px solid rgba(63,185,80,.3)}
+  .badge.parcial{background:rgba(210,153,34,.15);color:var(--warn);border:1px solid rgba(210,153,34,.3)}
+  .badge.pendiente{background:rgba(248,81,73,.15);color:var(--err);border:1px solid rgba(248,81,73,.3)}
+  .tag{display:inline-block;background:var(--bg);color:var(--text-dim);padding:.08em .4em;border-radius:3px;font-size:.68em;margin-right:.2em}
+  /* right: viewer */
+  #viewer{font-size:.88em;line-height:1.55;color:var(--text)}
+  #viewer h1{font-size:1.3em;color:var(--text-strong);margin:0 0 .5em;border-bottom:1px solid var(--border);padding-bottom:.3em}
+  #viewer h2{font-size:1.1em;color:var(--text-strong);margin:1em 0 .4em}
+  #viewer h3{font-size:1em;color:var(--text-strong);margin:.9em 0 .3em}
+  #viewer p{margin:.5em 0}
+  #viewer code{background:var(--bg);padding:.1em .35em;border-radius:3px;color:var(--accent);font-size:.88em}
+  #viewer pre{background:var(--bg);border:1px solid var(--border);padding:.8em;border-radius:4px;overflow-x:auto;font-size:.82em}
+  #viewer pre code{background:transparent;padding:0}
+  #viewer ul,#viewer ol{padding-left:1.4em}
+  #viewer li{margin:.2em 0}
+  #viewer blockquote{border-left:3px solid var(--accent);padding:.2em .8em;color:var(--text-dim);margin:.6em 0;background:var(--bg-panel)}
+  #viewer table{width:100%;border-collapse:collapse;margin:.6em 0;font-size:.85em}
+  #viewer th,#viewer td{border:1px solid var(--border);padding:.3em .6em;text-align:left}
+  #viewer th{background:var(--bg-panel)}
+  #viewer a{color:var(--accent)}
+  #viewer .viewer-meta{padding:.6em .8em;background:var(--bg-panel);border:1px solid var(--border);border-radius:4px;margin-bottom:.8em;font-size:.78em;color:var(--text-dim)}
+  #viewer .viewer-meta strong{color:var(--text-strong)}
+  #viewer .model-card{padding:1em;background:var(--bg-panel);border:1px solid var(--accent);border-radius:5px;margin-bottom:.8em}
+  #viewer .model-card h3{margin-top:0;color:var(--accent)}
+  #viewer .model-card .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5em;margin-top:.6em}
+  #viewer .model-card .metric{background:var(--bg-card);padding:.4em .6em;border-radius:3px;border:1px solid var(--border)}
+  #viewer .model-card .metric .k{color:var(--text-dim);font-size:.72em;text-transform:uppercase}
+  #viewer .model-card .metric .v{color:var(--text-strong);font-weight:700;font-size:.95em}
+  .empty{color:var(--text-dim);font-style:italic;padding:1em;text-align:center}
+  @media(max-width:1000px){
+    main{grid-template-columns:1fr;overflow-y:auto}
+    main > section{max-height:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<header>
+  <h1>Enciclopedia Maestra</h1>
+  <div class="search-wrap">
+    <input type="search" id="search" placeholder="Buscar fuzzy (titulo + preview + tags + path)... (min 2 chars)" aria-label="buscar en enciclopedia">
+  </div>
+  <div class="nav">
+    <a href="index.html">&larr; Home</a>
+    <a href="live.html">Live</a>
+    <a href="findings.html">Findings</a>
+  </div>
+  <div class="stats" id="stats">cargando...</div>
+</header>
+
+<main>
+
+<section aria-label="arbol de categorias">
+  <h2>Categorias (13)</h2>
+  <ul class="tree" id="tree"></ul>
+  <div class="cat-desc" id="cat-desc"></div>
+</section>
+
+<section aria-label="items de la categoria seleccionada">
+  <h2 id="items-header">Items</h2>
+  <div id="items"><div class="empty">selecciona una categoria</div></div>
+</section>
+
+<section aria-label="viewer markdown del item seleccionado">
+  <h2 id="viewer-header">Viewer</h2>
+  <div id="viewer"><div class="empty">selecciona un archivo para ver contenido</div></div>
+</section>
+
+</main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+"use strict";
+
+let ENCYC = null;
+let FUSE = null;
+let CURRENT_CAT = null;
+let CURRENT_ITEM = null;
+let ALL_ITEMS = []; // flat list for search
+
+function esc(s){
+  if(s==null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+async function loadEncyc(){
+  try{
+    const r = await fetch('state/encyclopedia.json?ts=' + Date.now(), {cache:'no-store'});
+    if(!r.ok) throw new Error('http ' + r.status);
+    ENCYC = await r.json();
+  }catch(e){
+    document.getElementById('tree').innerHTML = '<li class="empty">error cargando enciclopedia: ' + esc(e.message) + '</li>';
+    return;
+  }
+  // flatten all items for search
+  ALL_ITEMS = [];
+  for(const cid of Object.keys(ENCYC.categories || {})){
+    const cat = ENCYC.categories[cid];
+    for(const it of (cat.items || [])){
+      ALL_ITEMS.push(Object.assign({}, it, {__cat: cid, __cat_label: cat.label}));
+    }
+  }
+  // Fuse.js init
+  FUSE = new Fuse(ALL_ITEMS, {
+    keys: [
+      {name:'title', weight:3},
+      {name:'preview', weight:1},
+      {name:'tags', weight:2},
+      {name:'path', weight:.5},
+      {name:'name', weight:2}
+    ],
+    threshold: 0.42,
+    minMatchCharLength: 2,
+    includeScore: true
+  });
+
+  renderStats();
+  renderTree();
+  // auto-select first category
+  const firstCat = Object.keys(ENCYC.categories)[0];
+  if(firstCat) selectCategory(firstCat);
+}
+
+function renderStats(){
+  const s = ENCYC.source_stats || {};
+  const g = ENCYC.generated_at || '';
+  const parts = [];
+  parts.push((s.total_items||0) + ' items');
+  if(s.total_mb) parts.push(s.total_mb + ' MB');
+  if(s.memory_files) parts.push('mem:' + s.memory_files);
+  if(s.vault_files) parts.push('vault:' + s.vault_files);
+  if(s.root_files) parts.push('root:' + s.root_files);
+  document.getElementById('stats').textContent = parts.join(' · ') + (g ? ' · ' + g.slice(0,16) : '');
+}
+
+function renderTree(){
+  const treeEl = document.getElementById('tree');
+  const cats = ENCYC.categories || {};
+  const html = Object.keys(cats).map(cid => {
+    const c = cats[cid];
+    const count = (c.items || []).length;
+    return '<li class="cat" data-cat="' + esc(cid) + '" role="button" tabindex="0">' +
+      '<span class="icon">' + esc(c.icon || '•') + '</span>' +
+      '<span class="label">' + esc(c.label) + '</span>' +
+      '<span class="count">' + count + '</span>' +
+    '</li>';
+  }).join('');
+  treeEl.innerHTML = html;
+  treeEl.querySelectorAll('.cat').forEach(el => {
+    el.addEventListener('click', () => selectCategory(el.dataset.cat));
+    el.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); selectCategory(el.dataset.cat); }
+    });
+  });
+}
+
+function selectCategory(cid){
+  CURRENT_CAT = cid;
+  document.querySelectorAll('.tree .cat').forEach(el => {
+    el.classList.toggle('active', el.dataset.cat === cid);
+  });
+  const c = ENCYC.categories[cid];
+  document.getElementById('cat-desc').textContent = c.description || '';
+  document.getElementById('items-header').textContent = c.label + ' (' + c.items.length + ')';
+  // clear search
+  document.getElementById('search').value = '';
+  renderItems(c.items || [], cid);
+}
+
+function renderItems(items, cidOverride){
+  const el = document.getElementById('items');
+  if(!items || items.length === 0){
+    el.innerHTML = '<div class="empty">sin items</div>';
+    return;
+  }
+  const html = items.slice(0, 300).map(it => {
+    const isModel = (cidOverride === 'modelos_activos') || (it.__cat === 'modelos_activos') || it.script_path !== undefined || it.metrics;
+    const title = it.title || it.name || it.id || '?';
+    const preview = it.preview || it.description || '';
+    const prio = it.priority || 5;
+    const status = it.status || '';
+    const tags = it.tags || [];
+    const tagsHtml = tags.slice(0,4).map(t => '<span class="tag">' + esc(t) + '</span>').join('');
+    const catLabel = it.__cat_label ? ('· ' + esc(it.__cat_label)) : '';
+    const statusBadge = status ? '<span class="badge ' + esc(status.toLowerCase()) + '">' + esc(status) + '</span>' : '';
+    return '<div class="item" data-id="' + esc(it.id) + '" role="button" tabindex="0">' +
+      '<div class="title">' + esc(title) + '</div>' +
+      (preview ? '<div class="preview">' + esc(preview) + '</div>' : '') +
+      '<div class="meta">' +
+        '<span class="badge p' + prio + '">P' + prio + '</span>' +
+        statusBadge +
+        tagsHtml +
+        (it.source ? '<span>· ' + esc(it.source) + '</span>' : '') +
+        (it.lines ? '<span>· ' + it.lines + ' lines</span>' : '') +
+        catLabel +
+      '</div>' +
+    '</div>';
+  }).join('');
+  el.innerHTML = html;
+  el.querySelectorAll('.item').forEach(row => {
+    row.addEventListener('click', () => selectItem(row.dataset.id));
+    row.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); selectItem(row.dataset.id); }
+    });
+  });
+}
+
+function findItemById(id){
+  for(const cid of Object.keys(ENCYC.categories || {})){
+    for(const it of (ENCYC.categories[cid].items || [])){
+      if(String(it.id) === String(id)) return Object.assign({}, it, {__cat: cid});
+    }
+  }
+  return null;
+}
+
+async function selectItem(id){
+  const it = findItemById(id);
+  if(!it){
+    document.getElementById('viewer').innerHTML = '<div class="empty">item no encontrado</div>';
+    return;
+  }
+  CURRENT_ITEM = it;
+  document.querySelectorAll('.item').forEach(el => el.classList.toggle('active', el.dataset.id === id));
+  document.getElementById('viewer-header').textContent = (it.title || it.name || 'Viewer');
+  await renderViewer(it);
+}
+
+async function renderViewer(it){
+  const el = document.getElementById('viewer');
+  const metaHtml = buildMeta(it);
+
+  // Caso 1: modelos_activos entry (no file, render as model card)
+  if(it.__cat === 'modelos_activos' || it.metrics){
+    const metricsHtml = it.metrics ? (
+      '<div class="metrics">' +
+      Object.entries(it.metrics).map(([k,v]) =>
+        '<div class="metric"><div class="k">' + esc(k) + '</div><div class="v">' + esc(v) + '</div></div>'
+      ).join('') +
+      '</div>'
+    ) : '';
+    el.innerHTML =
+      metaHtml +
+      '<div class="model-card">' +
+        '<h3>' + esc(it.title || it.id) + '</h3>' +
+        (it.description ? '<p>' + esc(it.description) + '</p>' : '') +
+        (it.script_path ? '<p><strong>script:</strong> <code>' + esc(it.script_path) + '</code></p>' : '') +
+        (it.source_memory ? '<p><strong>source:</strong> ' + esc(it.source_memory) + '</p>' : '') +
+        (it.source_session ? '<p><strong>session:</strong> ' + esc(it.source_session) + '</p>' : '') +
+        metricsHtml +
+      '</div>';
+    return;
+  }
+
+  // Caso 2: file copiado a docs/encyc/
+  if(it.copied_to){
+    try{
+      const r = await fetch(it.copied_to + '?ts=' + Date.now(), {cache:'no-store'});
+      if(!r.ok) throw new Error('http ' + r.status);
+      const md = await r.text();
+      el.innerHTML = metaHtml + marked.parse(md);
+      return;
+    }catch(e){
+      el.innerHTML = metaHtml + '<p class="empty">error cargando archivo copiado: ' + esc(e.message) + '</p>' + buildPreviewFallback(it);
+      return;
+    }
+  }
+
+  // Caso 3: archivo fuera de docs/ -> mostrar solo preview del JSON
+  el.innerHTML = metaHtml + buildPreviewFallback(it);
+}
+
+function buildMeta(it){
+  const parts = [];
+  if(it.source) parts.push('source: <strong>' + esc(it.source) + '</strong>');
+  if(it.priority) parts.push('priority: <strong>P' + it.priority + '</strong>');
+  if(it.size_bytes) parts.push('size: <strong>' + Math.round(it.size_bytes/1024) + ' KB</strong>');
+  if(it.lines) parts.push('lines: <strong>' + it.lines + '</strong>');
+  if(it.path) parts.push('path: <code>' + esc(it.path) + '</code>');
+  if(it.copied_to) parts.push('copia: <code>' + esc(it.copied_to) + '</code>');
+  return '<div class="viewer-meta">' + parts.join(' · ') + '</div>';
+}
+
+function buildPreviewFallback(it){
+  const preview = it.preview || '(sin preview)';
+  return '<div class="empty">contenido completo no disponible (archivo fuera del repo de GitHub Pages)</div>' +
+    '<h3>Preview</h3>' +
+    '<p>' + esc(preview) + '</p>' +
+    (it.tags && it.tags.length ? '<p><strong>tags:</strong> ' + it.tags.map(esc).join(', ') + '</p>' : '');
+}
+
+// Search
+function performSearch(q){
+  if(!q || q.length < 2){
+    if(CURRENT_CAT) selectCategory(CURRENT_CAT);
+    return;
+  }
+  if(!FUSE) return;
+  const results = FUSE.search(q).slice(0, 100);
+  document.getElementById('items-header').textContent = 'Search: "' + q + '" (' + results.length + ')';
+  renderItems(results.map(r => r.item), null);
+}
+
+document.getElementById('search').addEventListener('input', e => {
+  performSearch(e.target.value.trim());
+});
+
+loadEncyc();
+</script>
+</body>
+</html>

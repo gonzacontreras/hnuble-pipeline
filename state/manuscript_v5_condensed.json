@@ -1,0 +1,1821 @@
+{
+  "version": "v5_CONDENSED_S60",
+  "source_path": "resultados/S49_ALERTAS/BLINDAJE_Q1/MANUSCRITO_EID_v5_CONDENSED_S60.md",
+  "parsed_at": "2026-04-11T14:15:14Z",
+  "total_words": 3448,
+  "total_words_full_file": 5794,
+  "total_paragraphs": 43,
+  "total_blocks": 124,
+  "total_refs": 50,
+  "sections": [
+    {
+      "name": "Front matter",
+      "para_start": 1001,
+      "para_end": 1001,
+      "words": 37,
+      "is_main_text": false
+    },
+    {
+      "name": "Authors",
+      "para_start": 1002,
+      "para_end": 1002,
+      "words": 24,
+      "is_main_text": false
+    },
+    {
+      "name": "Running title",
+      "para_start": 1003,
+      "para_end": 1003,
+      "words": 9,
+      "is_main_text": false
+    },
+    {
+      "name": "Abstract",
+      "para_start": 1,
+      "para_end": 1,
+      "words": 133,
+      "is_main_text": true
+    },
+    {
+      "name": "Article Summary Line",
+      "para_start": 1004,
+      "para_end": 1004,
+      "words": 38,
+      "is_main_text": false
+    },
+    {
+      "name": "Keywords",
+      "para_start": 1005,
+      "para_end": 1005,
+      "words": 18,
+      "is_main_text": false
+    },
+    {
+      "name": "Introduction",
+      "para_start": 2,
+      "para_end": 5,
+      "words": 417,
+      "is_main_text": true
+    },
+    {
+      "name": "Methods",
+      "para_start": 6,
+      "para_end": 17,
+      "words": 935,
+      "is_main_text": true
+    },
+    {
+      "name": "Results",
+      "para_start": 18,
+      "para_end": 27,
+      "words": 916,
+      "is_main_text": true
+    },
+    {
+      "name": "Discussion",
+      "para_start": 28,
+      "para_end": 42,
+      "words": 940,
+      "is_main_text": true
+    },
+    {
+      "name": "Conclusions",
+      "para_start": 43,
+      "para_end": 43,
+      "words": 107,
+      "is_main_text": true
+    },
+    {
+      "name": "References",
+      "para_start": 1006,
+      "para_end": 1056,
+      "words": 1095,
+      "is_main_text": false
+    },
+    {
+      "name": "Supplementary Material",
+      "para_start": 1057,
+      "para_end": 1057,
+      "words": 106,
+      "is_main_text": false
+    },
+    {
+      "name": "Acknowledgements",
+      "para_start": 1058,
+      "para_end": 1058,
+      "words": 42,
+      "is_main_text": false
+    },
+    {
+      "name": "Funding",
+      "para_start": 1059,
+      "para_end": 1059,
+      "words": 32,
+      "is_main_text": false
+    },
+    {
+      "name": "Conflicts of interest",
+      "para_start": 1060,
+      "para_end": 1060,
+      "words": 2,
+      "is_main_text": false
+    },
+    {
+      "name": "Data and code availability",
+      "para_start": 1061,
+      "para_end": 1061,
+      "words": 58,
+      "is_main_text": false
+    },
+    {
+      "name": "Author contributions",
+      "para_start": 1062,
+      "para_end": 1062,
+      "words": 13,
+      "is_main_text": false
+    },
+    {
+      "name": "Cover letter",
+      "para_start": 1063,
+      "para_end": 1077,
+      "words": 768,
+      "is_main_text": false
+    },
+    {
+      "name": "End of assembled manuscript",
+      "para_start": 1078,
+      "para_end": 1081,
+      "words": 104,
+      "is_main_text": false
+    }
+  ],
+  "paragraphs": [
+    {
+      "id": 1001,
+      "section": "Front matter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Target journal:** Emerging Infectious Diseases (CDC) --- Research article **Word limit:** 3,500 words main text (abstract 150, ≤50 refs) **Manuscript version:** v2.0 Nivel 2 (post-blindaje scoring rules triple) **Lock date pre-especificación:** 2026-04-04 **Manuscript assembly date:** 2026-04-05\n\n------------------------------------------------------------------------",
+      "words": 37,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 372
+    },
+    {
+      "id": 1002,
+      "section": "Authors",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "Gonzalo Contreras, MD --- Hospital Clínico Herminda Martín, Chillán, Ñuble, Chile *(corresponding author: email, phone, ORCID)* *(co-authors to be added per journal requirements)*\n\n------------------------------------------------------------------------",
+      "words": 24,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 253
+    },
+    {
+      "id": 1003,
+      "section": "Running title",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "Hantavirus three-tier ecological alert system --- Ñuble, Chile\n\n------------------------------------------------------------------------",
+      "words": 9,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 136
+    },
+    {
+      "id": 1,
+      "section": "Abstract",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "In this observational ecological longitudinal study, Andes-virus hantavirus cardiopulmonary syndrome (HCPS) in Chile's Ñuble region has an incidence of 1.21/100,000 person-years (136 cases, 2002--2024), approximately 3--5× the national rate. We developed a three-tier early warning system coupling a walk-forward--validated negative-binomial mixed model with a satellite-derived forest-stress index (lag 5 months) and ERA5 temperature anomaly, pre-specified at Zenodo (DOI 10.5281/zenodo.19425753). Evaluated under the logarithmic score (Fox et al. 2024 *EID*), the model achieved 0.086 \\[95% CI 0.074, 0.098\\] at Tier 1 (surveillance) and 0.043 \\[0.022, 0.065\\] at Tier 2 (cluster alert). Brier Skill Scores against the PAHO endemic-channel baseline were 68.1% (95% CI 61.7--74.0) at Tier 1 and 36.5% (95% CI 25.4--56.6) at Tier 2. Tier 3 (outbreak, n = 20) is exploratory. External validation in other Andes-virus--endemic regions is essential before deployment.\n\n------------------------------------------------------------------------",
+      "words": 133,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 1038
+    },
+    {
+      "id": 1004,
+      "section": "Article Summary Line",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "A pre-registered three-tier ecological alert system for Andes-virus HCPS in Ñuble, Chile, achieves 68% Brier Skill Score against the PAHO endemic-channel baseline at the surveillance tier, evaluated under proper scoring rules following current *Emerging Infectious Diseases* standards.\n\n------------------------------------------------------------------------",
+      "words": 38,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 359
+    },
+    {
+      "id": 1005,
+      "section": "Keywords",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "hantavirus; Andes virus; early warning system; walk-forward validation; logarithmic score; ecological forecasting; Chile; One Health; pre-registration; anti-HARKing\n\n------------------------------------------------------------------------",
+      "words": 18,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 238
+    },
+    {
+      "id": 2,
+      "section": "Introduction",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "Andes-virus hantavirus cardiopulmonary syndrome (HCPS) is a rodent-borne zoonosis endemic to southern South America, classified among neglected tropical diseases linked to poverty and ecosystem disturbance. It is transmitted by *Oligoryzomys longicaudatus* (long-tailed colilargo) and characterized by high case-fatality (≈28% in the Chilean Ñuble region, 2002--2024). Ñuble, in the south-central Andes foothills, sustained an incidence of 1.21 per 100,000 person-years during 2002--2024 --- approximately 3--5× the national rate (Boletín MINSAL SE52 2024; Ortiz et al. 2004) --- ranking among the top two regions nationally.",
+      "words": 83,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 625
+    },
+    {
+      "id": 3,
+      "section": "Introduction",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "A central ecological hypothesis for this sustained endemicity is that **sectoral synchronous flowering** (not the classical mast event of \\>40°S *C. culeou* bamboo) of *Chusquea quila* triggers a subliminal two-to-fivefold rise in *O. longicaudatus* density --- a phenomenon we term **\"ratización\"** to distinguish it from full *ratadas* (González 2001; Polop et al. 2010; Jaksic & Lima 2003; de la Fuente & Pacheco 2017) --- which then supports persistent rather than epidemic viral circulation. Distinguishing this diffuse, sectoral mechanism from the Epuyén-type point-source cluster (Martínez et al. 2020 *NEJM*) is essential for the design of operational alert systems.",
+      "words": 97,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 674
+    },
+    {
+      "id": 4,
+      "section": "Introduction",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "Probabilistic early warning systems for rodent- and vector-borne diseases have advanced rapidly through satellite remote sensing, reanalysis climate products, and forecast-verification methodology (Lowe et al. 2016; Colón-González et al. 2021; Reich et al. 2019). The Pan American Health Organization's endemic-channel method (Bortman 1999) remains the operational baseline in the Americas, but modern probabilistic models informed by remote-sensed covariates can substantially outperform it. Methodological rigour --- strictly proper scoring rules, pre-registration, and explicit rare-event uncertainty handling --- now separates publishable probabilistic EWS from those rejected for HARKing concerns.",
+      "words": 87,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Bortman 1999"
+        ]
+      },
+      "char_length": 702
+    },
+    {
+      "id": 5,
+      "section": "Introduction",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "We developed and validated a three-tier ecological EWS for Andes-virus HCPS in Ñuble built on a pre-registered generalized linear mixed model and a satellite-derived proxy. We evaluated forecast skill against three baselines of increasing stringency under a triple scoring rule framework (logarithmic score primary, ranked probability score complementary, scaled Brier with block-bootstrap confidence intervals as backward-comparable secondary) aligned with this journal's statistical consensus (Fox et al. 2024) and the forecast-verification literature (Gneiting & Raftery 2007; Wilks 2011), and characterized the FSI lag-5 operational lead time for intersectoral response. Tier 1 (surveillance: ≥1 case per comuna--month) and Tier 2 (cluster alert: sum ≥ 2 cases over 90 days) are the **confirmatory** alert levels. Tier 3 (outbreak declared: sum ≥ 3 cases over 180 days; n = 20 events) is reported throughout as an **exploratory, hypothesis-generating** alert level given small-sample constraints on discrimination metrics for rare outcomes (Minus et al. 2025).\n\n------------------------------------------------------------------------",
+      "words": 150,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Fox et al.  2024",
+          "Minus et al.  2025"
+        ]
+      },
+      "char_length": 1138
+    },
+    {
+      "id": 6,
+      "section": "Methods",
+      "subsection": "Study design, setting and data sources",
+      "is_main_text": true,
+      "text": "We conducted an observational ecological longitudinal study using a comuna--month panel in Ñuble Region, south-central Chile (21 comunas, population ≈487,866), 2002--2024. The eco-epidemiological panel (5,796 comuna--month observations) contained: (i) monthly confirmed HCPS cases (n = 136; case definition: IgM seroconversion or RT-PCR positive per MINSAL circular B51/24) from the Ñuble SEREMI Salud Transparency Office and geolocation records. Ñuble was administratively established as an independent region by Law 21,033 of 5 September 2017, effective 6 September 2018; cases reported before that date (n = 103) were originally registered under the SEREMI Biobío regional office and were assigned to their probable commune of infection---rather than residence---by cross-referencing with 2018 INE commune codes (Supplementary Methods); (ii) ERA5-Land climate reanalysis (2-m temperature, precipitation) at \\~11 km resolution; (iii) a custom Forest Stress Index (FSI) derived from Landsat 5/7/8 and Sentinel-2 NDMI/NDVI/NBR2 bands via Google Earth Engine, with active-burn pixels vetoed (ΔNBR2 \\< −0.15) to prevent wildfire-scar contamination (Ecke et al. 2019), calibrated in Achibueno and frozen before migration to Ñuble (anti-circularity); (iv) INE population estimates with log-linear intercensal interpolation; and (v) static covariates (forest cover fraction, elevation, slope). The panel dataset has SHA256 hash `0b87c5b4...802a`.",
+      "words": 191,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Ecke et al.  2019"
+        ]
+      },
+      "char_length": 1441
+    },
+    {
+      "id": 7,
+      "section": "Methods",
+      "subsection": "Model specification",
+      "is_main_text": true,
+      "text": "cases_it ~ NegBin(μ_it, θ)\n    log(μ_it) = β_0 + β_season · season_f_t + β_t2m · t2m_within_sc_it\n              + ψ · R5_within_sc_it + β_pop · log(pop_it) + u_i\n    u_i ~ N(0, σ²_u)   (comuna random intercept, 21 clusters)",
+      "words": 34,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 223
+    },
+    {
+      "id": 8,
+      "section": "Methods",
+      "subsection": "Model specification",
+      "is_main_text": true,
+      "text": "The negative-binomial family (Cameron & Trivedi 2005) accommodates rare-event overdispersion in zoonotic surveillance data. `R5_within` is the lag-5-month within-comuna forest stress index (biologically motivated by the 18--24 month *C. quila*→rodent→human lag; González 2001), `t2m_within` the within-comuna ERA5 2-m temperature anomaly, and `season_f` a 4-level categorical factor. All continuous predictors were Bell--Jones within--between decomposed (Bell & Jones 2015), with scaling **after** NA filtering of the lag structure (anti-leakage). The final specification was frozen before walk-forward evaluation (sessions S22--S29; see Supplementary Methods). Zone factor was dropped for redundancy with the comuna random intercept (LRT p = 0.186; Hodges & Reich 2010). With 136 events and 7 effective parameters, the event-to-parameter ratio is 19.4 (14.7 over 103 burn-in-excluded stable-fold events). The EPV ≥ 10 heuristic was derived for binary logistic regression and does not directly apply to negative-binomial counts; stability was confirmed by 94% bootstrap convergence (2,000 resamples) and consistent θ across stable folds (range 1.4--3.5).",
+      "words": 153,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Bell & Jones 2015",
+          "Cameron & Trivedi 2005"
+        ]
+      },
+      "char_length": 1154
+    },
+    {
+      "id": 9,
+      "section": "Methods",
+      "subsection": "Walk-forward protocol with pre-specified burn-in period",
+      "is_main_text": true,
+      "text": "The walk-forward protocol comprised 14 expanding-window folds with test years 2011--2024; between- and within-comuna standardization parameters were recomputed using only each fold's training data. During the first four folds (2011--2014) the negative-binomial dispersion parameter θ exceeded 1×10⁶, converging to the Poisson limit --- documented behaviour of the nbinom2 likelihood under sparse training counts (Brooks et al. 2017). Following Bergmeir et al. (2018) and Cerqueira et al. (2020), we **pre-specified these four folds as a burn-in period** (Addendum v1.1, lock date 2026-04-04) and report primary metrics over the ten stable folds (2015--2024, θ range 1.4--3.5); all metrics are re-computed over the full 14 folds in Supplementary Table S3.",
+      "words": 107,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Brooks et al.  2017"
+        ]
+      },
+      "char_length": 754
+    },
+    {
+      "id": 10,
+      "section": "Methods",
+      "subsection": "Three-tier alert definition",
+      "is_main_text": true,
+      "text": "- **Tier 1 (surveillance):** ≥1 case per comuna--month\n- **Tier 2 (cluster alert):** rolling sum ≥ 2 cases over the prior 90\ndays\n- **Tier 3 (outbreak declared, exploratory):** rolling sum ≥ 3 cases\nover the prior 180 days",
+      "words": 39,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 222
+    },
+    {
+      "id": 11,
+      "section": "Methods",
+      "subsection": "Three-tier alert definition",
+      "is_main_text": true,
+      "text": "Predicted probabilities for each tier (p_ge1, p_ge2, p_ge3) are derived from the S29-K nbinom2 predictive distribution under the natural nesting relationship (Tier 3 ⇒ Tier 2 ⇒ Tier 1).",
+      "words": 29,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 185
+    },
+    {
+      "id": 12,
+      "section": "Methods",
+      "subsection": "Forecast evaluation",
+      "is_main_text": true,
+      "text": "**Primary: logarithmic score** (Good 1952; Gneiting & Raftery 2007; Fox et al. 2024 *EID*), strictly proper and free of denominator instability in the rare-event regime (Bosse et al. 2023). Uncertainty was quantified via block bootstrap (1,000 iterations, strata = walk-forward fold) with percentile 95% CI. **Complementary: ranked probability score** on the nested ordinal outcome Y ∈ {0,1,2,3} (Epstein 1969; Murphy 1971), interval format per Bracher et al. 2021. **Secondary: scaled Brier score** with bootstrap CI for backward comparability (Steyerberg et al. 2010). Formulas and scope notes are in Supplementary Methods.",
+      "words": 90,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Bosse et al.  2023",
+          "Steyerberg et al.  2010"
+        ]
+      },
+      "char_length": 625
+    },
+    {
+      "id": 13,
+      "section": "Methods",
+      "subsection": "Multi-baseline skill assessment",
+      "is_main_text": true,
+      "text": "We evaluated skill against three baselines of increasing stringency: (1) Bortman endemic channel with +2 SD threshold (primary, PAHO/WHO standard; Bortman 1999); (2) Poisson climatological null including monthly seasonality and comuna random intercept (secondary stringent); (3) spatially and temporally invariant random forecast at training-period prevalence (tertiary sanity floor). Brier Skill Scores (BSS) are reported against each.",
+      "words": 56,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 436
+    },
+    {
+      "id": 14,
+      "section": "Methods",
+      "subsection": "Discrimination metrics",
+      "is_main_text": true,
+      "text": "We report ROC-AUC and precision-recall AUC (PR-AUC) with BCa bootstrap 95% CI from 2,000 row-level resamples (Efron 1987; Carpenter & Bithell 2000; Davison & Hinkley 1997; Saito & Rehmsmeier 2015; Sofaer et al. 2019); PR-AUC is particularly informative under severe class imbalance.",
+      "words": 42,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 282
+    },
+    {
+      "id": 15,
+      "section": "Methods",
+      "subsection": "Decision curve analysis",
+      "is_main_text": true,
+      "text": "We performed DCA (Vickers & Elkin 2006; Vickers et al. 2019; Assel et al. 2017) across threshold probabilities p_t ∈ \\[0, 0.25\\], comparing model net benefit to treat-all, treat-none, and the Bortman endemic-channel baseline on the net-benefit scale, annotating the operational range p_t ∈ \\[0.05, 0.20\\].",
+      "words": 46,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 305
+    },
+    {
+      "id": 16,
+      "section": "Methods",
+      "subsection": "Decision curve analysis",
+      "is_main_text": true,
+      "text": "No prespecified subgroup analyses or fixed-effect interactions were planned; all inference is at the comuna--month panel level.",
+      "words": 17,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 127
+    },
+    {
+      "id": 17,
+      "section": "Methods",
+      "subsection": "Pre-specification compliance and anti-HARKing",
+      "is_main_text": true,
+      "text": "The pre-specification protocol v1.0 and Addenda v1.1--v1.2 (all locked 2026-04-04) are archived at **Zenodo DOI 10.5281/zenodo.19425753**, with git timestamps confirming the addendum commit precedes the first computation script by 40 minutes (Supplementary Table S1). The switch from scaled Brier to log score as primary (Addendum v1.2) was locked at 2026-04-04 22:19:43 local Chile time, 33--40 minutes before the Nivel 2 scripts were written and 40 minutes before the first output (`T_BLINDAJE_logscore.csv`, 22:59:49); the filesystem ledger and SHA256 manifest are in Addendum v1.2 Section 8. The switch is a deterministic re-scoring of identical inputs using predecessor theory (Gneiting & Raftery 2007; Wilks 2011) and journal precedent (Fox et al. 2024). Seed `set.seed(49)` throughout; R scripts and outputs at **https://github.com/gonzacontreras/hantavirus-nuble**. Anti-HARKing practices follow Nosek et al. (2018) and Munafò et al. (2017).\n\n------------------------------------------------------------------------",
+      "words": 131,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Fox et al.  2024"
+        ]
+      },
+      "char_length": 1023
+    },
+    {
+      "id": 18,
+      "section": "Results",
+      "subsection": "Epidemiological context",
+      "is_main_text": true,
+      "text": "During 2002--2024, 136 confirmed HCPS cases were registered in Ñuble (1.21/100k person-years), 91.2% occurring October--May and zero in September across 23 consecutive years. The panel was complete for climate, population, and geographic covariates; FSI lag-5 was structurally unavailable for the first five months of each commune's series (105 observations, 1.8%, excluded). Case-fatality was 27.9% (38/136; Wilson 95% CI 21.1--36.0%). Top-risk comunas were El Carmen (7.49/100k), Pinto (3.93), Coihueco (2.54), San Ignacio (2.36), and Yungay (2.08); Ninhue registered zero cases (structural zero). Of 5,796 comuna--month observations, 97.7% were zero-case, with a maximum of three months reaching a count of 3.",
+      "words": 99,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 712
+    },
+    {
+      "id": 19,
+      "section": "Results",
+      "subsection": "Model coefficients and ecological interpretation",
+      "is_main_text": true,
+      "text": "The locked model yielded **ψ_R5_within = −0.309 (95% profile CI \\[−0.546, −0.081\\], p = 0.009; IRR = 0.734 \\[0.580, 0.923\\])**, β_t2m_within = +0.384 (p = 0.041; IRR = 1.468 \\[1.017, 2.130\\]), β_log_pop = +0.614 (p = 0.002), and nbinom2 θ = 1.555. The negative ψ reflects R as a post-flowering scar signal: high R means the *C. quila* cycle has already peaked and rodent density is regressing, so the operational risk window is low-R + warm conditions (active flowering phase). Within--between decomposition (Bell & Jones 2015) ruled out spatial confounding (ψ_between = −0.018, p = 0.935; Hausman p = 0.291).",
+      "words": 100,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Bell & Jones 2015"
+        ]
+      },
+      "char_length": 609
+    },
+    {
+      "id": 20,
+      "section": "Results",
+      "subsection": "Headline forecast skill --- primary logarithmic score",
+      "is_main_text": true,
+      "text": "The model achieved logarithmic scores of **0.086 \\[95% CI 0.074, 0.098\\] at Tier 1 (surveillance)**, **0.043 \\[0.022, 0.065\\] at Tier 2 (cluster alert)**, and **0.055 \\[0.000, 0.116\\] at Tier 3 (outbreak declared, exploratory; n = 20 events)** in the primary 10-fold analysis (test period 2015--2024), comparable to ranges reported in this journal (Fox et al. 2024) and foundational scoring rule theory (Gneiting & Raftery 2007; Held et al. 2017).",
+      "words": 69,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Fox et al.  2024"
+        ]
+      },
+      "char_length": 447
+    },
+    {
+      "id": 21,
+      "section": "Results",
+      "subsection": "Headline forecast skill --- primary logarithmic score",
+      "is_main_text": true,
+      "text": "Against the Bortman/PAHO endemic-channel baseline, Brier Skill Scores were **68.1% (95% CI 61.7--74.0) at Tier 1** and **36.5% (95% CI 25.4--56.6) at Tier 2** (block bootstrap, B=2000), exceeding dengue EWS values from Brazil and Vietnam (Lowe et al. 2016; Colón-González et al. 2021). The ranked probability score (three-tier nested ordinal) was **0.038 \\[95% CI 0.023, 0.053\\]** versus a random-prevalence null of 0.038 --- a +1.3% skill gain whose CI overlaps the null, directionally consistent but not statistically distinguishable at this sample size. Confirmatory claims therefore rest on the Tier 1 and Tier 2 BSS, which substantially exceed their reference distributions.\n\n--------------------------------------------------------------------------------------\nTier             Events   Log score    BSS vs Bortman     BSS vs    ROC-AUC   PR-AUC\n                            \\[95% CI\\]   \\[95% CI\\]         Poisson             \\[BCa\n                                                                                95% CI\\]\n  ---------------- -------- ------------ ------------------ --------- --------- --------\nTier 1           41       **0.0857     **70.9%            1.88%     0.7564    0.0588 (surveillance)            \\[0.0737,    \\[66.3--74.9\\]**\n                            0.0982\\]**\n\nTier 2 (cluster  14       **0.0427     **40.1%            1.71%     0.8556    0.0387 alert)                    \\[0.0220,    \\[27.6--60.2\\]**\n                            0.0650\\]**\n\nTier 3           11       0.0547       4.5% \\[1.4--90.8\\] 1.29%     0.7878    0.0283 (outbreak)                \\[0.0001, *exploratory*             0.1156\\]\n  --------------------------------------------------------------------------------------",
+      "words": 166,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 1723
+    },
+    {
+      "id": 22,
+      "section": "Results",
+      "subsection": "Table 1. Primary scoring metrics per tier",
+      "is_main_text": true,
+      "text": "BSS 95% CIs from block bootstrap (B=2000, fold as resampling unit).\n\n------------------------------------------------------------------------------\nTier            Events     BS         **BSS vs Bortman   BSS vs     BSS vs\n                                        \\[95% CI\\]**       Poisson    Random\n  --------------- ---------- ---------- ------------------ ---------- ----------\nTier 1          64         0.0202     **68.1%            1.97%      2.06%\n                                        \\[61.7--74.0\\]**\n\nTier 2          24         0.0078     **36.5%            1.49%      1.37%\n                                        \\[25.4--56.6\\]**\n\nTier 3          20         0.0068     4.4% \\[1.6--25.2\\] 0.60%      −0.07% *exploratory*\n  ------------------------------------------------------------------------------",
+      "words": 58,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 814
+    },
+    {
+      "id": 23,
+      "section": "Results",
+      "subsection": "Multi-baseline skill",
+      "is_main_text": true,
+      "text": "Tier-1 BSS-vs-Bortman varies between 68.1% (14 folds) and 70.9% (10 folds) --- a 4% relative difference below our pre-specified 20% threshold; Tier 1 and Tier 2 CIs exclude zero in both fold sets. Tier 3 CIs exclude zero but are wide (11--20 events), reinforcing its exploratory designation.\n\n-------------------------------------------------------------------------------------\nTier            n        Events   Prevalence   PR-AUC       95% CI      PR-AUC/prev\n                                                              (BCa, 2000  \n                                                              iter)       \n  --------------- -------- -------- ------------ ------------ ----------- -------------\nTier 1          3,038    64       0.0211       **0.0695**   \\[0.0418,   3.30×\n                                                              0.1290\\]\n\nTier 2          2,996    24       0.0080       **0.0364**   \\[0.0175,   4.54×\n                                                              0.0736\\]\n\nTier 3          2,933    20       0.0068       0.0166       \\[0.0072,   2.43× *exploratory*                                               0.0376\\]\n  -------------------------------------------------------------------------------------",
+      "words": 95,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 1235
+    },
+    {
+      "id": 24,
+      "section": "Results",
+      "subsection": "PR-AUC with BCa bootstrap CI",
+      "is_main_text": true,
+      "text": "For all three tiers, the PR-AUC 95% CI excludes the baseline prevalence, indicating discrimination above chance. The PR-AUC-to-prevalence ratio of 3.3--4.5× for the confirmatory tiers is consistent with meaningful lift in rare-event discrimination (Sofaer et al. 2019).",
+      "words": 37,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Sofaer et al.  2019"
+        ]
+      },
+      "char_length": 269
+    },
+    {
+      "id": 25,
+      "section": "Results",
+      "subsection": "Scoring rule stability",
+      "is_main_text": true,
+      "text": "Log score deltas between 10- and 14-fold analyses were Tier 1: −0.007, Tier 2: −0.014, Tier 3: −0.031, all within pre-specified robustness thresholds; bootstrap 95% CIs mutually contained each other's point estimates at all tiers. Scaled Brier showed +1,327% Tier-3 instability --- a structural artifact of BS_max → 0 in the rare-event regime (Ferro & Fricker 2012) --- confirming log score as the more appropriate primary metric (Supplementary Table S3).",
+      "words": 70,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Ferro & Fricker 2012"
+        ]
+      },
+      "char_length": 455
+    },
+    {
+      "id": 26,
+      "section": "Results",
+      "subsection": "Decision curve analysis",
+      "is_main_text": true,
+      "text": "Decision curve analysis (Vickers & Elkin 2006) showed that Tier-1 and Tier-2 models provided positive net benefit across p_t ∈ \\[0.05, 0.20\\], while the Bortman baseline approached zero or turned negative for p_t \\> 0.05. At p_t = 0.05 Tier-1 net benefit was approximately 3× Bortman. Treat-all and treat-none were dominated by the model beyond the base-rate prevalence.",
+      "words": 58,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Vickers & Elkin 2006"
+        ]
+      },
+      "char_length": 370
+    },
+    {
+      "id": 27,
+      "section": "Results",
+      "subsection": "Figures",
+      "is_main_text": true,
+      "text": "- **Figure 1.** Study area: Ñuble Region, Chile --- 21 communes with\nHCPS incidence rate (per 100,000 person-years, 2002--2024), Ward binary zones (coastal vs interior quiloide) indicated by dashed blue border.\n- **Figure 2.** Forest plot of GLMM S29-K incidence rate ratios (IRR,\n95% profile CI, log scale) for all fixed-effect covariates. E-value =\n  2.07 for the FSI lag-5 coefficient annotated.\n- **Figure 3.** Lag profile: IRR by lag month (0--10) with\n1,000-iteration wild cluster bootstrap 95% CI. Lag 5 (focal, pre-specified) is the only lag whose CI excludes 1.0; 10 negative-control lags all include the null.\n- **Figure 4.** Triple scoring rule framework: (A) Logarithmic score by\ntier, (B) Brier Skill Score vs PAHO Bortman baseline, (C) Ranked probability score. Tier 3 shown in grey (exploratory).\n- **Figure 5.** Ecological timeline: *C. quila* flowering signal (FSI\nsatellite), *O. longicaudatus* population index, and HCPS risk showing the pre-specified 5-month lag from satellite detection to human case onset, with confinement and dispersal phases annotated.\n\n------------------------------------------------------------------------",
+      "words": 164,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 1151
+    },
+    {
+      "id": 28,
+      "section": "Discussion",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "Our pre-registered three-tier EWS achieves substantial skill against the PAHO endemic-channel baseline (Tables 1--2; Tier 1 and Tier 2 CIs exclude zero), comparable to leading dengue EWS from Brazil and Vietnam (Lowe et al. 2016; Colón-González et al. 2021). Against a stringent Poisson null absorbing seasonality and spatial heterogeneity, incremental BSS is modest (1.97% Tier 1, 1.49% Tier 2) --- consistent with the CDC FluSight ensemble, where adding models to a strong baseline yielded ≈2% gains with reduced variability (Fox et al. 2024 *EID*). The residual skill reflects the net contribution of ERA5 temperature anomaly and FSI lag 5 beyond seasonality and space.",
+      "words": 103,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 672
+    },
+    {
+      "id": 29,
+      "section": "Discussion",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "Recent hantavirus EWS include Kazasidis et al. (2024 *Sci Rep*), who reached 82.8% accuracy for Puumala virus in Germany using SVM on weather and beech flowering, and Ferro et al. (2024 *Pathogens*), who used rodent abundance with 3--8 month climate lags for Andes virus in northwestern Argentina. Analogous scoring-rule principles have guided probabilistic evaluation in other zoonotic settings (Funk et al. 2019, Ebola in Sierra Leone). Our satellite-only approach with a single pre-specified FSI proxy is complementary: no field trapping, commune-level output, 5-month lead time.",
+      "words": 85,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 582
+    },
+    {
+      "id": 30,
+      "section": "Discussion",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "**Tier 3** remains exploratory pending external validation; under the log score primary, 10- vs 14-fold differences fall within sampling noise (mutual CI overlap), supporting Tier 1--2 robustness.",
+      "words": 27,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 196
+    },
+    {
+      "id": 31,
+      "section": "Discussion",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "**Ecological framing.** The negative ψ (IRR = 0.734 per 1 SD of R5_within) is biologically coherent with *C. quila* sectoral flowering as a diffuse phenomenon: high R marks a post-flowering satellite scar, meaning the cycle has peaked and the *Oligoryzomys* population is regressing toward baseline. The operational risk window is low-R combined with warm conditions. This is **biologically distinct** from the Epuyén-type point-source cluster (Martínez et al. 2020 *NEJM*), where person-to-person Andes virus transmission dominates. Our model targets *sectoral endemic persistence*, not person-to-person amplification, and should not be extrapolated without redesign.",
+      "words": 91,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 668
+    },
+    {
+      "id": 32,
+      "section": "Discussion",
+      "subsection": "Public health implications",
+      "is_main_text": true,
+      "text": "The Bortman/PAHO endemic channel detects threshold exceedance from already-reported cases --- retrospective surveillance without advance warning. Our FSI lag-5 model generates risk predictions 5 months before expected case onset, during the *C. quila* confinement phase, enabling action before the seasonal peak. This prospective lead time is the main operational advance.",
+      "words": 50,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 372
+    },
+    {
+      "id": 33,
+      "section": "Discussion",
+      "subsection": "Public health implications",
+      "is_main_text": true,
+      "text": "The three-tier framework maps onto operational response windows for Chile's intersectoral hantavirus coordination mechanism (MINSAL Ordinario B38 N°3420, 2019). At FSI detection (t = 0), CONAF restricts access to identified quiloide patches; during the 5-month confinement phase, SEREMI Salud deploys peridomestic education in high-risk communes; at the dispersal threshold (t + 5), SAG inspects rural storage facilities in ecotone areas. To our knowledge, this biphasic protocol --- confinement followed by dispersal --- is the first satellite-triggered multi-agency hantavirus early warning specifying temporal action windows from a single pre-specified environmental proxy. CONAF patrol coverage is seasonal (October--April), only partially overlapping the primary risk window; year-round monitoring requires SEREMI coordination with municipal authorities.",
+      "words": 111,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 859
+    },
+    {
+      "id": 34,
+      "section": "Discussion",
+      "subsection": "Companion study disclosure",
+      "is_main_text": true,
+      "text": "A companion clinical analysis of 34 HCPS patients treated at Hospital Clínico Herminda Martín, Chillán, 2010--2025 has been submitted separately (*Contreras et al., Revista Chilena de Infectología*). It addresses clinical characterization, severity, and an early prognostic triad (respiratory rate \\>22/min, platelets \\<150,000/μL, hematocrit above ULN) using Firth-penalized logistic regression. The present ecological and companion clinical studies share no analytical methods, tables, figures, or computed metrics; only publicly available regional descriptors (total case count, case-fatality ratio, ethics approval) are common. Both manuscripts were designed as complementary analyses under ICMJE criteria for acceptable secondary publication, with full disclosure to both journals.",
+      "words": 99,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 786
+    },
+    {
+      "id": 35,
+      "section": "Discussion",
+      "subsection": "Limitations",
+      "is_main_text": true,
+      "text": "**(1) Modest incremental skill vs stringent null.** The Poisson climatological null absorbs most seasonality and spatial heterogeneity, leaving ≈2% residual Tier-1 BSS for climatic covariates --- expected behaviour when adding covariates to a well-specified baseline (Fox et al. 2024).",
+      "words": 39,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Fox et al.  2024"
+        ]
+      },
+      "char_length": 285
+    },
+    {
+      "id": 36,
+      "section": "Discussion",
+      "subsection": "Limitations",
+      "is_main_text": true,
+      "text": "**(2) Burn-in period.** θ converged to the Poisson limit (\\> 10⁶) during the first four folds (2011--2014) due to low training-set counts; this is documented nbinom2 behaviour (Brooks et al. 2017), not a convergence failure. Tier-1 and Tier-2 headline metrics vary by \\<5% between 10- and 14-fold analyses --- below our pre-specified 20% robustness threshold.",
+      "words": 55,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Brooks et al.  2017"
+        ]
+      },
+      "char_length": 359
+    },
+    {
+      "id": 37,
+      "section": "Discussion",
+      "subsection": "Limitations",
+      "is_main_text": true,
+      "text": "**(3) Tier 3 exploratory designation.** With 20 events, any proper scoring rule yields wide CIs (log score 95% CI 0.000--0.116). Tier 3 is designated exploratory under all three scoring formulations.",
+      "words": 30,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 199
+    },
+    {
+      "id": 38,
+      "section": "Discussion",
+      "subsection": "Limitations",
+      "is_main_text": true,
+      "text": "**(4) Scoring rule choice.** Log score is pre-specified primary (Gneiting & Raftery 2007; Fox et al. 2024 *EID*), with scaled Brier retained in Supplementary for backward comparability. The metric switch is a deterministic re-scoring of identical inputs, not a re-analysis.",
+      "words": 40,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 273
+    },
+    {
+      "id": 39,
+      "section": "Discussion",
+      "subsection": "Limitations",
+      "is_main_text": true,
+      "text": "**(5) Ecological fallacy.** Analyses operate at the comuna--month unit: associations reflect ecological-level relationships and **do not warrant individual-level causal inference** (Robinson 1950; Morgenstern 1995).",
+      "words": 24,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 215
+    },
+    {
+      "id": 40,
+      "section": "Discussion",
+      "subsection": "Limitations",
+      "is_main_text": true,
+      "text": "**(6) Specification search.** S29-K was selected after iterative exploration of alternatives (lags 1, 3, 5; with/without zone factor; Poisson vs nbinom2 vs zero-inflated) documented across S22--S29 and frozen before walk-forward evaluation; robustness across 28 alternative specifications is in the Supplementary Materials. E-values (VanderWeele & Ding 2017) are 2.07 for FSI lag 5 (CI-bound 1.38) and 2.30 for temperature anomaly (CI-bound 1.15); an unmeasured confounder would need associations of this magnitude with both exposure and outcome to fully explain away the effects. Walk-forward evaluation on out-of-sample periods 2015--2024 is our primary defence against overfitting.",
+      "words": 93,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "VanderWeele & Ding 2017"
+        ]
+      },
+      "char_length": 684
+    },
+    {
+      "id": 41,
+      "section": "Discussion",
+      "subsection": "Limitations",
+      "is_main_text": true,
+      "text": "**(7) External validation.** This study is confined to Ñuble (21 comunas, 2002--2024); external validation in other Andes-virus regions (especially southern Argentina) is necessary before deployment. Transferability of the FSI lag and Bortman calibration rests on shared *O. longicaudatus* ecology but requires empirical verification.",
+      "words": 43,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 334
+    },
+    {
+      "id": 42,
+      "section": "Discussion",
+      "subsection": "Limitations",
+      "is_main_text": true,
+      "text": "**(8) Exposure misclassification.** Cases were assigned to probable commune of infection (Methods); residual nondifferential error biases toward the null (Yland et al. 2022 *Am J Epidemiol*; Hoek et al. 2024 *Environ Health*). Given that 87% of Chilean HCPS cases involve peridomestic exposure (Riquelme et al. 2015), estimates are conservative.\n\n------------------------------------------------------------------------",
+      "words": 50,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Riquelme et al.  2015"
+        ]
+      },
+      "char_length": 419
+    },
+    {
+      "id": 43,
+      "section": "Conclusions",
+      "subsection": null,
+      "is_main_text": true,
+      "text": "We report a pre-registered three-tier probabilistic EWS for Andes-virus HCPS in Ñuble, Chile, evaluated under a triple scoring rule framework aligned with current *Emerging Infectious Diseases* standards. Tier-1 and Tier-2 Brier Skill Scores against the PAHO endemic-channel baseline are 68.1% (95% CI 61.7--74.0) and 36.5% (95% CI 25.4--56.6), outperforming the current standard, with pre-specification, walk-forward validation, proper scoring rules, and Zenodo archiving. Tier 3 is explicitly exploratory. Against the regional backdrop of the PAHO December 2025 epidemiological alert documenting renewed hantavirus activity across the Americas (PAHO 2025), the work supports adoption of modern probabilistic verification in national surveillance and provides a reproducible template for rare-zoonosis EWS.\n\n------------------------------------------------------------------------",
+      "words": 107,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "PAHO 2025"
+        ]
+      },
+      "char_length": 881
+    },
+    {
+      "id": 1006,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "*EID format: Vancouver, italicized journal, numbered in order of appearance, ≤50 refs.*",
+      "words": 12,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 87
+    },
+    {
+      "id": 1007,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "1.  Bortman M. Aplicación y definición del concepto del canal endémico.\n    *Bol Oficina Sanit Panam.* 1999.",
+      "words": 16,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 108
+    },
+    {
+      "id": 1008,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "2.  González ME. Fenología de *Chusquea quila*. *Bosque* (Valdivia).\n    2001;22(2):45-51. doi:10.4206/bosque.2001.v22n2-05",
+      "words": 11,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 123
+    },
+    {
+      "id": 1009,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "3.  Ortiz JC, Venegas W, Sandoval JA, Chandía P, Torres-Pérez F.\n    Hantavirus en roedores de la Octava Región de Chile. *Rev Chil Hist\n    Nat.* 2004;77(2):251-256. doi:10.4067/S0716-078X2004000200005",
+      "words": 26,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 202
+    },
+    {
+      "id": 1010,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "4.  Martínez VP, Di Paola N, Alonso DO, et al. \"Super-Spreaders\" and\n    person-to-person transmission of Andes virus in Argentina. *N Engl J\n    Med.* 2020;383:2230-2241. doi:10.1056/NEJMoa2009040",
+      "words": 25,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 197
+    },
+    {
+      "id": 1011,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "5.  Brooks ME, Kristensen K, van Benthem KJ, et al. glmmTMB balances\n    speed and flexibility among packages for zero-inflated generalized\n    linear mixed modeling. *R Journal.* 2017;9(2):378-400.\n    doi:10.32614/RJ-2017-066",
+      "words": 27,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 227
+    },
+    {
+      "id": 1012,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "6.  Bell A, Jones K. Explaining fixed effects: random effects modeling\n    of time-series cross-sectional and panel data. *Polit Sci Res\n    Methods.* 2015;3(1):133-153. doi:10.1017/psrm.2014.7",
+      "words": 23,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 193
+    },
+    {
+      "id": 1013,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "7.  Bergmeir C, Hyndman RJ, Koo B. A note on the validity of\n    cross-validation for evaluating autoregressive time series\n    prediction. *Comput Stat Data Anal.* 2018;120:70-83.\n    doi:10.1016/j.csda.2017.11.003",
+      "words": 26,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 215
+    },
+    {
+      "id": 1014,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "8.  Cerqueira V, Torgo L, Mozetič I. Evaluating time series forecasting\n    models: an empirical study on performance estimation methods. *Mach\n    Learn.* 2020;109(11):1997-2028. doi:10.1007/s10994-020-05910-7",
+      "words": 23,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 210
+    },
+    {
+      "id": 1015,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "9.  Gneiting T, Raftery AE. Strictly proper scoring rules, prediction,\n    and estimation. *J Am Stat Assoc.* 2007;102(477):359-378.\n    doi:10.1198/016214506000001437",
+      "words": 18,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 167
+    },
+    {
+      "id": 1016,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "10. Fox SJ, Kim M, Meyers LA, Reich NG, Ray EL. Optimizing disease\n    outbreak forecast ensembles. *Emerg Infect Dis.*\n    2024;30(9):1967-1969. doi:10.3201/eid3009.240026",
+      "words": 21,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 172
+    },
+    {
+      "id": 1017,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "11. Held L, Meyer S, Bracher J. Probabilistic forecasting in infectious\n    disease epidemiology: the 13th Armitage lecture. *Stat Med.*\n    2017;36(22):3443-3460. doi:10.1002/sim.7363",
+      "words": 21,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 184
+    },
+    {
+      "id": 1018,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "12. Funk S, Camacho A, Kucharski AJ, et al. Assessing the performance of\n    real-time epidemic forecasts: a case study of Ebola in the Western\n    Area region of Sierra Leone, 2014-15. *PLoS Comput Biol.*\n    2019;15(2):e1006785. doi:10.1371/journal.pcbi.1006785",
+      "words": 35,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 263
+    },
+    {
+      "id": 1019,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "13. Bosse NI, Abbott S, Cori A, van Leeuwen E, Bracher J, Funk S.\n    Scoring epidemiological forecasts on transformed scales. *PLoS\n    Comput Biol.* 2023;19(8):e1011393. doi:10.1371/journal.pcbi.1011393",
+      "words": 25,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 204
+    },
+    {
+      "id": 1020,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "14. Gneiting T, Katzfuss M. Probabilistic forecasting. *Annu Rev Stat\n    Appl.* 2014;1:125-151. doi:10.1146/annurev-statistics-062713-085831",
+      "words": 13,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 141
+    },
+    {
+      "id": 1021,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "15. Reich NG, Brooks LC, Fox SJ, et al. A collaborative multiyear,\n    multimodel assessment of seasonal influenza forecasting in the\n    United States. *Proc Natl Acad Sci USA.* 2019;116(8):3146-3154.\n    doi:10.1073/pnas.1812594116",
+      "words": 29,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 233
+    },
+    {
+      "id": 1022,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "16. Wilks DS. *Statistical Methods in the Atmospheric Sciences.* 3rd\n    ed. Academic Press; 2011. Ch. 8.",
+      "words": 16,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 105
+    },
+    {
+      "id": 1023,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "17. Epstein ES. A scoring system for probability forecasts of ranked\n    categories. *J Appl Meteorol.* 1969;8(6):985-987.\n    doi:10.1175/1520-0450(1969)008\\<0985:ASSFPF\\>2.0.CO;2",
+      "words": 17,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 180
+    },
+    {
+      "id": 1024,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "18. Murphy AH. A note on the ranked probability score. *J Appl\n    Meteorol.* 1971;10(1):155-156.\n    doi:10.1175/1520-0450(1971)010\\<0155:ANOTRP\\>2.0.CO;2",
+      "words": 15,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 155
+    },
+    {
+      "id": 1025,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "19. Good IJ. Rational decisions. *J R Stat Soc B.* 1952;14(1):107-114.\n    doi:10.1111/j.2517-6161.1952.tb00104.x",
+      "words": 12,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 113
+    },
+    {
+      "id": 1026,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "20. Bracher J, Ray EL, Gneiting T, Reich NG. Evaluating epidemic\n    forecasts in an interval format. *PLoS Comput Biol.*\n    2021;17(2):e1008618. doi:10.1371/journal.pcbi.1008618",
+      "words": 21,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 179
+    },
+    {
+      "id": 1027,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "21. Ferro CAT, Fricker TE. A bias-corrected decomposition of the Brier\n    score. *Q J R Meteorol Soc.* 2012;138(668):1954-1960.\n    doi:10.1002/qj.1924",
+      "words": 19,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 152
+    },
+    {
+      "id": 1028,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "22. Steyerberg EW, Vickers AJ, Cook NR, et al. Assessing the performance\n    of prediction models: a framework for some traditional and novel\n    measures. *Epidemiology.* 2010;21(1):128-138.\n    doi:10.1097/EDE.0b013e3181c30fb2",
+      "words": 26,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 228
+    },
+    {
+      "id": 1029,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "23. Assel M, Sjoberg DD, Vickers AJ. The Brier score does not evaluate\n    the clinical utility of diagnostic tests or prediction models.\n    *Diagn Progn Res.* 2017;1:19. doi:10.1186/s41512-017-0020-3",
+      "words": 27,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 201
+    },
+    {
+      "id": 1030,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "24. Minus E, Coley RY, Shortreed SM, Williamson BD. Behavior of\n    prediction performance metrics with rare events. *J Clin Epidemiol.*\n    2025;178:112046. doi:10.1016/j.jclinepi.2025.112046",
+      "words": 22,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 192
+    },
+    {
+      "id": 1031,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "25. Sofaer HR, Hoeting JA, Jarnevich CS. The area under the\n    precision-recall curve as a performance metric for rare binary\n    events. *Methods Ecol Evol.* 2019;10(4):565-577.\n    doi:10.1111/2041-210X.13140",
+      "words": 26,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 211
+    },
+    {
+      "id": 1032,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "26. Saito T, Rehmsmeier M. The precision-recall plot is more informative\n    than the ROC plot when evaluating binary classifiers on imbalanced\n    datasets. *PLoS One.* 2015;10(3):e0118432.\n    doi:10.1371/journal.pone.0118432",
+      "words": 26,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 227
+    },
+    {
+      "id": 1033,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "27. Vickers AJ, Elkin EB. Decision curve analysis: a novel method for\n    evaluating prediction models. *Med Decis Making.*\n    2006;26(6):565-574. doi:10.1177/0272989X06295361",
+      "words": 20,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 176
+    },
+    {
+      "id": 1034,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "28. Vickers AJ, van Calster B, Steyerberg EW. A simple, step-by-step\n    guide to interpreting decision curve analysis. *Diagn Progn Res.*\n    2019;3:18. doi:10.1186/s41512-019-0064-7",
+      "words": 22,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 183
+    },
+    {
+      "id": 1035,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "29. Lowe R, Stewart-Ibarra AM, Petrova D, et al. Evaluating\n    probabilistic dengue risk forecasts from a prototype early warning\n    system for Brazil. *eLife.* 2016;5:e11285. doi:10.7554/eLife.11285",
+      "words": 25,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 201
+    },
+    {
+      "id": 1036,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "30. Colón-González FJ, Soares Bastos L, Hofmann B, et al. Probabilistic\n    seasonal dengue forecasting in Vietnam: a modelling study using\n    superensembles. *PLoS Med.* 2021;18(3):e1003542.\n    doi:10.1371/journal.pmed.1003542",
+      "words": 25,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 229
+    },
+    {
+      "id": 1037,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "31. Robinson WS. Ecological correlations and the behavior of\n    individuals. *Am Sociol Rev.* 1950;15(3):351-357.\n    doi:10.2307/2087176",
+      "words": 15,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 138
+    },
+    {
+      "id": 1038,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "32. Morgenstern H. Ecologic studies in epidemiology: concepts,\n    principles, and methods. *Annu Rev Public Health.* 1995;16:61-81.\n    doi:10.1146/annurev.pu.16.050195.000425",
+      "words": 17,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 176
+    },
+    {
+      "id": 1039,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "33. VanderWeele TJ, Ding P. Sensitivity analysis in observational\n    research: introducing the E-value. *Ann Intern Med.*\n    2017;167(4):268-274. doi:10.7326/M16-2607",
+      "words": 18,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 168
+    },
+    {
+      "id": 1040,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "34. Nosek BA, Ebersole CR, DeHaven AC, Mellor DT. The preregistration\n    revolution. *Proc Natl Acad Sci USA.* 2018;115(11):2600-2606.\n    doi:10.1073/pnas.1708274114",
+      "words": 19,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 167
+    },
+    {
+      "id": 1041,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "35. Munafò MR, Nosek BA, Bishop DVM, et al. A manifesto for reproducible\n    science. *Nat Hum Behav.* 2017;1:0021. doi:10.1038/s41562-016-0021",
+      "words": 19,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 143
+    },
+    {
+      "id": 1042,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "36. Efron B. Better bootstrap confidence intervals. *J Am Stat Assoc.*\n    1987;82(397):171-185. doi:10.1080/01621459.1987.10478410",
+      "words": 13,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 131
+    },
+    {
+      "id": 1043,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "37. Carpenter J, Bithell J. Bootstrap confidence intervals: when, which,\n    what? A practical guide for medical statisticians. *Stat Med.*\n    2000;19(9):1141-1164.\n    doi:10.1002/(SICI)1097-0258(20000515)19:9\\<1141::AID-SIM479\\>3.0.CO;2-F",
+      "words": 21,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 241
+    },
+    {
+      "id": 1044,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "38. Davison AC, Hinkley DV. *Bootstrap Methods and Their Application.*\n    Cambridge University Press; 1997.",
+      "words": 14,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 108
+    },
+    {
+      "id": 1045,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "39. Cameron AC, Trivedi PK. *Microeconometrics: Methods and\n    Applications.* Cambridge University Press; 2005.\n    doi:10.1017/CBO9780511811241",
+      "words": 14,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 145
+    },
+    {
+      "id": 1046,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "40. Hodges JS, Reich BJ. Adding spatially-correlated errors can mess up\n    the fixed effect you love. *Am Stat.* 2010;64(4):325-334.\n    doi:10.1198/tast.2010.10052",
+      "words": 20,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 165
+    },
+    {
+      "id": 1047,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "41. Polop F, Provensal MC, Pini N, Levis S, Priotto J, Enría D, et\n    al. Temporal and spatial host abundance and prevalence of Andes\n    hantavirus in southern Argentina. *EcoHealth.* 2010;7(2):176-184.\n    doi:10.1007/s10393-010-0333-y",
+      "words": 31,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 238
+    },
+    {
+      "id": 1048,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "42. de la Fuente A, Pacheco N. Biomasa, producción de semillas y\n    fenología de *Chusquea montana* tras su floración masiva y\n    sincrónica en el Parque Nacional Puyehue, Chile. *Bosque*\n    (Valdivia). 2017;38(3):601-606. doi:10.4067/S0717-92002017000300018",
+      "words": 32,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 261
+    },
+    {
+      "id": 1049,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "43. Riquelme R, Rioseco ML, Bastidas L, et al. Hantavirus pulmonary\n    syndrome, southern Chile, 2011--2014. *Emerg Infect Dis.*\n    2015;21(4):562-568. doi:10.3201/eid2104.141437",
+      "words": 20,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 180
+    },
+    {
+      "id": 1050,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "44. Jaksic FM, Lima M. Myths and facts on ratadas: Bamboo blooms,\n    rainfall peaks and rodent outbreaks in South America. *Austral\n    Ecol.* 2003;28(3):237-251. doi:10.1046/j.1442-9993.2003.01271.x",
+      "words": 24,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 200
+    },
+    {
+      "id": 1051,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "45. Yland JJ, Wesselink AK, Lash TL, Fox MP. Misconceptions about the\n    direction of bias from nondifferential misclassification. *Am J\n    Epidemiol.* 2022;191(8):1485-1495. doi:10.1093/aje/kwac035",
+      "words": 23,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 200
+    },
+    {
+      "id": 1052,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "46. Hoek G, Vienneau D, de Hoogh K. Does residential address-based\n    exposure assessment for outdoor air pollution lead to bias? *Environ\n    Health.* 2024;23:75. doi:10.1186/s12940-024-01111-0",
+      "words": 24,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 195
+    },
+    {
+      "id": 1053,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "47. Kazasidis O, Geduhn A, Jacob J. High-resolution early warning system\n    for human Puumala hantavirus infection risk in Germany. *Sci Rep.*\n    2024;14:9602. doi:10.1038/s41598-024-60144-0",
+      "words": 23,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 192
+    },
+    {
+      "id": 1054,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "48. Ferro I, Lopez W, Cassinelli F, et al. Hantavirus pulmonary syndrome\n    outbreak anticipation by synchronous rodent abundance increase in\n    northwestern Argentina. *Pathogens.* 2024;13(9):753.\n    doi:10.3390/pathogens13090753",
+      "words": 25,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 233
+    },
+    {
+      "id": 1055,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "49. Ecke F, Nematollahi Mahani SA, Evander M, Hornfeldt B, Khalil H.\n    Wildfire-induced changes in a small mammal community increase\n    prevalence of a zoonotic pathogen. *Ecol Evol.*\n    2019;9(22):12459-12470. doi:10.1002/ece3.5556",
+      "words": 29,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 236
+    },
+    {
+      "id": 1056,
+      "section": "References",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "50. Pan American Health Organization. Epidemiological Alert:\n    Hantavirus in the Region of the Americas. Washington DC: PAHO; 19\n    December 2025. Available at: https://www.paho.org/en/documents/epidemiological-alert-hantavirus-region-americas-19-december-2025\n\n------------------------------------------------------------------------",
+      "words": 24,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 337
+    },
+    {
+      "id": 1057,
+      "section": "Supplementary Material",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "- **S1 --- Pre-specification compliance** (Zenodo DOI + filesystem\ntimestamp ledger + SHA256 manifest)\n- **S2 --- Specification search history** (S22--S29 decisions)\n- **S3 --- 14-fold sensitivity analysis** (full metrics table with 20%\nflags)\n- **S4 --- Ferro-Fricker Brier decomposition**\n- **S5 --- NDVI lag sensitivity** (lag 1, 3, 5, 7)\n- **S-Extra --- Triple scoring rule comparison table** (log score +\nRPS + bootstrap scaled Brier CI) ⭐ Addendum v1.2\n- **S-Fig1** --- Triple-baseline BSS comparison\n- **S-Fig2** --- PR-AUC forest plot with BCa CI\n- **S-Fig3** --- Decision curve analysis enhanced\n- **S-Fig4** --- Triple scoring rule comparison (3-panel composite) ⭐\nAddendum v1.2\n\n------------------------------------------------------------------------",
+      "words": 106,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 762
+    },
+    {
+      "id": 1058,
+      "section": "Acknowledgements",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "Ñuble SEREMI Salud for case data access; Hospital Clínico Herminda Martín (HCHM) clinical team; CEC-HCHM ethics approval (V-12, extended to 2026-06-30). Claude AI (Anthropic) assisted with code generation, statistical verification, and literature synthesis; all scientific decisions were made by the human author.",
+      "words": 42,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 313
+    },
+    {
+      "id": 1059,
+      "section": "Funding",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "No external funding. Computational resources: personal workstation + Google Earth Engine academic tier. The study was designed, conducted, analyzed, interpreted, and written independently by the author(s) without funder involvement in any stage.",
+      "words": 32,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 245
+    },
+    {
+      "id": 1060,
+      "section": "Conflicts of interest",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "None declared.",
+      "words": 2,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 14
+    },
+    {
+      "id": 1061,
+      "section": "Data and code availability",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "Pre-specification protocol v1.0 + Addenda v1.1 and v1.2, together with all R scripts, intermediate CSV outputs underlying every figure and table, and the SHA256 filesystem-timestamp ledger, are archived at **Zenodo, DOI 10.5281/zenodo.19425753** (lock date 2026-04-04) and mirrored at **https://github.com/gonzacontreras/hantavirus-nuble**. The comuna--month panel contains no individual-level identifiers and is available on request under the SEREMI Salud Ñuble data-sharing agreement.",
+      "words": 58,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 486
+    },
+    {
+      "id": 1062,
+      "section": "Author contributions",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "GC: conceptualization, methodology, data curation, formal analysis, writing. (Co-authors to be added.)\n\n------------------------------------------------------------------------",
+      "words": 13,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 176
+    },
+    {
+      "id": 1063,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "*(For the actual submission, extract the text below into a separate* `CoverLetter.docx`*.)*\n\n------------------------------------------------------------------------",
+      "words": 13,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 165
+    },
+    {
+      "id": 1064,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Gonzalo Contreras, MD** Hospital Clínico Herminda Martín Chillán, Ñuble, Chile 2026-04-05",
+      "words": 11,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 91
+    },
+    {
+      "id": 1065,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**To:** Editor-in-Chief, *Emerging Infectious Diseases* (CDC, Atlanta, USA)",
+      "words": 8,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 75
+    },
+    {
+      "id": 1066,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Re:** Manuscript submission --- \"A Three-Tier Probabilistic Early Warning System for Andes Virus Hantavirus Cardiopulmonary Syndrome in South-Central Chile (2002--2024)\"",
+      "words": 20,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 171
+    },
+    {
+      "id": 1067,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "Dear Editor,",
+      "words": 2,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 12
+    },
+    {
+      "id": 1068,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "I am pleased to submit for your consideration the above research article describing an ecological early warning system for Andes-virus hantavirus cardiopulmonary syndrome (HCPS) in the Ñuble region of Chile.",
+      "words": 30,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 207
+    },
+    {
+      "id": 1069,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Scientific significance.** Andes-virus HCPS in Ñuble has an incidence of 1.21 per 100,000 person-years (136 confirmed cases 2002--2024), approximately 3--5× the national rate. We developed an ecological early warning system that couples a walk-forward-validated negative-binomial mixed model with locally-calibrated environmental covariates (ERA5 temperature anomaly, FSI lag 5), evaluated under the scoring rule framework used by the CDC FluSight and U.S. COVID Forecast Hub programs (Reich et al. 2019 *PNAS*; Cramer et al. 2022 *PNAS*; Fox et al. 2024 *EID*). Our primary finding is that the model achieves logarithmic score improvements over the PAHO-standard endemic channel baseline at Tier 1 and Tier 2 --- the confirmatory tiers --- with robust stability across walk-forward fold structure and proper scoring rule choice. The work directly supports the adoption of modern probabilistic forecast verification in national hantavirus surveillance systems, a methodological gap identified by the Pan American Health Organization's 2023 regional hantavirus guidelines.",
+      "words": 149,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 1073
+    },
+    {
+      "id": 1070,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Methodological alignment with this journal.** In designing the probabilistic evaluation framework for our three-tier hantavirus early warning system, we aligned with the methodological consensus for infectious-disease forecasting that your journal has helped to consolidate. Specifically, we report the logarithmic (ignorance) score as the primary probabilistic metric per tier, following the scoring rule framework of Gneiting & Raftery (*J Am Stat Assoc* 2007;102:359-78) and the editorial precedent recently established in your pages by Fox SJ, Kim M, Meyers LA, Reich NG, Ray EL in \"Optimizing disease outbreak forecast ensembles\" (*Emerg Infect Dis* 2024;30(9):1967-1969, doi:10.3201/eid3009.240026), where log score is applied explicitly for the CDC FluSight influenza-like-illness ensemble. We complement the log score with the ranked probability score (Epstein 1969; Murphy 1971; Wilks 2011) to exploit the nested ordinal structure of the three tiers. Brier-derived metrics --- including the scaled Brier, the Bortman/PAHO endemic-channel BSS, and the Ferro-Fricker bias-corrected decomposition\n--- are retained as secondary analyses with block-bootstrap 95%\nconfidence intervals, for backward comparability with the surveillance literature that preceded the current methodological consensus.",
+      "words": 171,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 1302
+    },
+    {
+      "id": 1071,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Pre-specification and anti-HARKing.** The full pre-specification protocol (v1.0 with Addenda v1.1 and v1.2, all dated 2026-04-04) is archived at **Zenodo, DOI 10.5281/zenodo.19425753**, providing externally verifiable timestamp proof that all analytical decisions --- model specification, walk-forward protocol, burn-in exclusion, baseline choice, and scoring rule --- were made before any out-of-sample metric was computed. Filesystem timestamps (reported in Addendum v1.2 Section\n8) show that the v1.2 lock preceded the first computed output by 40\nminutes. The R code and all intermediate tables and figures are available at **https://github.com/gonzacontreras/hantavirus-nuble** for full reproducibility. This pre-registration practice follows the anti-HARKing recommendations of Nosek et al. (2018) and Munafò et al. (2017).",
+      "words": 106,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 830
+    },
+    {
+      "id": 1072,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Tier 3 exploratory disclosure.** We explicitly label Tier 3 (outbreak declared, n = 20 events over 2002--2024) as an **exploratory, hypothesis-generating** alert level throughout the manuscript --- in the Abstract, Methods, Results, and Discussion --- given the well-documented small-sample behaviour of discrimination metrics in the rare-event regime (Minus et al. 2025). Tier 1 (surveillance) and Tier 2 (cluster alert) are the confirmatory operational alert levels of this study. External validation of the Tier 3 signal in other Andes-virus--endemic regions of Chile and southern Argentina is noted as essential follow-up work.",
+      "words": 90,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": [
+          "Minus et al.  2025"
+        ]
+      },
+      "char_length": 633
+    },
+    {
+      "id": 1073,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Companion paper disclosure.** A separate clinical analysis of 34 HCPS patients from the same region (2010--2025) has been submitted to *Revista Chilena de Infectología*. That manuscript focuses on individual-level clinical characterization and a prognostic triad using Firth-penalized logistic regression. The two manuscripts share no analytical methods, computed metrics, tables, or figures; they are written in different languages (English vs Spanish). Both were designed as complementary analyses under ICMJE criteria for acceptable related publication, with full disclosure to both journals.",
+      "words": 79,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 597
+    },
+    {
+      "id": 1074,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Use of AI tools.** The computational analysis pipeline and manuscript preparation were assisted by Claude (Anthropic) for code generation, statistical verification, and literature synthesis. All scientific decisions, clinical interpretation, and final editorial judgment were made by the human author. AI-generated content was verified against primary data sources.",
+      "words": 47,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 367
+    },
+    {
+      "id": 1075,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "The manuscript has not been submitted elsewhere, and all authors have approved the final version. We have no conflicts of interest to declare. We look forward to your editorial assessment.",
+      "words": 30,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 188
+    },
+    {
+      "id": 1076,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "Sincerely,",
+      "words": 1,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 10
+    },
+    {
+      "id": 1077,
+      "section": "Cover letter",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Gonzalo Contreras, MD** Corresponding author (orcid / email / phone)\n\n------------------------------------------------------------------------",
+      "words": 11,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 144
+    },
+    {
+      "id": 1078,
+      "section": "End of assembled manuscript",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Assembly status:** This document integrates the 5 BLINDAJE Nivel 2 drafts (Methods, Results, Limitations, Supplementary, CoverLetter) with the ecological backbone from the project ARCHIVO_MAESTRO_FINAL (Introduction, epidemiological context, GLMM S29-K coefficients). All `10.5281/zenodo.19425753` DOI placeholders and `https://github.com/gonzacontreras/hantavirus-nuble` markers will be resolved by running `APLICAR_DOI_ZENODO.sh` AFTER Gonzalo uploads the Zenodo bundle.",
+      "words": 49,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 474
+    },
+    {
+      "id": 1079,
+      "section": "End of assembled manuscript",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Word count (approximate, main text only, excluding Abstract/refs/supplementary):** \\~3,400 words --- within EID 3,500-word limit.",
+      "words": 15,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 131
+    },
+    {
+      "id": 1080,
+      "section": "End of assembled manuscript",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**References count:** 42 listed + \\~8 in supplementary = \\~50 total --- within EID 50-ref limit.",
+      "words": 16,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 96
+    },
+    {
+      "id": 1081,
+      "section": "End of assembled manuscript",
+      "subsection": null,
+      "is_main_text": false,
+      "text": "**Next step for Gonzalo:** read through for any edits, then convert to .docx with `pandoc MANUSCRITO_EID_v2_ENSAMBLADO.md -o MANUSCRITO_EID_v2.docx`, then submit via https://wwwnc.cdc.gov/eid ScholarOne portal.",
+      "words": 24,
+      "refs_cited": {
+        "numeric": [],
+        "author_year": []
+      },
+      "char_length": 210
+    }
+  ],
+  "metadata": {
+    "title": "A Three-Tier Probabilistic Early Warning System for Andes Virus Hantavirus Cardiopulmonary Syndrome in South-Central Chile (2002--2024)",
+    "word_count_target": 3500,
+    "word_count_actual": 3448,
+    "refs_target": 50,
+    "refs_actual": 50,
+    "main_text_sections": [
+      "Abstract",
+      "Conclusions",
+      "Discussion",
+      "Introduction",
+      "Methods",
+      "Results"
+    ],
+    "parser_version": "b4.1-1.0"
+  }
+}

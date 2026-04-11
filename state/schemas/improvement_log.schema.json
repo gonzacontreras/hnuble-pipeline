@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ImprovementLog",
+  "description": "Changelog of edits applied by W14 to the manuscript. Each entry links back to the annotation that triggered it and records validator checks, risk level and word/ref deltas. Canonical anchors: manuscript v5 = 3469/3500 words, 50/50 refs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "entries"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonic version of the improvement log document."
+    },
+    "entries": {
+      "type": "array",
+      "description": "Chronological list of improvement entries.",
+      "items": {"$ref": "#/definitions/entry"}
+    }
+  },
+  "definitions": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entry_id",
+        "timestamp",
+        "annotation_id",
+        "para_id",
+        "para_section",
+        "old_text",
+        "new_text",
+        "edit_type",
+        "rationale",
+        "lift_estimate",
+        "risk",
+        "agents_used",
+        "validator_passed",
+        "validator_checks",
+        "word_count_delta",
+        "refs_delta"
+      ],
+      "properties": {
+        "entry_id": {
+          "type": "string",
+          "description": "Unique identifier of the improvement entry."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO8601 timestamp when the edit was applied."
+        },
+        "annotation_id": {
+          "type": "string",
+          "description": "Identifier of the annotation that triggered this edit (see annotations.schema.json)."
+        },
+        "para_id": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Paragraph id affected by the edit."
+        },
+        "para_section": {
+          "type": "string",
+          "description": "Section label of the paragraph (e.g. Abstract, Methods, Results, Discussion)."
+        },
+        "old_text": {
+          "type": "string",
+          "description": "Verbatim text before the edit."
+        },
+        "new_text": {
+          "type": "string",
+          "description": "Verbatim text after the edit."
+        },
+        "edit_type": {
+          "type": "string",
+          "enum": ["replace", "insert", "delete", "no-op"],
+          "description": "Kind of edit performed."
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Short justification for the edit."
+        },
+        "lift_estimate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Estimated absolute lift in the EID score after this edit."
+        },
+        "risk": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Residual risk introduced by this edit."
+        },
+        "agents_used": {
+          "type": "array",
+          "description": "Identifiers of agents that contributed to this edit.",
+          "items": {"type": "string"}
+        },
+        "validator_passed": {
+          "type": "boolean",
+          "description": "True if every check in validator_checks passed."
+        },
+        "validator_checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "m14_ok",
+            "canonical_ok",
+            "no_dup_refs",
+            "word_count_ok",
+            "refs_count_ok"
+          ],
+          "properties": {
+            "m14_ok": {
+              "type": "boolean",
+              "description": "Anti-bypass (M14) 5-phase validator result."
+            },
+            "canonical_ok": {
+              "type": "boolean",
+              "description": "Canonical facts preserved (136/103/33 cases, BSS 68.1%/36.5%, etc.)."
+            },
+            "no_dup_refs": {
+              "type": "boolean",
+              "description": "No duplicate references introduced."
+            },
+            "word_count_ok": {
+              "type": "boolean",
+              "description": "Word count remains within EID cap (<= 3500)."
+            },
+            "refs_count_ok": {
+              "type": "boolean",
+              "description": "Reference count remains within EID cap (<= 50)."
+            }
+          }
+        },
+        "word_count_delta": {
+          "type": "integer",
+          "description": "Change in total word count (positive = added, negative = removed)."
+        },
+        "refs_delta": {
+          "type": "integer",
+          "description": "Change in total reference count (positive = added, negative = removed)."
+        }
+      }
+    }
+  }
+}

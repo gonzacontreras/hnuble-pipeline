@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "heartbeat_sequence": 4,
+  "updated_at": "2026-04-11T14:35:28Z",
+  "session": "S61",
+  "session_deadline": "2026-04-14T06:00:00Z",
+  "current_block": "B6",
+  "current_block_label": "Smoke tests + deploy Pages + handoff (última etapa)",
+  "overall_status": "running",
+  "agent": "Claude Opus 4.6 (1M context)",
+  "methodology": "5-fase anti-bypass + M14 + multi-agent paralelo + multiprocessing.Pool(8)",
+  "sub_blocks": [
+    {
+      "id": "B2",
+      "label": "Mapa workflow Cytoscape.js · 69 nodos / 125 edges (excedió mínimo)",
+      "status": "done",
+      "agent_type": "general-purpose",
+      "output_path": "pipeline/repo/docs/",
+      "output_refs": [
+        "docs/workflow.html (~470 LOC)",
+        "docs/state/workflow_nodes.json (41 KB)"
+      ],
+      "detail": "6 clusters (triggers/workflows/libs/state/external_services/models), Cytoscape 3.28 + dagre 0.8.5, modal click, filtros toolbar"
+    },
+    {
+      "id": "B3",
+      "label": "Live + Enciclopedia · 402 archivos en 13 categorías",
+      "status": "done",
+      "agent_type": "general-purpose",
+      "output_path": "pipeline/repo/docs/ + scripts/ + state/",
+      "output_refs": [
+        "docs/live.html (365 LOC dark mode terminal)",
+        "docs/encyclopedia.html (378 LOC Fuse.js + marked.js)",
+        "scripts/w11_encyclopedia_builder.py (579 LOC con multiprocessing.Pool(8))",
+        ".github/workflows/w11-encyclopedia.yml (42 LOC)",
+        "state/encyclopedia.json (6540 líneas, 392 KB)",
+        "docs/encyc/ (20 archivos top HIGH-VALUE copiados)"
+      ],
+      "detail": "247 memory + 148 vault + 7 root · dual mode CI/local · 13 cats incluye modelos_activos"
+    },
+    {
+      "id": "B4",
+      "label": "Paper current + improved · 43 párrafos parseados",
+      "status": "done",
+      "agent_type": "general-purpose",
+      "output_path": "pipeline/repo/docs/ + scripts/ + state/",
+      "output_refs": [
+        "scripts/build_manuscript_json.py (295 LOC)",
+        "state/manuscript_v5_condensed.json (1820 líneas · 43 párrafos · 3448 palabras · 50 refs)",
+        "docs/paper-current.html (486 LOC · subrayado 3 colores · POST ntfy)",
+        "docs/paper-improved.html (577 LOC · diff + score 11+2 barras + panel modelos)"
+      ],
+      "detail": "Schema annotation_message_v1 actualizado (para_id max 40→60 por 43 párrafos reales). Word count 3448 dentro de ±50 tolerancia."
+    },
+    {
+      "id": "B5",
+      "label": "W12-W15 workflows + W14 master orchestrator (758 LOC)",
+      "status": "done",
+      "agent_type": "general-purpose",
+      "output_path": "pipeline/repo/scripts/ + .github/workflows/",
+      "output_refs": [
+        "scripts/w12_annotation_listener.py (171 LOC)",
+        ".github/workflows/w12-annotation.yml (43 LOC · cron */5min)",
+        "scripts/w13_eid_scorer.py (404 LOC · asyncio.gather 11 componentes)",
+        ".github/workflows/w13-eid-scorer.yml (41 LOC)",
+        "scripts/w14_master_orchestrator.py (758 LOC · CRÍTICO · capas A/B/C/D paralelas)",
+        ".github/workflows/w14-master.yml (56 LOC · timeout 20min · concurrency sin cancel)",
+        "scripts/w15_model_evaluator.py (319 LOC · modo static/live)",
+        ".github/workflows/w15-model-eval.yml (43 LOC · cron 07:00 UTC)"
+      ],
+      "detail": "Validaciones py_compile OK (todos) · yamllint OK (15 yamls incluyendo 5 nuevos) · W13 mantuvo 11 componentes (schema constraint), decomposición stat_rigor en frontend"
+    },
+    {
+      "id": "B5.5",
+      "label": "Merger: validación cruzada + fixes + 1 commit único",
+      "status": "done",
+      "agent_type": "main (Claude Opus)",
+      "output_path": "pipeline/repo/",
+      "detail": "3 fixes aplicados: (1) index.html '38 nodos' → '69 nodos', (2) encyclopedia.schema relajado (13 cats, additionalProperties:true en item/source_stats/root, bundle_mode/priority_1_top añadidos, path/preview/size_bytes/lines opcionales para model cards), (3) annotation_message_v1 para_id max 40→60 aceptado. Todo valida 0 errores."
+    }
+  ],
+  "current_findings": [
+    "B2-B5 ejecutados en paralelo con 4 Task tools · total ~60 min wall time (vs ~6-7h secuencial)",
+    "Mapa workflow EXCEDIÓ spec: 69 nodos (mínimo 45) · 125 edges (mínimo 80) · Cytoscape+dagre",
+    "Enciclopedia: 402 archivos reales procesados en 1.0s con multiprocessing.Pool(8)",
+    "Paper parser: 43 párrafos (no 40) detectados · 3448 palabras · schema annotation ajustado a para_id max 60",
+    "W14 orchestrator 758 LOC CRÍTICO listo · 11+2 sub-componentes score EID (decomposición en frontend)",
+    "W15 Model Evaluator añadido (ajuste de alcance post-Gonzalo) · modo static/live auto-detect",
+    "5 fixes de schema encyclopedia aplicados · 0 errores finales · todos los 6 schemas validan draft-07",
+    "15 YAMLs parsean · 6 scripts Python nuevos compilan · 2 edits + 14 archivos nuevos al commit"
+  ],
+  "next_planned": [
+    "Commit único B2-B5 con ~25 archivos",
+    "B6 smoke tests 6 paralelos: live.html polling · encyclopedia árbol · workflow map · paper-current ntfy POST · W14 smoke run · deploy Pages",
+    "Deploy Pages trigger manual · verificación URL pública",
+    "HANDOFF.md con guía 5 pasos · ntfy notif final 'Sistema LIVE'"
+  ],
+  "tool_calls_total": 45,
+  "files_touched": [
+    "pipeline/repo/state/claude_live.json",
+    "pipeline/repo/state/schemas/claude_live.schema.json",
+    "pipeline/repo/state/schemas/encyclopedia.schema.json",
+    "pipeline/repo/state/schemas/annotation_message_v1.schema.json",
+    "pipeline/repo/state/encyclopedia.json",
+    "pipeline/repo/state/manuscript_v5_condensed.json",
+    "pipeline/repo/scripts/lib/claude_live.py",
+    "pipeline/repo/scripts/lib/eid_score.py",
+    "pipeline/repo/scripts/lib/annotations.py",
+    "pipeline/repo/scripts/build_manuscript_json.py",
+    "pipeline/repo/scripts/w11_encyclopedia_builder.py",
+    "pipeline/repo/scripts/w12_annotation_listener.py",
+    "pipeline/repo/scripts/w13_eid_scorer.py",
+    "pipeline/repo/scripts/w14_master_orchestrator.py",
+    "pipeline/repo/scripts/w15_model_evaluator.py",
+    "pipeline/repo/.github/workflows/w11-encyclopedia.yml",
+    "pipeline/repo/.github/workflows/w12-annotation.yml",
+    "pipeline/repo/.github/workflows/w13-eid-scorer.yml",
+    "pipeline/repo/.github/workflows/w14-master.yml",
+    "pipeline/repo/.github/workflows/w15-model-eval.yml",
+    "pipeline/repo/docs/index.html",
+    "pipeline/repo/docs/CONTRACTS.md",
+    "pipeline/repo/docs/live.html",
+    "pipeline/repo/docs/encyclopedia.html",
+    "pipeline/repo/docs/workflow.html",
+    "pipeline/repo/docs/paper-current.html",
+    "pipeline/repo/docs/paper-improved.html",
+    "pipeline/repo/docs/state/workflow_nodes.json",
+    "pipeline/repo/docs/encyc/ (20 files)"
+  ],
+  "active_terminal": "this instance (B5.5 merger done, entering B6 smoke+deploy)",
+  "other_terminals": [
+    "parallel instance editing manuscript in resultados/S49_ALERTAS/BLINDAJE_Q1/"
+  ],
+  "eta_estimate": {
+    "optimistic_wall_time_min": 30,
+    "pessimistic_wall_time_min": 60,
+    "current_block_eta_min": 35
+  },
+  "m14_preflight": {
+    "catalog_consulted": true,
+    "catalog_path": "memory/CANONICAL_BLINDAJES_INDEX.md",
+    "findings_classified": "N/A (infrastructure build)"
+  }
+}

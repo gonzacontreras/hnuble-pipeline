@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hnuble-pipeline · Mapa del Pipeline (Cytoscape)</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --fg:#222;
+    --muted:#555;
+    --card:#f7f8fa;
+    --border:#e1e4e8;
+    --accent:#6c98c9;
+  }
+  *{box-sizing:border-box}
+  body{font-family:system-ui,-apple-system,sans-serif;margin:0;padding:0;color:var(--fg);background:var(--bg);height:100vh;display:flex;flex-direction:column}
+  header{padding:.8em 1.2em;border-bottom:1px solid var(--border);background:var(--card);display:flex;align-items:center;gap:1.2em;flex-wrap:wrap}
+  header h1{margin:0;font-size:1.15em;font-weight:600}
+  header .sub{color:var(--muted);font-size:.82em;margin:0}
+  header nav{margin-left:auto;display:flex;gap:.9em;font-size:.85em}
+  header nav a{color:#1864ab;text-decoration:none;padding:.25em .5em;border-radius:3px}
+  header nav a:hover{background:#eef4ff}
+
+  .toolbar{padding:.55em 1.2em;border-bottom:1px solid var(--border);background:#fff;display:flex;gap:1.1em;flex-wrap:wrap;align-items:center;font-size:.82em}
+  .toolbar fieldset{border:1px solid var(--border);border-radius:5px;padding:.2em .6em .3em;margin:0}
+  .toolbar legend{padding:0 .3em;font-size:.72em;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .toolbar label{display:inline-flex;align-items:center;gap:.25em;margin-right:.6em;cursor:pointer}
+  .toolbar button{border:1px solid var(--border);background:#f1f3f5;border-radius:4px;padding:.32em .8em;font-size:.82em;cursor:pointer;color:#222}
+  .toolbar button:hover{background:#eef4ff;border-color:var(--accent)}
+  .toolbar .status{margin-left:auto;color:var(--muted);font-size:.8em;font-family:ui-monospace,Consolas,monospace}
+
+  #cy{flex:1;background:#fafbfc;min-height:300px}
+
+  .legend{position:fixed;right:18px;bottom:18px;background:rgba(255,255,255,.95);border:1px solid var(--border);border-radius:6px;padding:.6em .9em;font-size:.78em;box-shadow:0 2px 10px rgba(0,0,0,.06);max-width:220px;z-index:10}
+  .legend h3{margin:.1em 0 .4em;font-size:.82em;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+  .legend .row{display:flex;align-items:center;gap:.45em;margin:.18em 0;line-height:1.1}
+  .legend .swatch{width:14px;height:14px;border-radius:3px;flex-shrink:0;border:1px solid rgba(0,0,0,.15)}
+  .legend .shape{width:16px;height:16px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:#555}
+
+  /* Modal */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:flex-start;justify-content:center;padding:3em 1em;z-index:100;overflow-y:auto}
+  .modal-backdrop.open{display:flex}
+  .modal{background:#fff;border:1px solid var(--border);border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.2);max-width:680px;width:100%;padding:1.3em 1.6em}
+  .modal h2{margin:0 0 .35em;font-size:1.15em}
+  .modal .meta{color:var(--muted);font-size:.85em;margin-bottom:.9em}
+  .modal dl{display:grid;grid-template-columns:max-content 1fr;gap:.35em .9em;font-size:.85em;margin:0}
+  .modal dt{color:var(--muted);font-weight:500}
+  .modal dd{margin:0;word-break:break-word}
+  .modal code{background:#f1f3f5;padding:.05em .35em;border-radius:3px;font-size:.92em}
+  .modal .chip{display:inline-block;background:#eef4ff;border:1px solid #c7dbf0;border-radius:10px;padding:.1em .55em;font-size:.72em;color:#1864ab;margin:.1em .2em .1em 0}
+  .modal .chip.warn{background:#fff4e6;border-color:#ffd8a8;color:#d9480f}
+  .modal .chip.ok{background:#d3f9d8;border-color:#8ce99a;color:#2b8a3e}
+  .modal .close{float:right;background:none;border:none;font-size:1.2em;color:var(--muted);cursor:pointer;padding:0;margin-left:.5em}
+  .modal .close:hover{color:#000}
+
+  /* Edge tooltip */
+  .edge-tooltip{position:fixed;background:#222;color:#fff;padding:.3em .6em;border-radius:3px;font-size:.75em;pointer-events:none;z-index:50;display:none;max-width:240px;line-height:1.3}
+  .edge-tooltip.open{display:block}
+
+  .loading{padding:3em;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mapa del Pipeline</h1>
+  <p class="sub">Cytoscape.js + dagre · nodos interactivos · click para detalle</p>
+  <nav>
+    <a href="index.html">&larr; Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="https://github.com/gonzacontreras/hnuble-pipeline" target="_blank" rel="noopener">Repo</a>
+  </nav>
+</header>
+
+<div class="toolbar">
+  <fieldset id="cluster-filter">
+    <legend>Clusters</legend>
+    <label><input type="checkbox" value="triggers" checked> Triggers</label>
+    <label><input type="checkbox" value="workflows" checked> Workflows</label>
+    <label><input type="checkbox" value="libs" checked> Libs</label>
+    <label><input type="checkbox" value="state" checked> State</label>
+    <label><input type="checkbox" value="external_services" checked> External</label>
+    <label><input type="checkbox" value="models" checked> Models</label>
+  </fieldset>
+  <fieldset id="edge-filter">
+    <legend>Edges</legend>
+    <label><input type="checkbox" value="triggers" checked> triggers</label>
+    <label><input type="checkbox" value="calls" checked> calls</label>
+    <label><input type="checkbox" value="reads" checked> reads</label>
+    <label><input type="checkbox" value="writes" checked> writes</label>
+    <label><input type="checkbox" value="cascades" checked> cascades</label>
+    <label><input type="checkbox" value="external_call" checked> external</label>
+    <label><input type="checkbox" value="evaluates" checked> evaluates</label>
+    <label><input type="checkbox" value="audits" checked> audits</label>
+  </fieldset>
+  <button id="btn-cascades">Solo cascadas</button>
+  <button id="btn-reset">Reset</button>
+  <button id="btn-fit">Fit</button>
+  <span class="status" id="status-text">cargando...</span>
+</div>
+
+<div id="cy" role="application" aria-label="Mapa interactivo del pipeline"></div>
+
+<div class="legend" aria-hidden="false">
+  <h3>Clusters</h3>
+  <div class="row"><span class="swatch" style="background:#8884d8"></span>Triggers (rombo)</div>
+  <div class="row"><span class="swatch" style="background:#82ca9d"></span>Workflows (elipse)</div>
+  <div class="row"><span class="swatch" style="background:#ffc658"></span>Libs (rect redondo)</div>
+  <div class="row"><span class="swatch" style="background:#ff8042"></span>State (rect)</div>
+  <div class="row"><span class="swatch" style="background:#d88884"></span>External (hexagono)</div>
+  <div class="row"><span class="swatch" style="background:#a855f7"></span>Models (triangulo)</div>
+</div>
+
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="close" id="modal-close" aria-label="Cerrar">&times;</button>
+    <h2 id="modal-title">Nodo</h2>
+    <div class="meta" id="modal-meta"></div>
+    <dl id="modal-body"></dl>
+  </div>
+</div>
+
+<div class="edge-tooltip" id="edge-tooltip"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dagre@0.8.5/dist/dagre.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+<script>
+"use strict";
+
+const STATUS = document.getElementById('status-text');
+
+const CLUSTER_COLORS = {
+  triggers:           '#8884d8',
+  workflows:          '#82ca9d',
+  libs:               '#ffc658',
+  state:              '#ff8042',
+  external_services:  '#d88884',
+  models:             '#a855f7'
+};
+
+const TYPE_SHAPES = {
+  trigger:  'diamond',
+  workflow: 'ellipse',
+  lib:      'round-rectangle',
+  state:    'rectangle',
+  external: 'hexagon',
+  model:    'triangle'
+};
+
+const EDGE_COLORS = {
+  triggers:      '#8884d8',
+  calls:         '#ffc658',
+  reads:         '#ff8042',
+  writes:        '#e03131',
+  cascades:      '#2b8a3e',
+  external_call: '#d88884',
+  evaluates:     '#a855f7',
+  audits:        '#fd7e14'
+};
+
+let cy = null;
+let rawData = null;
+
+async function loadData(){
+  try{
+    const r = await fetch('state/workflow_nodes.json?ts=' + Date.now(), {cache:'no-store'});
+    if(!r.ok) throw new Error('http ' + r.status);
+    rawData = await r.json();
+    STATUS.textContent = rawData.total_nodes + ' nodos, ' + rawData.total_edges + ' edges · ' + rawData.generated_at;
+    buildGraph();
+  }catch(e){
+    STATUS.textContent = 'error cargando JSON: ' + e.message;
+    document.getElementById('cy').innerHTML = '<div class="loading">No se pudo cargar <code>state/workflow_nodes.json</code><br>' + e.message + '</div>';
+  }
+}
+
+function buildGraph(){
+  const elements = [];
+
+  rawData.nodes.forEach(n => {
+    elements.push({
+      group: 'nodes',
+      data: {
+        id: n.id,
+        label: n.label,
+        type: n.type,
+        cluster: n.cluster,
+        status: n.status || 'active',
+        raw: n
+      }
+    });
+  });
+
+  rawData.edges.forEach((e, i) => {
+    elements.push({
+      group: 'edges',
+      data: {
+        id: 'e' + i,
+        source: e.source,
+        target: e.target,
+        etype: e.type,
+        label: e.label || '',
+        planned: e.planned ? 'yes' : 'no'
+      }
+    });
+  });
+
+  cy = cytoscape({
+    container: document.getElementById('cy'),
+    elements: elements,
+    wheelSensitivity: 0.25,
+    style: [
+      {
+        selector: 'node',
+        style: {
+          'background-color': (ele) => CLUSTER_COLORS[ele.data('cluster')] || '#888',
+          'shape': (ele) => TYPE_SHAPES[ele.data('type')] || 'ellipse',
+          'label': 'data(label)',
+          'font-size': 10,
+          'color': '#222',
+          'text-valign': 'center',
+          'text-halign': 'center',
+          'text-wrap': 'wrap',
+          'text-max-width': 110,
+          'width': 'label',
+          'height': 'label',
+          'padding': '10px',
+          'border-width': 1,
+          'border-color': '#555',
+          'border-opacity': 0.55
+        }
+      },
+      {
+        selector: 'node[status = "planned"]',
+        style: {
+          'border-style': 'dashed',
+          'border-width': 2,
+          'border-color': '#8884d8',
+          'opacity': 0.82
+        }
+      },
+      {
+        selector: 'node[status = "script_only"]',
+        style: {
+          'border-style': 'dotted',
+          'border-width': 2,
+          'border-color': '#d9480f'
+        }
+      },
+      {
+        selector: 'node:selected',
+        style: {
+          'border-color': '#1864ab',
+          'border-width': 3,
+          'border-opacity': 1
+        }
+      },
+      {
+        selector: 'edge',
+        style: {
+          'width': 1.4,
+          'line-color': (ele) => EDGE_COLORS[ele.data('etype')] || '#bbb',
+          'target-arrow-color': (ele) => EDGE_COLORS[ele.data('etype')] || '#bbb',
+          'target-arrow-shape': 'triangle',
+          'curve-style': 'bezier',
+          'arrow-scale': 0.85,
+          'opacity': 0.68
+        }
+      },
+      {
+        selector: 'edge[etype = "cascades"]',
+        style: {
+          'width': 2.4,
+          'line-style': 'solid',
+          'opacity': 0.9
+        }
+      },
+      {
+        selector: 'edge[etype = "triggers"]',
+        style: {
+          'line-style': 'dashed'
+        }
+      },
+      {
+        selector: 'edge[planned = "yes"]',
+        style: {
+          'line-style': 'dashed',
+          'opacity': 0.45
+        }
+      },
+      {
+        selector: '.hidden',
+        style: {
+          'display': 'none'
+        }
+      }
+    ],
+    layout: {
+      name: 'dagre',
+      rankDir: 'LR',
+      nodeSep: 32,
+      edgeSep: 18,
+      rankSep: 120,
+      animate: false
+    }
+  });
+
+  cy.on('tap', 'node', (evt) => showNodeModal(evt.target.data('raw')));
+  cy.on('mouseover', 'edge', (evt) => showEdgeTooltip(evt));
+  cy.on('mouseout', 'edge', hideEdgeTooltip);
+  cy.on('tap', 'edge', (evt) => showEdgeTooltip(evt, true));
+}
+
+// --------- Modal ---------
+function chip(text, cls){
+  return '<span class="chip' + (cls ? ' ' + cls : '') + '">' + escapeHtml(text) + '</span>';
+}
+function listChips(arr, cls){
+  if(!arr || !arr.length) return '<em style="color:#999">none</em>';
+  return arr.map(x => chip(x, cls)).join('');
+}
+function escapeHtml(s){
+  if(s == null) return '';
+  return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[ch]));
+}
+
+function showNodeModal(n){
+  const title = document.getElementById('modal-title');
+  const meta = document.getElementById('modal-meta');
+  const body = document.getElementById('modal-body');
+  title.textContent = n.label;
+  const clusterTxt = (rawData.clusters[n.cluster] && rawData.clusters[n.cluster].label) || n.cluster;
+  const statusChip = n.status === 'planned'
+    ? '<span class="chip warn">planned</span>'
+    : n.status === 'script_only'
+      ? '<span class="chip warn">script only</span>'
+      : n.status === 'active'
+        ? '<span class="chip ok">active</span>'
+        : '';
+  meta.innerHTML = '<strong>' + escapeHtml(n.type) + '</strong> · ' + escapeHtml(clusterTxt) + ' · ' + statusChip;
+
+  const rows = [];
+  function row(label, html){
+    rows.push('<dt>' + escapeHtml(label) + '</dt><dd>' + html + '</dd>');
+  }
+  if(n.docstring) row('docstring', escapeHtml(n.docstring));
+  if(n.script_file) row('script', '<code>' + escapeHtml(n.script_file) + '</code>');
+  if(n.yaml_file) row('yaml', '<code>' + escapeHtml(n.yaml_file) + '</code>');
+  if(n.triggers && n.triggers.length) row('triggers', listChips(n.triggers));
+  if(n.functions && n.functions.length) row('functions', listChips(n.functions));
+  if(n.uses_lib && n.uses_lib.length) row('uses_lib', listChips(n.uses_lib));
+  if(n.uses_external && n.uses_external.length) row('uses_external', listChips(n.uses_external));
+  if(n.reads_state && n.reads_state.length) row('reads_state', listChips(n.reads_state));
+  if(n.writes_state && n.writes_state.length) row('writes_state', listChips(n.writes_state));
+  if(n.cascades_to && n.cascades_to.length) row('cascades_to', listChips(n.cascades_to));
+  if(n.schema_keys && n.schema_keys.length) row('schema_keys', listChips(n.schema_keys));
+  if(n.file) row('file', '<code>' + escapeHtml(n.file) + '</code>');
+  if(n.url) row('url', '<code>' + escapeHtml(n.url) + '</code>');
+  if(n.frequency) row('frequency', escapeHtml(n.frequency));
+  if(n.metrics){
+    const m = Object.entries(n.metrics).map(([k,v]) => k + '=' + v).join(', ');
+    row('metrics', escapeHtml(m));
+  }
+  if(n.script) row('script', '<code>' + escapeHtml(n.script) + '</code>');
+  if(n.kind) row('kind', escapeHtml(n.kind));
+  if(n.planned_note) row('note', '<em>' + escapeHtml(n.planned_note) + '</em>');
+  if(n.cluster_role) row('role', escapeHtml(n.cluster_role));
+
+  body.innerHTML = rows.join('');
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-backdrop').addEventListener('click', (e) => {
+  if(e.target.id === 'modal-backdrop') closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') closeModal();
+});
+function closeModal(){
+  document.getElementById('modal-backdrop').classList.remove('open');
+}
+
+// --------- Edge tooltip ---------
+function showEdgeTooltip(evt, pinned){
+  const tip = document.getElementById('edge-tooltip');
+  const d = evt.target.data();
+  const src = evt.target.source().data('label');
+  const tgt = evt.target.target().data('label');
+  tip.innerHTML = '<strong>' + escapeHtml(d.etype) + '</strong><br>' +
+    escapeHtml(src) + ' &rarr; ' + escapeHtml(tgt) +
+    (d.label ? '<br><em>' + escapeHtml(d.label) + '</em>' : '') +
+    (d.planned === 'yes' ? '<br><em style="color:#ffc658">planned</em>' : '');
+  const pos = evt.renderedPosition || evt.target.midpoint();
+  const rect = document.getElementById('cy').getBoundingClientRect();
+  tip.style.left = (rect.left + (pos.x || 100) + 12) + 'px';
+  tip.style.top  = (rect.top + (pos.y || 100) + 12) + 'px';
+  tip.classList.add('open');
+  if(!pinned){
+    clearTimeout(tip._t);
+    tip._t = setTimeout(() => tip.classList.remove('open'), 3500);
+  }
+}
+function hideEdgeTooltip(){
+  const tip = document.getElementById('edge-tooltip');
+  tip.classList.remove('open');
+}
+
+// --------- Filters ---------
+function getCheckedValues(sel){
+  const out = new Set();
+  document.querySelectorAll(sel + ' input[type="checkbox"]').forEach(cb => {
+    if(cb.checked) out.add(cb.value);
+  });
+  return out;
+}
+
+function applyFilters(){
+  if(!cy) return;
+  const clusters = getCheckedValues('#cluster-filter');
+  const etypes = getCheckedValues('#edge-filter');
+  cy.batch(() => {
+    cy.nodes().forEach(n => {
+      const show = clusters.has(n.data('cluster'));
+      n.toggleClass('hidden', !show);
+    });
+    cy.edges().forEach(e => {
+      const srcCluster = e.source().data('cluster');
+      const tgtCluster = e.target().data('cluster');
+      const typeOk = etypes.has(e.data('etype'));
+      const nodesOk = clusters.has(srcCluster) && clusters.has(tgtCluster);
+      e.toggleClass('hidden', !(typeOk && nodesOk));
+    });
+  });
+}
+
+document.querySelectorAll('#cluster-filter input, #edge-filter input').forEach(cb => {
+  cb.addEventListener('change', applyFilters);
+});
+
+document.getElementById('btn-cascades').addEventListener('click', () => {
+  // Show only workflows + cascades
+  document.querySelectorAll('#cluster-filter input').forEach(cb => {
+    cb.checked = (cb.value === 'workflows');
+  });
+  document.querySelectorAll('#edge-filter input').forEach(cb => {
+    cb.checked = (cb.value === 'cascades');
+  });
+  applyFilters();
+  setTimeout(() => cy.fit(cy.elements(':visible'), 40), 60);
+});
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  document.querySelectorAll('.toolbar input[type="checkbox"]').forEach(cb => cb.checked = true);
+  applyFilters();
+  setTimeout(() => cy.fit(null, 30), 60);
+});
+
+document.getElementById('btn-fit').addEventListener('click', () => {
+  if(cy) cy.fit(cy.elements(':visible'), 30);
+});
+
+// --------- Boot ---------
+loadData();
+</script>
+</body>
+</html>

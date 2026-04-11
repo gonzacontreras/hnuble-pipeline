@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hnuble-pipeline · LIVE STATUS</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg-panel:#161b22;
+    --bg-panel-alt:#1c2128;
+    --border:#30363d;
+    --border-strong:#484f58;
+    --text:#c9d1d9;
+    --text-dim:#8b949e;
+    --text-strong:#f0f6fc;
+    --accent:#58a6ff;
+    --accent-dim:#388bfd;
+    --ok:#3fb950;
+    --warn:#d29922;
+    --err:#f85149;
+    --done:#58a6ff;
+    --idle:#6e7681;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",Menlo,monospace;font-size:14px;line-height:1.45}
+  a{color:var(--accent);text-decoration:none}
+  a:hover,a:focus{text-decoration:underline;outline:2px solid var(--accent);outline-offset:2px}
+  .wrap{max-width:1400px;margin:0 auto;padding:1em}
+  header{display:flex;justify-content:space-between;align-items:center;gap:1em;padding-bottom:.8em;border-bottom:1px solid var(--border);flex-wrap:wrap}
+  header h1{margin:0;font-size:1.1em;color:var(--text-strong);font-weight:600}
+  header .session{color:var(--text-dim);font-size:.9em}
+  .countdown{color:var(--accent);font-weight:600;font-size:1em}
+  .countdown.urgent{color:var(--err)}
+  .nav{margin:.6em 0 1em;font-size:.88em}
+  .nav a{margin-right:1.2em}
+  /* refresh dot */
+  .refresh-dot{position:fixed;top:10px;right:12px;width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:pulse 3s infinite;z-index:100}
+  .refresh-dot.stale{background:var(--warn);box-shadow:0 0 8px var(--warn)}
+  .refresh-dot.err{background:var(--err);box-shadow:0 0 8px var(--err);animation:none}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  /* status */
+  .status-indicator{display:inline-flex;align-items:center;gap:.5em;padding:.25em .7em;border-radius:3px;border:1px solid var(--border);background:var(--bg-panel);font-size:.82em;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+  .status-indicator .led{width:10px;height:10px;border-radius:50%;background:var(--idle)}
+  .status-indicator.running{color:var(--ok);border-color:rgba(63,185,80,.4)}
+  .status-indicator.running .led{background:var(--ok);box-shadow:0 0 6px var(--ok);animation:pulse 2s infinite}
+  .status-indicator.idle{color:var(--idle)}
+  .status-indicator.idle .led{background:var(--idle)}
+  .status-indicator.blocked{color:var(--warn);border-color:rgba(210,153,34,.4)}
+  .status-indicator.blocked .led{background:var(--warn)}
+  .status-indicator.error,.status-indicator.failed{color:var(--err);border-color:rgba(248,81,73,.5)}
+  .status-indicator.error .led,.status-indicator.failed .led{background:var(--err);box-shadow:0 0 6px var(--err)}
+  .status-indicator.done{color:var(--done);border-color:rgba(88,166,255,.4)}
+  .status-indicator.done .led{background:var(--done)}
+  /* big panel */
+  .main-panel{background:var(--bg-panel);border:1px solid var(--border);border-radius:6px;padding:1.5em 1.3em;margin:1em 0;position:relative}
+  .main-panel.flash-err{border-color:var(--err);box-shadow:0 0 0 2px rgba(248,81,73,.25);animation:flashErr 2s ease-in-out}
+  @keyframes flashErr{0%,100%{box-shadow:0 0 0 2px rgba(248,81,73,.15)}50%{box-shadow:0 0 0 4px rgba(248,81,73,.45)}}
+  .main-panel .label{font-size:.72em;color:var(--text-dim);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.2em}
+  .main-panel .block-id{font-size:2.5em;font-weight:700;color:var(--text-strong);line-height:1.1;margin:.1em 0}
+  .main-panel .block-label{color:var(--text);font-size:.98em;margin-top:.35em}
+  .main-panel .status-row{display:flex;align-items:center;gap:.8em;margin-top:.9em;flex-wrap:wrap;color:var(--text-dim);font-size:.85em}
+  .main-panel .gh-link{display:none;margin-top:.8em;padding:.5em .9em;background:var(--err);color:#fff;border-radius:3px;font-size:.85em;font-weight:600}
+  .main-panel.flash-err .gh-link{display:inline-block}
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1em;margin:1em 0}
+  .panel{background:var(--bg-panel);border:1px solid var(--border);border-radius:6px;padding:1em 1.1em}
+  .panel h2{margin:0 0 .6em;font-size:.78em;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;font-weight:600;border-bottom:1px solid var(--border);padding-bottom:.4em}
+  .panel .scroll{max-height:260px;overflow-y:auto;padding-right:.2em}
+  .panel .scroll::-webkit-scrollbar{width:8px}
+  .panel .scroll::-webkit-scrollbar-track{background:var(--bg)}
+  .panel .scroll::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:4px}
+  .panel ul{margin:0;padding:0;list-style:none}
+  .panel li{padding:.4em 0;border-bottom:1px dashed var(--border);font-size:.87em;color:var(--text)}
+  .panel li:last-child{border-bottom:none}
+  .panel .empty{color:var(--text-dim);font-style:italic;font-size:.85em}
+  /* sub_blocks */
+  .subblocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:.8em}
+  .sb{background:var(--bg-panel-alt);border:1px solid var(--border);border-radius:5px;padding:.85em 1em}
+  .sb .sb-head{display:flex;justify-content:space-between;align-items:center;gap:.5em;margin-bottom:.4em}
+  .sb .sb-id{font-weight:700;color:var(--text-strong);font-size:1.02em}
+  .sb .sb-label{color:var(--text);font-size:.85em;line-height:1.4}
+  .sb .sb-detail{color:var(--text-dim);font-size:.78em;margin-top:.5em;padding-top:.4em;border-top:1px dashed var(--border)}
+  .sb .sb-path{color:var(--accent);font-size:.75em;margin-top:.3em;word-break:break-all}
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6em}
+  .stat{background:var(--bg-panel-alt);border:1px solid var(--border);border-radius:4px;padding:.65em .8em}
+  .stat .k{font-size:.7em;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em}
+  .stat .v{font-size:1.35em;color:var(--text-strong);font-weight:700;margin-top:.15em}
+  .file-entry{font-size:.8em;color:var(--text);word-break:break-all}
+  footer{margin-top:2em;padding-top:1em;border-top:1px solid var(--border);color:var(--text-dim);font-size:.82em}
+  .finding{font-size:.85em;color:var(--text);padding:.5em 0;border-bottom:1px dashed var(--border)}
+  .finding:last-child{border-bottom:none}
+  .finding .num{color:var(--accent);font-weight:700;margin-right:.3em}
+  @media(max-width:720px){
+    .main-panel .block-id{font-size:1.8em}
+    header{font-size:.9em}
+  }
+</style>
+</head>
+<body>
+
+<div class="refresh-dot" id="refresh-dot" aria-label="indicador de refresco en vivo" role="status"></div>
+
+<div class="wrap">
+
+<header>
+  <h1>hnuble-pipeline &middot; LIVE STATUS</h1>
+  <div>
+    <span class="session" id="session-info">session: &mdash;</span>
+    <span class="countdown" id="countdown" aria-label="tiempo restante al deadline EID">&mdash;</span>
+  </div>
+</header>
+
+<nav class="nav" aria-label="navegacion principal">
+  <a href="index.html">&larr; Home</a>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="findings.html">Findings</a>
+  <a href="approvals.html">Approvals</a>
+  <a href="encyclopedia.html">Enciclopedia</a>
+</nav>
+
+<section class="main-panel" id="main-panel" aria-live="polite" aria-atomic="true" aria-label="bloque actual en ejecucion">
+  <div class="label">current block</div>
+  <div class="block-id" id="current-block">offline</div>
+  <div class="block-label" id="current-block-label">esperando claude_live.json</div>
+  <div class="status-row">
+    <span class="status-indicator idle" id="overall-status" aria-label="estado global"><span class="led"></span><span id="overall-status-text">idle</span></span>
+    <span id="agent-info">agent: &mdash;</span>
+    <span id="methodology-info"></span>
+  </div>
+  <a class="gh-link" id="gh-link" href="https://github.com/gonzacontreras/hnuble-pipeline/actions" target="_blank" rel="noopener">View GitHub Actions logs &rarr;</a>
+</section>
+
+<section class="panel" aria-label="sub-bloques en ejecucion">
+  <h2>Sub-blocks</h2>
+  <div class="subblocks" id="subblocks">
+    <div class="empty">sin sub-bloques</div>
+  </div>
+</section>
+
+<div class="grid">
+  <section class="panel" aria-label="hallazgos actuales">
+    <h2>Current Findings</h2>
+    <div class="scroll" id="findings-scroll">
+      <div class="empty">sin hallazgos</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="proximos pasos">
+    <h2>Next Planned</h2>
+    <div class="scroll" id="next-scroll">
+      <div class="empty">sin plan</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="estadisticas de la sesion">
+    <h2>Stats</h2>
+    <div class="stats" id="stats">
+      <div class="stat"><div class="k">tool calls</div><div class="v" id="stat-tools">&mdash;</div></div>
+      <div class="stat"><div class="k">files touched</div><div class="v" id="stat-files">&mdash;</div></div>
+      <div class="stat"><div class="k">heartbeat</div><div class="v" id="stat-hb">&mdash;</div></div>
+      <div class="stat"><div class="k">updated</div><div class="v" id="stat-upd">&mdash;</div></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="archivos tocados">
+    <h2>Files Touched</h2>
+    <div class="scroll" id="files-scroll">
+      <div class="empty">sin archivos</div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>polling <code>state/claude_live.json</code> cada 3s &middot; deadline EID: <strong>2026-04-14 06:00 UTC</strong></p>
+  <p>contraste WCAG AA &middot; aria-live en panel central &middot; dark mode #0d1117</p>
+</footer>
+
+</div>
+
+<script>
+"use strict";
+const DEADLINE = new Date('2026-04-14T06:00:00Z');
+const POLL_MS = 3000;
+const STALE_MS = 90000;
+
+function esc(s){
+  if(s==null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function formatETA(deadline){
+  const now = new Date();
+  const diffMs = deadline - now;
+  if(diffMs <= 0) return 'DEADLINE PASADO';
+  const days = Math.floor(diffMs / 86400000);
+  const hours = Math.floor((diffMs % 86400000) / 3600000);
+  const mins = Math.floor((diffMs % 3600000) / 60000);
+  return days + 'd ' + hours + 'h ' + mins + 'm';
+}
+
+function isUrgent(deadline){
+  return (deadline - new Date()) < 24 * 3600 * 1000;
+}
+
+function timeAgo(iso){
+  if(!iso) return 'never';
+  try{
+    const t = new Date(iso);
+    const delta = Math.floor((Date.now() - t.getTime())/1000);
+    if(delta < 0) return 'future';
+    if(delta < 60) return delta + 's ago';
+    if(delta < 3600) return Math.floor(delta/60) + 'm ago';
+    if(delta < 86400) return Math.floor(delta/3600) + 'h ago';
+    return Math.floor(delta/86400) + 'd ago';
+  }catch(e){ return 'unknown' }
+}
+
+function isStale(iso){
+  if(!iso) return true;
+  try{ return (Date.now() - new Date(iso).getTime()) > STALE_MS }
+  catch(e){ return true }
+}
+
+async function fetchLive(){
+  try{
+    const r = await fetch('state/claude_live.json?ts=' + Date.now(), {cache:'no-store'});
+    if(!r.ok) throw new Error('http ' + r.status);
+    return await r.json();
+  }catch(e){
+    return null;
+  }
+}
+
+function renderSubblocks(blocks){
+  const el = document.getElementById('subblocks');
+  if(!Array.isArray(blocks) || blocks.length === 0){
+    el.innerHTML = '<div class="empty">sin sub-bloques</div>';
+    return;
+  }
+  el.innerHTML = blocks.map(b => {
+    const status = (b.status || 'pending').toLowerCase();
+    return '<div class="sb">' +
+      '<div class="sb-head">' +
+        '<span class="sb-id">' + esc(b.id || '?') + '</span>' +
+        '<span class="status-indicator ' + esc(status) + '"><span class="led"></span>' + esc(status) + '</span>' +
+      '</div>' +
+      '<div class="sb-label">' + esc(b.label || '') + '</div>' +
+      (b.detail ? '<div class="sb-detail">' + esc(b.detail) + '</div>' : '') +
+      (b.output_path ? '<div class="sb-path">' + esc(b.output_path) + '</div>' : '') +
+    '</div>';
+  }).join('');
+}
+
+function renderList(id, items, prefix){
+  const el = document.getElementById(id);
+  if(!Array.isArray(items) || items.length === 0){
+    el.innerHTML = '<div class="empty">sin datos</div>';
+    return;
+  }
+  el.innerHTML = '<ul>' + items.map((it, i) => {
+    const num = prefix ? '<span class="num">' + (i+1) + '.</span>' : '';
+    return '<li class="finding">' + num + esc(it) + '</li>';
+  }).join('') + '</ul>';
+}
+
+function renderFiles(files){
+  const el = document.getElementById('files-scroll');
+  if(!Array.isArray(files) || files.length === 0){
+    el.innerHTML = '<div class="empty">sin archivos</div>';
+    return;
+  }
+  const last = files.slice(-20).reverse();
+  el.innerHTML = '<ul>' + last.map(f => '<li class="file-entry">' + esc(f) + '</li>').join('') + '</ul>';
+}
+
+async function refresh(){
+  const live = await fetchLive();
+  const dot = document.getElementById('refresh-dot');
+  const mainPanel = document.getElementById('main-panel');
+
+  const cdEl = document.getElementById('countdown');
+  cdEl.textContent = formatETA(DEADLINE);
+  cdEl.className = 'countdown' + (isUrgent(DEADLINE) ? ' urgent' : '');
+
+  if(!live){
+    dot.className = 'refresh-dot err';
+    dot.setAttribute('aria-label','error leyendo claude_live.json');
+    document.getElementById('current-block').textContent = 'offline';
+    document.getElementById('current-block-label').textContent = 'no se pudo leer claude_live.json';
+    const si = document.getElementById('overall-status');
+    si.className = 'status-indicator error';
+    document.getElementById('overall-status-text').textContent = 'offline';
+    mainPanel.classList.remove('flash-err');
+    return;
+  }
+
+  // header
+  document.getElementById('session-info').textContent = 'session: ' + esc(live.session || '?');
+
+  // main panel
+  document.getElementById('current-block').textContent = live.current_block || 'none';
+  document.getElementById('current-block-label').textContent = live.current_block_label || live.current_agent || 'idle';
+
+  const status = (live.overall_status || 'idle').toLowerCase();
+  const si = document.getElementById('overall-status');
+  let cls = 'status-indicator ';
+  if(status === 'running' || status === 'active') cls += 'running';
+  else if(status === 'blocked') cls += 'blocked';
+  else if(status === 'error' || status === 'failed') cls += 'error';
+  else if(status === 'done' || status === 'completed') cls += 'done';
+  else cls += 'idle';
+  si.className = cls;
+  document.getElementById('overall-status-text').textContent = status;
+
+  if(status === 'error' || status === 'failed'){
+    mainPanel.classList.add('flash-err');
+  }else{
+    mainPanel.classList.remove('flash-err');
+  }
+
+  document.getElementById('agent-info').textContent = 'agent: ' + esc(live.agent || live.current_agent || '—');
+  document.getElementById('methodology-info').textContent = live.methodology ? '· ' + esc(live.methodology) : '';
+
+  // sub blocks
+  renderSubblocks(live.sub_blocks);
+
+  // findings (last 10)
+  const findings = Array.isArray(live.current_findings) ? live.current_findings.slice(-10) : [];
+  renderList('findings-scroll', findings, true);
+
+  // next planned
+  renderList('next-scroll', live.next_planned, true);
+
+  // stats
+  document.getElementById('stat-tools').textContent = live.tool_calls_total != null ? live.tool_calls_total : '—';
+  document.getElementById('stat-files').textContent = Array.isArray(live.files_touched) ? live.files_touched.length : '—';
+  document.getElementById('stat-hb').textContent = live.heartbeat_sequence != null ? live.heartbeat_sequence : '—';
+  document.getElementById('stat-upd').textContent = timeAgo(live.updated_at);
+
+  // files
+  renderFiles(live.files_touched);
+
+  // refresh dot state
+  if(isStale(live.updated_at)){
+    dot.className = 'refresh-dot stale';
+    dot.setAttribute('aria-label','datos stale, sin actualizacion reciente');
+  }else{
+    dot.className = 'refresh-dot';
+    dot.setAttribute('aria-label','live, actualizando cada 3s');
+  }
+}
+
+refresh();
+setInterval(refresh, POLL_MS);
+// countdown update every 10s independiente del poll
+setInterval(() => {
+  const cdEl = document.getElementById('countdown');
+  cdEl.textContent = formatETA(DEADLINE);
+  cdEl.className = 'countdown' + (isUrgent(DEADLINE) ? ' urgent' : '');
+}, 10000);
+</script>
+</body>
+</html>

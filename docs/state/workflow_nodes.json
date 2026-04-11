@@ -1,0 +1,1728 @@
+{
+  "version": 1,
+  "generated_at": "2026-04-11T13:59:02Z",
+  "total_nodes": 69,
+  "total_edges": 125,
+  "clusters": {
+    "triggers": {
+      "label": "Triggers",
+      "color": "#8884d8"
+    },
+    "workflows": {
+      "label": "Workflows (17)",
+      "color": "#82ca9d"
+    },
+    "libs": {
+      "label": "Python libs",
+      "color": "#ffc658"
+    },
+    "state": {
+      "label": "State files",
+      "color": "#ff8042"
+    },
+    "external_services": {
+      "label": "External APIs",
+      "color": "#d88884"
+    },
+    "models": {
+      "label": "Models & Tools",
+      "color": "#a855f7"
+    }
+  },
+  "nodes": [
+    {
+      "id": "lib_annotations",
+      "label": "annotations.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\annotations.py",
+      "functions": [
+        "parse_ntfy_message",
+        "validate",
+        "dedupe",
+        "mark_received",
+        "mark_processed"
+      ],
+      "docstring": "Annotation parser, validator and utilities (stub)."
+    },
+    {
+      "id": "lib_claude_api",
+      "label": "claude_api.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\claude_api.py",
+      "functions": [
+        "call_sonnet",
+        "call_haiku",
+        "call_opus",
+        "extract_json"
+      ],
+      "docstring": "Claude API wrapper with retry, model selection, usage tracking."
+    },
+    {
+      "id": "lib_claude_live",
+      "label": "claude_live.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\claude_live.py",
+      "functions": [
+        "heartbeat",
+        "start_block",
+        "finalize",
+        "error"
+      ],
+      "docstring": "Claude Live heartbeat helper."
+    },
+    {
+      "id": "lib_crossref_verify",
+      "label": "crossref_verify.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\crossref_verify.py",
+      "functions": [
+        "verify_citation"
+      ],
+      "docstring": "crossref_verify — detect fabricated / swapped DOIs via Crossref API."
+    },
+    {
+      "id": "lib_eid_score",
+      "label": "eid_score.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\eid_score.py",
+      "functions": [
+        "sigmoid",
+        "sigmoid_derivative",
+        "score_strobe",
+        "score_tripod_ai",
+        "score_epiforge",
+        "score_stat_rigor",
+        "score_reproducibility",
+        "score_novelty",
+        "score_writing_quality",
+        "score_ref_quality",
+        "score_bias_coverage",
+        "score_reviewer_anticipation",
+        "score_journal_fit_eid",
+        "aggregate",
+        "compute_lift_ranking",
+        "score_manuscript"
+      ],
+      "docstring": "EID manuscript scoring library (stub)."
+    },
+    {
+      "id": "lib_github",
+      "label": "github.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\github.py",
+      "functions": [
+        "ensure_git_identity",
+        "commit_state"
+      ],
+      "docstring": "Git helpers to commit state from GitHub Actions."
+    },
+    {
+      "id": "lib_memory_search",
+      "label": "memory_search.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\memory_search.py",
+      "functions": [
+        "grep_memory",
+        "grep_vault",
+        "grep_audit_findings"
+      ],
+      "docstring": "Memory + vault search for V1 MCC."
+    },
+    {
+      "id": "lib_ntfy",
+      "label": "ntfy.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\ntfy.py",
+      "functions": [
+        "send",
+        "send_alert",
+        "send_approval_request"
+      ],
+      "docstring": "ntfy.sh wrapper for HIL notifications."
+    },
+    {
+      "id": "lib_state",
+      "label": "state.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\state.py",
+      "functions": [
+        "load_json",
+        "save_json",
+        "load_findings",
+        "save_findings",
+        "load_references",
+        "save_references",
+        "load_decisions",
+        "save_decisions",
+        "load_objections",
+        "save_objections",
+        "load_paper_candidates",
+        "save_paper_candidates",
+        "load_stability_history",
+        "save_stability_history",
+        "load_pending_approvals",
+        "save_pending_approvals",
+        "load_pipeline_status",
+        "save_pipeline_status"
+      ],
+      "docstring": "Atomic JSON state file load/save."
+    },
+    {
+      "id": "lib_text_cleanup",
+      "label": "text_cleanup.py",
+      "type": "lib",
+      "cluster": "libs",
+      "file": "scripts\\lib\\text_cleanup.py",
+      "functions": [
+        "strip_nbsp",
+        "normalize_whitespace",
+        "nfc_normalize",
+        "preprocess_for_edit"
+      ],
+      "docstring": "text_cleanup — whitespace/unicode normalization for batch edits."
+    },
+    {
+      "id": "state_canonical_facts",
+      "label": "canonical_facts.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\canonical_facts.json",
+      "schema_keys": [
+        "created",
+        "description",
+        "facts_bias_counts",
+        "facts_checklist_coverage",
+        "facts_geographic_administrative",
+        "facts_model_S29K",
+        "facts_panel_canonical",
+        "facts_references_corrected",
+        "manuscript_file",
+        "owner",
+        "project",
+        "schema_version"
+      ]
+    },
+    {
+      "id": "state_claude_live",
+      "label": "claude_live.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\claude_live.json",
+      "schema_keys": [
+        "active_terminal",
+        "agent",
+        "current_block",
+        "current_block_label",
+        "current_findings",
+        "eta_estimate",
+        "files_touched",
+        "heartbeat_sequence",
+        "m14_preflight",
+        "methodology",
+        "next_planned",
+        "other_terminals"
+      ]
+    },
+    {
+      "id": "state_findings",
+      "label": "findings.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\findings.json",
+      "schema_keys": [
+        "initialized_at",
+        "items",
+        "last_w7_checked",
+        "last_w7_errors",
+        "last_w7_run",
+        "version"
+      ]
+    },
+    {
+      "id": "state_memory_bundle",
+      "label": "memory_bundle.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\memory_bundle.json",
+      "schema_keys": [
+        "audit",
+        "counts",
+        "description",
+        "memory",
+        "schema_version",
+        "vault"
+      ]
+    },
+    {
+      "id": "state_objections",
+      "label": "objections.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\objections.json",
+      "schema_keys": [
+        "initialized_at",
+        "items",
+        "version"
+      ]
+    },
+    {
+      "id": "state_paper_candidates",
+      "label": "paper_candidates.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\paper_candidates.json",
+      "schema_keys": [
+        "items",
+        "last_run"
+      ]
+    },
+    {
+      "id": "state_pending_approvals",
+      "label": "pending_approvals.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\pending_approvals.json",
+      "schema_keys": [
+        "audit_summary",
+        "items",
+        "last_audit",
+        "version"
+      ]
+    },
+    {
+      "id": "state_pipeline_status",
+      "label": "pipeline_status.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\pipeline_status.json",
+      "schema_keys": [
+        "initialized_at",
+        "workflows"
+      ]
+    },
+    {
+      "id": "state_references",
+      "label": "references.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\references.json",
+      "schema_keys": [
+        "initialized_at",
+        "items",
+        "version"
+      ]
+    },
+    {
+      "id": "state_stability_history",
+      "label": "stability_history.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\stability_history.json",
+      "schema_keys": [
+        "runs"
+      ]
+    },
+    {
+      "id": "state_w10_queue",
+      "label": "w10_queue.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\w10_queue.json",
+      "schema_keys": [
+        "items"
+      ]
+    },
+    {
+      "id": "state_annotation_message_v1_schema",
+      "label": "annotation_message_v1.schema.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\schemas\\annotation_message_v1.schema.json",
+      "schema_keys": [
+        "annotation_id",
+        "color",
+        "comment",
+        "para_id",
+        "para_section",
+        "prior_annotations_count",
+        "schema_version",
+        "selected_text",
+        "selection_end",
+        "selection_start",
+        "ts",
+        "user_agent"
+      ],
+      "is_schema_only": true,
+      "title": "AnnotationMessageV1"
+    },
+    {
+      "id": "state_annotations_schema",
+      "label": "annotations.schema.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\schemas\\annotations.schema.json",
+      "schema_keys": [
+        "items",
+        "last_poll_at",
+        "version"
+      ],
+      "is_schema_only": true,
+      "title": "AnnotationsQueue"
+    },
+    {
+      "id": "state_eid_score_schema",
+      "label": "eid_score.schema.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\schemas\\eid_score.schema.json",
+      "schema_keys": [
+        "baseline_prior",
+        "components",
+        "delta_vs_baseline",
+        "logit_params",
+        "manuscript_hash",
+        "ranking_lift",
+        "score",
+        "scored_at",
+        "top3_recommendations",
+        "version"
+      ],
+      "is_schema_only": true,
+      "title": "EIDScore"
+    },
+    {
+      "id": "state_encyclopedia_schema",
+      "label": "encyclopedia.schema.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\schemas\\encyclopedia.schema.json",
+      "schema_keys": [
+        "categories",
+        "generated_at",
+        "source_stats",
+        "version"
+      ],
+      "is_schema_only": true,
+      "title": "ProjectEncyclopedia"
+    },
+    {
+      "id": "state_improvement_log_schema",
+      "label": "improvement_log.schema.json",
+      "type": "state",
+      "cluster": "state",
+      "file": "state\\schemas\\improvement_log.schema.json",
+      "schema_keys": [
+        "entries",
+        "version"
+      ],
+      "is_schema_only": true,
+      "title": "ImprovementLog"
+    },
+    {
+      "id": "ext_anthropic",
+      "label": "Anthropic API",
+      "type": "external",
+      "cluster": "external_services",
+      "url": "https://api.anthropic.com"
+    },
+    {
+      "id": "ext_ntfy",
+      "label": "ntfy.sh",
+      "type": "external",
+      "cluster": "external_services",
+      "url": "https://ntfy.sh/"
+    },
+    {
+      "id": "ext_openalex",
+      "label": "OpenAlex",
+      "type": "external",
+      "cluster": "external_services",
+      "url": "https://api.openalex.org/"
+    },
+    {
+      "id": "ext_ncbi",
+      "label": "NCBI E-utilities",
+      "type": "external",
+      "cluster": "external_services",
+      "url": "https://eutils.ncbi.nlm.nih.gov/"
+    },
+    {
+      "id": "ext_biorxiv",
+      "label": "bioRxiv API",
+      "type": "external",
+      "cluster": "external_services",
+      "url": "https://api.biorxiv.org/"
+    },
+    {
+      "id": "ext_crossref",
+      "label": "Crossref",
+      "type": "external",
+      "cluster": "external_services",
+      "url": "https://api.crossref.org/"
+    },
+    {
+      "id": "ext_github",
+      "label": "GitHub API",
+      "type": "external",
+      "cluster": "external_services",
+      "url": "https://api.github.com/"
+    },
+    {
+      "id": "ext_semanticscholar",
+      "label": "Semantic Scholar",
+      "type": "external",
+      "cluster": "external_services",
+      "url": "https://api.semanticscholar.org/"
+    },
+    {
+      "id": "w0",
+      "label": "W0 Weekly Recon",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "reconnaissance",
+      "yaml_file": ".github\\workflows\\w0-weekly.yml",
+      "triggers": [
+        "cron:0 6 * * 1",
+        "workflow_dispatch"
+      ],
+      "script": "scripts/w0_reconnaissance.py",
+      "yaml_name": "W0 Weekly Recon",
+      "script_file": "scripts\\w0_reconnaissance.py",
+      "docstring": "W0 — Weekly Reconnaissance.",
+      "functions": [
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "pipeline_status",
+        "weekly_recon"
+      ],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "w1",
+      "label": "W1 Papers Watcher",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "literature",
+      "yaml_file": ".github\\workflows\\w1-papers.yml",
+      "triggers": [
+        "cron:0 */12 * * *",
+        "workflow_dispatch"
+      ],
+      "script": "scripts/w1_papers_watcher.py",
+      "yaml_name": "W1 Papers Watcher",
+      "script_file": "scripts\\w1_papers_watcher.py",
+      "docstring": "W1 — Papers Q1 Watcher.",
+      "functions": [
+        "query_openalex",
+        "query_pubmed",
+        "query_biorxiv",
+        "dedupe",
+        "score_with_claude",
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_openalex",
+        "ext_ncbi",
+        "ext_biorxiv",
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "paper_candidates",
+        "pipeline_status"
+      ],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "w3",
+      "label": "W3 Bias Hunter",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "audit",
+      "yaml_file": ".github\\workflows\\w3-bias.yml",
+      "triggers": [
+        "cron:0 3 * * *",
+        "workflow_dispatch"
+      ],
+      "script": "scripts/w3_bias_hunter.py",
+      "yaml_name": "W3 Bias Hunter",
+      "script_file": "scripts\\w3_bias_hunter.py",
+      "docstring": "W3 — Bias Hunter.",
+      "functions": [
+        "load_manuscript_excerpt",
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_github",
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "findings",
+        "pipeline_status"
+      ],
+      "writes_state": [],
+      "cascades_to": [
+        "w9-mcc.yml"
+      ]
+    },
+    {
+      "id": "w5",
+      "label": "W5 Reviewer Virtuals",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "audit",
+      "yaml_file": ".github\\workflows\\w5-reviewers.yml",
+      "triggers": [
+        "cron:0 4 * * *",
+        "workflow_dispatch"
+      ],
+      "script": "scripts/w5_reviewer_virtuals.py",
+      "yaml_name": "W5 Reviewer Virtuals",
+      "script_file": "scripts\\w5_reviewer_virtuals.py",
+      "docstring": "W5 — Reviewer Virtuals.",
+      "functions": [
+        "load_manuscript_excerpt",
+        "run_reviewer",
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "objections",
+        "pipeline_status"
+      ],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "w6",
+      "label": "W6 Model Stability",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "model",
+      "yaml_file": ".github\\workflows\\w6-stability.yml",
+      "triggers": [
+        "cron:0 2 * * *",
+        "workflow_dispatch"
+      ],
+      "script": "scripts/w6_model_stability.py",
+      "yaml_name": "W6 Model Stability",
+      "script_file": "scripts\\w6_model_stability.py",
+      "docstring": "W6 — Model Stability.",
+      "functions": [
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "pipeline_status",
+        "stability_history",
+        "stability_seeds"
+      ],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "w7",
+      "label": "W7 Retraction Check",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "verification",
+      "yaml_file": ".github\\workflows\\w7-retraction.yml",
+      "triggers": [
+        "cron:0 */6 * * *",
+        "workflow_dispatch"
+      ],
+      "script": "scripts/w7_retraction_check.py",
+      "yaml_name": "W7 Retraction Check",
+      "script_file": "scripts\\w7_retraction_check.py",
+      "docstring": "W7 — Retraction Check.",
+      "functions": [
+        "check_crossref",
+        "check_openalex",
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_openalex",
+        "ext_crossref",
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "findings",
+        "pipeline_status",
+        "references"
+      ],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "w8",
+      "label": "W8 HIL ntfy",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "hil",
+      "yaml_file": ".github\\workflows\\w8-hil.yml",
+      "triggers": [
+        "cron:*/30 * * * *",
+        "workflow_dispatch",
+        "repository_dispatch"
+      ],
+      "script": "scripts/w8_hil_ntfy.py",
+      "yaml_name": "W8 HIL Dispatcher",
+      "script_file": "scripts\\w8_hil_ntfy.py",
+      "docstring": "W8 — HIL ntfy dispatcher.",
+      "functions": [
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "pending_approvals",
+        "pipeline_status"
+      ],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "w9",
+      "label": "W9 Memory Crosschecker (MCC)",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "mcc",
+      "yaml_file": ".github\\workflows\\w9-mcc.yml",
+      "triggers": [
+        "workflow_dispatch",
+        "repository_dispatch"
+      ],
+      "script": "scripts/w9_memory_crosschecker.py",
+      "yaml_name": "W9 Memory Cross-Checker",
+      "script_file": "scripts\\w9_memory_crosschecker.py",
+      "docstring": "W9 — Memory Cross-Checker (MCC, V1).",
+      "functions": [
+        "extract_keywords",
+        "gather_evidence",
+        "classify_batch",
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "findings",
+        "pipeline_status",
+        "w10_queue"
+      ],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "w10",
+      "label": "W10 Blindaje Upgrader (BU)",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "blindaje",
+      "yaml_file": ".github\\workflows\\w10-bu.yml",
+      "triggers": [
+        "workflow_dispatch",
+        "repository_dispatch"
+      ],
+      "script": "scripts/w10_blindaje_upgrader.py",
+      "yaml_name": "W10 Blindaje Upgrader",
+      "script_file": "scripts\\w10_blindaje_upgrader.py",
+      "docstring": "W10 — Blindaje Upgrader (BU, V2).",
+      "functions": [
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "pending_approvals",
+        "pipeline_status",
+        "w10_queue"
+      ],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "deploy",
+      "label": "Deploy Pages",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "active",
+      "cluster_role": "deploy",
+      "yaml_file": ".github\\workflows\\deploy-pages.yml",
+      "triggers": [
+        "cron:*/30 * * * *",
+        "workflow_dispatch",
+        "push"
+      ],
+      "script": "",
+      "yaml_name": "Deploy GitHub Pages"
+    },
+    {
+      "id": "w2",
+      "label": "W2 Language Polish",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "script_only",
+      "cluster_role": "polish",
+      "script_file": "scripts\\w2_language_polish.py",
+      "docstring": "W2 — Language Polish.",
+      "functions": [
+        "validate_preserved",
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_ntfy"
+      ],
+      "reads_state": [
+        "pending_approvals",
+        "pipeline_status"
+      ],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "w4",
+      "label": "W4 Figure Iterator",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "script_only",
+      "cluster_role": "figures",
+      "script_file": "scripts\\w4_figure_iterator.py",
+      "docstring": "W4 — Figure Iterator (stub).",
+      "functions": [
+        "main"
+      ],
+      "uses_lib": [],
+      "uses_external": [
+        "ext_ntfy"
+      ],
+      "reads_state": [],
+      "writes_state": [],
+      "cascades_to": []
+    },
+    {
+      "id": "w11",
+      "label": "W11 Encyclopedia Builder",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "planned",
+      "cluster_role": "encyclopedia",
+      "planned_note": "B5 task: index 397 project files into 12 categories"
+    },
+    {
+      "id": "w12",
+      "label": "W12 Annotation Listener",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "planned",
+      "cluster_role": "annotation",
+      "planned_note": "B5 task: ntfy listener for paper-current annotations"
+    },
+    {
+      "id": "w13",
+      "label": "W13 EID Scorer",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "planned",
+      "cluster_role": "scoring",
+      "planned_note": "B5 task: compute 11-component EID fit score"
+    },
+    {
+      "id": "w14",
+      "label": "W14 Master Orchestrator",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "planned",
+      "cluster_role": "orchestration",
+      "planned_note": "B5 task: dispatches W13 always, W15 conditional"
+    },
+    {
+      "id": "w15",
+      "label": "W15 Model Evaluator",
+      "type": "workflow",
+      "cluster": "workflows",
+      "status": "planned",
+      "cluster_role": "model",
+      "planned_note": "B5 task: re-score models when canonical_facts change"
+    },
+    {
+      "id": "model_s29k",
+      "label": "S29-K GLMM NB2",
+      "type": "model",
+      "cluster": "models",
+      "script": "R/S29K_MODELO_FINAL_SIN_ZONE.R",
+      "metrics": {
+        "BSS_tier1": "68.1%",
+        "cvAUC": "0.766",
+        "ICC": "9.43%"
+      },
+      "kind": "primary ecological model"
+    },
+    {
+      "id": "model_s52_ward",
+      "label": "S52 Ward Clustering",
+      "type": "model",
+      "cluster": "models",
+      "script": "R/S52_WARD_INTEGRADO_Q1.R",
+      "metrics": {
+        "k": 3,
+        "silhouette": "0.595",
+        "kappa": "0.81"
+      },
+      "kind": "spatial clustering"
+    },
+    {
+      "id": "model_s37b_firth",
+      "label": "S37-B Firth Trilogia",
+      "type": "model",
+      "cluster": "models",
+      "script": "R/S37B_FIRTH_TRILOGIA.R",
+      "metrics": {
+        "OR_FR22": "11.7",
+        "trilogy_OR": "5.58",
+        "p": "0.008"
+      },
+      "kind": "clinical prognostic"
+    },
+    {
+      "id": "model_s47_fire",
+      "label": "S47 Fire x SCPH",
+      "type": "model",
+      "cluster": "models",
+      "script": "R/S47_FIRE_SCPH_ANALYSIS.R",
+      "metrics": {
+        "IRR": "1.28",
+        "PAF": "35%",
+        "p": "0.044"
+      },
+      "kind": "fire dual-pathway"
+    },
+    {
+      "id": "model_s50_fsi_lag5",
+      "label": "S50 FSI lag-5 Sidecar",
+      "type": "model",
+      "cluster": "models",
+      "script": "R/S50_SIDECAR_PARALELO.R",
+      "metrics": {
+        "IRR_lag5": "0.701",
+        "CI": "[0.551, 0.910]",
+        "BSS": "68.1%"
+      },
+      "kind": "phenological signal"
+    },
+    {
+      "id": "trigger_w0_cron",
+      "label": "cron: 0 6 * * 1",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "cron"
+    },
+    {
+      "id": "trigger_manual",
+      "label": "Manual dispatch",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "manual"
+    },
+    {
+      "id": "trigger_w1_cron",
+      "label": "cron: 0 */12 * * *",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "cron"
+    },
+    {
+      "id": "trigger_w3_cron",
+      "label": "cron: 0 3 * * *",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "cron"
+    },
+    {
+      "id": "trigger_w5_cron",
+      "label": "cron: 0 4 * * *",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "cron"
+    },
+    {
+      "id": "trigger_w6_cron",
+      "label": "cron: 0 2 * * *",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "cron"
+    },
+    {
+      "id": "trigger_w7_cron",
+      "label": "cron: 0 */6 * * *",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "cron"
+    },
+    {
+      "id": "trigger_w8_cron",
+      "label": "cron: */30 * * * *",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "cron"
+    },
+    {
+      "id": "trigger_repo_dispatch",
+      "label": "Repository dispatch",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "event"
+    },
+    {
+      "id": "trigger_deploy_cron",
+      "label": "cron: */30 * * * *",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "cron"
+    },
+    {
+      "id": "trigger_push",
+      "label": "Git push",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "push"
+    },
+    {
+      "id": "trigger_script_only",
+      "label": "Script-only (no YAML)",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "manual"
+    },
+    {
+      "id": "trigger_planned",
+      "label": "Planned cron (B5)",
+      "type": "trigger",
+      "cluster": "triggers",
+      "frequency": "planned"
+    }
+  ],
+  "edges": [
+    {
+      "source": "trigger_w0_cron",
+      "target": "w0",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "w0",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_w1_cron",
+      "target": "w1",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "w1",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_w3_cron",
+      "target": "w3",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "w3",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_w5_cron",
+      "target": "w5",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "w5",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_w6_cron",
+      "target": "w6",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "w6",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_w7_cron",
+      "target": "w7",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "w7",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_w8_cron",
+      "target": "w8",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "w8",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_repo_dispatch",
+      "target": "w8",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "w9",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_repo_dispatch",
+      "target": "w9",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "w10",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_repo_dispatch",
+      "target": "w10",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_deploy_cron",
+      "target": "deploy",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_manual",
+      "target": "deploy",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_push",
+      "target": "deploy",
+      "type": "triggers"
+    },
+    {
+      "source": "trigger_script_only",
+      "target": "w2",
+      "type": "triggers",
+      "label": "no YAML yet"
+    },
+    {
+      "source": "trigger_script_only",
+      "target": "w4",
+      "type": "triggers",
+      "label": "no YAML yet"
+    },
+    {
+      "source": "trigger_planned",
+      "target": "w11",
+      "type": "triggers",
+      "label": "planned"
+    },
+    {
+      "source": "trigger_planned",
+      "target": "w12",
+      "type": "triggers",
+      "label": "planned"
+    },
+    {
+      "source": "trigger_planned",
+      "target": "w13",
+      "type": "triggers",
+      "label": "planned"
+    },
+    {
+      "source": "trigger_planned",
+      "target": "w14",
+      "type": "triggers",
+      "label": "planned"
+    },
+    {
+      "source": "trigger_planned",
+      "target": "w15",
+      "type": "triggers",
+      "label": "planned"
+    },
+    {
+      "source": "w0",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w1",
+      "target": "state_paper_candidates",
+      "type": "reads"
+    },
+    {
+      "source": "w1",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w3",
+      "target": "state_findings",
+      "type": "reads"
+    },
+    {
+      "source": "w3",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w5",
+      "target": "state_objections",
+      "type": "reads"
+    },
+    {
+      "source": "w5",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w6",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w6",
+      "target": "state_stability_history",
+      "type": "reads"
+    },
+    {
+      "source": "w7",
+      "target": "state_findings",
+      "type": "reads"
+    },
+    {
+      "source": "w7",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w7",
+      "target": "state_references",
+      "type": "reads"
+    },
+    {
+      "source": "w8",
+      "target": "state_pending_approvals",
+      "type": "reads"
+    },
+    {
+      "source": "w8",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w9",
+      "target": "state_findings",
+      "type": "reads"
+    },
+    {
+      "source": "w9",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w9",
+      "target": "state_w10_queue",
+      "type": "reads"
+    },
+    {
+      "source": "w10",
+      "target": "state_pending_approvals",
+      "type": "reads"
+    },
+    {
+      "source": "w10",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w10",
+      "target": "state_w10_queue",
+      "type": "reads"
+    },
+    {
+      "source": "w2",
+      "target": "state_pending_approvals",
+      "type": "reads"
+    },
+    {
+      "source": "w2",
+      "target": "state_pipeline_status",
+      "type": "reads"
+    },
+    {
+      "source": "w0",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w1",
+      "target": "ext_openalex",
+      "type": "external_call"
+    },
+    {
+      "source": "w1",
+      "target": "ext_ncbi",
+      "type": "external_call"
+    },
+    {
+      "source": "w1",
+      "target": "ext_biorxiv",
+      "type": "external_call"
+    },
+    {
+      "source": "w1",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w3",
+      "target": "ext_github",
+      "type": "external_call"
+    },
+    {
+      "source": "w3",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w5",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w6",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w7",
+      "target": "ext_openalex",
+      "type": "external_call"
+    },
+    {
+      "source": "w7",
+      "target": "ext_crossref",
+      "type": "external_call"
+    },
+    {
+      "source": "w7",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w8",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w9",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w10",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w2",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w4",
+      "target": "ext_ntfy",
+      "type": "external_call"
+    },
+    {
+      "source": "w11",
+      "target": "lib_claude_api",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w11",
+      "target": "lib_state",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w11",
+      "target": "state_memory_bundle",
+      "type": "reads",
+      "planned": true
+    },
+    {
+      "source": "w11",
+      "target": "state_canonical_facts",
+      "type": "reads",
+      "planned": true
+    },
+    {
+      "source": "w11",
+      "target": "state_findings",
+      "type": "writes",
+      "planned": true
+    },
+    {
+      "source": "w11",
+      "target": "ext_anthropic",
+      "type": "external_call",
+      "planned": true
+    },
+    {
+      "source": "w12",
+      "target": "lib_claude_api",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w12",
+      "target": "lib_ntfy",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w12",
+      "target": "lib_annotations",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w12",
+      "target": "lib_state",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w12",
+      "target": "state_pending_approvals",
+      "type": "reads",
+      "planned": true
+    },
+    {
+      "source": "w12",
+      "target": "state_findings",
+      "type": "writes",
+      "planned": true
+    },
+    {
+      "source": "w12",
+      "target": "state_pending_approvals",
+      "type": "writes",
+      "planned": true
+    },
+    {
+      "source": "w12",
+      "target": "ext_ntfy",
+      "type": "external_call",
+      "planned": true
+    },
+    {
+      "source": "w13",
+      "target": "lib_claude_api",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w13",
+      "target": "lib_eid_score",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w13",
+      "target": "lib_state",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w13",
+      "target": "state_canonical_facts",
+      "type": "reads",
+      "planned": true
+    },
+    {
+      "source": "w13",
+      "target": "state_findings",
+      "type": "writes",
+      "planned": true
+    },
+    {
+      "source": "w13",
+      "target": "ext_anthropic",
+      "type": "external_call",
+      "planned": true
+    },
+    {
+      "source": "w14",
+      "target": "lib_github",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w14",
+      "target": "lib_state",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w14",
+      "target": "lib_claude_api",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w14",
+      "target": "state_pipeline_status",
+      "type": "reads",
+      "planned": true
+    },
+    {
+      "source": "w14",
+      "target": "state_findings",
+      "type": "reads",
+      "planned": true
+    },
+    {
+      "source": "w14",
+      "target": "state_pipeline_status",
+      "type": "writes",
+      "planned": true
+    },
+    {
+      "source": "w14",
+      "target": "ext_github",
+      "type": "external_call",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "lib_claude_api",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "lib_state",
+      "type": "calls",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "state_canonical_facts",
+      "type": "reads",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "state_findings",
+      "type": "writes",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "state_stability_history",
+      "type": "writes",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "ext_anthropic",
+      "type": "external_call",
+      "planned": true
+    },
+    {
+      "source": "w3",
+      "target": "w9",
+      "type": "cascades",
+      "label": "triggers w9"
+    },
+    {
+      "source": "w9",
+      "target": "w10",
+      "type": "cascades",
+      "label": "MCC gap -> blindaje upgrade"
+    },
+    {
+      "source": "w10",
+      "target": "w8",
+      "type": "cascades",
+      "label": "new upgrade -> HIL notification"
+    },
+    {
+      "source": "w1",
+      "target": "w7",
+      "type": "cascades",
+      "label": "new paper -> retraction check"
+    },
+    {
+      "source": "w0",
+      "target": "w1",
+      "type": "cascades",
+      "label": "weekly recon -> papers sweep"
+    },
+    {
+      "source": "w0",
+      "target": "w3",
+      "type": "cascades",
+      "label": "weekly recon -> bias audit"
+    },
+    {
+      "source": "w14",
+      "target": "w13",
+      "type": "cascades",
+      "label": "master always -> re-score"
+    },
+    {
+      "source": "w14",
+      "target": "w15",
+      "type": "cascades",
+      "label": "master conditional -> model eval"
+    },
+    {
+      "source": "w14",
+      "target": "w11",
+      "type": "cascades",
+      "label": "master -> encyclopedia refresh"
+    },
+    {
+      "source": "w12",
+      "target": "w14",
+      "type": "cascades",
+      "label": "annotation -> orchestrator trigger"
+    },
+    {
+      "source": "w13",
+      "target": "w10",
+      "type": "cascades",
+      "label": "score gap -> blindaje queue"
+    },
+    {
+      "source": "w15",
+      "target": "w10",
+      "type": "cascades",
+      "label": "model gap -> blindaje queue"
+    },
+    {
+      "source": "deploy",
+      "target": "state_canonical_facts",
+      "type": "reads"
+    },
+    {
+      "source": "deploy",
+      "target": "state_claude_live",
+      "type": "reads"
+    },
+    {
+      "source": "deploy",
+      "target": "state_findings",
+      "type": "reads"
+    },
+    {
+      "source": "deploy",
+      "target": "state_memory_bundle",
+      "type": "reads"
+    },
+    {
+      "source": "w15",
+      "target": "model_s29k",
+      "type": "evaluates",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "model_s52_ward",
+      "type": "evaluates",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "model_s37b_firth",
+      "type": "evaluates",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "model_s47_fire",
+      "type": "evaluates",
+      "planned": true
+    },
+    {
+      "source": "w15",
+      "target": "model_s50_fsi_lag5",
+      "type": "evaluates",
+      "planned": true
+    },
+    {
+      "source": "w6",
+      "target": "model_s29k",
+      "type": "evaluates"
+    },
+    {
+      "source": "w3",
+      "target": "model_s29k",
+      "type": "audits"
+    },
+    {
+      "source": "w3",
+      "target": "model_s47_fire",
+      "type": "audits"
+    }
+  ]
+}

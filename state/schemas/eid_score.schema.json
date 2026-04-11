@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EIDScore",
+  "description": "Logit-based EID acceptance score computed from 11 quality components. Baseline prior is Beta(7,18) -> accept rate 0.28. Score lives in [0,1]; delta_vs_baseline is score - baseline_prior.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "scored_at",
+    "manuscript_hash",
+    "score",
+    "baseline_prior",
+    "delta_vs_baseline",
+    "components",
+    "ranking_lift",
+    "top3_recommendations",
+    "logit_params"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonic version of the score document."
+    },
+    "scored_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 timestamp when the score was computed."
+    },
+    "manuscript_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$",
+      "description": "SHA256 of the manuscript file that was scored."
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Predicted probability of acceptance at EID, 0-1."
+    },
+    "baseline_prior": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 0.28,
+      "description": "Baseline acceptance prior (Beta(7,18) mean = 0.28)."
+    },
+    "delta_vs_baseline": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1,
+      "description": "score - baseline_prior."
+    },
+    "components": {
+      "type": "array",
+      "description": "Exactly 11 score components. Order reflects declared component index i = 1..11.",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {"$ref": "#/definitions/component"}
+    },
+    "ranking_lift": {
+      "type": "array",
+      "description": "Component names ordered from largest to smallest lift contribution.",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {"$ref": "#/definitions/component_name"}
+    },
+    "top3_recommendations": {
+      "type": "array",
+      "description": "Top 3 actionable recommendations to lift the score.",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["component", "action", "expected_lift"],
+        "properties": {
+          "component": {"$ref": "#/definitions/component_name"},
+          "action": {
+            "type": "string",
+            "description": "Concrete action to take to raise the component value."
+          },
+          "expected_lift": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Expected absolute lift on score if the action is applied."
+          }
+        }
+      }
+    },
+    "logit_params": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["beta0", "betas"],
+      "description": "Logit regression parameters: score = sigmoid(beta0 + sum_i beta_i * x_i).",
+      "properties": {
+        "beta0": {
+          "type": "number",
+          "description": "Intercept of the logit model."
+        },
+        "betas": {
+          "type": "array",
+          "description": "Exactly 11 beta coefficients aligned with components[i].",
+          "minItems": 11,
+          "maxItems": 11,
+          "items": {"type": "number"}
+        }
+      }
+    }
+  },
+  "definitions": {
+    "component_name": {
+      "type": "string",
+      "enum": [
+        "strobe",
+        "tripod_ai",
+        "epiforge",
+        "stat_rigor",
+        "reproducibility",
+        "novelty",
+        "writing_quality",
+        "ref_quality",
+        "bias_coverage",
+        "reviewer_anticipation",
+        "journal_fit_eid"
+      ],
+      "description": "Canonical component names. Exactly these 11 values are allowed."
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["i", "name", "value", "weight", "lift"],
+      "properties": {
+        "i": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 11,
+          "description": "Component index 1..11."
+        },
+        "name": {"$ref": "#/definitions/component_name"},
+        "value": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Current normalised value of the component in [0,1]."
+        },
+        "weight": {
+          "type": "number",
+          "description": "Weight of the component in the logit (equal to betas[i-1])."
+        },
+        "lift": {
+          "type": "number",
+          "description": "Contribution of this component to the current score (partial derivative x value)."
+        }
+      }
+    }
+  }
+}
