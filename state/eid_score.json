@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "scored_at": "2026-04-11T18:21:35Z",
+  "manuscript_hash": "05c0c9c5136bdf108433b3b1c2070ac81991942dc9fd8a0580aaeb736e2745f0",
+  "score": 0.31426350801116315,
+  "baseline_prior": 0.28,
+  "delta_vs_baseline": 0.034263508011163124,
+  "components": [
+    {
+      "i": 1,
+      "name": "strobe",
+      "value": 0.0,
+      "weight": 0.12,
+      "lift": 0.02586023466524169
+    },
+    {
+      "i": 2,
+      "name": "tripod_ai",
+      "value": 0.0,
+      "weight": 0.1,
+      "lift": 0.021550195554368077
+    },
+    {
+      "i": 3,
+      "name": "epiforge",
+      "value": 0.0,
+      "weight": 0.08,
+      "lift": 0.017240156443494463
+    },
+    {
+      "i": 4,
+      "name": "stat_rigor",
+      "value": 0.835,
+      "weight": 0.12,
+      "lift": 0.00426693871976488
+    },
+    {
+      "i": 5,
+      "name": "reproducibility",
+      "value": 0.0,
+      "weight": 0.08,
+      "lift": 0.017240156443494463
+    },
+    {
+      "i": 6,
+      "name": "novelty",
+      "value": 0.0,
+      "weight": 0.1,
+      "lift": 0.021550195554368077
+    },
+    {
+      "i": 7,
+      "name": "writing_quality",
+      "value": 0.0,
+      "weight": 0.08,
+      "lift": 0.017240156443494463
+    },
+    {
+      "i": 8,
+      "name": "ref_quality",
+      "value": 0.8,
+      "weight": 0.08,
+      "lift": 0.003448031288698892
+    },
+    {
+      "i": 9,
+      "name": "bias_coverage",
+      "value": 0.0,
+      "weight": 0.08,
+      "lift": 0.017240156443494463
+    },
+    {
+      "i": 10,
+      "name": "reviewer_anticipation",
+      "value": 0.0,
+      "weight": 0.08,
+      "lift": 0.017240156443494463
+    },
+    {
+      "i": 11,
+      "name": "journal_fit_eid",
+      "value": 0.0,
+      "weight": 0.08,
+      "lift": 0.017240156443494463
+    }
+  ],
+  "ranking_lift": [
+    "strobe",
+    "tripod_ai",
+    "novelty",
+    "epiforge",
+    "reproducibility",
+    "writing_quality",
+    "bias_coverage",
+    "reviewer_anticipation",
+    "journal_fit_eid",
+    "stat_rigor",
+    "ref_quality"
+  ],
+  "top3_recommendations": [
+    {
+      "component": "strobe",
+      "action": "Complete remaining STROBE items flagged by strobe-checker.",
+      "expected_lift": 0.02586023466524169
+    },
+    {
+      "component": "tripod_ai",
+      "action": "Add TRIPOD+AI model card details to Methods.",
+      "expected_lift": 0.021550195554368077
+    },
+    {
+      "component": "novelty",
+      "action": "Sharpen contribution statement vs Gorris 2025.",
+      "expected_lift": 0.021550195554368077
+    }
+  ],
+  "logit_params": {
+    "beta0": -0.9444616,
+    "betas": [
+      0.12,
+      0.1,
+      0.08,
+      0.12,
+      0.08,
+      0.1,
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.08
+    ]
+  }
+}
