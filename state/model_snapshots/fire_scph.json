@@ -1,0 +1,29 @@
+{
+  "model_id": "fire_scph",
+  "status": "STATIC",
+  "source": "canonical_facts.json + memory/project_sesion_code_S47_fire.md + memory/project_sesion_fire_analysis.md + BASELINE_S61_MASTER_CONTROL.md seccion 5",
+  "generated_at": "2026-04-11T00:00:00Z",
+  "rationale": "Existen multiples scripts FIRE_*.R en C:/Proyectos/Hantavirus_Nuble/R/ (FIRE_PREESPECIFICADO_Q1.R, FIRE_Q1_FINAL.R, FIRE_ROBUSTEZ_AVANZADA_Q1.R, FIRE_METRICAS_FINALES.R). Por heterogeneidad de outputs y el volumen de specification curve (28 tests), se consolida el snapshot canonico con los valores pre-especificados de S47. Refrescar con refresh_model_snapshots.py cuando cambie el panel de incendios.",
+  "metrics": {
+    "IRR": 1.28,
+    "p_value": 0.044,
+    "pre_specified": true,
+    "PAF": "35%",
+    "n_tests": 28,
+    "specification_curve": "monotonic across quartiles",
+    "dose_response": "monotonic across quartiles",
+    "paradoja_cobquecura": "dual-pathway (directa + refugia)",
+    "hypothesis": "fire drives rodent displacement and peridomestic exposure"
+  },
+  "blindaje_status": "BLINDADO",
+  "m14_index": "FIRE-01 a FIRE-07",
+  "script_real_principal": "C:/Proyectos/Hantavirus_Nuble/R/FIRE_PREESPECIFICADO_Q1.R",
+  "scripts_soporte": [
+    "C:/Proyectos/Hantavirus_Nuble/R/FIRE_Q1_FINAL.R",
+    "C:/Proyectos/Hantavirus_Nuble/R/FIRE_ROBUSTEZ_AVANZADA_Q1.R",
+    "C:/Proyectos/Hantavirus_Nuble/R/FIRE_METRICAS_FINALES.R",
+    "C:/Proyectos/Hantavirus_Nuble/R/FIRE_DLNM_Q1.R",
+    "C:/Proyectos/Hantavirus_Nuble/R/FIRE_COBQUECURA_HIPOTESIS.R"
+  ],
+  "panel_sha256": "0b87c5b46b1894a822d2c31ce880ef7452e24ba4b98d6e66bffc4b38eeb4802a"
+}

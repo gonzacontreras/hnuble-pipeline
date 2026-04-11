@@ -1,0 +1,26 @@
+{
+  "model_id": "framework_seremi",
+  "status": "STATIC",
+  "source": "canonical_facts.json + memory/project_framework_operacional_SAG_CONAF_S50.md + memory/reference_normativa_MINSAL_hantavirus_S51.md",
+  "generated_at": "2026-04-11T00:00:00Z",
+  "rationale": "Framework operacional multi-agencia es una herramienta narrativa/politica derivada del modelo S29-K (lag 5) y del anclaje legal chileno. No tiene un script R ejecutable porque es una tabla de actores x ventanas temporales. Snapshot estatico sintetiza las 4 ventanas operacionales y el respaldo legal verificado en S51 (B38 MINSAL leido verbatim).",
+  "tool_id": "framework_operacional",
+  "metrics": {
+    "components": [
+      "CONAF restriccion quiloide patches",
+      "SEREMI peridomestico education",
+      "SAG inspeccion rural storage"
+    ],
+    "ventanas_temporales": 4,
+    "lag_biologico_base": "lag 5 (meses)",
+    "actores": ["SEREMI Salud", "CONAF", "SAG"],
+    "legal_anchor": "Ordinario MINSAL B38 No 3420 (2019, Dra. Daza)",
+    "law_anchor": "Law 21,033 (5-sep-2017, effective 6-sep-2018)",
+    "precedentes_internacionales_no_equivalentes": ["Engelthaler 1999", "Lowe 2016", "Andreo 2024"],
+    "anclaje_clinico": "cluster C30 El Carmen 2023"
+  },
+  "blindaje_status": "BLINDADO",
+  "m14_index": "FRAME-01 a FRAME-06",
+  "script_real": null,
+  "panel_sha256": "0b87c5b46b1894a822d2c31ce880ef7452e24ba4b98d6e66bffc4b38eeb4802a"
+}

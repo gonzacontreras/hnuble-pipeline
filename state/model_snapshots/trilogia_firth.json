@@ -1,0 +1,23 @@
+{
+  "model_id": "trilogia_firth",
+  "status": "STATIC",
+  "source": "canonical_facts.json + BASELINE_S61_MASTER_CONTROL.md seccion 5 + memory/project_trilogia_precoz_S37.md",
+  "generated_at": "2026-04-11T00:00:00Z",
+  "rationale": "Script real R/S37_TRILOGIA_FIRTH_Q1.R existe pero genera el modelo clinico separado (Paper clinico, no paper EID ecologico). Por alcance del pipeline S61 y separacion entre papers, se mantiene snapshot estatico derivado de memory/project_sesion_code_S37B.md. Refrescar manualmente si cambian los casos trilogia.",
+  "metrics": {
+    "AUC": 0.833,
+    "AUC_CI95": "[0.646, 1.000]",
+    "OR_firth": 10.31,
+    "N_trilogia_completa": 33,
+    "criterios": ["FR > 22 rpm", "Plaquetas < 150k", "Hematocrito > ULN"],
+    "score_OR": 5.58,
+    "score_p_value": 0.008,
+    "sensibilidad_C18": "robusta (S43)",
+    "convergence": true
+  },
+  "blindaje_status": "PARCIAL",
+  "m14_index": "TRIL-01 a TRIL-07",
+  "script_real": "C:/Proyectos/Hantavirus_Nuble/R/S37_TRILOGIA_FIRTH_Q1.R",
+  "script_sensibilidad": "C:/Proyectos/Hantavirus_Nuble/R/S43_SENSIBILIDAD_FIRTH_SIN_C18.R",
+  "panel_sha256": "0b87c5b46b1894a822d2c31ce880ef7452e24ba4b98d6e66bffc4b38eeb4802a"
+}

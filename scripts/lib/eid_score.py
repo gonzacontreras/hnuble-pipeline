@@ -4,9 +4,10 @@ This module provides the scoring scaffolding used by ``scripts/w13_eid_scorer.py
 to estimate the probability that a Hantavirus Nuble manuscript is accepted at
 the target journal (Emerging Infectious Diseases, CDC).
 
-The score is a logistic regression over 11 quality components. The intercept
-``beta_0`` encodes the baseline prior ``Beta(7, 18)`` with mean 0.28, i.e.
-``beta_0 = ln(0.28 / 0.72) ~= -0.9444616``.
+The score is a logistic regression over 13 quality components (S61: split
+stat_rigor into model_descriptive_rigor + model_predictive_rigor). The
+intercept ``beta_0`` encodes the baseline prior ``Beta(7, 18)`` with mean
+0.28, i.e. ``beta_0 = ln(0.28 / 0.72) ~= -0.9444616``.
 
 Formula:
     score_EID = sigmoid(beta_0 + sum_i beta_i * f_i(manuscript))  in [0, 1]
@@ -31,18 +32,22 @@ from typing import Any
 BETA_0: float = -0.9444616
 
 # Weights calibrated manually from the M14 catalog. Must sum to 1.0.
+# S61 re-balance: stat_rigor 0.12 -> 0.06 (decomposed into 2 new model_*
+# components, each 0.08). Other weights shaved to keep Sigma = 1.00.
 WEIGHTS: dict[str, float] = {
-    "strobe": 0.12,
-    "tripod_ai": 0.10,
-    "epiforge": 0.08,
-    "stat_rigor": 0.12,
-    "reproducibility": 0.08,
-    "novelty": 0.10,
-    "writing_quality": 0.08,
-    "ref_quality": 0.08,
+    "strobe": 0.10,
+    "tripod_ai": 0.09,
+    "epiforge": 0.07,
+    "stat_rigor": 0.06,
+    "reproducibility": 0.07,
+    "novelty": 0.09,
+    "writing_quality": 0.07,
+    "ref_quality": 0.07,
     "bias_coverage": 0.08,
-    "reviewer_anticipation": 0.08,
-    "journal_fit_eid": 0.08,
+    "reviewer_anticipation": 0.07,
+    "journal_fit_eid": 0.07,
+    "model_descriptive_rigor": 0.08,
+    "model_predictive_rigor": 0.08,
 }
 
 # Fail fast at import time if the weights are ever edited inconsistently.
@@ -235,6 +240,76 @@ def score_journal_fit_eid(manuscript_json: dict) -> float:
     return 0.85
 
 
+def score_model_descriptive_rigor(model_eval: dict | None = None) -> float:
+    """Score descriptive-model rigor from ``state/model_evaluation.json``.
+
+    Evaluates Ward clustering, DHARMa diagnostics, ICC, and trilogia/fire/
+    cluster descriptives. Heuristic:
+
+        base = 0.70 + 0.05 * count_blindado(descriptive_models)
+        +0.05 if ward_clustering overall_drift_flag == "low"
+        capped at 0.98
+
+    Args:
+        model_eval: Parsed ``state/model_evaluation.json``. If ``None`` we
+            return 0.85 as canonical fallback.
+
+    Returns:
+        Score in ``[0, 1]``.
+    """
+    if model_eval is None:
+        return 0.85
+    models = model_eval.get("models", []) if isinstance(model_eval, dict) else []
+    ward = next(
+        (m for m in models if m.get("model_id") == "ward_clustering"), None
+    )
+    descriptives_blindados = sum(
+        1
+        for m in models
+        if m.get("model_id")
+        in ("ward_clustering", "trilogia_firth", "fire_scph", "cluster_2023")
+        and m.get("blindaje_status") == "BLINDADO"
+    )
+    base = 0.70 + 0.05 * descriptives_blindados  # range 0.70..0.90
+    if ward and ward.get("overall_drift_flag") == "low":
+        base += 0.05
+    return min(0.98, base)
+
+
+def score_model_predictive_rigor(model_eval: dict | None = None) -> float:
+    """Score predictive-model rigor from ``state/model_evaluation.json``.
+
+    Evaluates S29-K snapshot, walk-forward 14-fold validation, log-score
+    primary, and drift. Heuristic:
+
+        base = 0.75
+        +0.10 if s29k overall_drift_flag == "low"
+        +0.08 if walk_forward overall_drift_flag == "low"
+        +0.05 if s29k blindaje_status == "BLINDADO"
+        capped at 0.98
+
+    Args:
+        model_eval: Parsed ``state/model_evaluation.json``. If ``None`` we
+            return 0.85 as canonical fallback.
+
+    Returns:
+        Score in ``[0, 1]``.
+    """
+    if model_eval is None:
+        return 0.85
+    models = model_eval.get("models", []) if isinstance(model_eval, dict) else []
+    s29k = next((m for m in models if m.get("model_id") == "s29k"), None)
+    wf = next((m for m in models if m.get("model_id") == "walk_forward"), None)
+    base = 0.75
+    if s29k and s29k.get("overall_drift_flag") == "low":
+        base += 0.10
+    if wf and wf.get("overall_drift_flag") == "low":
+        base += 0.08
+    if s29k and s29k.get("blindaje_status") == "BLINDADO":
+        base += 0.05
+    return min(0.98, base)
+
+
 # ---------------------------------------------------------------------------
 # Aggregation + lift ranking
 # ---------------------------------------------------------------------------
@@ -244,7 +319,7 @@ def aggregate(features: dict[str, float]) -> float:
     """Compute the final EID score via the logistic formula.
 
     Args:
-        features: Dict with the 11 keys of ``WEIGHTS`` mapped to values in
+        features: Dict with the 13 keys of ``WEIGHTS`` mapped to values in
             ``[0, 1]``. Missing keys are treated as ``0.0``.
 
     Returns:
@@ -317,6 +392,7 @@ def score_manuscript(
     bias_findings: list[dict] | None = None,
     reviewer_objections: list[dict] | None = None,
     top_biorxiv: list[dict] | None = None,
+    model_eval: dict | None = None,
 ) -> dict:
     """Compute the full EID score, per-component lifts, and a payload dict.
 
@@ -333,11 +409,15 @@ def score_manuscript(
         reviewer_objections: Optional list of reviewer objections. Defaults
             to empty list.
         top_biorxiv: Optional list of top bioRxiv hantavirus preprints.
+        model_eval: Optional parsed ``state/model_evaluation.json`` used by
+            ``score_model_descriptive_rigor`` and
+            ``score_model_predictive_rigor``.
 
     Returns:
         A dict following ``state/schemas/eid_score.schema.json`` with the
-        final score, baseline delta, per-component breakdown, lift ranking,
-        top-3 recommendations (empty in the stub), and logit params.
+        final score, baseline delta, per-component breakdown (13 entries),
+        lift ranking, top-3 recommendations (empty in the stub), and logit
+        params.
     """
     features: dict[str, float] = {
         "strobe": score_strobe(manuscript_json),
@@ -355,6 +435,8 @@ def score_manuscript(
             reviewer_objections or []
         ),
         "journal_fit_eid": score_journal_fit_eid(manuscript_json),
+        "model_descriptive_rigor": score_model_descriptive_rigor(model_eval),
+        "model_predictive_rigor": score_model_predictive_rigor(model_eval),
     }
 
     score = aggregate(features)

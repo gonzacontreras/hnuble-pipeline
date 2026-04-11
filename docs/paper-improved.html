@@ -114,15 +114,46 @@
   .changelog-body pre{background:var(--panel-bg);border:1px solid var(--rule);padding:.4em .6em;border-radius:3px;font-size:.78em;white-space:pre-wrap;word-break:break-word;margin:.3em 0}
 
   /* Models tab */
-  .model-card{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:.8em 1em;margin-bottom:.7em}
-  .model-card h4{margin:0 0 .3em;font-size:.9em;color:#0b2447}
+  .model-summary{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:.6em .9em;margin-bottom:.8em;font-size:.82em;display:flex;gap:1.2em;flex-wrap:wrap}
+  .model-summary .ms-item{display:flex;flex-direction:column;line-height:1.2}
+  .model-summary .ms-item strong{font-size:1.05em;color:#0b2447}
+  .model-summary .ms-item span{font-size:.72em;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+  .model-sub-tabs{display:flex;gap:.3em;margin-bottom:.6em;font-size:.78em}
+  .model-sub-tab{padding:.35em .8em;border:1px solid var(--rule);border-radius:999px;background:#fff;cursor:pointer;color:var(--muted)}
+  .model-sub-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .model-card{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--rule);border-radius:4px;padding:.8em 1em;margin-bottom:.7em}
+  .model-card.drift-low{border-left-color:#2b8a3e}
+  .model-card.drift-medium{border-left-color:#f59f00;background:#fffdf6}
+  .model-card.drift-high{border-left-color:#c92a2a;background:#fff7f7}
+  .model-card h4{margin:0 0 .3em;font-size:.9em;color:#0b2447;display:flex;align-items:center;gap:.4em;flex-wrap:wrap}
   .model-card .script{font-family:ui-monospace,monospace;font-size:.72em;color:var(--muted);word-break:break-all}
   .model-card .metrics{margin-top:.4em;font-size:.78em;line-height:1.5}
   .model-card .metrics code{background:var(--panel-bg);padding:.08em .3em;border-radius:3px}
-  .model-card .badge{display:inline-block;padding:.1em .45em;border-radius:3px;font-size:.7em;font-weight:600;margin-left:.3em;vertical-align:middle}
+  .model-card .metric-table{width:100%;border-collapse:collapse;font-size:.76em;margin-top:.4em}
+  .model-card .metric-table th,.model-card .metric-table td{padding:.25em .4em;text-align:left;border-bottom:1px solid var(--rule)}
+  .model-card .metric-table th{font-weight:600;color:var(--muted);background:var(--panel-bg);font-size:.72em;text-transform:uppercase;letter-spacing:.03em}
+  .model-card .metric-table td.drift-yes{color:var(--bad);font-weight:600}
+  .model-card .metric-table td.drift-no{color:var(--good)}
+  .model-card .metric-table td.num{font-family:ui-monospace,Consolas,monospace;text-align:right}
+  .model-card .footer-meta{margin-top:.5em;font-size:.7em;color:var(--muted);display:flex;justify-content:space-between;gap:.6em;flex-wrap:wrap}
+  .model-card .cta{display:inline-block;margin-top:.4em;padding:.25em .7em;font-size:.72em;border:1px solid var(--bad);color:var(--bad);background:#fff;border-radius:4px;cursor:pointer}
+  .model-card .cta:hover{background:#fff3f3}
+  .model-card .badge{display:inline-block;padding:.1em .45em;border-radius:3px;font-size:.7em;font-weight:600;vertical-align:middle}
   .badge.blind{background:#dafbe1;color:var(--good)}
   .badge.partial{background:#fff3b8;color:var(--warn)}
   .badge.pending{background:#ffebe9;color:var(--bad)}
+  .badge.drift-low{background:#dafbe1;color:#2b8a3e}
+  .badge.drift-medium{background:#fff3b8;color:#a65300}
+  .badge.drift-high{background:#ffebe9;color:#c92a2a}
+  .badge.risk-low{background:#dafbe1;color:#2b8a3e}
+  .badge.risk-medium{background:#fff3b8;color:#a65300}
+  .badge.risk-high{background:#ffebe9;color:#c92a2a}
+  .improvement-card{background:#fff;border:1px solid var(--rule);border-left:3px solid #0969da;border-radius:4px;padding:.8em 1em;margin-bottom:.7em}
+  .improvement-card h4{margin:0 0 .3em;font-size:.85em;color:#0b2447}
+  .improvement-card .issue{font-size:.78em;color:var(--ink);margin:.2em 0}
+  .improvement-card .proposal{font-size:.78em;color:var(--ink);margin:.2em 0}
+  .improvement-card pre{background:var(--panel-bg);border:1px solid var(--rule);padding:.4em .6em;border-radius:3px;font-size:.72em;white-space:pre-wrap;word-break:break-word;margin:.3em 0;max-height:200px;overflow-y:auto}
+  .improvement-card .meta-row{display:flex;gap:.5em;font-size:.72em;color:var(--muted);margin-top:.3em;flex-wrap:wrap;align-items:center}
   .placeholder{background:#fffbe6;border:1px solid #facc15;border-radius:4px;padding:.9em 1em;color:#7a4e00;font-size:.85em}
   .loading{color:var(--muted);font-style:italic;padding:2em;text-align:center}
 
@@ -191,13 +222,24 @@
  *  - Tabs: Score EID (13 bars), Changelog, Modelos & Herramientas.
  *  ======================================================================= */
 
+// 13-component EID rubric (schema v2, synced with W13 backend — Fix-3 S61).
+// Names + canonical weights MUST mirror eid_scorer.py. Values/lift are
+// placeholders that render the shape of the panel when W13 hasn't run yet.
 const FALLBACK_COMPONENTS = [
-  "strobe","tripod_ai","epiforge","stat_rigor","reproducibility",
-  "novelty","writing_quality","ref_quality","bias_coverage",
-  "reviewer_anticipation","journal_fit_eid"
+  {name:"strobe",                  value:0.85, weight:0.10, lift:0.0},
+  {name:"tripod_ai",               value:0.85, weight:0.09, lift:0.0},
+  {name:"epiforge",                value:0.85, weight:0.07, lift:0.0},
+  {name:"stat_rigor",              value:0.85, weight:0.06, lift:0.0},
+  {name:"reproducibility",         value:0.85, weight:0.07, lift:0.0},
+  {name:"novelty",                 value:0.85, weight:0.09, lift:0.0},
+  {name:"writing_quality",         value:0.85, weight:0.07, lift:0.0},
+  {name:"ref_quality",             value:0.85, weight:0.07, lift:0.0},
+  {name:"bias_coverage",           value:0.85, weight:0.08, lift:0.0},
+  {name:"reviewer_anticipation",   value:0.85, weight:0.07, lift:0.0},
+  {name:"journal_fit_eid",         value:0.85, weight:0.07, lift:0.0},
+  {name:"model_descriptive_rigor", value:0.85, weight:0.08, lift:0.0},
+  {name:"model_predictive_rigor",  value:0.85, weight:0.08, lift:0.0},
 ];
-// Extra decomposition components added in B4.3 per scope adjustment.
-const DECOMP_COMPONENTS = ["model_descriptive_rigor","model_predictive_rigor"];
 
 const EIGHT_MODELS = [
   {key:"s29k",        name:"S29-K GLMM NB2",          script:"R/AJUSTE_GLMM_S29K.R",           metric_keys:["bss_tier1","bss_tier2","psi"]},
@@ -334,6 +376,12 @@ function renderDiff(){
 }
 
 // ------- Score tab ----------------------------------------------------------
+// Fix-4 (S61): the backend W13 EID scorer now emits 13 components directly
+// (no more synthesis of model_*_rigor bars in the frontend). We still keep
+// a fallback for the case where eid_score.json is missing or belongs to an
+// old schema (n_components !== 13).
+const MODEL_RIGOR_NAMES = new Set(["model_descriptive_rigor","model_predictive_rigor"]);
+
 function renderScore(){
   const body = $("#tab-score");
   if(!eidScore){
@@ -344,13 +392,13 @@ function renderScore(){
         <div class="score-delta">W13 EID Scorer aún no ha corrido</div>
       </div>
       <div class="placeholder">
-        Se calculará automáticamente cuando W13 emita <code>state/eid_score.json</code>. Mientras tanto, se muestran los 13 componentes esperados (11 canónicos + 2 de decomposición del rigor estadístico).
+        Se calculará automáticamente cuando W13 emita <code>state/eid_score.json</code>. Mientras tanto, se muestran los 13 componentes esperados del rubric EID (schema v2, Fix-3).
       </div>
       <div class="bars">
-        ${[...FALLBACK_COMPONENTS, ...DECOMP_COMPONENTS].map(name => `
+        ${FALLBACK_COMPONENTS.map(c => `
           <div class="bar-row">
-            <div class="bar-label">${name.replace(/_/g," ")}<small>pendiente</small></div>
-            <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+            <div class="bar-label">${c.name.replace(/_/g," ")}<small>w=${c.weight.toFixed(2)} · pendiente</small></div>
+            <div class="bar-track"><div class="bar-fill${MODEL_RIGOR_NAMES.has(c.name)?" decomp":""}" style="width:0%"></div></div>
             <div class="bar-value">—</div>
           </div>`).join("")}
       </div>`;
@@ -360,42 +408,37 @@ function renderScore(){
   const score = eidScore.score || 0;
   const baseline = eidScore.baseline_prior || 0.28;
   const delta = eidScore.delta_vs_baseline ?? (score - baseline);
-  const components = eidScore.components || [];
+  let components = eidScore.components || [];
   const top3 = eidScore.top3_recommendations || [];
   const deltaClass = delta >= 0 ? "positive" : "negative";
 
-  // Add synthetic decomposition bars if backend does not provide them yet.
-  // We surface the two "model_*_rigor" bars visually by duplicating the
-  // stat_rigor component at half weight each, annotated as decomposition.
-  const decompBars = [];
-  const statRigor = components.find(c => c.name === "stat_rigor");
-  if(statRigor){
-    DECOMP_COMPONENTS.forEach((name, k) => {
-      decompBars.push({
-        i: 12 + k,
-        name,
-        value: statRigor.value,
-        weight: statRigor.weight / 2,
-        lift: (statRigor.lift || 0) / 2,
-        is_decomp: true
-      });
+  // Safety net: if backend still emits a pre-Fix-3 schema with 11 components,
+  // pad with model_*_rigor at neutral value (0.85) so all 13 bars still
+  // render. This keeps the UI consistent during the staggered rollout.
+  if(components.length < 13){
+    const present = new Set(components.map(c => c.name));
+    FALLBACK_COMPONENTS.forEach(fb => {
+      if(!present.has(fb.name)){
+        components = components.concat([{...fb, lift: 0.0, _padded: true}]);
+      }
     });
   }
-
-  const allBars = [...components, ...decompBars];
 
   body.innerHTML = `
     <div class="score-head">
       <div class="score-big">${formatPct(score)}</div>
       <div class="score-delta ${deltaClass}">${formatDelta(delta)} vs baseline (${formatPct(baseline)})</div>
+      <div style="font-size:.72em;color:var(--muted);margin-top:.3em">${components.length} componentes · rubric v${eidScore.rubric_version||"2"}</div>
     </div>
     <div class="bars">
-      ${allBars.map(c => {
-        const pct = Math.max(0, Math.min(1, c.value)) * 100;
+      ${components.map(c => {
+        const pct = Math.max(0, Math.min(1, c.value||0)) * 100;
+        const isModelRigor = MODEL_RIGOR_NAMES.has(c.name);
+        const pad = c._padded ? " · padded" : "";
         return `
           <div class="bar-row">
-            <div class="bar-label">${c.name.replace(/_/g," ")}<small>w=${(c.weight||0).toFixed(2)} · lift=${(c.lift||0).toFixed(3)}${c.is_decomp?" (decomp)":""}</small></div>
-            <div class="bar-track"><div class="bar-fill${c.is_decomp?" decomp":""}" style="width:${pct}%"></div></div>
+            <div class="bar-label">${c.name.replace(/_/g," ")}<small>w=${(c.weight||0).toFixed(2)} · lift=${(c.lift||0).toFixed(3)}${pad}</small></div>
+            <div class="bar-track"><div class="bar-fill${isModelRigor?" decomp":""}" style="width:${pct}%"></div></div>
             <div class="bar-value">${pct.toFixed(0)}%</div>
           </div>`;
       }).join("")}
@@ -480,13 +523,62 @@ function renderChangelog(){
 }
 
 // ------- Modelos & Herramientas tab ----------------------------------------
+// Relative-time helper: "hace 2h", "hace 35min", "hace 3d" (ES locale).
+function relTime(iso){
+  if(!iso) return "—";
+  const t = Date.parse(iso);
+  if(isNaN(t)) return escapeHtml(iso);
+  const diff = Date.now() - t;
+  if(diff < 0) return "justo ahora";
+  const mins = Math.floor(diff / 60000);
+  if(mins < 1)   return "justo ahora";
+  if(mins < 60)  return `hace ${mins}min`;
+  const hrs = Math.floor(mins / 60);
+  if(hrs < 24)   return `hace ${hrs}h`;
+  const days = Math.floor(hrs / 24);
+  if(days < 30)  return `hace ${days}d`;
+  return iso.slice(0,10);
+}
+
+// Turn a model_id into a human label. Falls back to raw id if unknown.
+const MODEL_LABELS = {
+  s29k:        "S29-K GLMM NB2",
+  ward:        "Ward clustering (k=3)",
+  trilogy:     "Trilogía clínica",
+  firescph:    "Fire × SCPH",
+  cluster2023: "Cluster 2023 El Carmen",
+  framework:   "Framework operacional",
+  dca:         "Decision Curve Analysis",
+  walkforward: "Walk-forward validation",
+};
+function prettyModelName(id){
+  return MODEL_LABELS[id] || (id||"").replace(/_/g," ");
+}
+
+// Status→badge CSS class (blindaje_status).
+function blindajeBadgeClass(status){
+  const s = (status||"").toUpperCase();
+  if(s === "BLINDADO") return "blind";
+  if(s === "PARCIAL")  return "partial";
+  return "pending";
+}
+// Drift flag → CSS class.
+function driftClass(flag){
+  const f = (flag||"low").toLowerCase();
+  if(f === "high")   return "drift-high";
+  if(f === "medium") return "drift-medium";
+  return "drift-low";
+}
+
+let modelsSubTab = "live"; // 'live' | 'improvements'
+
 function renderModels(){
   const body = $("#tab-models");
   if(!modelEval){
     body.innerHTML = `
       <div class="placeholder">
-        <strong>W15 Model Evaluator pendiente (se generará en B5).</strong><br>
-        Cuando W15 corra, este panel mostrará las métricas en vivo de los 8 modelos/herramientas junto con su delta vs <code>canonical_facts.json</code>, estado (BLINDADO / PARCIAL / PENDIENTE), último timestamp de evaluación y recomendaciones de mejora.
+        <strong>W15 Model Evaluator pendiente.</strong><br>
+        Ejecuta <code>gh workflow run w15-model-eval.yml</code> para generar <code>state/model_evaluation.json</code>. Este panel se poblará con los 8 modelos, su drift vs <code>canonical_facts.json</code>, blindaje, último snapshot y mejoras propuestas.
       </div>
       <h3 style="font-family:system-ui,sans-serif;font-size:.9em;color:#0b2447;margin-top:1em">Modelos esperados</h3>
       ${EIGHT_MODELS.map(m => `
@@ -498,28 +590,109 @@ function renderModels(){
       `).join("")}`;
     return;
   }
-  // modelEval schema: { models: [ { key, name, script, status, last_eval, metrics: {...}, delta_vs_canonical: {...}, recommendations: [...] } ] }
+
+  // Schema v2: { version, evaluated_at, mode, drift_tolerance_pct,
+  //              models:[{model_id, snapshot_status, blindaje_status,
+  //                       m14_index, snapshot_generated_at,
+  //                       metric_comparisons:{m:{snapshot,canonical,delta_pct,drift}},
+  //                       drift_count, overall_drift_flag, n_metrics_evaluated}],
+  //              summary:{total_models_evaluated,n_high_drift,n_medium_drift,
+  //                       n_low_drift,overall_health_pct},
+  //              improvements:[] }
   const models = modelEval.models || [];
-  body.innerHTML = models.map(m => {
-    const statusClass = (m.status||"").toLowerCase() === "blindado" ? "blind" :
-                        (m.status||"").toLowerCase() === "parcial" ? "partial" : "pending";
-    const metricsHtml = m.metrics
-      ? Object.entries(m.metrics).map(([k,v]) => `<div><code>${escapeHtml(k)}</code>: ${escapeHtml(String(v))}</div>`).join("")
-      : "<em>sin métricas</em>";
-    const deltaHtml = m.delta_vs_canonical
-      ? Object.entries(m.delta_vs_canonical).map(([k,v]) => `<div>Δ <code>${escapeHtml(k)}</code>: ${escapeHtml(String(v))}</div>`).join("")
+  const summary = modelEval.summary || {};
+  const improvements = modelEval.improvements || [];
+  const nDrifty = (summary.n_high_drift || 0) + (summary.n_medium_drift || 0);
+
+  const summaryHtml = `
+    <div class="model-summary">
+      <div class="ms-item"><strong>${summary.total_models_evaluated ?? models.length}</strong><span>modelos</span></div>
+      <div class="ms-item"><strong>${(summary.overall_health_pct ?? 0).toFixed(0)}%</strong><span>health</span></div>
+      <div class="ms-item"><strong>${nDrifty}</strong><span>drifty (hi+med)</span></div>
+      <div class="ms-item"><strong>${summary.n_high_drift || 0}</strong><span>high drift</span></div>
+      <div class="ms-item"><strong>${relTime(modelEval.evaluated_at)}</strong><span>last refresh</span></div>
+      <div class="ms-item"><strong>±${(modelEval.drift_tolerance_pct ?? 5).toFixed(1)}%</strong><span>tolerance</span></div>
+    </div>`;
+
+  const subTabsHtml = `
+    <div class="model-sub-tabs" role="tablist">
+      <div class="model-sub-tab ${modelsSubTab==='live'?'active':''}" data-subtab="live">Live (${models.length})</div>
+      <div class="model-sub-tab ${modelsSubTab==='improvements'?'active':''}" data-subtab="improvements">Mejoras propuestas (${improvements.length})</div>
+    </div>`;
+
+  const liveHtml = models.map(m => {
+    const dClass = driftClass(m.overall_drift_flag);
+    const bClass = blindajeBadgeClass(m.blindaje_status);
+    const comparisons = m.metric_comparisons || {};
+    const rows = Object.entries(comparisons).map(([metric, cmp]) => {
+      const driftFlag = cmp && cmp.drift;
+      const delta = (cmp && typeof cmp.delta_pct === "number") ? cmp.delta_pct.toFixed(2)+"%" : "—";
+      return `
+        <tr>
+          <td>${escapeHtml(metric)}</td>
+          <td class="num">${escapeHtml(String(cmp?.snapshot ?? "—"))}</td>
+          <td class="num">${escapeHtml(String(cmp?.canonical ?? "—"))}</td>
+          <td class="num ${driftFlag?"drift-yes":"drift-no"}">${delta}${driftFlag?" ⚠":""}</td>
+        </tr>`;
+    }).join("");
+    const tableHtml = rows
+      ? `<table class="metric-table">
+           <thead><tr><th>metric</th><th>snapshot</th><th>canonical</th><th>Δ %</th></tr></thead>
+           <tbody>${rows}</tbody>
+         </table>`
+      : `<div class="metrics" style="color:var(--muted);font-style:italic">sin métricas comparadas</div>`;
+    const ctaHtml = (m.overall_drift_flag||"").toLowerCase() === "high"
+      ? `<button class="cta" data-model="${escapeHtml(m.model_id)}" disabled title="Visual only (Fix-4)">Ver mejora propuesta</button>`
       : "";
-    const recsHtml = (m.recommendations||[]).map(r => `<li>${escapeHtml(r)}</li>`).join("");
     return `
-      <div class="model-card">
-        <h4>${escapeHtml(m.name||m.key)} <span class="badge ${statusClass}">${escapeHtml(m.status||"?")}</span></h4>
-        <div class="script">${escapeHtml(m.script||"")}</div>
-        <div class="metrics">${metricsHtml}</div>
-        ${deltaHtml ? `<div class="metrics">${deltaHtml}</div>` : ""}
-        ${recsHtml ? `<div class="metrics"><strong>Mejoras:</strong><ul>${recsHtml}</ul></div>` : ""}
-        <div style="color:var(--muted);font-size:.72em;margin-top:.3em">last eval: ${escapeHtml(m.last_eval||"—")}</div>
+      <div class="model-card ${dClass}">
+        <h4>
+          ${escapeHtml(prettyModelName(m.model_id))}
+          <span class="badge ${bClass}">${escapeHtml(m.blindaje_status||"?")}</span>
+          <span class="badge ${dClass}">drift: ${escapeHtml(m.overall_drift_flag||"?")}</span>
+        </h4>
+        <div class="script">model_id: <code>${escapeHtml(m.model_id||"")}</code> · snapshot: ${escapeHtml(m.snapshot_status||"?")}</div>
+        ${tableHtml}
+        ${ctaHtml}
+        <div class="footer-meta">
+          <span>M14 index: ${escapeHtml(m.m14_index||"—")}</span>
+          <span>snapshot: ${relTime(m.snapshot_generated_at)}</span>
+          <span>${m.n_metrics_evaluated ?? "?"} métricas · ${m.drift_count ?? 0} drift</span>
+        </div>
       </div>`;
   }).join("");
+
+  const improvementsHtml = improvements.length
+    ? improvements.map(imp => `
+        <div class="improvement-card">
+          <h4>
+            <span class="badge blind">${escapeHtml(prettyModelName(imp.model_id||""))}</span>
+            <span class="badge risk-${(imp.risk||"low").toLowerCase()}">risk: ${escapeHtml(imp.risk||"low")}</span>
+          </h4>
+          <div class="issue"><strong>Issue:</strong> ${escapeHtml(imp.issue||"—")}</div>
+          <div class="proposal"><strong>Proposal:</strong> ${escapeHtml(imp.proposal||"—")}</div>
+          <div class="meta-row">
+            <span>expected lift: <strong>+${(imp.expected_lift_pct ?? 0).toFixed(1)}%</strong></span>
+            <span>script: <code>${escapeHtml(imp.script_to_modify||"—")}</code></span>
+          </div>
+          ${imp.diff_sketch ? `<pre>${escapeHtml(imp.diff_sketch)}</pre>` : ""}
+          <button class="cta" disabled title="Visual only (Fix-4)">Marcar para aplicar</button>
+        </div>`).join("")
+    : `<div class="placeholder">Sin mejoras propuestas (no hay drift detectado).</div>`;
+
+  body.innerHTML =
+    summaryHtml +
+    subTabsHtml +
+    `<div id="models-live" ${modelsSubTab!=="live"?'style="display:none"':""}>${liveHtml || "<div class=\"placeholder\">Sin modelos evaluados.</div>"}</div>` +
+    `<div id="models-improvements" ${modelsSubTab!=="improvements"?'style="display:none"':""}>${improvementsHtml}</div>`;
+
+  // Sub-tab wiring (delegated each render, since body.innerHTML is replaced).
+  $$("#tab-models .model-sub-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      modelsSubTab = tab.dataset.subtab;
+      renderModels();
+    });
+  });
 }
 
 // ------- Footer stats -------------------------------------------------------

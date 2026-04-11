@@ -1,0 +1,380 @@
+{
+  "version": 2,
+  "evaluated_at": "2026-04-11T19:23:07Z",
+  "mode": "snapshots_static",
+  "drift_tolerance_pct": 5.0,
+  "models": [
+    {
+      "model_id": "cluster_2023",
+      "snapshot_status": "STATIC",
+      "blindaje_status": "PARCIAL",
+      "m14_index": "CLUS-01 a CLUS-05",
+      "snapshot_generated_at": "2026-04-11T00:00:00Z",
+      "canonical_section": null,
+      "metric_comparisons": {
+        "RR_Kulldorff": {
+          "snapshot": 2.14,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "N_cases": {
+          "snapshot": 2,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "p_value_temporal": {
+          "snapshot": 0.089,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "location": {
+          "snapshot": "El Carmen",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "year": {
+          "snapshot": 2023,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "status_narrativo": {
+          "snapshot": "exploratory illustration only",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "method": {
+          "snapshot": "Kulldorff scan statistic (SaTScan-equivalent in R)",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "cluster_type": {
+          "snapshot": "space-time retrospective",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        }
+      },
+      "drift_count": 0,
+      "overall_drift_flag": "low",
+      "n_metrics_evaluated": 8
+    },
+    {
+      "model_id": "decision_curve",
+      "snapshot_status": "STATIC",
+      "blindaje_status": "BLINDADO",
+      "m14_index": "DCA-01 a DCA-04",
+      "snapshot_generated_at": "2026-04-11T00:00:00Z",
+      "canonical_section": null,
+      "metric_comparisons": {
+        "p_t_range": {
+          "snapshot": "[0.05, 0.20]",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "net_benefit_tier1_at_p005": {
+          "snapshot": "approx 3x Bortman baseline",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "net_benefit_strategy": {
+          "snapshot": "treat-if-tier1-high",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "comparator": {
+          "snapshot": "Bortman operational baseline (treat-all under threshold)",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "horizon": {
+          "snapshot": "monthly cases per comuna (Nuble)",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "model_base": {
+          "snapshot": "S29K GLMM NB2 (Tier1 = FSI lag5 + t2m + baseline)",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        }
+      },
+      "drift_count": 0,
+      "overall_drift_flag": "low",
+      "n_metrics_evaluated": 6
+    },
+    {
+      "model_id": "fire_scph",
+      "snapshot_status": "STATIC",
+      "blindaje_status": "BLINDADO",
+      "m14_index": "FIRE-01 a FIRE-07",
+      "snapshot_generated_at": "2026-04-11T00:00:00Z",
+      "canonical_section": null,
+      "metric_comparisons": {
+        "IRR": {
+          "snapshot": 1.28,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "p_value": {
+          "snapshot": 0.044,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "pre_specified": {
+          "snapshot": true,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "PAF": {
+          "snapshot": "35%",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "n_tests": {
+          "snapshot": 28,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "specification_curve": {
+          "snapshot": "monotonic across quartiles",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "dose_response": {
+          "snapshot": "monotonic across quartiles",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "paradoja_cobquecura": {
+          "snapshot": "dual-pathway (directa + refugia)",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "hypothesis": {
+          "snapshot": "fire drives rodent displacement and peridomestic exposure",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        }
+      },
+      "drift_count": 0,
+      "overall_drift_flag": "low",
+      "n_metrics_evaluated": 9
+    },
+    {
+      "model_id": "framework_seremi",
+      "snapshot_status": "STATIC",
+      "blindaje_status": "BLINDADO",
+      "m14_index": "FRAME-01 a FRAME-06",
+      "snapshot_generated_at": "2026-04-11T00:00:00Z",
+      "canonical_section": null,
+      "metric_comparisons": {
+        "components": {
+          "snapshot": [
+            "CONAF restriccion quiloide patches",
+            "SEREMI peridomestico education",
+            "SAG inspeccion rural storage"
+          ],
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "ventanas_temporales": {
+          "snapshot": 4,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "lag_biologico_base": {
+          "snapshot": "lag 5 (meses)",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "actores": {
+          "snapshot": [
+            "SEREMI Salud",
+            "CONAF",
+            "SAG"
+          ],
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "legal_anchor": {
+          "snapshot": "Ordinario MINSAL B38 No 3420 (2019, Dra. Daza)",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "law_anchor": {
+          "snapshot": "Law 21,033 (5-sep-2017, effective 6-sep-2018)",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "precedentes_internacionales_no_equivalentes": {
+          "snapshot": [
+            "Engelthaler 1999",
+            "Lowe 2016",
+            "Andreo 2024"
+          ],
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "anclaje_clinico": {
+          "snapshot": "cluster C30 El Carmen 2023",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        }
+      },
+      "drift_count": 0,
+      "overall_drift_flag": "low",
+      "n_metrics_evaluated": 8
+    },
+    {
+      "model_id": "trilogia_firth",
+      "snapshot_status": "STATIC",
+      "blindaje_status": "PARCIAL",
+      "m14_index": "TRIL-01 a TRIL-07",
+      "snapshot_generated_at": "2026-04-11T00:00:00Z",
+      "canonical_section": null,
+      "metric_comparisons": {
+        "AUC": {
+          "snapshot": 0.833,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "AUC_CI95": {
+          "snapshot": "[0.646, 1.000]",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "OR_firth": {
+          "snapshot": 10.31,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "N_trilogia_completa": {
+          "snapshot": 33,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "criterios": {
+          "snapshot": [
+            "FR > 22 rpm",
+            "Plaquetas < 150k",
+            "Hematocrito > ULN"
+          ],
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "score_OR": {
+          "snapshot": 5.58,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "score_p_value": {
+          "snapshot": 0.008,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "sensibilidad_C18": {
+          "snapshot": "robusta (S43)",
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        },
+        "convergence": {
+          "snapshot": true,
+          "canonical": null,
+          "delta_pct": null,
+          "drift": false,
+          "note": "no canonical reference"
+        }
+      },
+      "drift_count": 0,
+      "overall_drift_flag": "low",
+      "n_metrics_evaluated": 9
+    }
+  ],
+  "summary": {
+    "total_models_evaluated": 5,
+    "n_high_drift": 0,
+    "n_medium_drift": 0,
+    "n_low_drift": 5,
+    "n_blindados": 3,
+    "n_parciales": 2,
+    "n_pendientes": 0,
+    "overall_health_pct": 100.0
+  },
+  "improvements": []
+}

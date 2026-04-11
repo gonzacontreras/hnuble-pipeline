@@ -1,15 +1,18 @@
 """W13 EID Scorer.
 
 Computes the EID acceptance probability for the current manuscript using the
-logistic model defined in :mod:`scripts.lib.eid_score` (11 canonical
-components). For each component, a Claude Sonnet agent is asked to score it
-in [0, 1] given a component-specific rubric and the relevant manuscript
-slices. Agent calls run concurrently via ``asyncio.to_thread``.
+logistic model defined in :mod:`scripts.lib.eid_score` (13 canonical
+components, S61). For each non-model component, a Claude Sonnet agent is
+asked to score it in [0, 1] given a component-specific rubric and the
+relevant manuscript slices. Agent calls run concurrently via
+``asyncio.to_thread``.
 
-The two "model rigor" sub-components (descriptive and predictive) are folded
-into the single ``stat_rigor`` component as a 50/50 average, so the output
-still conforms to ``state/schemas/eid_score.schema.json`` which demands
-exactly 11 components.
+S61 change: the legacy single ``stat_rigor`` is now joined by two real
+sub-components ``model_descriptive_rigor`` and ``model_predictive_rigor``
+that read directly from ``state/model_evaluation.json`` via the library
+helpers ``score_model_descriptive_rigor`` and ``score_model_predictive_rigor``.
+Output conforms to ``state/schemas/eid_score.schema.json`` with exactly 13
+components.
 
 Inputs:
     * ``state/manuscript_v5_condensed.json`` (preferred) — parsed manuscript.
@@ -19,7 +22,7 @@ Inputs:
     * ``state/canonical_facts.json`` — canonical numeric anchors.
 
 Output:
-    * ``state/eid_score.json`` following the 11-component schema.
+    * ``state/eid_score.json`` following the 13-component schema.
 
 Notes:
     * If any Claude call fails, the component falls back to the stub value
@@ -132,9 +135,11 @@ def _build_component_prompt(component: str, excerpt: str, extras: dict) -> str:
             "Score EPIFORGE 18-item coverage for epidemiological forecasting."
         ),
         "stat_rigor": (
-            "Score statistical rigor: CI reporting, assumption checks, "
-            "walk-forward validation, DHARMa/ICC diagnostics, Ward kappa. "
-            "Average descriptive and predictive rigor."
+            "Score overall statistical rigor in the TEXT: CI reporting "
+            "(Wilson/BCa), hypothesis framing, effect sizes, multiple-"
+            "comparison correction, sensitivity analysis. Do NOT score "
+            "model diagnostics here (those live in model_descriptive_rigor "
+            "and model_predictive_rigor)."
         ),
         "reproducibility": (
             "Score reproducibility as (code_available + data_available + "
@@ -197,33 +202,6 @@ async def _score_component_async(
         return fallback
 
 
-async def _score_model_descriptive_async(
-    model_eval: dict, canonical: dict
-) -> float:
-    """Descriptive rigor: DHARMa, ICC, Ward kappa."""
-    if not model_eval:
-        return 0.85  # stub
-    signals = {
-        "ICC": canonical.get("facts_model", {}).get("ICC", 0.0943),
-        "Ward_kappa": canonical.get("facts_model", {}).get("Ward_kappa", 0.81),
-        "DHARMa_pass": True,
-    }
-    score = 0.7 + 0.2 * (signals["ICC"] > 0.05) + 0.05 * (signals["Ward_kappa"] > 0.7)
-    return min(1.0, max(0.0, float(score)))
-
-
-async def _score_model_predictive_async(
-    model_eval: dict, canonical: dict
-) -> float:
-    """Predictive rigor: walk-forward BSS, log score, CI coverage."""
-    if not model_eval:
-        return 0.82  # stub
-    facts = canonical.get("facts_model", {})
-    bss = float(facts.get("BSS_tier1", 0.681))
-    score = 0.5 + min(0.5, bss * 0.6)
-    return min(1.0, max(0.0, score))
-
-
 # ---------------------------------------------------------------------------
 # Orchestration
 # ---------------------------------------------------------------------------
@@ -232,6 +210,15 @@ async def _score_model_predictive_async(
 async def _score_all_async(manuscript: dict, refs: list[dict], canonical: dict,
                            m14_catalog: dict, objections: list[dict],
                            model_eval: dict) -> dict[str, float]:
+    """Score the 13 EID components.
+
+    The 11 textual components are scored by Claude Sonnet per-component
+    rubrics (fallback to lib stubs on any failure). The 2 model-rigor
+    components are computed deterministically from
+    ``state/model_evaluation.json`` via
+    :func:`eid_score.score_model_descriptive_rigor` and
+    :func:`eid_score.score_model_predictive_rigor`.
+    """
     excerpt = _manuscript_excerpt(manuscript)
     ref_stats = {
         "n": len(refs),
@@ -246,6 +233,7 @@ async def _score_all_async(manuscript: dict, refs: list[dict], canonical: dict,
         ("strobe", {}, eid_score.score_strobe(manuscript)),
         ("tripod_ai", {}, eid_score.score_tripod_ai(manuscript)),
         ("epiforge", {}, eid_score.score_epiforge(manuscript)),
+        ("stat_rigor", {}, eid_score.score_stat_rigor(manuscript)),
         (
             "reproducibility",
             {},
@@ -271,21 +259,20 @@ async def _score_all_async(manuscript: dict, refs: list[dict], canonical: dict,
         _score_component_async(name, excerpt, extras, fallback)
         for name, extras, fallback in components
     ]
-    # Model rigor sub-components run in parallel with the 10 above.
-    tasks.append(_score_model_descriptive_async(model_eval, canonical))
-    tasks.append(_score_model_predictive_async(model_eval, canonical))
 
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
     features: dict[str, float] = {}
-    for (name, _extras, fallback), value in zip(components, results[:-2]):
+    for (name, _extras, fallback), value in zip(components, results):
         features[name] = fallback if isinstance(value, Exception) else float(value)
 
-    desc = results[-2]
-    pred = results[-1]
-    desc_f = 0.85 if isinstance(desc, Exception) else float(desc)
-    pred_f = 0.82 if isinstance(pred, Exception) else float(pred)
-    features["stat_rigor"] = 0.5 * desc_f + 0.5 * pred_f
+    # Model rigor sub-components are deterministic functions of model_eval.
+    features["model_descriptive_rigor"] = eid_score.score_model_descriptive_rigor(
+        model_eval
+    )
+    features["model_predictive_rigor"] = eid_score.score_model_predictive_rigor(
+        model_eval
+    )
 
     return features
 
@@ -296,7 +283,7 @@ def _build_top3(features: dict[str, float], ranking: list[dict]) -> list[dict]:
         "strobe": "Complete remaining STROBE items flagged by strobe-checker.",
         "tripod_ai": "Add TRIPOD+AI model card details to Methods.",
         "epiforge": "Expand EPIFORGE forecasting documentation.",
-        "stat_rigor": "Report BCa CIs and walk-forward diagnostics.",
+        "stat_rigor": "Report BCa CIs, effect sizes, sensitivity analyses.",
         "reproducibility": "Pin renv lockfile and upload Zenodo DOI.",
         "novelty": "Sharpen contribution statement vs Gorris 2025.",
         "writing_quality": "Tighten Abstract and Discussion opening.",
@@ -304,6 +291,12 @@ def _build_top3(features: dict[str, float], ranking: list[dict]) -> list[dict]:
         "bias_coverage": "Cite missing M14 blindings explicitly.",
         "reviewer_anticipation": "Pre-empt top 3 reviewer attacks in Discussion.",
         "journal_fit_eid": "Align framing with EID Dispatch template.",
+        "model_descriptive_rigor": (
+            "Re-run Ward + DHARMa + ICC blindaje and refresh model_evaluation."
+        ),
+        "model_predictive_rigor": (
+            "Refresh S29-K snapshot and walk-forward 14-fold log-score."
+        ),
     }
     top3 = []
     for entry in ranking[:3]:
@@ -332,8 +325,8 @@ def main() -> None:
         "W13",
         "EID Scorer",
         [
-            {"id": "W13.load", "label": "Load manuscript + refs", "agent_type": "main"},
-            {"id": "W13.score", "label": "Score 11 components", "agent_type": "sonnet x10"},
+            {"id": "W13.load", "label": "Load manuscript + refs + model_eval", "agent_type": "main"},
+            {"id": "W13.score", "label": "Score 13 components", "agent_type": "sonnet x11"},
             {"id": "W13.write", "label": "Persist eid_score.json", "agent_type": "main"},
         ],
     )

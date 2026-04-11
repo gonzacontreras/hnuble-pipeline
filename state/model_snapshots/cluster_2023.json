@@ -1,0 +1,22 @@
+{
+  "model_id": "cluster_2023",
+  "status": "STATIC",
+  "source": "canonical_facts.json + memory/project_framework_operacional_SAG_CONAF_S50.md (anclaje clinico) + memory/reference_cerrados_S37B_trazabilidad.md",
+  "generated_at": "2026-04-11T00:00:00Z",
+  "rationale": "Script real R/CLUSTER_AUDIT.R existe y computa la auditoria de clustering. El cluster 2023 El Carmen es presentado en el manuscrito como 'exploratory illustration only' (N=2) para contextualizar la utilidad operacional del framework multi-agencia, no como hallazgo confirmatorio. Se mantiene snapshot estatico por bajo N y estatus narrativo.",
+  "metrics": {
+    "RR_Kulldorff": 2.14,
+    "N_cases": 2,
+    "p_value_temporal": 0.089,
+    "location": "El Carmen",
+    "year": 2023,
+    "status_narrativo": "exploratory illustration only",
+    "method": "Kulldorff scan statistic (SaTScan-equivalent in R)",
+    "cluster_type": "space-time retrospective"
+  },
+  "blindaje_status": "PARCIAL",
+  "m14_index": "CLUS-01 a CLUS-05",
+  "script_real": "C:/Proyectos/Hantavirus_Nuble/R/CLUSTER_AUDIT.R",
+  "script_soporte": "C:/Proyectos/Hantavirus_Nuble/R/S50_CLUSTER_2023_ANALYSIS.R",
+  "panel_sha256": "0b87c5b46b1894a822d2c31ce880ef7452e24ba4b98d6e66bffc4b38eeb4802a"
+}

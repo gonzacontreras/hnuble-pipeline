@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "EIDScore",
-  "description": "Logit-based EID acceptance score computed from 11 quality components. Baseline prior is Beta(7,18) -> accept rate 0.28. Score lives in [0,1]; delta_vs_baseline is score - baseline_prior.",
+  "description": "Logit-based EID acceptance score computed from 13 quality components. Baseline prior is Beta(7,18) -> accept rate 0.28. Score lives in [0,1]; delta_vs_baseline is score - baseline_prior.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -53,16 +53,16 @@
     },
     "components": {
       "type": "array",
-      "description": "Exactly 11 score components. Order reflects declared component index i = 1..11.",
-      "minItems": 11,
-      "maxItems": 11,
+      "description": "Exactly 13 score components. Order reflects declared component index i = 1..13.",
+      "minItems": 13,
+      "maxItems": 13,
       "items": {"$ref": "#/definitions/component"}
     },
     "ranking_lift": {
       "type": "array",
       "description": "Component names ordered from largest to smallest lift contribution.",
-      "minItems": 11,
-      "maxItems": 11,
+      "minItems": 13,
+      "maxItems": 13,
       "items": {"$ref": "#/definitions/component_name"}
     },
     "top3_recommendations": {
@@ -101,9 +101,9 @@
         },
         "betas": {
           "type": "array",
-          "description": "Exactly 11 beta coefficients aligned with components[i].",
-          "minItems": 11,
-          "maxItems": 11,
+          "description": "Exactly 13 beta coefficients aligned with components[i].",
+          "minItems": 13,
+          "maxItems": 13,
           "items": {"type": "number"}
         }
       }
@@ -123,9 +123,11 @@
         "ref_quality",
         "bias_coverage",
         "reviewer_anticipation",
-        "journal_fit_eid"
+        "journal_fit_eid",
+        "model_descriptive_rigor",
+        "model_predictive_rigor"
       ],
-      "description": "Canonical component names. Exactly these 11 values are allowed."
+      "description": "Canonical component names. Exactly these 13 values are allowed."
     },
     "component": {
       "type": "object",
@@ -135,8 +137,8 @@
         "i": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 11,
-          "description": "Component index 1..11."
+          "maximum": 13,
+          "description": "Component index 1..13."
         },
         "name": {"$ref": "#/definitions/component_name"},
         "value": {

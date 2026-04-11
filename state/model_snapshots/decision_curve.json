@@ -1,0 +1,25 @@
+{
+  "model_id": "decision_curve",
+  "status": "STATIC",
+  "source": "canonical_facts.json + BASELINE_S61_MASTER_CONTROL.md seccion 5 + memory/project_sesion_code_S49_nivel2.md",
+  "generated_at": "2026-04-11T00:00:00Z",
+  "rationale": "Decision Curve Analysis (DCA) sobre tier1 del S29-K. El calculo de net benefit en el rango p_t [0.05, 0.20] se produce en el pipeline de Nivel 2 (Zenodo DOI 10.5281/zenodo.19425753). No se re-ejecuta en cada run del pipeline S61 por costo y porque la comparacion con baseline Bortman es fija. Snapshot estatico documenta los valores usados en el manuscrito.",
+  "tool_id": "dca",
+  "metrics": {
+    "p_t_range": "[0.05, 0.20]",
+    "net_benefit_tier1_at_p005": "approx 3x Bortman baseline",
+    "net_benefit_strategy": "treat-if-tier1-high",
+    "comparator": "Bortman operational baseline (treat-all under threshold)",
+    "horizon": "monthly cases per comuna (Nuble)",
+    "model_base": "S29K GLMM NB2 (Tier1 = FSI lag5 + t2m + baseline)"
+  },
+  "references": [
+    "Vickers & Elkin 2006 (decision curve analysis)",
+    "Vickers et al. 2019 (net benefit interpretation)",
+    "Assel et al. 2017 (extensions)"
+  ],
+  "blindaje_status": "BLINDADO",
+  "m14_index": "DCA-01 a DCA-04",
+  "script_real": null,
+  "panel_sha256": "0b87c5b46b1894a822d2c31ce880ef7452e24ba4b98d6e66bffc4b38eeb4802a"
+}
