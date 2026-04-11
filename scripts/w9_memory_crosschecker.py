@@ -38,22 +38,45 @@ Your job: classify each FINDING against PRIOR-EVIDENCE snippets found by greppin
 
 Classification rules:
 - BLINDADO: the prior evidence contains (a) a Q1 citation, (b) a specific calculation/value, AND (c) an explicit sentence already integrated in the manuscript. All three required.
-- PARCIAL: some but not all of the three exist. Must name the missing piece (CITATION_MISSING / CALC_MISSING / PHRASE_MISSING).
+- PARCIAL: some but not all of the three exist. Must name the missing piece.
 - NUEVO: no prior evidence found, genuinely new.
 - CONTRADICCION: prior evidence directly contradicts the finding claim.
 
-Return strict JSON:
+Return STRICT JSON with a single top-level key 'classifications' whose value is a list of objects. Each object must have exactly these fields:
+- 'finding_id': string, the finding id exactly as given in the input payload.
+- 'classification': string, must be exactly one of these literal values: 'BLINDADO', 'PARCIAL', 'NUEVO', 'CONTRADICCION'.
+- 'rationale': string, at most 250 characters, explaining why this classification was chosen.
+- 'missing': string or JSON null. When classification is PARCIAL this must be one of 'CITATION_MISSING', 'CALC_MISSING', 'PHRASE_MISSING'. For any other classification use JSON null.
+- 'prior_refs': list of strings, each in the form 'file:line' pointing to prior evidence locations. Empty list if none.
+
+Example of a well-formed response (values are illustrative only, use the real findings from the input):
+```json
 {
   "classifications": [
     {
-      "finding_id": "...",
-      "classification": "BLINDADO|PARCIAL|NUEVO|CONTRADICCION",
-      "rationale": "<=250 chars",
-      "missing": "CITATION_MISSING|CALC_MISSING|PHRASE_MISSING|null",
-      "prior_refs": ["file:line", ...]
+      "finding_id": "F-A1-001",
+      "classification": "BLINDADO",
+      "rationale": "Prior evidence includes Gorris 2025 citation, IRR 0.701 CI [0.551,0.910] computed in S50, and explicit Methods sentence already in manuscript v5.",
+      "missing": null,
+      "prior_refs": ["memory/project_auditoria_Q1_S50_cierre_completo.md:42", "obsidian_vault/04_Parte_I_EcoEpi/Paper_EID_Final.md:128"]
+    },
+    {
+      "finding_id": "F-B2-014",
+      "classification": "PARCIAL",
+      "rationale": "Q1 citation present (PAHO 2025) but no numeric calculation derived yet and no sentence integrated in the manuscript body.",
+      "missing": "CALC_MISSING",
+      "prior_refs": ["memory/project_sesion_code_S59_capa1_2_hallazgos.md:77"]
+    },
+    {
+      "finding_id": "F-C3-022",
+      "classification": "NUEVO",
+      "rationale": "No prior grep hits across memory/ or obsidian_vault/; genuinely new finding from current audit pass.",
+      "missing": null,
+      "prior_refs": []
     }
   ]
 }
+```
 """
 
 KEYWORD_STOPWORDS = set(

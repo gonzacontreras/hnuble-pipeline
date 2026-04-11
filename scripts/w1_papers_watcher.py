@@ -44,9 +44,34 @@ Score each candidate 0-10 based on:
 - Relevance to our argument (methodological triangulation, new contradicting evidence, extension of findings)
 - Recency and Q1 venue
 - Direct usability as a citation in Intro / Methods / Discussion
-Return STRICT JSON with a single key 'papers', a list of objects with:
-{"id": str, "score": int, "reason": str (<=120 chars), "target_section": "intro|methods|results|discussion|reject"}
+
+Return STRICT JSON with a single top-level key 'papers' whose value is a list of objects. Each object must have exactly these fields:
+- 'id': string, the candidate id exactly as given in the input payload.
+- 'score': integer between 0 and 10 inclusive.
+- 'reason': string, at most 120 characters, describing why the paper is relevant.
+- 'target_section': string, must be one of these literal values: 'intro', 'methods', 'results', 'discussion', 'reject'.
+
 Only include candidates with score >= 6. Score 10 = must-cite. Score 9 = strong addition.
+
+Example of a well-formed response (the values are illustrative only, use the real candidates from the input):
+```json
+{
+  "papers": [
+    {
+      "id": "10.1234/example.2025.001",
+      "score": 9,
+      "reason": "Provides independent validation of 5-month lag FSI signal in a comparable rodent-borne zoonosis",
+      "target_section": "discussion"
+    },
+    {
+      "id": "abc123def4",
+      "score": 7,
+      "reason": "Methodological extension of GLMM nbinom2 with DHARMa residuals for count data",
+      "target_section": "methods"
+    }
+  ]
+}
+```
 """
 
 
