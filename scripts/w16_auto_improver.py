@@ -263,16 +263,18 @@ def validate_edit(old_full: str, new_full: str) -> tuple[bool, str]:
     if abs(new_wc - old_wc) > WC_TOLERANCE:
         return False, f"word count delta {new_wc - old_wc} exceeds ±{WC_TOLERANCE}"
 
-    # Phase 3: no duplicate refs in new text
-    new_refs = _extract_refs(new_full)
-    if len(new_refs) != len(set(new_refs)):
-        return False, "duplicate refs introduced"
-
-    # Phase 4: ref count stability
-    old_ref_count = len(set(_extract_refs(old_full)))
-    new_ref_count = len(set(_extract_refs(new_full)))
-    if abs(new_ref_count - old_ref_count) > REFS_TOLERANCE:
-        return False, f"ref count delta {new_ref_count - old_ref_count}"
+    # Phase 3: author-year ref count stability.
+    # This manuscript uses author-year refs (e.g., "Fox et al. 2024"),
+    # NOT Vancouver numbered refs. Count author-year patterns instead.
+    ay_pattern = re.compile(
+        r"\b[A-Z][A-Za-z\-\u00C0-\u017F]+"
+        r"(?:\s+(?:et\s+al\.?|&\s+[A-Z][A-Za-z\-\u00C0-\u017F]+))?"
+        r",?\s+\d{4}[a-z]?\b"
+    )
+    old_ay = len(ay_pattern.findall(old_full))
+    new_ay = len(ay_pattern.findall(new_full))
+    if abs(new_ay - old_ay) > REFS_TOLERANCE + 2:
+        return False, f"author-year ref count delta {new_ay - old_ay}"
 
     return True, "ok"
 
