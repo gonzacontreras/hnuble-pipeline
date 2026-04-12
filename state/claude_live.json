@@ -1,42 +1,34 @@
 {
   "version": 1,
-  "heartbeat_sequence": 88,
-  "updated_at": "2026-04-12T05:00:17Z",
+  "heartbeat_sequence": 91,
+  "updated_at": "2026-04-12T05:12:56Z",
   "session": "S61",
   "session_deadline": "2026-04-14T06:00:00Z",
-  "current_block": "W13",
-  "current_block_label": "EID Scorer",
-  "overall_status": "done",
+  "current_block": "W16",
+  "current_block_label": "Auto-improvement iteration",
+  "overall_status": "running",
   "agent": "Claude Opus 4.6 (1M context)",
   "methodology": "5-fase anti-bypass + M14 + multi-agent paralelo + multiprocessing.Pool(8)",
   "sub_blocks": [
     {
-      "id": "W13.load",
-      "label": "Load manuscript + refs + model_eval",
+      "id": "W16.pick",
+      "label": "Pick target paragraph",
       "agent_type": "main",
-      "status": "done",
-      "output_refs": [
-        "state/manuscript_v5_condensed.json"
-      ]
+      "status": "pending"
     },
     {
-      "id": "W13.score",
-      "label": "Score 13 components",
-      "agent_type": "sonnet x11",
+      "id": "W16.edit",
+      "label": "Propose + validate edit",
+      "agent_type": "sonnet",
       "status": "done",
-      "detail": "asyncio fan-out",
-      "output_refs": [
-        "state/eid_score.json"
-      ]
+      "detail": "para 69",
+      "output_refs": []
     },
     {
-      "id": "W13.write",
-      "label": "Persist eid_score.json",
+      "id": "W16.commit",
+      "label": "Persist + cascade",
       "agent_type": "main",
-      "status": "done",
-      "output_refs": [
-        "state/eid_score.json"
-      ]
+      "status": "pending"
     }
   ],
   "current_findings": [
@@ -55,7 +47,7 @@
     "Deploy Pages trigger manual · verificación URL pública",
     "HANDOFF.md con guía 5 pasos · ntfy notif final 'Sistema LIVE'"
   ],
-  "tool_calls_total": 84,
+  "tool_calls_total": 85,
   "files_touched": [
     "pipeline/repo/state/claude_live.json",
     "pipeline/repo/state/schemas/claude_live.schema.json",
@@ -94,7 +86,7 @@
   "eta_estimate": {
     "optimistic_wall_time_min": 30,
     "pessimistic_wall_time_min": 60,
-    "current_block_eta_min": 15
+    "current_block_eta_min": 3
   },
   "m14_preflight": {
     "catalog_consulted": true,
