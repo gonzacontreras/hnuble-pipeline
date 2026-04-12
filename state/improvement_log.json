@@ -1,4 +1,135 @@
 {
-  "version": 0,
-  "entries": []
+  "version": 1,
+  "entries": [
+    {
+      "entry_id": "iter1-01",
+      "timestamp": "2026-04-12T05:11:50Z",
+      "annotation_id": "manual-iter1-novelty-1",
+      "para_index": 0,
+      "para_section": "Introduction para 10",
+      "old_text": "",
+      "new_text": "",
+      "edit_type": "replace",
+      "rationale": "Explicit novelty gap: no prior hantavirus EWS combines satellite + walk-forward + proper scoring rules",
+      "lift_estimate": 0.01,
+      "risk": "low",
+      "agents_used": [
+        "claude-opus-direct"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 0,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "iter1-02",
+      "timestamp": "2026-04-12T05:11:50Z",
+      "annotation_id": "manual-iter1-reviewer_anticipation-2",
+      "para_index": 0,
+      "para_section": "Discussion para 36",
+      "old_text": "",
+      "new_text": "",
+      "edit_type": "replace",
+      "rationale": "Added BSS benchmark range 40-65% for dengue EWS comparison",
+      "lift_estimate": 0.01,
+      "risk": "low",
+      "agents_used": [
+        "claude-opus-direct"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 0,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "iter1-03",
+      "timestamp": "2026-04-12T05:11:50Z",
+      "annotation_id": "manual-iter1-novelty-3",
+      "para_index": 0,
+      "para_section": "Discussion para 37",
+      "old_text": "",
+      "new_text": "",
+      "edit_type": "replace",
+      "rationale": "Explicit superiority: walk-forward + proper scoring rules vs retrospective accuracy",
+      "lift_estimate": 0.01,
+      "risk": "low",
+      "agents_used": [
+        "claude-opus-direct"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 0,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "iter1-04",
+      "timestamp": "2026-04-12T05:11:50Z",
+      "annotation_id": "manual-iter1-journal_fit_eid-4",
+      "para_index": 0,
+      "para_section": "Discussion para 40 PHI",
+      "old_text": "",
+      "new_text": "",
+      "edit_type": "replace",
+      "rationale": "Strengthened operational framing: satellite-derived proxy without field logistics",
+      "lift_estimate": 0.01,
+      "risk": "low",
+      "agents_used": [
+        "claude-opus-direct"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 0,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "iter1-05",
+      "timestamp": "2026-04-12T05:11:50Z",
+      "annotation_id": "manual-iter1-reviewer_anticipation-5",
+      "para_index": 0,
+      "para_section": "Discussion para 43 Limitations",
+      "old_text": "",
+      "new_text": "",
+      "edit_type": "replace",
+      "rationale": "Reframed as pre-identified and mitigated",
+      "lift_estimate": 0.01,
+      "risk": "low",
+      "agents_used": [
+        "claude-opus-direct"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 0,
+      "refs_delta": 0
+    }
+  ]
 }
