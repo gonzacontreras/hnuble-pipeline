@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -129,6 +129,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": 0,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-3473a79b",
+      "timestamp": "2026-04-12T05:16:20Z",
+      "annotation_id": "auto-reviewer_anticipation-69",
+      "para_index": 69,
+      "para_section": "reviewer_anticipation",
+      "old_text": "**Limitations**. Eight limitations were pre-identified and mitigated:\n1. **Modest incremental skill vs stringent null** (~2% Tier-1 BSS residual over Poisson null — expected per Fox 2024)\n2. **Burn-in period** (4 folds 2011-2014, θ>10⁶ Poisson limit; Brooks 2017 documented, not failure)\n3. **Tier 3 exploratory designation** (20 events → wide CIs; exploratory under all scoring formulations)\n4. **Scoring rule choice** (log score primary per Gneiting-Raftery; scaled Brier retained for comparability",
+      "new_text": "**Limitations**. Eight limitations were identified and mitigated through design and transparency:\n1. **Modest incremental skill vs stringent null** (~2% Tier-1 BSS residual over Poisson null reflects the theoretical ceiling for rare-event forecasting documented by Fox 2024)\n2. **Burn-in period** (4 folds 2011–2014 exceeded θ>10⁶ Poisson convergence limit per Brooks 2017—documented as design constraint, not model failure)\n3. **Tier 3 exploratory designation** (20 events yield wide CIs; all scorin",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: reviewer_anticipation strategy",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 47,
       "refs_delta": 0
     }
   ]

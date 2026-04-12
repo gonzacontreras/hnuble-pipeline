@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "heartbeat_sequence": 94,
-  "updated_at": "2026-04-12T05:14:50Z",
+  "heartbeat_sequence": 97,
+  "updated_at": "2026-04-12T05:16:20Z",
   "session": "S61",
   "session_deadline": "2026-04-14T06:00:00Z",
   "current_block": "W16",
@@ -20,15 +20,18 @@
       "id": "W16.edit",
       "label": "Propose + validate edit",
       "agent_type": "sonnet",
-      "status": "done",
-      "detail": "para 69",
-      "output_refs": []
+      "status": "running",
+      "detail": "para 69"
     },
     {
       "id": "W16.commit",
       "label": "Persist + cascade",
       "agent_type": "main",
-      "status": "pending"
+      "status": "done",
+      "output_refs": [
+        "state/manuscript_improved.md",
+        "state/improvement_log.json"
+      ]
     }
   ],
   "current_findings": [
@@ -47,7 +50,7 @@
     "Deploy Pages trigger manual · verificación URL pública",
     "HANDOFF.md con guía 5 pasos · ntfy notif final 'Sistema LIVE'"
   ],
-  "tool_calls_total": 86,
+  "tool_calls_total": 87,
   "files_touched": [
     "pipeline/repo/state/claude_live.json",
     "pipeline/repo/state/schemas/claude_live.schema.json",

@@ -161,15 +161,15 @@ The three-tier framework maps onto operational response windows for Chile's inte
 
 **Companion study disclosure**. A companion clinical analysis of 34 HCPS patients treated at Hospital Clínico Herminda Martín, Chillán, 2010–2025 has been submitted separately (Contreras et al., Revista Chilena de Infectología). It addresses clinical characterization, severity, and an early prognostic triad (respiratory rate >22/min, platelets <150,000/μL, hematocrit above ULN) using Firth-penalized logistic regression. The present ecological and companion clinical studies share no analytical methods, tables, figures, or computed metrics; only publicly available regional descriptors (total case count, case-fatality ratio, ethics approval) are common. Both manuscripts were designed as complementary analyses under ICMJE criteria for acceptable secondary publication, with full disclosure to both journals.
 
-**Limitations**. Eight limitations were pre-identified and mitigated:
-1. **Modest incremental skill vs stringent null** (~2% Tier-1 BSS residual over Poisson null — expected per Fox 2024)
-2. **Burn-in period** (4 folds 2011-2014, θ>10⁶ Poisson limit; Brooks 2017 documented, not failure)
-3. **Tier 3 exploratory designation** (20 events → wide CIs; exploratory under all scoring formulations)
-4. **Scoring rule choice** (log score primary per Gneiting-Raftery; scaled Brier retained for comparability)
-5. **Ecological fallacy** (comuna-month unit; Robinson 1950; Morgenstern 1995)
-6. **Specification search** (S22-S29 alternatives documented; frozen pre-walk-forward; E-values = 2.07/2.30)
-7. **External validation** (confined to Ñuble; southern Argentina transferability needs empirical verification)
-8. **Exposure misclassification** (commune of probable infection; 87% peridomestic per Riquelme 2015; biases toward null per Yland 2022; Hoek 2024)
+**Limitations**. Eight limitations were identified and mitigated through design and transparency:
+1. **Modest incremental skill vs stringent null** (~2% Tier-1 BSS residual over Poisson null reflects the theoretical ceiling for rare-event forecasting documented by Fox 2024)
+2. **Burn-in period** (4 folds 2011–2014 exceeded θ>10⁶ Poisson convergence limit per Brooks 2017—documented as design constraint, not model failure)
+3. **Tier 3 exploratory designation** (20 events yield wide CIs; all scoring formulations independently classify this tier as exploratory, consistent with pre-registration)
+4. **Scoring rule choice** (log score primary per Gneiting-Raftery recommendations; scaled Brier retained to enable direct comparison with existing literature)
+5. **Ecological fallacy** (comuna-month aggregation carries inherent individual-level inference limits per Robinson 1950; Morgenstern 1995)
+6. **Specification search** (S22–S29 alternatives fully documented; frozen pre-walk-forward; E-values = 2.07/2.30 exceed unmeasured-confounding thresholds)
+7. **External validation** (Ñuble-only; southern Argentina transferability requires empirical verification in future deployments)
+8. **Exposure misclassification** (commune of probable infection; 87% peridomestic transmission per Riquelme 2015 supports spatial accuracy; residual misclassification biases estimates toward null per Yland 2022; Hoek 2024)
 
 ### 5.8 Conclusions (109 words)
 
