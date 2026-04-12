@@ -1,63 +1,41 @@
 {
   "version": 1,
-  "heartbeat_sequence": 82,
-  "updated_at": "2026-04-12T04:59:22Z",
+  "heartbeat_sequence": 88,
+  "updated_at": "2026-04-12T05:00:17Z",
   "session": "S61",
   "session_deadline": "2026-04-14T06:00:00Z",
-  "current_block": "W14",
-  "current_block_label": "Orchestrating 2 annotations",
-  "overall_status": "running",
+  "current_block": "W13",
+  "current_block_label": "EID Scorer",
+  "overall_status": "done",
   "agent": "Claude Opus 4.6 (1M context)",
   "methodology": "5-fase anti-bypass + M14 + multi-agent paralelo + multiprocessing.Pool(8)",
   "sub_blocks": [
     {
-      "id": "W14.load",
-      "label": "Load context",
+      "id": "W13.load",
+      "label": "Load manuscript + refs + model_eval",
       "agent_type": "main",
       "status": "done",
       "output_refs": [
-        "state/annotations.json"
+        "state/manuscript_v5_condensed.json"
       ]
     },
     {
-      "id": "W14.A",
-      "label": "Layer A fact-check",
-      "agent_type": "sonnet x6",
-      "status": "running",
-      "detail": "0 agents"
-    },
-    {
-      "id": "W14.B",
-      "label": "Layer B content",
-      "agent_type": "sonnet x8",
-      "status": "running",
-      "detail": "8 agents"
-    },
-    {
-      "id": "W14.C",
-      "label": "Layer C review",
-      "agent_type": "sonnet x6",
-      "status": "running",
-      "detail": "2 agents"
-    },
-    {
-      "id": "W14.D",
-      "label": "Layer D synthesis",
-      "agent_type": "sonnet x2",
+      "id": "W13.score",
+      "label": "Score 13 components",
+      "agent_type": "sonnet x11",
       "status": "done",
-      "detail": "supervisor + manuscript-writer",
+      "detail": "asyncio fan-out",
       "output_refs": [
-        "state/improvement_log.json"
+        "state/eid_score.json"
       ]
     },
     {
-      "id": "W14.commit",
-      "label": "Commit + cascade",
+      "id": "W13.write",
+      "label": "Persist eid_score.json",
       "agent_type": "main",
       "status": "done",
       "output_refs": [
-        "state/manuscript_improved.md",
-        "state/improvement_log.json"
+        "state/eid_score.json"
       ]
     }
   ],
@@ -77,7 +55,7 @@
     "Deploy Pages trigger manual · verificación URL pública",
     "HANDOFF.md con guía 5 pasos · ntfy notif final 'Sistema LIVE'"
   ],
-  "tool_calls_total": 82,
+  "tool_calls_total": 84,
   "files_touched": [
     "pipeline/repo/state/claude_live.json",
     "pipeline/repo/state/schemas/claude_live.schema.json",
