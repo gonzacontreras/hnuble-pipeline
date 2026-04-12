@@ -582,9 +582,12 @@ async def orchestrate(annotation_ids: list[str]) -> list[dict]:
     encyclopedia = state.load_json("encyclopedia.json", {"categories": {}})
     annotations_state = state.load_json("annotations.json", {"items": []})
 
-    m14_catalog_path = (
-        REPO_ROOT.parent.parent / "memory" / "CANONICAL_BLINDAJES_INDEX.md"
-    )
+    # M14 catalog: try repo-local copy first (CI), then developer path (local).
+    m14_catalog_path = REPO_ROOT / "state" / "m14_catalog.md"
+    if not m14_catalog_path.exists():
+        m14_catalog_path = (
+            REPO_ROOT.parent.parent / "memory" / "CANONICAL_BLINDAJES_INDEX.md"
+        )
     m14_catalog = (
         m14_catalog_path.read_text(encoding="utf-8")
         if m14_catalog_path.exists()
