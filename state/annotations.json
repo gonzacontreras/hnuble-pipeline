@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "last_poll_at": "2026-04-12T04:35:05.966044Z",
+  "version": 3,
+  "last_poll_at": "2026-04-12T04:38:48.958614Z",
   "items": [
     {
       "schema_version": "v1",
@@ -16,6 +16,22 @@
       "para_section": "Results (epidemiology)",
       "prior_annotations_count": 0,
       "received_at": "2026-04-12T04:35:05.966044Z",
+      "processed": false
+    },
+    {
+      "schema_version": "v1",
+      "annotation_id": "ann-test-smoke-002",
+      "para_id": 5,
+      "selection_start": 0,
+      "selection_end": 60,
+      "selected_text": "three-tier early warning system for Andes virus HCPS",
+      "color": "green",
+      "comment": "Smoke test 2: sugerir mejorar la introduccion con datos PAHO 2025 mas recientes",
+      "ts": "2026-04-12T04:40:00Z",
+      "user_agent": "smoke-test-cli",
+      "para_section": "Introduction",
+      "prior_annotations_count": 1,
+      "received_at": "2026-04-12T04:38:48.958614Z",
       "processed": false
     }
   ]
