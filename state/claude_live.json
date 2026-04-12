@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "heartbeat_sequence": 150,
-  "updated_at": "2026-04-12T15:22:29Z",
+  "heartbeat_sequence": 152,
+  "updated_at": "2026-04-12T15:51:09Z",
   "session": "S61",
   "session_deadline": "2026-04-14T06:00:00Z",
-  "current_block": "W16",
+  "current_block": "W12",
   "current_block_label": "Auto-improvement iteration",
   "overall_status": "running",
   "agent": "Claude Opus 4.6 (1M context)",
@@ -14,7 +14,10 @@
       "id": "W16.pick",
       "label": "Pick target paragraph",
       "agent_type": "main",
-      "status": "pending"
+      "status": "done",
+      "output_refs": [
+        "state/annotations.json"
+      ]
     },
     {
       "id": "W16.edit",
@@ -47,7 +50,7 @@
     "Deploy Pages trigger manual · verificación URL pública",
     "HANDOFF.md con guía 5 pasos · ntfy notif final 'Sistema LIVE'"
   ],
-  "tool_calls_total": 109,
+  "tool_calls_total": 110,
   "files_touched": [
     "pipeline/repo/state/claude_live.json",
     "pipeline/repo/state/schemas/claude_live.schema.json",
