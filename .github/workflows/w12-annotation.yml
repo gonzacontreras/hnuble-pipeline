@@ -34,7 +34,6 @@ jobs:
         run: |
           git config user.name "hnuble-bot"
           git config user.email "bot@hnuble.io"
-          # Robust add: only stage files that actually exist
           for f in state/annotations.json state/claude_live.json; do
             [ -f "$f" ] && git add "$f" || echo "skip missing $f"
           done
@@ -42,5 +41,23 @@ jobs:
             echo "no changes"
           else
             git commit -m "W12: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            git push
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && break
+              echo "push attempt $i failed, retrying in 3s"
+              sleep 3
+            done
+          fi
+      - name: Dispatch W14 if new annotations
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f state/w14_dispatch_ids.txt ]; then
+            IDS=$(cat state/w14_dispatch_ids.txt)
+            if [ -n "$IDS" ]; then
+              echo "Dispatching W14 with: $IDS"
+              gh workflow run w14-master.yml --field "annotation_ids=$IDS"
+            fi
+          else
+            echo "No new annotations to dispatch"
           fi

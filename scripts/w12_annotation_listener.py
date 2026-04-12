@@ -158,7 +158,12 @@ def main() -> None:
         state.save_json(STATE_FILE, current)
 
         new_ids = [n["annotation_id"] for n in new_items]
-        dispatch_w14(new_ids)
+        # Write IDs to a dispatch file; the YAML step AFTER commit will
+        # read this and fire W14, guaranteeing annotations.json is pushed
+        # before W14 checks out the repo.
+        dispatch_path = REPO_ROOT / "state" / "w14_dispatch_ids.txt"
+        dispatch_path.write_text(",".join(new_ids), encoding="utf-8")
+        print(f"[W12] wrote dispatch ids: {new_ids}", flush=True)
 
     finalize("W12", [f"state/{STATE_FILE}"], sub_block_id="W12.poll")
     print(
