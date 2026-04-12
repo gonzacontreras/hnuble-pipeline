@@ -190,6 +190,106 @@
         "04_sesgos_vacios.md"
       ],
       "mcc_at": "2026-04-11T07:53:31.497247Z"
+    },
+    {
+      "id": "W3-20250614-01",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "measurement",
+      "title": "Commune of probable infection assignment protocol unspecified pre-Ñuble split",
+      "evidence": "cases reported before that date (n = 103) were originally registered under the SEREMI Biobío regional office and were assigned to their probable commune of infection—rather than residence—following the case reconciliation protocol described in Supplementary Methods",
+      "mechanism": "103/136 (75.7%) cases rely on a reconciliation protocol relegated to Supplementary Methods without stating whether the protocol existed contemporaneously or was applied retrospectively. If retrospective, it introduces recall/records bias. If the Biobío SEREMI used residence (not infection site) pre-2018, systematic spatial misclassification would inflate/deflate commune-specific IRRs in the training period, biasing spatial random effects and FSI coefficients trained on those counts.",
+      "fix_hint": "Move reconciliation protocol to main text Methods (±100 words). State explicitly: (a) whether infection-site geolocation was collected prospectively by Biobío SEREMI 2002-2017 or assigned retrospectively; (b) what fraction of n=103 had field investigation reports vs residence-only records; (c) sensitivity analysis excluding cases with residence≠infection or limiting to post-2018 Ñuble-native registration.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior vault references case reconciliation and probable commune of infection protocol, but no Q1 citation provided, no numeric calculation shown, and no explicit integrated sentence in manuscript.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/02_Datos/Panel Oficial M1M2.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
+    },
+    {
+      "id": "W3-20250614-02",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "measurement",
+      "title": "FSI wildfire-veto threshold (ΔNBR2 < −0.15) lacks calibration evidence",
+      "evidence": "with active-burn pixels vetoed (ΔNBR2 < −0.15) to prevent wildfire-scar contamination (Ecke et al. 2019)",
+      "mechanism": "The ΔNBR2 = −0.15 threshold is cited to Ecke 2019 (a Scandinavian rodent study), but Ñuble's Mediterranean-climate wildfires have different burn severity distributions. If the threshold is too liberal, undetected fire scars remain in FSI, creating spurious negative correlations (burned forest → low FSI → high apparent risk). If too strict, it masks true C. quila post-fire regrowth signals. No sensitivity analysis across thresholds [−0.10, −0.20] is reported.",
+      "fix_hint": "Report fire-pixel prevalence in the Ñuble FSI series (% months affected). Perform sensitivity analysis varying ΔNBR2 ∈ {−0.10, −0.12, −0.15, −0.18, −0.20} and show IRR_R5 stability. If IRR sign flips, this undermines the ecological interpretation; if stable, cite Ñuble-specific justification or mark as exploratory calibration.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Ecke 2019 citation present, ΔNBR2 threshold −0.15 documented in GEE_FSI_Reconstruccion_S51.md and project memory S51, but no explicit calibration validation or integrated sentence in manuscript.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "memory/project_GEE_FSI_reconstruccion_S51.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/GEE_FSI_Reconstruccion_S51.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
+    },
+    {
+      "id": "W3-20250614-05",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "measurement",
+      "title": "87% peridomestic transmission assumption (Riquelme 2015) unverified in Ñuble",
+      "evidence": "87% peridomestic transmission per Riquelme 2015 supports spatial accuracy",
+      "mechanism": "Riquelme 2015 is cited to justify commune-level spatial accuracy under the infection-site assignment protocol, but the 87% figure likely derives from national-level or different-region data (not Ñuble-specific 2002–2024). Ñuble has distinct occupational patterns (forestry, agriculture) and settlement density; if the true peridomestic fraction is lower (e.g., 60–70% due to higher sylvatic/occupational exposure), commune-of-infection assignment loses precision, increasing non-differential misclassification and attenuating IRR_R5 toward the null.",
+      "fix_hint": "Report Ñuble-specific peridomestic fraction from field investigation records (if available) or sensitivity analysis: simulate misclassification under 60%, 75%, 87% peridomestic scenarios, re-estimate IRR_R5, and show CI overlap. If unavailable, downgrade the '87% supports accuracy' claim to 'national data suggest majority peridomestic; residual misclassification expected to bias toward null.'",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Riquelme 2015 citation present, 87% peridomestic transmission documented in multiple vault files, but no Ñuble-specific validation calculation or integrated caveat sentence in manuscript.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/01_Proyecto/Hipotesis Principal.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Auditoria_Q1_S50_cierre.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
+    },
+    {
+      "id": "W3-20250614-06",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "information",
+      "title": "Case reconciliation protocol in Supplementary Methods creates verifiability barrier",
+      "evidence": "following the case reconciliation protocol described in Supplementary Methods",
+      "mechanism": "The protocol governing 75.7% of cases (103/136 pre-Ñuble split) is not in the main text. Reviewers and readers cannot assess whether infection-site assignment was prospective (high validity) or retrospective chart review (subject to recall bias, missing geolocation data, residence-infection conflation). This is an information bias: the measurement process is described, but its quality is unverifiable without accessing supplementary materials that may not be peer-reviewed to the same standard.",
+      "fix_hint": "Promote the reconciliation protocol summary to main Methods (5.5.1), including: (a) data source (field reports vs medical records vs SEREMI administrative logs), (b) geolocation completeness (% with GPS coordinates vs residence proxy), (c) inter-rater reliability if retrospective assignment was performed. Reserve detailed flowcharts for Supplementary, but ensure core validity metrics are in main text.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Case reconciliation protocol referenced in vault Panel Oficial M1M2.md and Estado_Conocimiento_Serie_Ecologica_S50.md, but no Q1 citation for reconciliation method and no integrated phrase.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/02_Datos/Panel Oficial M1M2.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
+    },
+    {
+      "id": "W3-20250614-09",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "publication",
+      "title": "PAHO 2025 alert citation in Conclusions lacks methodological connection",
+      "evidence": "Against the regional backdrop of the PAHO December 2025 epidemiological alert documenting renewed hantavirus activity across the Americas (PAHO 2025), the work supports adoption...",
+      "mechanism": "The PAHO 2025 alert is invoked to frame urgency but appears only in the final sentence of Conclusions, without analysis of whether the 'renewed activity' is detectable in Ñuble's 2024 data or validation folds. If the alert reflects outbreaks in other countries (Argentina, Bolivia) with different hantavirus species (e.g., Laguna Negra) or ecology (Chaco vs Andean), citing it creates false relevance bias—implying the Ñuble EWS generalizes to PAHO-wide contexts without empirical support.",
+      "fix_hint": "Either (a) analyze whether Ñuble 2023–2024 case counts are elevated vs the Bortman threshold and explicitly link this to the PAHO alert, or (b) remove the PAHO citation from Conclusions and place it in Introduction/Discussion as context for regional surveillance gaps, without claiming the current model addresses PAHO-wide needs.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "PAHO 2025 citation present, multiple vault references to Manuscrito_v5_CONDENSED_S60.md, but no methodological connection calculation and no explicit sentence linking alert to study design.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md:0",
+        "memory/project_auditoria_Q1_S50_cierre_completo.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     }
   ]
 }

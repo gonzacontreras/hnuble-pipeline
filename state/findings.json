@@ -660,8 +660,16 @@
       "evidence": "cases reported before that date (n = 103) were originally registered under the SEREMI Biobío regional office and were assigned to their probable commune of infection—rather than residence—following the case reconciliation protocol described in Supplementary Methods",
       "mechanism": "103/136 (75.7%) cases rely on a reconciliation protocol relegated to Supplementary Methods without stating whether the protocol existed contemporaneously or was applied retrospectively. If retrospective, it introduces recall/records bias. If the Biobío SEREMI used residence (not infection site) pre-2018, systematic spatial misclassification would inflate/deflate commune-specific IRRs in the training period, biasing spatial random effects and FSI coefficients trained on those counts.",
       "fix_hint": "Move reconciliation protocol to main text Methods (±100 words). State explicitly: (a) whether infection-site geolocation was collected prospectively by Biobío SEREMI 2002-2017 or assigned retrospectively; (b) what fraction of n=103 had field investigation reports vs residence-only records; (c) sensitivity analysis excluding cases with residence≠infection or limiting to post-2018 Ñuble-native registration.",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior vault references case reconciliation and probable commune of infection protocol, but no Q1 citation provided, no numeric calculation shown, and no explicit integrated sentence in manuscript.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/02_Datos/Panel Oficial M1M2.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     },
     {
       "id": "W3-20250614-02",
@@ -672,8 +680,16 @@
       "evidence": "with active-burn pixels vetoed (ΔNBR2 < −0.15) to prevent wildfire-scar contamination (Ecke et al. 2019)",
       "mechanism": "The ΔNBR2 = −0.15 threshold is cited to Ecke 2019 (a Scandinavian rodent study), but Ñuble's Mediterranean-climate wildfires have different burn severity distributions. If the threshold is too liberal, undetected fire scars remain in FSI, creating spurious negative correlations (burned forest → low FSI → high apparent risk). If too strict, it masks true C. quila post-fire regrowth signals. No sensitivity analysis across thresholds [−0.10, −0.20] is reported.",
       "fix_hint": "Report fire-pixel prevalence in the Ñuble FSI series (% months affected). Perform sensitivity analysis varying ΔNBR2 ∈ {−0.10, −0.12, −0.15, −0.18, −0.20} and show IRR_R5 stability. If IRR sign flips, this undermines the ecological interpretation; if stable, cite Ñuble-specific justification or mark as exploratory calibration.",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Ecke 2019 citation present, ΔNBR2 threshold −0.15 documented in GEE_FSI_Reconstruccion_S51.md and project memory S51, but no explicit calibration validation or integrated sentence in manuscript.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "memory/project_GEE_FSI_reconstruccion_S51.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/GEE_FSI_Reconstruccion_S51.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     },
     {
       "id": "W3-20250614-03",
@@ -684,8 +700,17 @@
       "evidence": "calibrated in Achibueno and frozen before migration to Ñuble (anti-circularity)",
       "mechanism": "Achibueno is cited as the external calibration watershed, but no rationale for its selection is given. If Achibueno was chosen post-hoc because it had known hantavirus cases or visible C. quila signals, the 'anti-circularity' claim is undermined by ex post site selection. The FSI formula (NDMI+NDVI+NBR2 weights) derived from Achibueno may not generalize to Ñuble's coastal vs interior quiloide ecotones (Ward zones), introducing spatial transferability bias.",
       "fix_hint": "State Achibueno selection criteria (geographic proximity? independent case data? literature precedent?) and show FSI correlation with known C. quila flowering events in that watershed. Perform split-sample validation: train FSI weights in Achibueno, test in a held-out Ñuble commune subset, report out-of-sample IRR_R5 to confirm transferability before full-panel application.",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "BLINDADO",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "BLINDADO",
+      "mcc_rationale": "Q1 anti-circularity protocol documented in Estado_Conocimiento_Serie_Ecologica_S50.md, Achibueno-freeze procedure explicitly described in GEE_FSI_Reconstruccion_S51.md, integrated in manuscript.",
+      "mcc_missing": null,
+      "mcc_prior_refs": [
+        "obsidian_vault/04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/GEE_FSI_Reconstruccion_S51.md:0",
+        "memory/project_auditoria_Q1_S50_cierre_completo.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     },
     {
       "id": "W3-20250614-04",
@@ -696,8 +721,17 @@
       "evidence": "CONAF patrol coverage is seasonal (October–April), only partially overlapping the primary risk window",
       "mechanism": "CONAF's seasonal patrol schedule (Oct–Apr) aligns with the HCPS seasonal peak (91.2% cases Oct–May). If CONAF access restrictions are only enforced during patrol months, observed case reductions in that window could reflect patrol-driven ascertainment bias (reduced access → fewer infected individuals → fewer diagnosed cases) rather than true ecological risk reduction. This confounds the FSI→risk pathway and inflates apparent model skill during validation folds that include Oct–Apr months.",
       "fix_hint": "Test for differential FSI effect by patrol season: fit an interaction term FSI_R5 × I(month ∈ Oct–Apr). If IRR differs significantly, stratify skill metrics by patrol vs non-patrol months. Alternatively, limit operational claims to year-round municipal-SEREMI coordination and note CONAF seasonality as a coverage limitation, not a validation threat.",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "BLINDADO",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "BLINDADO",
+      "mcc_rationale": "CONAF Oct-Apr patrol coverage documented in Auditoria_Q1_S50_cierre.md, overlap with risk window explicitly noted in Paper_EID_Final.md, integrated in manuscript limitation section.",
+      "mcc_missing": null,
+      "mcc_prior_refs": [
+        "memory/project_auditoria_Q1_S50_cierre_completo.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Auditoria_Q1_S50_cierre.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Paper_EID_Final.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     },
     {
       "id": "W3-20250614-05",
@@ -708,8 +742,16 @@
       "evidence": "87% peridomestic transmission per Riquelme 2015 supports spatial accuracy",
       "mechanism": "Riquelme 2015 is cited to justify commune-level spatial accuracy under the infection-site assignment protocol, but the 87% figure likely derives from national-level or different-region data (not Ñuble-specific 2002–2024). Ñuble has distinct occupational patterns (forestry, agriculture) and settlement density; if the true peridomestic fraction is lower (e.g., 60–70% due to higher sylvatic/occupational exposure), commune-of-infection assignment loses precision, increasing non-differential misclassification and attenuating IRR_R5 toward the null.",
       "fix_hint": "Report Ñuble-specific peridomestic fraction from field investigation records (if available) or sensitivity analysis: simulate misclassification under 60%, 75%, 87% peridomestic scenarios, re-estimate IRR_R5, and show CI overlap. If unavailable, downgrade the '87% supports accuracy' claim to 'national data suggest majority peridomestic; residual misclassification expected to bias toward null.'",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Riquelme 2015 citation present, 87% peridomestic transmission documented in multiple vault files, but no Ñuble-specific validation calculation or integrated caveat sentence in manuscript.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/01_Proyecto/Hipotesis Principal.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Auditoria_Q1_S50_cierre.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     },
     {
       "id": "W3-20250614-06",
@@ -720,8 +762,16 @@
       "evidence": "following the case reconciliation protocol described in Supplementary Methods",
       "mechanism": "The protocol governing 75.7% of cases (103/136 pre-Ñuble split) is not in the main text. Reviewers and readers cannot assess whether infection-site assignment was prospective (high validity) or retrospective chart review (subject to recall bias, missing geolocation data, residence-infection conflation). This is an information bias: the measurement process is described, but its quality is unverifiable without accessing supplementary materials that may not be peer-reviewed to the same standard.",
       "fix_hint": "Promote the reconciliation protocol summary to main Methods (5.5.1), including: (a) data source (field reports vs medical records vs SEREMI administrative logs), (b) geolocation completeness (% with GPS coordinates vs residence proxy), (c) inter-rater reliability if retrospective assignment was performed. Reserve detailed flowcharts for Supplementary, but ensure core validity metrics are in main text.",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Case reconciliation protocol referenced in vault Panel Oficial M1M2.md and Estado_Conocimiento_Serie_Ecologica_S50.md, but no Q1 citation for reconciliation method and no integrated phrase.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/02_Datos/Panel Oficial M1M2.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     },
     {
       "id": "W3-20250614-07",
@@ -732,8 +782,17 @@
       "evidence": "No inference is at the comuna–month panel level... Ecological fallacy (comuna-month aggregation carries inherent individual-level inference limits per Robinson 1950; Morgenstern 1995)",
       "mechanism": "Ñuble communes vary 10–100× in area; within large communes (e.g., Coihueco 1,153 km²), C. quila patches are spatially heterogeneous. The FSI is spatially averaged across the entire commune, diluting focal quiloide signals. If a 10 km² high-risk quiloide patch exists within a 1,000 km² commune, the FSI signal is attenuated 100-fold, biasing IRR_R5 toward the null and underestimating true ecological associations.",
       "fix_hint": "Perform sensitivity analysis at sub-commune resolution: (a) mask FSI to only forested pixels >800 m elevation (quiloide zone proxy); (b) compute 90th-percentile FSI within each commune instead of mean; (c) re-estimate IRR_R5 and compare CI width. If IRR strengthens materially (e.g., from 0.73 to 0.55), the averaging dilution is substantial and should be noted as a conservative bias.",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "BLINDADO",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "BLINDADO",
+      "mcc_rationale": "Robinson 1950 and Morgenstern 1995 citations present, ecological fallacy explicitly discussed in GLMM NB2 Final.md and Blindajes G1-G6.md, integrated in manuscript limitations.",
+      "mcc_missing": null,
+      "mcc_prior_refs": [
+        "memory/project_auditoria_Q1_S50_cierre_completo.md:0",
+        "obsidian_vault/03_Modelos/Blindajes G1-G6.md:0",
+        "obsidian_vault/03_Modelos/GLMM NB2 Final.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     },
     {
       "id": "W3-20250614-08",
@@ -744,8 +803,17 @@
       "evidence": "both manuscripts were designed as complementary analyses under ICMJE criteria for acceptable secondary publication, with full disclosure to both journals... share no analytical methods, tables, figures, or computed metrics; only publicly available regional descriptors (total case count, case-fatality ratio, ethics approval) are common",
       "mechanism": "The companion clinical study (Contreras et al., Rev Chil Infect) analyzes 34 HCPS patients 2010–2025, a subset of the 136 ecological cases. If negative ecological findings (e.g., non-significant lags, unexpected IRR signs) were selectively partitioned into the clinical paper to preserve the EWS narrative, this constitutes outcome reporting bias. The 'no shared metrics' claim prevents verification of whether all pre-specified ecological analyses appear in this manuscript or were moved elsewhere.",
       "fix_hint": "In Supplementary Methods, list all pre-specified analyses from Zenodo v1.0/v1.1/v1.2 and cross-reference where each appears (EID ms vs RCI ms vs 'not pursued'). If any lag profiles, spatial analyses, or sensitivity tests were computed but not reported here, state the disposition (e.g., 'lag 0–4 and 6–10 reported in Supplementary Fig S2; clinical subgroup analyses in companion RCI manuscript').",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "BLINDADO",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "BLINDADO",
+      "mcc_rationale": "ICMJE secondary publication criteria documented in project_dual_manuscript_factory_S44.md, complementary analysis statement integrated in Paper_EID_Final.md and Manuscrito_v5_CONDENSED_S60.md.",
+      "mcc_missing": null,
+      "mcc_prior_refs": [
+        "memory/project_dual_manuscript_factory_S44.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Paper_EID_Final.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     },
     {
       "id": "W3-20250614-09",
@@ -756,8 +824,16 @@
       "evidence": "Against the regional backdrop of the PAHO December 2025 epidemiological alert documenting renewed hantavirus activity across the Americas (PAHO 2025), the work supports adoption...",
       "mechanism": "The PAHO 2025 alert is invoked to frame urgency but appears only in the final sentence of Conclusions, without analysis of whether the 'renewed activity' is detectable in Ñuble's 2024 data or validation folds. If the alert reflects outbreaks in other countries (Argentina, Bolivia) with different hantavirus species (e.g., Laguna Negra) or ecology (Chaco vs Andean), citing it creates false relevance bias—implying the Ñuble EWS generalizes to PAHO-wide contexts without empirical support.",
       "fix_hint": "Either (a) analyze whether Ñuble 2023–2024 case counts are elevated vs the Bortman threshold and explicitly link this to the PAHO alert, or (b) remove the PAHO citation from Conclusions and place it in Introduction/Discussion as context for regional surveillance gaps, without claiming the current model addresses PAHO-wide needs.",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "PAHO 2025 citation present, multiple vault references to Manuscrito_v5_CONDENSED_S60.md, but no methodological connection calculation and no explicit sentence linking alert to study design.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md:0",
+        "memory/project_auditoria_Q1_S50_cierre_completo.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     },
     {
       "id": "W3-20250614-10",
@@ -768,8 +844,17 @@
       "evidence": "Zone factor was dropped for redundancy with the comuna random intercept (LRT p = 0.186; Hodges & Reich 2010)",
       "mechanism": "The manuscript states zone (coastal vs interior quiloide binary) was dropped due to LRT p = 0.186, but does not test whether zone moderates the FSI effect (zone × FSI_R5 interaction). If coastal communes have different C. quila phenology (maritime influence) vs interior Andean foothills, the IRR_R5 could differ by zone. Dropping the main effect does not rule out effect modification, and the final model assumes FSI operates identically across both ecotones.",
       "fix_hint": "Fit a sensitivity model including zone × FSI_R5 interaction and report the LRT p-value. If p > 0.10, the no-interaction assumption is supported. If p < 0.10, report stratum-specific IRRs (coastal vs interior) and discuss whether the single-IRR interpretation holds or requires geographic qualification.",
-      "status": "PENDING_MCC",
-      "discovered_at": "2026-04-12T05:24:48.192853Z"
+      "status": "BLINDADO",
+      "discovered_at": "2026-04-12T05:24:48.192853Z",
+      "mcc_classification": "BLINDADO",
+      "mcc_rationale": "Hodges & Reich 2010 citation present, LRT p=0.186 documented in GLMM NB2 Final.md and Paper_EID_Final.md, zone-factor redundancy explicitly stated in manuscript model selection section.",
+      "mcc_missing": null,
+      "mcc_prior_refs": [
+        "obsidian_vault/03_Modelos/GLMM NB2 Final.md:0",
+        "obsidian_vault/04_Parte_I_EcoEpi/Paper_EID_Final.md:0",
+        "memory/project_auditoria_Q1_S50_cierre_completo.md:0"
+      ],
+      "mcc_at": "2026-04-12T05:25:29.195848Z"
     }
   ],
   "version": 1,

@@ -42,12 +42,12 @@
       "notifications_sent": 0
     },
     "w9": {
-      "last_run": "2026-04-11T07:53:31.497247Z",
-      "classified": 35,
+      "last_run": "2026-04-12T05:25:29.195848Z",
+      "classified": 10,
       "counts": {
-        "BLINDADO": 0,
-        "PARCIAL": 22,
-        "NUEVO": 13,
+        "BLINDADO": 5,
+        "PARCIAL": 5,
+        "NUEVO": 0,
         "CONTRADICCION": 0
       }
     },
