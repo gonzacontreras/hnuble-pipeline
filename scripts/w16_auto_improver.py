@@ -258,10 +258,17 @@ def validate_edit(old_full: str, new_full: str) -> tuple[bool, str]:
         if token in old_full and token not in new_full:
             return False, f"M14 token '{token}' removed"
 
-    # Phase 2: word count within tolerance of anchor
-    # Use delta from old rather than absolute anchor (parsed wc differs from docx wc)
-    if abs(new_wc - old_wc) > WC_TOLERANCE:
-        return False, f"word count delta {new_wc - old_wc} exceeds ±{WC_TOLERANCE}"
+    # Phase 2: word count within tolerance.
+    # Check both per-edit delta (strict ±25) and cumulative delta from control (±50).
+    per_edit_delta = new_wc - old_wc
+    if abs(per_edit_delta) > 25:
+        return False, f"per-edit word count delta {per_edit_delta} exceeds ±25"
+    # Also check cumulative drift from original control
+    control_path = Path(__file__).resolve().parents[1] / "state" / "manuscript_control.md"
+    if control_path.exists():
+        control_wc = _word_count(control_path.read_text(encoding="utf-8"))
+        if abs(new_wc - control_wc) > WC_TOLERANCE:
+            return False, f"cumulative word count drift {new_wc - control_wc} exceeds ±{WC_TOLERANCE} vs control"
 
     # Phase 3: author-year ref count stability.
     # This manuscript uses author-year refs (e.g., "Fox et al. 2024"),
