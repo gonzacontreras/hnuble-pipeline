@@ -107,7 +107,19 @@
       "target_section": "intro",
       "discovered_at": "2026-04-11T19:18:05.961924Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.3390/app16073496",
+      "title": "Cost-Aware Network Traffic Anomaly Detection with Histogram-Based Gradient Boosting",
+      "venue": null,
+      "pub_date": "2026-04-03",
+      "abstract": "Intrusion Detection Systems (IDSs) operate under asymmetric misclassification costs: false alarms (FP) consume analysts’ time and erode trust, whereas missed attacks (FN) carry business risks. This paper presents a complete pipeline for network anomaly detection on the CIC-IDS2017 dataset using Histogram-Based Gradient Boosting (HGB), with a particular focus on cost-aware threshold selection on a validation split for representative operating regimes wFP:wFN∈{1:1, 1:2, 1:3, 1:4, 1:5, 1:10}—treated as scenario-based proxies for varying risk posture, attack severity, and analyst workload rather than as universally fixed costs—and on the role of isotonic calibration. The results indicate that (i) under 1:1, the cost-optimal operating point aligns with the F1/MCC optimum; (ii) for 1:k cost regi",
+      "score": 7,
+      "reason": "Cost-aware threshold selection and calibration with gradient boosting, relevant to operational decision tiers",
+      "target_section": "methods",
+      "discovered_at": "2026-04-12T03:22:14.965318Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-11T19:18:05.961924Z"
+  "last_run": "2026-04-12T03:22:14.965318Z"
 }
