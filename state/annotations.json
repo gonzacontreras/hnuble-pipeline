@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "last_poll_at": "2026-04-12T04:38:48.958614Z",
+  "version": 4,
+  "last_poll_at": "2026-04-12T04:57:56.055000Z",
   "items": [
     {
       "schema_version": "v1",
@@ -32,6 +32,38 @@
       "para_section": "Introduction",
       "prior_annotations_count": 1,
       "received_at": "2026-04-12T04:38:48.958614Z",
+      "processed": false
+    },
+    {
+      "schema_version": "v1",
+      "annotation_id": "batch1-novelty-02",
+      "para_id": 37,
+      "selection_start": 0,
+      "selection_end": 85,
+      "selected_text": "Recent hantavirus EWS include Kazasidis et al. (2024 Sci Rep), who reached 82.8% accuracy",
+      "color": "green",
+      "comment": "COMPARISON SHARPENING: This comparison paragraph is currently descriptive. Strengthen by making explicit WHY our approach is superior: (1) Kazasidis uses retrospective accuracy not out-of-sample probabilistic scoring rules, (2) our walk-forward 14-fold validation is strictly out-of-sample vs their cross-validation, (3) our three-tier framework provides graded operational response vs their binary alert. Use active voice. This is where EID reviewers will judge novelty contribution. Keep exact word count.",
+      "ts": "2026-04-12T04:57:26Z",
+      "user_agent": "auto-improver-batch1",
+      "para_section": "Discussion",
+      "prior_annotations_count": 3,
+      "received_at": "2026-04-12T04:57:56.054979Z",
+      "processed": false
+    },
+    {
+      "schema_version": "v1",
+      "annotation_id": "batch1-reviewer-03",
+      "para_id": 36,
+      "selection_start": 0,
+      "selection_end": 103,
+      "selected_text": "Our pre-registered three-tier EWS achieves substantial skill against the PAHO endemic-channel",
+      "color": "green",
+      "comment": "REVIEWER ANTICIPATION: Opening Discussion paragraph. A reviewer will ask: 'How does BSS 68.1% compare to published benchmarks in infectious disease forecasting?' Preemptively address by noting that Fox et al. 2024 EID reported BSS range 40-65% for dengue in Brazil, making our 68.1% competitive. Also preempt: 'Is log score primary a departure from Brier tradition?' by briefly noting Gneiting-Raftery 2007 establishes log score as strictly proper. Active voice, confident but measured tone. Keep word count stable.",
+      "ts": "2026-04-12T04:57:26Z",
+      "user_agent": "auto-improver-batch1",
+      "para_section": "Discussion",
+      "prior_annotations_count": 4,
+      "received_at": "2026-04-12T04:57:56.055000Z",
       "processed": false
     }
   ]
