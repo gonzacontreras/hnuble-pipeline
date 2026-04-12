@@ -1,5 +1,22 @@
 {
-  "version": 1,
-  "last_poll_at": null,
-  "items": []
+  "version": 2,
+  "last_poll_at": "2026-04-12T04:35:05.966044Z",
+  "items": [
+    {
+      "schema_version": "v1",
+      "annotation_id": "ann-test-smoke-001",
+      "para_id": 12,
+      "selection_start": 0,
+      "selection_end": 44,
+      "selected_text": "HCPS incidence in Nuble 1.21/100k hab-year",
+      "color": "yellow",
+      "comment": "Smoke test: verificar que este numero es correcto contra panel M1M2 canonico (136 casos, 2002-2024, 21 comunas)",
+      "ts": "2026-04-12T04:00:00Z",
+      "user_agent": "smoke-test-cli",
+      "para_section": "Results (epidemiology)",
+      "prior_annotations_count": 0,
+      "received_at": "2026-04-12T04:35:05.966044Z",
+      "processed": false
+    }
+  ]
 }
