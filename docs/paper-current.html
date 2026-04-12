@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Paper Actual · EID v5 CONDENSED · Hantavirus Ñuble</title>
+<title>Manuscrito Actual · BASELINE S61 · Hantavirus Ñuble</title>
 <!-- marked.js for safe Markdown rendering (tables, lists, etc.) -->
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js" crossorigin="anonymous"></script>
 <style>
@@ -116,22 +116,22 @@
 <body>
 
 <header class="topbar">
-  <h1>Paper Actual · EID v5 CONDENSED</h1>
+  <h1>Manuscrito Actual · BASELINE S61</h1>
   <span class="meta" id="meta-stats">cargando&hellip;</span>
   <nav>
     <a href="index.html">&larr; Inicio</a>
-    <a href="paper-improved.html">Paper Mejorado &rarr;</a>
+    <a href="paper-improved.html">Manuscrito Mejorado &rarr;</a>
   </nav>
 </header>
 
 <main>
-  <article class="paper" id="paper-root" aria-label="manuscrito EID">
-    <p class="loading">Cargando manuscrito&hellip;</p>
+  <article class="paper" id="paper-root" aria-label="manuscrito EID BASELINE S61">
+    <p class="loading">Cargando manuscrito BASELINE S61&hellip;</p>
   </article>
 
   <aside class="sidebar" aria-label="anotaciones">
     <h2>Anotaciones <span class="count-pill" id="annot-count">0</span></h2>
-    <p class="shortcut-hint">Atajos tras seleccionar texto: <code>Y</code> amarillo, <code>G</code> verde, <code>R</code> rojo. Escape cancela.</p>
+    <p class="shortcut-hint">Instrucciones: selecciona texto del manuscrito con el mouse, elige un color (amarillo = duda, verde = mejora, rojo = error), escribe tu comentario y envía. El pipeline W14 procesará tu anotación automáticamente.<br>Atajos de teclado tras seleccionar: <code>Y</code> amarillo, <code>G</code> verde, <code>R</code> rojo. Escape cancela.</p>
     <div id="annot-list">
       <p class="empty-hint">No hay anotaciones aún. Selecciona texto en el manuscrito para empezar.</p>
     </div>
@@ -139,9 +139,9 @@
 </main>
 
 <div class="popover" id="popover" role="toolbar" aria-label="anotar seleccion">
-  <button data-color="yellow" aria-label="Nota amarilla (Y)">🟡<span class="shortcut">Y</span></button>
-  <button data-color="green" aria-label="Sugerir mejora verde (G)">🟢<span class="shortcut">G</span></button>
-  <button data-color="red" aria-label="Reportar error rojo (R)">🔴<span class="shortcut">R</span></button>
+  <button data-color="yellow" aria-label="Duda (amarillo)" title="Duda / pregunta">🟡<span class="shortcut">Y</span></button>
+  <button data-color="green" aria-label="Mejora (verde)" title="Sugerencia de mejora">🟢<span class="shortcut">G</span></button>
+  <button data-color="red" aria-label="Error (rojo)" title="Reportar error">🔴<span class="shortcut">R</span></button>
 </div>
 
 <div class="modal-mask" id="modal-mask" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -150,11 +150,11 @@
     <div><strong>Color:</strong> <span id="modal-color"></span></div>
     <div><strong>Párrafo:</strong> <span id="modal-para"></span></div>
     <div class="sel-preview" id="modal-selection"></div>
-    <label for="modal-comment" style="font-size:.85em;display:block;margin-top:.4em"><strong>Comentario</strong> (opcional, ≤2000 chars):</label>
-    <textarea id="modal-comment" maxlength="2000" placeholder="¿Qué anotas? (dudas, sugerencias, errores)"></textarea>
+    <label for="modal-comment" style="font-size:.85em;display:block;margin-top:.4em"><strong>Comentario</strong> (opcional, máximo 2000 caracteres):</label>
+    <textarea id="modal-comment" maxlength="2000" placeholder="Escribe tu observación aquí: ¿qué duda tienes? ¿qué mejora sugieres? ¿qué error encontraste?"></textarea>
     <div class="actions">
       <button id="modal-cancel">Cancelar</button>
-      <button id="modal-submit" class="primary">Enviar a W14</button>
+      <button id="modal-submit" class="primary">Enviar anotación</button>
     </div>
   </div>
 </div>
@@ -406,10 +406,10 @@ async function submitAnnotation(){
     if(r.ok){
       showToast(`Enviada · ID ${payload.annotation_id}`);
     }else{
-      showToast(`Guardada local · ntfy ${r.status}`, true);
+      showToast(`Guardada localmente · error servidor ${r.status}`, true);
     }
   }catch(e){
-    showToast(`Guardada local · ntfy offline`, true);
+    showToast(`Guardada localmente · sin conexión`, true);
     console.warn("ntfy post failed", e);
   }
   currentSelection = null;
@@ -448,11 +448,11 @@ async function boot(){
     const local = loadLocalAnnots();
     annotations = mergeAnnots(local, remote);
     $("#meta-stats").textContent =
-      `${manuscript.total_paragraphs} párrafos · ${manuscript.total_words} palabras · ${manuscript.total_refs} refs · topic ${ntfyTopic}`;
+      `${manuscript.total_paragraphs} párrafos · ${manuscript.total_words} palabras · ${manuscript.total_refs} referencias · BASELINE S61`;
     renderManuscript();
     renderAnnotList();
   }catch(e){
-    $("#paper-root").innerHTML = `<div class="error">Error cargando manuscrito: ${escapeHtml(e.message)}<br><small>Asegúrate de que <code>state/manuscript_v5_condensed.json</code> existe. Ejecuta <code>python scripts/build_manuscript_json.py</code>.</small></div>`;
+    $("#paper-root").innerHTML = `<div class="error">Error cargando manuscrito: ${escapeHtml(e.message)}<br><small>El archivo <code>state/manuscript_v5_condensed.json</code> no se encontró. Espera al próximo despliegue automático de GitHub Pages (cada 30 min) o contacta al administrador.</small></div>`;
     console.error(e);
   }
 }
