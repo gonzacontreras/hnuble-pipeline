@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "heartbeat_sequence": 246,
-  "updated_at": "2026-04-13T17:04:23Z",
+  "heartbeat_sequence": 249,
+  "updated_at": "2026-04-13T17:19:39Z",
   "session": "S61",
   "session_deadline": "2026-04-14T06:00:00Z",
-  "current_block": "W12",
+  "current_block": "W16",
   "current_block_label": "Auto-improvement iteration",
-  "overall_status": "done",
+  "overall_status": "running",
   "agent": "Claude Opus 4.6 (1M context)",
   "methodology": "5-fase anti-bypass + M14 + multi-agent paralelo + multiprocessing.Pool(8)",
   "sub_blocks": [
@@ -14,10 +14,7 @@
       "id": "W16.pick",
       "label": "Pick target paragraph",
       "agent_type": "main",
-      "status": "done",
-      "output_refs": [
-        "state/annotations.json"
-      ]
+      "status": "pending"
     },
     {
       "id": "W16.edit",
@@ -31,10 +28,7 @@
       "id": "W16.commit",
       "label": "Persist + cascade",
       "agent_type": "main",
-      "status": "done",
-      "output_refs": [
-        "state/annotations.json"
-      ]
+      "status": "pending"
     }
   ],
   "current_findings": [
@@ -53,7 +47,7 @@
     "Deploy Pages trigger manual · verificación URL pública",
     "HANDOFF.md con guía 5 pasos · ntfy notif final 'Sistema LIVE'"
   ],
-  "tool_calls_total": 149,
+  "tool_calls_total": 150,
   "files_touched": [
     "pipeline/repo/state/claude_live.json",
     "pipeline/repo/state/schemas/claude_live.schema.json",
