@@ -79,8 +79,59 @@
       "title": "Ortiz 2004 misattribution",
       "critique": "Ortiz reports rodent seroprevalence, not national incidence.",
       "suggested_response": "Replaced with MINSAL Bulletin + direct calculation."
+    },
+    {
+      "id": "R2-01",
+      "severity": "HIGH",
+      "title": "Retrospective case assignment to probable commune of infection violates temporal integrity",
+      "critique": "Pre-2018 cases (n=103, 76% of sample) were 'assigned to probable commune of infection' from BioBío records after administrative partition. This introduces post-hoc spatial re-allocation based on criteria not described, creating circular risk: if FSI informed assignment, the predictor is trained on its own output. The walk-forward protocol cannot protect against pre-fold contamination of historical labels.",
+      "suggested_response": "Perform sensitivity analysis restricting to post-2018 cases (n=33) where commune assignment is prospective. If model fails or CIs widen substantially, acknowledge geographic re-allocation as unmeasured confounding. Document assignment algorithm with blinding証明 or exclude pre-partition cases entirely.",
+      "role": "stats",
+      "discovered_at": "2026-04-13T06:24:50.997600Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R2-02",
+      "severity": "HIGH",
+      "title": "E-value 2.07 is weak and insufficient for causal inference from observational design",
+      "critique": "E-value=2.07 for FSI lag-5 (IRR=0.734) means an unmeasured confounder associated 2.07-fold with both FSI and HCPS could nullify the result. Given rodent abundance (the true mechanistic mediator) is unmeasured, this threshold is easily crossed. Claiming 'causal' lead time without rodent trapping data or instrumental-variable design is unjustified.",
+      "suggested_response": "Reframe as predictive association, not causal pathway. State explicitly: 'Without direct rodent abundance data, FSI→HCPS may be confounded by unmeasured ecological drivers. E-value 2.07 indicates moderate robustness but does not establish causality.' Replace 'enables preventive action' with 'generates risk signals for hypothesis-driven field validation.'",
+      "role": "stats",
+      "discovered_at": "2026-04-13T06:24:50.997600Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R2-03",
+      "severity": "MED",
+      "title": "Ranked probability score 'skill +1.3%' is null result misrepresented as directional evidence",
+      "critique": "RPS 0.038 vs null 0.038 with CI overlap is explicitly reported as 'not statistically distinguishable,' yet abstract includes RPS in the results summary without this caveat, and discussion claims 'triple scoring rule' validation. A null result on one of three metrics weakens—not strengthens—the evidentiary triangle. This is selective emphasis.",
+      "suggested_response": "Remove RPS from abstract. In discussion, state: 'RPS showed no detectable improvement over climatology (95% CI includes null), limiting support to the binary tier structure. Multi-tier ordinal skill requires larger N or external validation.' Reframe 'triple' as 'dual confirmatory (log, BSS) plus exploratory (RPS).'",
+      "role": "stats",
+      "discovered_at": "2026-04-13T06:24:50.997600Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R2-04",
+      "severity": "MED",
+      "title": "Decision curve analysis threshold range [0.05,0.20] lacks clinical/operational justification",
+      "critique": "The 'operational range p_t ∈ [0.05,0.20]' is asserted without explanation. DCA requires threshold choice to reflect actual decision context: cost of false alarm vs missed case. No cost-effectiveness data, stakeholder survey, or budget constraint anchors this range. Arbitrary bounds allow cherry-picking the net-benefit peak.",
+      "suggested_response": "Either: (1) cite MINSAL or CONAF resource-allocation documents specifying acceptable false-positive rates, or (2) show DCA across full [0,0.5] range and mark [0.05,0.20] as post-hoc 'illustrative' only. State that threshold calibration requires prospective pilot deployment with observed intervention costs before operational use.",
+      "role": "stats",
+      "discovered_at": "2026-04-13T06:24:50.997600Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R2-05",
+      "severity": "LOW",
+      "title": "Burn-in rationale cites time-series CV literature but model is spatial panel, not pure time series",
+      "critique": "Bergmeir 2018 and Cerqueira 2020 address univariate/multivariate time-series CV. Your model is a spatial panel GLMM with 21 clusters and within/between decomposition—different dependence structure. Citing time-seriesburn-in precedent for a mixed-model walk-forward is a category error. GLMMs can converge poorly with small N, but that's a maximum-likelihood issue, not time-series stationarity.",
+      "suggested_response": "Replace time-series citations with mixed-model references (e.g., Maas & Hox 2005 on minimum cluster counts). Justify burn-in via 'insufficient training events for stable θ estimation (n<50 per fold)' rather than non-stationarity. Show fold-wise θ and σ²_u trajectories in supplement to demonstrate convergence empirically.",
+      "role": "stats",
+      "discovered_at": "2026-04-13T06:24:50.997600Z",
+      "status": "PENDING_MCC"
     }
   ],
   "version": 1,
-  "initialized_at": "2026-04-11T07:39:31.354398Z"
+  "initialized_at": "2026-04-11T07:39:31.354398Z",
+  "last_w5_run": "2026-04-13T06:24:50.997600Z"
 }

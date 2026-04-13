@@ -23,8 +23,8 @@
       "status": "not_yet_run"
     },
     "w5": {
-      "last_run": null,
-      "status": "not_yet_run"
+      "last_run": "2026-04-13T06:24:50.997600Z",
+      "new_objections": 5
     },
     "w6": {
       "last_run": "2026-04-13T05:19:03.387818Z",
