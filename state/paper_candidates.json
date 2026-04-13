@@ -119,7 +119,19 @@
       "target_section": "methods",
       "discovered_at": "2026-04-12T03:22:14.965318Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.48084/etasr.16808",
+      "title": "Weighted Soft-Voting Ensembles for Liver Disease Prediction: A Large-Scale Comparative Study with Transparent Evaluation",
+      "venue": null,
+      "pub_date": "2026-04-04",
+      "abstract": "Early detection of liver disease can significantly improve patient outcomes and reduce healthcare costs. This study presents a comparative evaluation of four traditional machine learning classifiers—Logistic Regression, Support Vector Machines, Gaussian Naïve Bayes, and a Multi-Layer Perceptron—alongside an enhanced weighted soft-voting ensemble model. Using a large, publicly available clinical dataset (~30,000 records), a fully nested, leakage-free cross-validation framework is employed to ensure robust and reliable evaluation. The proposed ensemble assigns adaptive weights based on per-fold model performance and demonstrates superior discrimination and calibration compared to individual classifiers. The results highlight the contribution of transparent ensemble modeling in achieving accu",
+      "score": 7,
+      "reason": "Nested cross-validation + calibration for prediction; reinforces our leakage-free evaluation + probability calibration methods",
+      "target_section": "methods",
+      "discovered_at": "2026-04-13T03:29:17.847533Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-12T13:13:14.674542Z"
+  "last_run": "2026-04-13T03:29:17.847533Z"
 }
