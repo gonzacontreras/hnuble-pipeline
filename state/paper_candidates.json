@@ -131,7 +131,19 @@
       "target_section": "methods",
       "discovered_at": "2026-04-13T03:29:17.847533Z",
       "status": "NEW"
+    },
+    {
+      "id": "e9ebb6d9c7",
+      "title": "Learning Debt and Cost-Sensitive Bayesian Retraining: A Forecasting Operations Framework",
+      "venue": null,
+      "pub_date": "2026-04-07",
+      "abstract": "Forecasters often choose retraining schedules by convention rather than by an explicit decision rule. This paper gives that decision a posterior-space language. We define learning debt as the divergence between the deployed and continuously updated posteriors, define actionable staleness as the policy-relevant latent state, and derive a one-step Bayes retraining rule under an excess-loss formulation. In an online conjugate simulation using the exact Kullback-Leibler divergence between deployed and shadow normal-inverse-gamma posteriors, a debt-filter beats a default 10-period calendar baseline in 15 of 24 abrupt-shift cells, all 24 gradual-drift cells, and 17 of 24 variance-shift cells, and remains below the best fixed cadence in a grid of cadences (5, 10, 20, and 40 periods) in 10, 24, an",
+      "score": 7,
+      "reason": "Bayesian retraining framework under excess-loss formulation, conceptually relevant to adaptive early warning update rules",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-13T13:52:50.370622Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-13T03:29:17.847533Z"
+  "last_run": "2026-04-13T13:52:50.370622Z"
 }
