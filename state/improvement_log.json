@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 13,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -409,6 +409,33 @@
       "para_section": "writing_quality",
       "old_text": "**Primary**: logarithmic score (Good 1952; Gneiting & Raftery 2007; Fox et al. 2024 EID), strictly proper and free of denominator instability in the rare-event regime (Bosse et al. 2023). Uncertainty was quantified via block bootstrap (1,000 iterations, strata = walk-forward fold) with percentile 95% CI.",
       "new_text": "**Primary**: logarithmic score (Good 1952; Gneiting & Raftery 2007; Fox et al. 2024 EID), strictly proper and stable in rare-event regimes without denominator instability (Bosse et al. 2023). We quantified uncertainty via block bootstrap (1,000 iterations, strata = walk-forward fold) with percentile 95% CI.",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": -1,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-bd8145b0",
+      "timestamp": "2026-04-14T22:30:08Z",
+      "annotation_id": "auto-writing_quality-65",
+      "para_index": 65,
+      "para_section": "writing_quality",
+      "old_text": "**Ecological framing**. The negative ψ (IRR = 0.734 per 1 SD of R5_within) is biologically coherent with C. quila sectoral flowering as a diffuse phenomenon: high R marks a post-flowering satellite scar, meaning the cycle has peaked and the Oligoryzomys population is regressing toward baseline. The operational risk window is low-R combined with warm conditions. This is biologically distinct from the Epuyén-type point-source cluster (Martínez et al. 2020 NEJM), where person-to-person Andes virus ",
+      "new_text": "**Ecological framing**. The negative ψ (IRR = 0.734 per 1 SD of R5_within) aligns with C. quila sectoral flowering as a diffuse phenomenon: high R marks a post-flowering satellite scar, indicating the cycle has peaked and the Oligoryzomys population is regressing toward baseline. The operational risk window combines low R with warm conditions. This mechanism differs biologically from the Epuyén-type point-source cluster (Martínez et al. 2020 NEJM), where person-to-person Andes virus transmission",
       "edit_type": "replace",
       "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
       "lift_estimate": 0.0,
