@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -237,6 +237,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": 1,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-45fdd8e8",
+      "timestamp": "2026-04-14T12:45:40Z",
+      "annotation_id": "auto-writing_quality-58",
+      "para_index": 58,
+      "para_section": "writing_quality",
+      "old_text": "Decision curve analysis (Vickers & Elkin 2006) showed that Tier-1 and Tier-2 models provided positive net benefit across p_t ∈ [0.05, 0.20], while the Bortman baseline approached zero or turned negative for p_t > 0.05. At p_t = 0.05 Tier-1 net benefit was approximately 3× Bortman. Treat-all and treat-none were dominated by the model beyond the base-rate prevalence.",
+      "new_text": "Decision curve analysis (Vickers & Elkin 2006) demonstrated that Tier-1 and Tier-2 models delivered positive net benefit across p_t ∈ [0.05, 0.20], whereas the Bortman baseline approached zero or became negative for p_t > 0.05. At p_t = 0.05, Tier-1 net benefit exceeded Bortman by approximately 3×. Both treat-all and treat-none strategies were dominated by the model beyond base-rate prevalence.",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 2,
       "refs_delta": 0
     }
   ]

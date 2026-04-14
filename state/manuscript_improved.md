@@ -135,7 +135,7 @@ Log score deltas between 10- and 14-fold analyses were Tier 1: −0.007, Tier 2:
 
 **5.6.6 Decision curve analysis**
 
-Decision curve analysis (Vickers & Elkin 2006) showed that Tier-1 and Tier-2 models provided positive net benefit across p_t ∈ [0.05, 0.20], while the Bortman baseline approached zero or turned negative for p_t > 0.05. At p_t = 0.05 Tier-1 net benefit was approximately 3× Bortman. Treat-all and treat-none were dominated by the model beyond the base-rate prevalence.
+Decision curve analysis (Vickers & Elkin 2006) demonstrated that Tier-1 and Tier-2 models delivered positive net benefit across p_t ∈ [0.05, 0.20], whereas the Bortman baseline approached zero or became negative for p_t > 0.05. At p_t = 0.05, Tier-1 net benefit exceeded Bortman by approximately 3×. Both treat-all and treat-none strategies were dominated by the model beyond base-rate prevalence.
 
 **5.6.7 Figures**
 
