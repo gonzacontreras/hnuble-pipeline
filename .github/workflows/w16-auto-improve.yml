@@ -34,6 +34,8 @@ jobs:
         run: |
           git config user.name "hnuble-bot"
           git config user.email "bot@hnuble.io"
+          # Discard non-essential modified files that block git pull --rebase
+          git checkout -- state/claude_live.json 2>/dev/null || true
           # Only stage manuscript and log files — NOT claude_live.json (avoids ghost commits)
           git add state/manuscript_improved.md state/improvement_log.json state/strategy_stats.json state/rejection_log.json
           if git diff --staged --quiet; then
