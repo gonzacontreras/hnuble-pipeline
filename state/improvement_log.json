@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -291,6 +291,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": -1,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-60791e88",
+      "timestamp": "2026-04-14T16:20:23Z",
+      "annotation_id": "auto-writing_quality-46",
+      "para_index": 46,
+      "para_section": "writing_quality",
+      "old_text": "During 2002–2024, 136 confirmed HCPS cases were registered in Ñuble (1.21/100k person-years), 91.2% occurring October–May and zero in September across 23 consecutive years. The panel was complete for climate, population, and geographic covariates; FSI lag-5 was structurally unavailable for the first five months of each commune's series (105 observations, 1.8%, excluded). Case-fatality was 27.9% (38/136; Wilson 95% CI 21.1–36.0%). Top-risk comunas were El Carmen (7.49/100k), Pinto (3.93), Coihuec",
+      "new_text": "During 2002–2024, Ñuble registered 136 confirmed HCPS cases (1.21/100k person-years); 91.2% occurred October–May, with zero cases in September across 23 consecutive years. Climate, population, and geographic covariates were complete; FSI lag-5 was structurally unavailable for the first five months of each commune's series (105 observations, 1.8%, excluded). Case-fatality reached 27.9% (38/136; Wilson 95% CI 21.1–36.0%). El Carmen (7.49/100k), Pinto (3.93), Coihueco (2.54), San Ignacio (2.36), an",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": -4,
       "refs_delta": 0
     }
   ]

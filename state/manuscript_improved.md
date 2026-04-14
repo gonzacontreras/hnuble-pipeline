@@ -109,7 +109,7 @@ The pre-specification protocol v1.0 and Addenda v1.1–v1.2 (all locked 2026-04-
 
 **5.6.1 Epidemiological context**
 
-During 2002–2024, 136 confirmed HCPS cases were registered in Ñuble (1.21/100k person-years), 91.2% occurring October–May and zero in September across 23 consecutive years. The panel was complete for climate, population, and geographic covariates; FSI lag-5 was structurally unavailable for the first five months of each commune's series (105 observations, 1.8%, excluded). Case-fatality was 27.9% (38/136; Wilson 95% CI 21.1–36.0%). Top-risk comunas were El Carmen (7.49/100k), Pinto (3.93), Coihueco (2.54), San Ignacio (2.36), and Yungay (2.08); Ninhue registered zero cases (structural zero). Of 5,796 comuna–month observations, 97.7% were zero-case, with a maximum of three months reaching a count of 3.
+During 2002–2024, Ñuble registered 136 confirmed HCPS cases (1.21/100k person-years); 91.2% occurred October–May, with zero cases in September across 23 consecutive years. Climate, population, and geographic covariates were complete; FSI lag-5 was structurally unavailable for the first five months of each commune's series (105 observations, 1.8%, excluded). Case-fatality reached 27.9% (38/136; Wilson 95% CI 21.1–36.0%). El Carmen (7.49/100k), Pinto (3.93), Coihueco (2.54), San Ignacio (2.36), and Yungay (2.08) exhibited the highest risk; Ninhue registered zero cases (structural zero). Of 5,796 comuna–month observations, 97.7% recorded zero cases, with a maximum count of 3 across three months.
 
 **5.6.2 Model coefficients and ecological interpretation (GLMM S29-K)**
 
