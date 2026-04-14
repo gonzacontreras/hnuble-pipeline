@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -399,6 +399,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": 0,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-d73b61ce",
+      "timestamp": "2026-04-14T21:35:02Z",
+      "annotation_id": "auto-writing_quality-31",
+      "para_index": 31,
+      "para_section": "writing_quality",
+      "old_text": "**Primary**: logarithmic score (Good 1952; Gneiting & Raftery 2007; Fox et al. 2024 EID), strictly proper and free of denominator instability in the rare-event regime (Bosse et al. 2023). Uncertainty was quantified via block bootstrap (1,000 iterations, strata = walk-forward fold) with percentile 95% CI.",
+      "new_text": "**Primary**: logarithmic score (Good 1952; Gneiting & Raftery 2007; Fox et al. 2024 EID), strictly proper and stable in rare-event regimes without denominator instability (Bosse et al. 2023). We quantified uncertainty via block bootstrap (1,000 iterations, strata = walk-forward fold) with percentile 95% CI.",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": -1,
       "refs_delta": 0
     }
   ]

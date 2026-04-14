@@ -76,7 +76,7 @@ Predicted probabilities for each tier (p_ge1, p_ge2, p_ge3) are derived from the
 
 **5.5.5 Forecast evaluation (expanded per Addendum v1.1 and v1.2)**
 
-**Primary**: logarithmic score (Good 1952; Gneiting & Raftery 2007; Fox et al. 2024 EID), strictly proper and free of denominator instability in the rare-event regime (Bosse et al. 2023). Uncertainty was quantified via block bootstrap (1,000 iterations, strata = walk-forward fold) with percentile 95% CI.
+**Primary**: logarithmic score (Good 1952; Gneiting & Raftery 2007; Fox et al. 2024 EID), strictly proper and stable in rare-event regimes without denominator instability (Bosse et al. 2023). We quantified uncertainty via block bootstrap (1,000 iterations, strata = walk-forward fold) with percentile 95% CI.
 
 **Complementary**: ranked probability score on the nested ordinal outcome Y ∈ {0,1,2,3} (Epstein 1969; Murphy 1971), formatted as prediction intervals per Bracher et al. 2021.
 
