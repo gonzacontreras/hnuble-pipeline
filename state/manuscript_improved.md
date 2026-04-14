@@ -165,7 +165,7 @@ The three-tier framework maps onto operational response windows for Chile's inte
 1. **Modest incremental skill vs stringent null** (~2% Tier-1 BSS residual over Poisson null reflects the theoretical ceiling for rare-event forecasting documented by Fox 2024)
 2. **Burn-in period** (4 folds 2011–2014 exceeded θ>10⁶ Poisson convergence limit per Brooks 2017—documented as design constraint, not model failure)
 3. **Tier 3 exploratory designation** (20 events yield wide CIs; all scoring formulations independently classify this tier as exploratory, consistent with pre-registration)
-4. **Scoring rule choice** (log score primary per Gneiting-Raftery recommendations; scaled Brier retained to enable direct comparison with existing literature)
+4. **Scoring rule choice** (log score primary per Gneiting-Raftery recommendations; scaled Brier retained for direct comparison with existing literature)
 5. **Ecological fallacy** (comuna-month aggregation carries inherent individual-level inference limits per Robinson 1950; Morgenstern 1995)
 6. **Specification search** (S22–S29 alternatives fully documented; frozen pre-walk-forward; E-values = 2.07/2.30 exceed unmeasured-confounding thresholds)
 7. **External validation** (Ñuble-only; southern Argentina transferability requires empirical verification in future deployments)

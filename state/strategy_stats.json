@@ -50,12 +50,12 @@
       "successes": 2
     },
     "compress": {
-      "alpha": 3.0,
+      "alpha": 5.0,
       "beta": 1.0,
-      "attempts": 2,
-      "successes": 2
+      "attempts": 4,
+      "successes": 4
     }
   },
-  "total_attempts": 14,
-  "total_successes": 9
+  "total_attempts": 16,
+  "total_successes": 11
 }
