@@ -1,133 +1,133 @@
 {
   "version": 1,
-  "scored_at": "2026-04-14T03:43:00Z",
+  "scored_at": "2026-04-14T04:13:23Z",
   "manuscript_hash": "b7394b1bb2dca8f0a5af31c29aaa195f61196ff8ef1ab63b088c67387a7aa903",
-  "score": 0.31681198699323937,
+  "score": 0.42683855024333966,
   "baseline_prior": 0.28,
-  "delta_vs_baseline": 0.03681198699323934,
+  "delta_vs_baseline": 0.14683855024333964,
   "components": [
     {
       "i": 1,
       "name": "strobe",
-      "value": 0.0,
+      "value": 0.55,
       "weight": 0.1,
-      "lift": 0.021644215189063495
+      "lift": 0.011009133102127665
     },
     {
       "i": 2,
       "name": "tripod_ai",
-      "value": 0.0,
+      "value": 0.42,
       "weight": 0.09,
-      "lift": 0.019479793670157144
+      "lift": 0.012770594398468093
     },
     {
       "i": 3,
       "name": "epiforge",
-      "value": 0.0,
+      "value": 0.89,
       "weight": 0.07,
-      "lift": 0.015150950632344446
+      "lift": 0.001883784997475178
     },
     {
       "i": 4,
       "name": "stat_rigor",
-      "value": 0.0,
+      "value": 0.92,
       "weight": 0.06,
-      "lift": 0.012986529113438096
+      "lift": 0.0011743075308936171
     },
     {
       "i": 5,
       "name": "reproducibility",
-      "value": 0.0,
+      "value": 0.95,
       "weight": 0.07,
-      "lift": 0.015150950632344446
+      "lift": 0.0008562659079432637
     },
     {
       "i": 6,
       "name": "novelty",
-      "value": 0.0,
+      "value": 0.78,
       "weight": 0.09,
-      "lift": 0.019479793670157144
+      "lift": 0.004844018564936172
     },
     {
       "i": 7,
       "name": "writing_quality",
-      "value": 0.0,
+      "value": 0.82,
       "weight": 0.07,
-      "lift": 0.015150950632344446
+      "lift": 0.0030825572685957473
     },
     {
       "i": 8,
       "name": "ref_quality",
-      "value": 0.8,
+      "value": 0.87,
       "weight": 0.07,
-      "lift": 0.0030301901264688886
+      "lift": 0.0022262913606524836
     },
     {
       "i": 9,
       "name": "bias_coverage",
       "value": 0.0,
       "weight": 0.08,
-      "lift": 0.017315372151250796
+      "lift": 0.019571792181560296
     },
     {
       "i": 10,
       "name": "reviewer_anticipation",
       "value": 0.0,
       "weight": 0.07,
-      "lift": 0.015150950632344446
+      "lift": 0.017125318158865258
     },
     {
       "i": 11,
       "name": "journal_fit_eid",
-      "value": 0.0,
+      "value": 0.92,
       "weight": 0.07,
-      "lift": 0.015150950632344446
+      "lift": 0.00137002545270922
     },
     {
       "i": 12,
       "name": "model_descriptive_rigor",
       "value": 0.75,
       "weight": 0.08,
-      "lift": 0.004328843037812699
+      "lift": 0.004892948045390074
     },
     {
       "i": 13,
       "name": "model_predictive_rigor",
       "value": 0.75,
       "weight": 0.08,
-      "lift": 0.004328843037812699
+      "lift": 0.004892948045390074
     }
   ],
   "ranking_lift": [
-    "strobe",
-    "tripod_ai",
-    "novelty",
     "bias_coverage",
-    "epiforge",
-    "reproducibility",
-    "writing_quality",
     "reviewer_anticipation",
-    "journal_fit_eid",
-    "stat_rigor",
+    "tripod_ai",
+    "strobe",
     "model_descriptive_rigor",
     "model_predictive_rigor",
-    "ref_quality"
+    "novelty",
+    "writing_quality",
+    "ref_quality",
+    "epiforge",
+    "journal_fit_eid",
+    "stat_rigor",
+    "reproducibility"
   ],
   "top3_recommendations": [
     {
-      "component": "strobe",
-      "action": "Complete remaining STROBE items flagged by strobe-checker.",
-      "expected_lift": 0.021644215189063495
+      "component": "bias_coverage",
+      "action": "Cite missing M14 blindings explicitly.",
+      "expected_lift": 0.019571792181560296
+    },
+    {
+      "component": "reviewer_anticipation",
+      "action": "Pre-empt top 3 reviewer attacks in Discussion.",
+      "expected_lift": 0.017125318158865258
     },
     {
       "component": "tripod_ai",
       "action": "Add TRIPOD+AI model card details to Methods.",
-      "expected_lift": 0.019479793670157144
-    },
-    {
-      "component": "novelty",
-      "action": "Sharpen contribution statement vs Gorris 2025.",
-      "expected_lift": 0.019479793670157144
+      "expected_lift": 0.012770594398468093
     }
   ],
   "logit_params": {
