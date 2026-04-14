@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "strategies": {
+    "novelty": {"alpha": 1.0, "beta": 1.0, "attempts": 0, "successes": 0},
+    "writing_quality": {"alpha": 1.0, "beta": 1.0, "attempts": 0, "successes": 0},
+    "reviewer_anticipation": {"alpha": 2.0, "beta": 2.0, "attempts": 1, "successes": 1},
+    "stat_rigor": {"alpha": 1.0, "beta": 1.0, "attempts": 0, "successes": 0},
+    "journal_fit_eid": {"alpha": 1.0, "beta": 1.0, "attempts": 0, "successes": 0},
+    "bias_coverage": {"alpha": 1.0, "beta": 1.0, "attempts": 0, "successes": 0},
+    "model_descriptive_rigor": {"alpha": 1.0, "beta": 1.0, "attempts": 0, "successes": 0},
+    "model_predictive_rigor": {"alpha": 1.0, "beta": 1.0, "attempts": 0, "successes": 0}
+  },
+  "total_attempts": 1,
+  "total_successes": 1
+}

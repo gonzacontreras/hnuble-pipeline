@@ -30,13 +30,14 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/w16_auto_improver.py
-      - name: Commit state
+      - name: Commit only real changes
         run: |
           git config user.name "hnuble-bot"
           git config user.email "bot@hnuble.io"
-          git add state/manuscript_improved.md state/improvement_log.json state/claude_live.json
+          # Only stage manuscript and log files — NOT claude_live.json (avoids ghost commits)
+          git add state/manuscript_improved.md state/improvement_log.json state/strategy_stats.json state/rejection_log.json
           if git diff --staged --quiet; then
-            echo "no changes"
+            echo "no manuscript changes — skipping commit"
           else
             git commit -m "W16: auto-improve $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             for i in 1 2 3 4 5; do
