@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -183,6 +183,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": 4,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-ed24b038",
+      "timestamp": "2026-04-14T09:50:30Z",
+      "annotation_id": "auto-compress-50",
+      "para_index": 50,
+      "para_section": "compress",
+      "old_text": "The model achieved logarithmic scores of 0.086 [95% CI 0.074, 0.098] at Tier 1 (surveillance), 0.043 [0.022, 0.065] at Tier 2 (cluster alert), and 0.055 [0.000, 0.116] at Tier 3 (outbreak declared, exploratory; n = 20 events) in the primary 10-fold analysis (test period 2015–2024), comparable to ranges reported in this journal (Fox et al. 2024) and foundational scoring rule theory (Gneiting & Raftery 2007; Held et al. 2017).",
+      "new_text": "The model achieved logarithmic scores of 0.086 [95% CI 0.074, 0.098] at Tier 1 (surveillance), 0.043 [0.022, 0.065] at Tier 2 (cluster alert), and 0.055 [0.000, 0.116] at Tier 3 (outbreak declared, exploratory; n = 20 events) in the primary 10-fold analysis (test period 2015–2024), comparable to ranges in this journal (Fox et al. 2024) and foundational theory (Gneiting & Raftery 2007; Held et al. 2017).",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: compress strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": -3,
       "refs_delta": 0
     }
   ]

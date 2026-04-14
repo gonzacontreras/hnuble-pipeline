@@ -117,7 +117,7 @@ The locked model yielded ψ_R5_within = −0.309 (95% profile CI [−0.546, −0
 
 **5.6.3 Headline forecast skill — primary logarithmic score (Table 1)**
 
-The model achieved logarithmic scores of 0.086 [95% CI 0.074, 0.098] at Tier 1 (surveillance), 0.043 [0.022, 0.065] at Tier 2 (cluster alert), and 0.055 [0.000, 0.116] at Tier 3 (outbreak declared, exploratory; n = 20 events) in the primary 10-fold analysis (test period 2015–2024), comparable to ranges reported in this journal (Fox et al. 2024) and foundational scoring rule theory (Gneiting & Raftery 2007; Held et al. 2017).
+The model achieved logarithmic scores of 0.086 [95% CI 0.074, 0.098] at Tier 1 (surveillance), 0.043 [0.022, 0.065] at Tier 2 (cluster alert), and 0.055 [0.000, 0.116] at Tier 3 (outbreak declared, exploratory; n = 20 events) in the primary 10-fold analysis (test period 2015–2024), comparable to ranges in this journal (Fox et al. 2024) and foundational theory (Gneiting & Raftery 2007; Held et al. 2017).
 
 Against the Bortman/PAHO endemic-channel baseline, Brier Skill Scores were 68.1% (95% CI 61.7–74.0) at Tier 1 and 36.5% (95% CI 25.4–56.6) at Tier 2 (block bootstrap, B=2000), exceeding dengue EWS values from Brazil and Vietnam (Lowe et al. 2016; Colón-González et al. 2021). The ranked probability score (three-tier nested ordinal) was 0.038 [95% CI 0.023, 0.053] versus a random-prevalence null of 0.038 — a +1.3% skill gain whose CI overlaps the null, directionally consistent but not statistically distinguishable at this sample size. Confirmatory claims therefore rest on the Tier 1 and Tier 2 BSS, which substantially exceed their reference distributions.
 
