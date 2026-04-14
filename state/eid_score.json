@@ -1,133 +1,133 @@
 {
   "version": 1,
-  "scored_at": "2026-04-14T17:49:15Z",
+  "scored_at": "2026-04-14T19:41:57Z",
   "manuscript_hash": "b7394b1bb2dca8f0a5af31c29aaa195f61196ff8ef1ab63b088c67387a7aa903",
-  "score": 0.420660735532569,
+  "score": 0.4226848106315743,
   "baseline_prior": 0.28,
-  "delta_vs_baseline": 0.14066073553256897,
+  "delta_vs_baseline": 0.1426848106315743,
   "components": [
     {
       "i": 1,
       "name": "strobe",
-      "value": 0.36,
+      "value": 0.77,
       "weight": 0.1,
-      "lift": 0.015597137991281092
+      "lift": 0.005612514314337263
     },
     {
       "i": 2,
       "name": "tripod_ai",
-      "value": 0.45,
+      "value": 0.15,
       "weight": 0.09,
-      "lift": 0.012063411415131469
+      "lift": 0.01866771065420872
     },
     {
       "i": 3,
       "name": "epiforge",
-      "value": 0.89,
+      "value": 0.92,
       "weight": 0.07,
-      "lift": 0.0018765306645760062
+      "lift": 0.0013665252243603764
     },
     {
       "i": 4,
       "name": "stat_rigor",
-      "value": 0.92,
+      "value": 0.85,
       "weight": 0.06,
-      "lift": 0.0011697853493460812
+      "lift": 0.00219620125343632
     },
     {
       "i": 5,
       "name": "reproducibility",
-      "value": 0.77,
+      "value": 0.85,
       "weight": 0.07,
-      "lift": 0.003923655025931649
+      "lift": 0.0025622347956757072
     },
     {
       "i": 6,
       "name": "novelty",
-      "value": 0.82,
+      "value": 0.78,
       "weight": 0.09,
-      "lift": 0.003948025554043027
+      "lift": 0.004831642757559903
     },
     {
       "i": 7,
       "name": "writing_quality",
-      "value": 0.82,
+      "value": 0.78,
       "weight": 0.07,
-      "lift": 0.003070686542033466
+      "lift": 0.0037579443669910366
     },
     {
       "i": 8,
       "name": "ref_quality",
       "value": 0.87,
       "weight": 0.07,
-      "lift": 0.00221771805813528
+      "lift": 0.0022206034895856127
     },
     {
       "i": 9,
       "name": "bias_coverage",
       "value": 0.0,
       "weight": 0.08,
-      "lift": 0.019496422489101363
+      "lift": 0.019521788919433954
     },
     {
       "i": 10,
       "name": "reviewer_anticipation",
       "value": 0.0,
       "weight": 0.07,
-      "lift": 0.017059369677963693
+      "lift": 0.017081565304504713
     },
     {
       "i": 11,
       "name": "journal_fit_eid",
-      "value": 0.92,
+      "value": 0.88,
       "weight": 0.07,
-      "lift": 0.001364749574237095
+      "lift": 0.0020497878365405655
     },
     {
       "i": 12,
       "name": "model_descriptive_rigor",
       "value": 0.75,
       "weight": 0.08,
-      "lift": 0.004874105622275341
+      "lift": 0.004880447229858489
     },
     {
       "i": 13,
       "name": "model_predictive_rigor",
       "value": 0.75,
       "weight": 0.08,
-      "lift": 0.004874105622275341
+      "lift": 0.004880447229858489
     }
   ],
   "ranking_lift": [
     "bias_coverage",
+    "tripod_ai",
     "reviewer_anticipation",
     "strobe",
-    "tripod_ai",
     "model_descriptive_rigor",
     "model_predictive_rigor",
     "novelty",
-    "reproducibility",
     "writing_quality",
+    "reproducibility",
     "ref_quality",
-    "epiforge",
+    "stat_rigor",
     "journal_fit_eid",
-    "stat_rigor"
+    "epiforge"
   ],
   "top3_recommendations": [
     {
       "component": "bias_coverage",
       "action": "Cite missing M14 blindings explicitly.",
-      "expected_lift": 0.019496422489101363
+      "expected_lift": 0.019521788919433954
+    },
+    {
+      "component": "tripod_ai",
+      "action": "Add TRIPOD+AI model card details to Methods.",
+      "expected_lift": 0.01866771065420872
     },
     {
       "component": "reviewer_anticipation",
       "action": "Pre-empt top 3 reviewer attacks in Discussion.",
-      "expected_lift": 0.017059369677963693
-    },
-    {
-      "component": "strobe",
-      "action": "Complete remaining STROBE items flagged by strobe-checker.",
-      "expected_lift": 0.015597137991281092
+      "expected_lift": 0.017081565304504713
     }
   ],
   "logit_params": {
