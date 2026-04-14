@@ -97,7 +97,7 @@ We report ROC-AUC and precision-recall AUC (PR-AUC) with BCa bootstrap 95% CI fr
 
 **5.5.8 Decision curve analysis**
 
-We performed DCA (Vickers & Elkin 2006; Vickers et al. 2019; Assel et al. 2017) across threshold probabilities p_t ∈ [0, 0.25], comparing model net benefit to treat-all, treat-none, and the Bortman endemic-channel baseline on the net-benefit scale, annotating the operational range p_t ∈ [0.05, 0.20].
+We conducted DCA (Vickers & Elkin 2006; Vickers et al. 2019; Assel et al. 2017) across threshold probabilities p_t ∈ [0, 0.25], comparing model net benefit against treat-all, treat-none, and the Bortman endemic-channel baseline on the net-benefit scale, with operational range p_t ∈ [0.05, 0.20] annotated.
 
 No prespecified subgroup analyses or fixed-effect interactions were planned; all inference is at the comuna–month panel level.
 
