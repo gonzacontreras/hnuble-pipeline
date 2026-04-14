@@ -1,4 +1,23 @@
 {
   "version": 1,
-  "entries": []
+  "entries": [
+    {
+      "timestamp": "2026-04-14T05:51:29Z",
+      "reason": "P6:semantic meaning changed (Haiku guard)",
+      "strategy": "stat_rigor",
+      "para_index": 63
+    },
+    {
+      "timestamp": "2026-04-14T05:51:33Z",
+      "reason": "P6:semantic meaning changed (Haiku guard)",
+      "strategy": "reviewer_anticipation",
+      "para_index": 67
+    },
+    {
+      "timestamp": "2026-04-14T05:51:40Z",
+      "reason": "P6:semantic meaning changed (Haiku guard)",
+      "strategy": "model_predictive_rigor",
+      "para_index": 18
+    }
+  ]
 }
