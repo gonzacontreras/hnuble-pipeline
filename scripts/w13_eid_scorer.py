@@ -97,24 +97,37 @@ def _load_manuscript() -> tuple[dict, str]:
 
 
 def _manuscript_excerpt(manuscript: dict, max_chars: int = 6000) -> str:
-    """Return a compact excerpt of the manuscript for prompts."""
+    """Return a compact excerpt of the manuscript for prompts.
+
+    Priority: raw_md > paragraphs[].text > sections[].text > JSON dump.
+    Bug fix (v2.1): sections may lack text fields while paragraphs have them.
+    """
     if "raw_md" in manuscript:
         return manuscript["raw_md"][:max_chars]
-    # Prefer sections concatenation, fall back to JSON dump.
-    sections = manuscript.get("sections") or manuscript.get("paragraphs") or []
-    chunks: list[str] = []
-    for s in sections:
-        if isinstance(s, dict):
-            chunks.append(str(s.get("text") or s.get("content") or "")[:800])
-        else:
-            chunks.append(str(s)[:800])
-        if sum(len(c) for c in chunks) > max_chars:
-            break
-    text = "\n\n".join(chunks)
-    if not text:
-        import json
-        text = json.dumps(manuscript, ensure_ascii=False)[:max_chars]
-    return text[:max_chars]
+
+    # Prefer paragraphs (have actual text) over sections (may be metadata-only)
+    sources = [
+        manuscript.get("paragraphs", []),
+        manuscript.get("sections", []),
+    ]
+    for source in sources:
+        chunks: list[str] = []
+        for s in source:
+            if isinstance(s, dict):
+                text_val = s.get("text") or s.get("content") or s.get("raw") or ""
+                if text_val:
+                    chunks.append(str(text_val)[:800])
+            else:
+                chunks.append(str(s)[:800])
+            if sum(len(c) for c in chunks) > max_chars:
+                break
+        text = "\n\n".join(chunks)
+        if text.strip():
+            return text[:max_chars]
+
+    # Last resort: JSON dump
+    import json
+    return json.dumps(manuscript, ensure_ascii=False)[:max_chars]
 
 
 # ---------------------------------------------------------------------------

@@ -32,12 +32,12 @@ jobs:
         run: |
           git config user.name "hnuble-bot"
           git config user.email "bot@hnuble.io"
-          git add state/eid_score.json state/claude_live.json
+          git checkout -- state/claude_live.json 2>/dev/null || true
+          git add state/eid_score.json
           if git diff --staged --quiet; then
             echo "no changes"
           else
             git commit -m "W13: score update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            # Retry with rebase to survive parallel commits from W8/W12/W15/etc.
             for i in 1 2 3 4 5; do
               git pull --rebase origin main && git push && break
               echo "push attempt $i failed, retrying in 3s"
