@@ -411,14 +411,15 @@ def propose_edit(
         return ""
 
 
-def validate_edit(old_full: str, new_full: str) -> tuple[bool, str]:
-    """5-phase validation on the full manuscript text.
+def validate_edit(old_full: str, new_full: str, old_para: str = "", new_para: str = "") -> tuple[bool, str]:
+    """6-phase validation on the full manuscript text.
 
     Phase 1: M14 canonical tokens preserved
     Phase 2: per-edit word count delta within tolerance
     Phase 3: cumulative word count vs control within tolerance
     Phase 4: hard ceiling (EID 3500 word limit)
     Phase 5: author-year reference count stability
+    Phase 6: semantic preservation check (Haiku guard) — new v2.1
     """
     new_wc = _word_count(new_full)
     old_wc = _word_count(old_full)
@@ -426,12 +427,12 @@ def validate_edit(old_full: str, new_full: str) -> tuple[bool, str]:
     # Phase 1: M14 canonical tokens must still be present
     for token in BLINDAJE_TOKENS:
         if token in old_full and token not in new_full:
-            return False, f"M14 token '{token}' removed"
+            return False, f"P1:M14 token '{token}' removed"
 
     # Phase 2: per-edit word count delta
     per_edit_delta = new_wc - old_wc
     if abs(per_edit_delta) > WC_TOLERANCE_EDIT:
-        return False, f"per-edit wc delta {per_edit_delta:+d} exceeds +/-{WC_TOLERANCE_EDIT}"
+        return False, f"P2:per-edit wc delta {per_edit_delta:+d} exceeds +/-{WC_TOLERANCE_EDIT}"
 
     # Phase 3: cumulative drift from control
     control_path = REPO_ROOT / "state" / "manuscript_control.md"
@@ -439,11 +440,11 @@ def validate_edit(old_full: str, new_full: str) -> tuple[bool, str]:
         control_wc = _word_count(control_path.read_text(encoding="utf-8"))
         cumul_delta = new_wc - control_wc
         if abs(cumul_delta) > WC_TOLERANCE_CUMUL:
-            return False, f"cumulative wc drift {cumul_delta:+d} exceeds +/-{WC_TOLERANCE_CUMUL}"
+            return False, f"P3:cumulative wc drift {cumul_delta:+d} exceeds +/-{WC_TOLERANCE_CUMUL}"
 
     # Phase 4: hard ceiling (EID limit)
     if new_wc > WC_HARD_CEILING:
-        return False, f"wc {new_wc} exceeds EID ceiling {WC_HARD_CEILING}"
+        return False, f"P4:wc {new_wc} exceeds EID ceiling {WC_HARD_CEILING}"
 
     # Phase 5: author-year reference stability
     ay_pattern = re.compile(
@@ -454,9 +455,39 @@ def validate_edit(old_full: str, new_full: str) -> tuple[bool, str]:
     old_ay = len(ay_pattern.findall(old_full))
     new_ay = len(ay_pattern.findall(new_full))
     if abs(new_ay - old_ay) > REFS_TOLERANCE:
-        return False, f"author-year ref count delta {new_ay - old_ay:+d} exceeds +/-{REFS_TOLERANCE}"
+        return False, f"P5:author-year ref count delta {new_ay - old_ay:+d} exceeds +/-{REFS_TOLERANCE}"
+
+    # Phase 6: semantic preservation check via Haiku (cheap second opinion)
+    # Only runs if paragraph texts are provided and non-trivial
+    if old_para and new_para and _word_count(old_para) >= 30:
+        try:
+            verdict = _semantic_check(old_para, new_para)
+            if verdict == "CHANGED":
+                return False, "P6:semantic meaning changed (Haiku guard)"
+        except Exception:
+            pass  # Haiku failure is non-blocking — other 5 phases sufficient
 
     return True, "ok"
+
+
+def _semantic_check(old_para: str, new_para: str) -> str:
+    """Ask Claude Haiku if the meaning changed between old and new paragraph.
+
+    Returns 'SAME' or 'CHANGED'. Cost: ~$0.0005 per call.
+    This is the cheapest possible semantic guard — Haiku is 60x cheaper than Sonnet.
+    """
+    prompt = (
+        "Compare these two paragraphs from a scientific manuscript. "
+        "Did the FACTUAL MEANING change, or only the wording/style?\n\n"
+        f"ORIGINAL:\n{old_para}\n\n"
+        f"EDITED:\n{new_para}\n\n"
+        "Reply with EXACTLY one word: SAME or CHANGED"
+    )
+    result = claude_api.call_haiku(prompt, max_tokens=10)
+    result = result.strip().upper()
+    if "CHANGED" in result:
+        return "CHANGED"
+    return "SAME"
 
 
 # ── Rejection logging ────────────────────────────────────────────────────────
@@ -575,7 +606,15 @@ def main() -> None:
         or current_wc > WC_HARD_CEILING - 30  # within 30 words of EID ceiling
     )
 
-    print(f"[W16] wc_drift={wc_drift:+d} compression={compression_mode} entries={len(entries)}", flush=True)
+    # Rejection-reason-aware feedback: check if recent rejections were WC-related
+    rlog = state.load_json("rejection_log.json", {"version": 1, "entries": []})
+    recent_rejections = rlog.get("entries", [])[-10:]
+    wc_rejections = sum(1 for r in recent_rejections if "wc" in r.get("reason", "").lower())
+    if wc_rejections >= 3 and not compression_mode:
+        compression_mode = True
+        print(f"[W16] compression forced: {wc_rejections}/10 recent rejections were WC-related", flush=True)
+
+    print(f"[W16] wc_drift={wc_drift:+d} compression={compression_mode} ceiling_headroom={WC_HARD_CEILING - current_wc} entries={len(entries)}", flush=True)
 
     # Score all paragraphs
     para_scores = _score_paragraphs(paras, entries, score_data)
@@ -619,11 +658,11 @@ def main() -> None:
 
         wc_delta = _word_count(new_para) - _word_count(target_para)
 
-        # Validate
+        # Validate (6 phases including Haiku semantic guard)
         preview_paras = list(paras)
         preview_paras[para_idx] = new_para
         new_full = "\n\n".join(preview_paras)
-        ok, reason = validate_edit(old_full, new_full)
+        ok, reason = validate_edit(old_full, new_full, old_para=target_para, new_para=new_para)
 
         if ok:
             candidates.append({
