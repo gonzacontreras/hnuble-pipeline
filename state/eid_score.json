@@ -1,101 +1,101 @@
 {
   "version": 1,
-  "scored_at": "2026-04-14T11:20:08Z",
+  "scored_at": "2026-04-14T12:46:01Z",
   "manuscript_hash": "b7394b1bb2dca8f0a5af31c29aaa195f61196ff8ef1ab63b088c67387a7aa903",
-  "score": 0.4285029742125569,
+  "score": 0.4222456316188408,
   "baseline_prior": 0.28,
-  "delta_vs_baseline": 0.14850297421255687,
+  "delta_vs_baseline": 0.1422456316188408,
   "components": [
     {
       "i": 1,
       "name": "strobe",
-      "value": 0.55,
+      "value": 0.41,
       "weight": 0.1,
-      "lift": 0.011019967888659736
+      "lift": 0.014393301233661174
     },
     {
       "i": 2,
       "name": "tripod_ai",
-      "value": 0.72,
+      "value": 0.42,
       "weight": 0.09,
-      "lift": 0.006171182017649453
+      "lift": 0.012734412277917172
     },
     {
       "i": 3,
       "name": "epiforge",
       "value": 0.89,
       "weight": 0.07,
-      "lift": 0.0018856389498373325
+      "lift": 0.0018784477881218817
     },
     {
       "i": 4,
       "name": "stat_rigor",
       "value": 0.85,
       "weight": 0.06,
-      "lift": 0.0022039935777319474
+      "lift": 0.002195588323778823
     },
     {
       "i": 5,
       "name": "reproducibility",
-      "value": 0.78,
+      "value": 0.89,
       "weight": 0.07,
-      "lift": 0.003771277899674665
+      "lift": 0.0018784477881218817
     },
     {
       "i": 6,
       "name": "novelty",
       "value": 0.82,
       "weight": 0.09,
-      "lift": 0.003967188439917506
+      "lift": 0.003952058982801882
     },
     {
       "i": 7,
       "name": "writing_quality",
-      "value": 0.78,
+      "value": 0.82,
       "weight": 0.07,
-      "lift": 0.003771277899674665
+      "lift": 0.003073823653290353
     },
     {
       "i": 8,
       "name": "ref_quality",
-      "value": 0.8,
+      "value": 0.87,
       "weight": 0.07,
-      "lift": 0.003428434454249695
+      "lift": 0.0022199837495985877
     },
     {
       "i": 9,
       "name": "bias_coverage",
       "value": 0.0,
       "weight": 0.08,
-      "lift": 0.019591054024283978
+      "lift": 0.019516340655811756
     },
     {
       "i": 10,
       "name": "reviewer_anticipation",
       "value": 0.0,
       "weight": 0.07,
-      "lift": 0.01714217227124848
+      "lift": 0.01707679807383529
     },
     {
       "i": 11,
       "name": "journal_fit_eid",
       "value": 0.92,
       "weight": 0.07,
-      "lift": 0.0013713737816998777
+      "lift": 0.0013661438459068225
     },
     {
       "i": 12,
       "name": "model_descriptive_rigor",
       "value": 0.75,
       "weight": 0.08,
-      "lift": 0.004897763506070994
+      "lift": 0.004879085163952939
     },
     {
       "i": 13,
       "name": "model_predictive_rigor",
       "value": 0.75,
       "weight": 0.08,
-      "lift": 0.004897763506070994
+      "lift": 0.004879085163952939
     }
   ],
   "ranking_lift": [
@@ -106,28 +106,28 @@
     "model_descriptive_rigor",
     "model_predictive_rigor",
     "novelty",
-    "reproducibility",
     "writing_quality",
     "ref_quality",
     "stat_rigor",
     "epiforge",
+    "reproducibility",
     "journal_fit_eid"
   ],
   "top3_recommendations": [
     {
       "component": "bias_coverage",
       "action": "Cite missing M14 blindings explicitly.",
-      "expected_lift": 0.019591054024283978
+      "expected_lift": 0.019516340655811756
     },
     {
       "component": "reviewer_anticipation",
       "action": "Pre-empt top 3 reviewer attacks in Discussion.",
-      "expected_lift": 0.01714217227124848
+      "expected_lift": 0.01707679807383529
     },
     {
       "component": "strobe",
       "action": "Complete remaining STROBE items flagged by strobe-checker.",
-      "expected_lift": 0.011019967888659736
+      "expected_lift": 0.014393301233661174
     }
   ],
   "logit_params": {
