@@ -8,10 +8,10 @@
       "successes": 0
     },
     "writing_quality": {
-      "alpha": 7.0,
+      "alpha": 9.0,
       "beta": 1.0,
-      "attempts": 6,
-      "successes": 6
+      "attempts": 8,
+      "successes": 8
     },
     "reviewer_anticipation": {
       "alpha": 2.0,
@@ -56,6 +56,6 @@
       "successes": 4
     }
   },
-  "total_attempts": 18,
-  "total_successes": 13
+  "total_attempts": 20,
+  "total_successes": 15
 }

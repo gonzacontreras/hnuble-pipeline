@@ -80,7 +80,7 @@ Predicted probabilities for each tier (p_ge1, p_ge2, p_ge3) are derived from the
 
 **Complementary**: ranked probability score on the nested ordinal outcome Y ∈ {0,1,2,3} (Epstein 1969; Murphy 1971), interval format per Bracher et al. 2021.
 
-**Secondary**: scaled Brier score with bootstrap CI for backward comparability (Steyerberg et al. 2010); formulas, walk-forward fold assignments, and baseline forecast specifications appear in Supplementary Methods.
+**Secondary**: scaled Brier score with bootstrap CI for backward compatibility (Steyerberg et al. 2010); Supplementary Methods provides formulas, walk-forward fold assignments, and baseline forecast specifications.
 
 **5.5.6 Multi-baseline skill assessment**
 
