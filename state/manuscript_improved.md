@@ -93,7 +93,7 @@ Brier Skill Scores (BSS) are reported against each.
 
 **5.5.7 Discrimination metrics**
 
-We report ROC-AUC and precision-recall AUC (PR-AUC) with BCa bootstrap 95% CI from 2,000 row-level resamples (Efron 1987; Carpenter & Bithell 2000; Davison & Hinkley 1997; Saito & Rehmsmeier 2015; Sofaer et al. 2019); PR-AUC is particularly informative under severe class imbalance.
+We report ROC-AUC and precision-recall AUC (PR-AUC) with BCa bootstrap 95% CI from 2,000 row-level resamples (Efron 1987; Carpenter & Bithell 2000; Davison & Hinkley 1997; Saito & Rehmsmeier 2015; Sofaer et al. 2019); PR-AUC proves particularly informative under severe class imbalance.
 
 **5.5.8 Decision curve analysis**
 

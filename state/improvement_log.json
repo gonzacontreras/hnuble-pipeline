@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -372,6 +372,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": 2,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-3bf924a2",
+      "timestamp": "2026-04-14T20:38:58Z",
+      "annotation_id": "auto-writing_quality-38",
+      "para_index": 38,
+      "para_section": "writing_quality",
+      "old_text": "We report ROC-AUC and precision-recall AUC (PR-AUC) with BCa bootstrap 95% CI from 2,000 row-level resamples (Efron 1987; Carpenter & Bithell 2000; Davison & Hinkley 1997; Saito & Rehmsmeier 2015; Sofaer et al. 2019); PR-AUC is particularly informative under severe class imbalance.",
+      "new_text": "We report ROC-AUC and precision-recall AUC (PR-AUC) with BCa bootstrap 95% CI from 2,000 row-level resamples (Efron 1987; Carpenter & Bithell 2000; Davison & Hinkley 1997; Saito & Rehmsmeier 2015; Sofaer et al. 2019); PR-AUC proves particularly informative under severe class imbalance.",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 0,
       "refs_delta": 0
     }
   ]
