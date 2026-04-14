@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -210,6 +210,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": -3,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-2569fbe5",
+      "timestamp": "2026-04-14T11:19:45Z",
+      "annotation_id": "auto-writing_quality-64",
+      "para_index": 64,
+      "para_section": "writing_quality",
+      "old_text": "Tier 3 remains exploratory pending external validation; under the log score primary, 10- vs 14-fold differences fall within sampling noise (mutual CI overlap), supporting Tier 1–2 robustness.",
+      "new_text": "Tier 3 remains exploratory pending external validation; under the primary log score, 10- versus 14-fold differences fall within sampling noise (mutual confidence interval overlap), supporting Tier 1–2 robustness.",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 1,
       "refs_delta": 0
     }
   ]
