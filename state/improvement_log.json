@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -345,6 +345,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": -1,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-7636bd5e",
+      "timestamp": "2026-04-14T19:41:35Z",
+      "annotation_id": "auto-writing_quality-32",
+      "para_index": 32,
+      "para_section": "writing_quality",
+      "old_text": "**Complementary**: ranked probability score on the nested ordinal outcome Y ∈ {0,1,2,3} (Epstein 1969; Murphy 1971), interval format per Bracher et al. 2021.",
+      "new_text": "**Complementary**: ranked probability score on the nested ordinal outcome Y ∈ {0,1,2,3} (Epstein 1969; Murphy 1971), formatted as prediction intervals per Bracher et al. 2021.",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 2,
       "refs_delta": 0
     }
   ]
