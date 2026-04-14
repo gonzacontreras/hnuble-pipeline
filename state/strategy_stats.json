@@ -21,8 +21,8 @@
     },
     "stat_rigor": {
       "alpha": 1.0,
-      "beta": 2.0,
-      "attempts": 1,
+      "beta": 3.0,
+      "attempts": 2,
       "successes": 0
     },
     "journal_fit_eid": {
@@ -44,12 +44,12 @@
       "successes": 0
     },
     "model_predictive_rigor": {
-      "alpha": 1.0,
+      "alpha": 3.0,
       "beta": 2.0,
-      "attempts": 1,
-      "successes": 0
+      "attempts": 3,
+      "successes": 2
     }
   },
-  "total_attempts": 4,
-  "total_successes": 1
+  "total_attempts": 7,
+  "total_successes": 3
 }

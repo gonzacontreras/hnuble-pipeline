@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -156,6 +156,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": 47,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-4f463541",
+      "timestamp": "2026-04-14T08:04:03Z",
+      "annotation_id": "auto-model_predictive_rigor-33",
+      "para_index": 33,
+      "para_section": "model_predictive_rigor",
+      "old_text": "**Secondary**: scaled Brier score with bootstrap CI for backward comparability (Steyerberg et al. 2010). Formulas and scope notes are in Supplementary Methods.",
+      "new_text": "**Secondary**: scaled Brier score with bootstrap CI for backward comparability (Steyerberg et al. 2010); formulas, walk-forward fold assignments, and baseline forecast specifications appear in Supplementary Methods.",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: model_predictive_rigor strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": 4,
       "refs_delta": 0
     }
   ]

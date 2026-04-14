@@ -18,6 +18,12 @@
       "reason": "P6:semantic meaning changed (Haiku guard)",
       "strategy": "model_predictive_rigor",
       "para_index": 18
+    },
+    {
+      "timestamp": "2026-04-14T08:04:01Z",
+      "reason": "P6:semantic meaning changed (Haiku guard)",
+      "strategy": "stat_rigor",
+      "para_index": 65
     }
   ]
 }
