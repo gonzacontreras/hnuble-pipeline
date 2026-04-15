@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -507,6 +507,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": -1,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-7fee5b20",
+      "timestamp": "2026-04-15T04:17:48Z",
+      "annotation_id": "auto-writing_quality-15",
+      "para_index": 15,
+      "para_section": "writing_quality",
+      "old_text": "Andes-virus hantavirus cardiopulmonary syndrome (HCPS) is a rodent-borne zoonosis endemic to southern South America, classified among neglected tropical diseases linked to poverty and ecosystem disturbance. It is transmitted by Oligoryzomys longicaudatus (long-tailed colilargo) and characterized by high case-fatality (≈28% in the Chilean Ñuble region, 2002–2024). Ñuble, in the south-central Andes foothills, sustained an incidence of 1.21 per 100,000 person-years during 2002–2024 — approximately ",
+      "new_text": "Andes-virus hantavirus cardiopulmonary syndrome (HCPS) is a rodent-borne zoonosis endemic to southern South America and classified among neglected tropical diseases linked to poverty and ecosystem disturbance. Oligoryzomys longicaudatus (long-tailed colilargo) transmits the virus, which produces high case-fatality (≈28% in Chile's Ñuble region, 2002–2024). Ñuble, situated in the south-central Andes foothills, sustained an incidence of 1.21 per 100,000 person-years during 2002–2024—approximately ",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": -5,
       "refs_delta": 0
     }
   ]
