@@ -1,5 +1,5 @@
 {
-  "version": 14,
+  "version": 15,
   "entries": [
     {
       "entry_id": "iter1-01",
@@ -480,6 +480,33 @@
         "refs_count_ok": true
       },
       "word_count_delta": 0,
+      "refs_delta": 0
+    },
+    {
+      "entry_id": "w16-4f9fe3ed",
+      "timestamp": "2026-04-15T01:08:56Z",
+      "annotation_id": "auto-writing_quality-43",
+      "para_index": 43,
+      "para_section": "writing_quality",
+      "old_text": "The pre-specification protocol v1.0 and Addenda v1.1–v1.2 (all locked 2026-04-04) are archived at Zenodo DOI 10.5281/zenodo.19425753, with git timestamps confirming the addendum commit precedes the first computation script by 40 minutes (Supplementary Table S1). The switch from scaled Brier to log score as primary (Addendum v1.2) was locked at 2026-04-04 22:19:43 local Chile time, 33–40 minutes before the Nivel 2 scripts were written and 40 minutes before the first output (T_BLINDAJE_logscore.cs",
+      "new_text": "The pre-specification protocol v1.0 and Addenda v1.1–v1.2 (all locked 2026-04-04) are archived at Zenodo DOI 10.5281/zenodo.19425753; git timestamps confirm the addendum commit precedes the first computation script by 40 minutes (Supplementary Table S1). We locked the switch from scaled Brier to log score as primary (Addendum v1.2) at 2026-04-04 22:19:43 local Chile time, 33–40 minutes before writing the Nivel 2 scripts and 40 minutes before generating the first output (T_BLINDAJE_logscore.csv, ",
+      "edit_type": "replace",
+      "rationale": "Auto-improvement: writing_quality strategy (Thompson Sampling v2)",
+      "lift_estimate": 0.0,
+      "risk": "low",
+      "agents_used": [
+        "w16-auto-improver-v2",
+        "claude-sonnet"
+      ],
+      "validator_passed": true,
+      "validator_checks": {
+        "m14_ok": true,
+        "canonical_ok": true,
+        "no_dup_refs": true,
+        "word_count_ok": true,
+        "refs_count_ok": true
+      },
+      "word_count_delta": -1,
       "refs_delta": 0
     }
   ]
