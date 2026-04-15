@@ -855,6 +855,150 @@
         "memory/project_auditoria_Q1_S50_cierre_completo.md:0"
       ],
       "mcc_at": "2026-04-12T05:25:29.195848Z"
+    },
+    {
+      "id": "W3-20250609-01",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "measurement",
+      "title": "Case definition change IgM→RT-PCR without sensitivity/specificity adjustment",
+      "evidence": "case definition: IgM seroconversion or RT-PCR positive per MINSAL circular B51/24",
+      "mechanism": "IgM-based diagnosis (pre-2012) has different sensitivity/specificity than RT-PCR (post-2012), potentially creating artificial temporal trends in case ascertainment independent of true incidence. No adjustment for diagnostic test performance applied.",
+      "fix_hint": "Conduct sensitivity analysis weighting pre/post-2012 cases by known IgM vs RT-PCR sensitivity/specificity ratios, or stratify walk-forward folds by diagnostic era",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-02",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "selection",
+      "title": "Commune of probable infection assignment lacks validation",
+      "evidence": "assigned to their probable commune of infection—rather than residence—following the case reconciliation protocol described in Supplementary Methods",
+      "mechanism": "No validation data provided for infection-vs-residence assignment accuracy. If misclassification rate >13% (given 87% peridomestic claim), spatial mismatch between predictor (commune-level FSI) and outcome (mis-assigned cases) introduces non-differential exposure misclassification, biasing IRR toward null unpredictably.",
+      "fix_hint": "Report inter-rater reliability for infection commune assignment or conduct probabilistic sensitivity analysis across plausible misclassification rates (10-30%)",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-03",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "confounding",
+      "title": "Rodent density proxy absent despite being causal mediator",
+      "evidence": "O. longicaudatus transmits the virus... subliminal two-to-fivefold rise in O. longicaudatus density — a phenomenon we term 'ratización'",
+      "mechanism": "FSI → rodent density → human cases is the stated causal path, yet no rodent abundance measurement appears in the model. Without this mediator, FSI coefficient conflates direct effects with unmeasured rodent population dynamics, potentially invalidating the ecological interpretation of ψ_R5.",
+      "fix_hint": "Add historical trapping data as sensitivity check, or explicitly state FSI is an instrumental variable with assumptions required for valid inference",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-04",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "temporal",
+      "title": "Wildfire veto threshold (ΔNBR2 < −0.15) lacks empirical justification",
+      "evidence": "active-burn pixels vetoed (ΔNBR2 < −0.15) to prevent wildfire-scar contamination",
+      "mechanism": "Arbitrary threshold without validation against known fire perimeters. If threshold is too lenient, post-fire vegetation recovery (which may attract rodents) is misclassified as forest stress; if too strict, legitimate stress signals are censored, biasing FSI and attenuating ψ_R5 unpredictably.",
+      "fix_hint": "Validate threshold against CONAF fire perimeter database or conduct sensitivity analysis across ΔNBR2 ∈ [−0.10, −0.20]",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-05",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "model-mis-specification",
+      "title": "Negative ψ_R5 interpretation reversal unreported in pre-specification",
+      "evidence": "The negative ψ reflects R as a post-flowering scar signal: high R means the C. quila cycle has already peaked",
+      "mechanism": "Pre-specification likely assumed positive association (high stress → high cases). Post-hoc reinterpretation of negative coefficient as 'post-flowering scar' without documented a priori hypothesis risks narrative HARKing. If pre-spec v1.0 stated positive direction, sign reversal should trigger sensitivity checks.",
+      "fix_hint": "Publish pre-specification v1.0 directional hypothesis for ψ_R5; if reversed, report as exploratory finding requiring external validation",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-06",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "publication",
+      "title": "Companion clinical study selective outcome reporting risk",
+      "evidence": "A companion clinical analysis... has been submitted separately... share no analytical methods, tables, figures, or computed metrics",
+      "mechanism": "If companion study failed to find prognostic associations, selective non-publication of null results while publishing positive ecological findings inflates apparent hantavirus predictability literature-wide. No trial registration or pre-specification mentioned for clinical study.",
+      "fix_hint": "Register companion clinical study retrospectively at ClinicalTrials.gov or state explicitly if negative findings will be published regardless of significance",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-07",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "ecological",
+      "title": "87% peridomestic transmission citation (Riquelme 2015) location mismatch",
+      "evidence": "87% peridomestic transmission per Riquelme 2015 supports spatial accuracy",
+      "mechanism": "If Riquelme 2015 study was conducted outside Ñuble region or in different ecological zone, applying its 87% estimate to justify Ñuble commune-level assignment creates cross-population transportability error. Peridomestic fraction may differ in quiloide vs non-quiloide zones.",
+      "fix_hint": "Verify Riquelme 2015 study region; if non-Ñuble, conduct local chart review subsample to estimate Ñuble-specific peridomestic fraction",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-08",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "measurement",
+      "title": "FSI composite formula weights frozen in Achibueno without Ñuble validation",
+      "evidence": "custom Forest Stress Index (FSI) derived from... NDMI/NDVI/NBR2 bands... calibrated in Achibueno and frozen before migration to Ñuble",
+      "mechanism": "Achibueno and Ñuble differ in elevation, forest composition, and precipitation regime. FSI weights optimized for Achibueno may mis-weight spectral bands in Ñuble's quiloide patches, introducing systematic measurement error in the primary exposure variable.",
+      "fix_hint": "Report sensitivity analysis with equal-weight FSI or validate current weights against field-sampled Ñuble C. quila patches",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-09",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "ascertainment",
+      "title": "CONAF seasonal patrol coverage (Oct-Apr) incomplete over risk window",
+      "evidence": "CONAF patrol coverage is seasonal (October–April), only partially overlapping the primary risk window",
+      "mechanism": "If CONAF detects quiloide flowering only during Oct-Apr, but cases occur year-round (including lag-5 from May-Sep flowering), off-season flowering events are systematically under-detected in FSI, creating seasonally varying exposure measurement error that confounds the lag-5 estimate.",
+      "fix_hint": "Report monthly FSI availability completeness or restrict analysis to Oct-Apr detection windows with explicit seasonal generalizability caveat",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-10",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "information",
+      "title": "Zero September cases structural assumption untested",
+      "evidence": "91.2% occurred October–May, with zero cases in September across 23 consecutive years",
+      "mechanism": "23-year zero count in September likely reflects surveillance artifact (end-of-winter reporting lag) or true biological null period. If artifact, model's season_f factor absorbs spurious September effect; if biological, treating as fixed structural zero ignores rare-event tail risk (e.g., climate-shifted phenology).",
+      "fix_hint": "Test whether September zero-inflation is surveillance artifact via case-onset-vs-report-date analysis, or model as overdispersed Poisson rather than structural zero",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-11",
+      "source": "W3",
+      "severity": "LOW",
+      "taxonomy": "temporal",
+      "title": "INE intercensal log-linear interpolation ignores migration shocks",
+      "evidence": "INE population estimates with log-linear intercensal interpolation",
+      "mechanism": "Log-linear interpolation assumes smooth exponential growth between censuses, missing abrupt migration events (e.g., 2010 earthquake, 2017 Ñuble administrative split). If population denominators are mis-estimated during shock years, incidence rate standardization introduces time-varying bias.",
+      "fix_hint": "Use INE's official annual projections if available, or flag census years as potential structural break points in sensitivity analysis",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
+    },
+    {
+      "id": "W3-20250609-12",
+      "source": "W3",
+      "severity": "LOW",
+      "taxonomy": "confounding",
+      "title": "Forest cover fraction static despite 22-year study period",
+      "evidence": "static covariates (forest cover fraction, elevation, slope)",
+      "mechanism": "Forest cover changed 2002-2024 due to fires, logging, and CONAF reforestation. Using time-invariant baseline forest cover misses temporal confounding: communes with increasing cover may have rising rodent habitat independently of FSI, biasing spatial between-commune effects.",
+      "fix_hint": "Derive annual forest cover from Landsat time series or include linear forest-cover trend as sensitivity covariate",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-15T05:24:40.338137Z"
     }
   ],
   "version": 1,
@@ -862,5 +1006,5 @@
   "last_w7_run": "2026-04-15T03:25:45.482729Z",
   "last_w7_checked": 10,
   "last_w7_errors": 1,
-  "last_w3_run": "2026-04-14T05:24:44.861797Z"
+  "last_w3_run": "2026-04-15T05:24:40.338137Z"
 }
