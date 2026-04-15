@@ -174,6 +174,187 @@
         "memory/project_auditoria_Q1_S50_cierre_completo.md:0"
       ],
       "mcc_at": "2026-04-12T05:25:29.195848Z"
+    },
+    {
+      "id": "W3-20250609-01",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "measurement",
+      "title": "Case definition change IgM→RT-PCR without sensitivity/specificity adjustment",
+      "evidence": "case definition: IgM seroconversion or RT-PCR positive per MINSAL circular B51/24",
+      "mechanism": "IgM-based diagnosis (pre-2012) has different sensitivity/specificity than RT-PCR (post-2012), potentially creating artificial temporal trends in case ascertainment independent of true incidence. No adjustment for diagnostic test performance applied.",
+      "fix_hint": "Conduct sensitivity analysis weighting pre/post-2012 cases by known IgM vs RT-PCR sensitivity/specificity ratios, or stratify walk-forward folds by diagnostic era",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-15T05:24:40.338137Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Case definition IgM/RT-PCR documented in official panel metadata and manuscript v5, but no Q1 citation addressing sensitivity/specificity trade-offs of the 2024 diagnostic switch.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/02_Datos/Panel Oficial M1M2.md:snippet",
+        "obsidian_vault/04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md:snippet"
+      ],
+      "mcc_at": "2026-04-15T05:25:29.533738Z"
+    },
+    {
+      "id": "W3-20250609-02",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "selection",
+      "title": "Commune of probable infection assignment lacks validation",
+      "evidence": "assigned to their probable commune of infection—rather than residence—following the case reconciliation protocol described in Supplementary Methods",
+      "mechanism": "No validation data provided for infection-vs-residence assignment accuracy. If misclassification rate >13% (given 87% peridomestic claim), spatial mismatch between predictor (commune-level FSI) and outcome (mis-assigned cases) introduces non-differential exposure misclassification, biasing IRR toward null unpredictably.",
+      "fix_hint": "Report inter-rater reliability for infection commune assignment or conduct probabilistic sensitivity analysis across plausible misclassification rates (10-30%)",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-15T05:24:40.338137Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Commune-of-infection assignment protocol mentioned in manuscript v5 and Supp Methods, but no validation statistics or Q1 citation quantifying misclassification rate.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md:snippet",
+        "obsidian_vault/05_Parte_II_Clinica/Archivo Maestro Parte II.md:snippet"
+      ],
+      "mcc_at": "2026-04-15T05:25:29.533738Z"
+    },
+    {
+      "id": "W3-20250609-03",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "confounding",
+      "title": "Rodent density proxy absent despite being causal mediator",
+      "evidence": "O. longicaudatus transmits the virus... subliminal two-to-fivefold rise in O. longicaudatus density — a phenomenon we term 'ratización'",
+      "mechanism": "FSI → rodent density → human cases is the stated causal path, yet no rodent abundance measurement appears in the model. Without this mediator, FSI coefficient conflates direct effects with unmeasured rodent population dynamics, potentially invalidating the ecological interpretation of ψ_R5.",
+      "fix_hint": "Add historical trapping data as sensitivity check, or explicitly state FSI is an instrumental variable with assumptions required for valid inference",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-15T05:24:40.338137Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Ratización concept and O. longicaudatus causal role documented in hypothesis files and Estado_Conocimiento S50, but no direct rodent density covariate in final GLMM model.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/01_Proyecto/Hipotesis Principal.md:snippet",
+        "obsidian_vault/04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md:snippet"
+      ],
+      "mcc_at": "2026-04-15T05:25:29.533738Z"
+    },
+    {
+      "id": "W3-20250609-04",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "temporal",
+      "title": "Wildfire veto threshold (ΔNBR2 < −0.15) lacks empirical justification",
+      "evidence": "active-burn pixels vetoed (ΔNBR2 < −0.15) to prevent wildfire-scar contamination",
+      "mechanism": "Arbitrary threshold without validation against known fire perimeters. If threshold is too lenient, post-fire vegetation recovery (which may attract rodents) is misclassified as forest stress; if too strict, legitimate stress signals are censored, biasing FSI and attenuating ψ_R5 unpredictably.",
+      "fix_hint": "Validate threshold against CONAF fire perimeter database or conduct sensitivity analysis across ΔNBR2 ∈ [−0.10, −0.20]",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-15T05:24:40.338137Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "dNBR2 < -0.15 threshold implemented in GEE_FSI_Reconstruccion S51 scripts, but no peer-reviewed citation or empirical validation justifying -0.15 cutpoint for bamboo ecosystems.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "memory/project_GEE_FSI_reconstruccion_S51.md:snippet",
+        "obsidian_vault/04_Parte_I_EcoEpi/GEE_FSI_Reconstruccion_S51.md:snippet"
+      ],
+      "mcc_at": "2026-04-15T05:25:29.533738Z"
+    },
+    {
+      "id": "W3-20250609-05",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "model-mis-specification",
+      "title": "Negative ψ_R5 interpretation reversal unreported in pre-specification",
+      "evidence": "The negative ψ reflects R as a post-flowering scar signal: high R means the C. quila cycle has already peaked",
+      "mechanism": "Pre-specification likely assumed positive association (high stress → high cases). Post-hoc reinterpretation of negative coefficient as 'post-flowering scar' without documented a priori hypothesis risks narrative HARKing. If pre-spec v1.0 stated positive direction, sign reversal should trigger sensitivity checks.",
+      "fix_hint": "Publish pre-specification v1.0 directional hypothesis for ψ_R5; if reversed, report as exploratory finding requiring external validation",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-15T05:24:40.338137Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Negative ψ_R5 interpretation present in decision_opcionA S50 and Paper_EID_Final, but pre-specification doc lacks explicit HARKing disclosure of sign reversal discovery.",
+      "mcc_missing": "PHRASE_MISSING",
+      "mcc_prior_refs": [
+        "memory/project_decision_opcionA_blindada_S50.md:snippet",
+        "obsidian_vault/04_Parte_I_EcoEpi/Paper_EID_Final.md:snippet"
+      ],
+      "mcc_at": "2026-04-15T05:25:29.533738Z"
+    },
+    {
+      "id": "W3-20250609-07",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "ecological",
+      "title": "87% peridomestic transmission citation (Riquelme 2015) location mismatch",
+      "evidence": "87% peridomestic transmission per Riquelme 2015 supports spatial accuracy",
+      "mechanism": "If Riquelme 2015 study was conducted outside Ñuble region or in different ecological zone, applying its 87% estimate to justify Ñuble commune-level assignment creates cross-population transportability error. Peridomestic fraction may differ in quiloide vs non-quiloide zones.",
+      "fix_hint": "Verify Riquelme 2015 study region; if non-Ñuble, conduct local chart review subsample to estimate Ñuble-specific peridomestic fraction",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-15T05:24:40.338137Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Riquelme 2015 87% peridomestic figure cited in Auditoria_Q1_S50 and Paper_EID_Final, but no explicit geographic concordance check between Riquelme cohort and Ñuble study area.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "memory/project_auditoria_Q1_S50_cierre_completo.md:snippet",
+        "obsidian_vault/04_Parte_I_EcoEpi/Paper_EID_Final.md:snippet"
+      ],
+      "mcc_at": "2026-04-15T05:25:29.533738Z"
+    },
+    {
+      "id": "W3-20250609-08",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "measurement",
+      "title": "FSI composite formula weights frozen in Achibueno without Ñuble validation",
+      "evidence": "custom Forest Stress Index (FSI) derived from... NDMI/NDVI/NBR2 bands... calibrated in Achibueno and frozen before migration to Ñuble",
+      "mechanism": "Achibueno and Ñuble differ in elevation, forest composition, and precipitation regime. FSI weights optimized for Achibueno may mis-weight spectral bands in Ñuble's quiloide patches, introducing systematic measurement error in the primary exposure variable.",
+      "fix_hint": "Report sensitivity analysis with equal-weight FSI or validate current weights against field-sampled Ñuble C. quila patches",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-15T05:24:40.338137Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "FSI Achibueno calibration documented in GEE_FSI_Reconstruccion S51 and Estado_Conocimiento S50, but no Ñuble-specific validation analysis quantifying out-of-sample prediction error.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "memory/project_GEE_FSI_reconstruccion_S51.md:snippet",
+        "obsidian_vault/04_Parte_I_EcoEpi/GEE_FSI_Reconstruccion_S51.md:snippet"
+      ],
+      "mcc_at": "2026-04-15T05:25:29.533738Z"
+    },
+    {
+      "id": "W3-20250609-10",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "information",
+      "title": "Zero September cases structural assumption untested",
+      "evidence": "91.2% occurred October–May, with zero cases in September across 23 consecutive years",
+      "mechanism": "23-year zero count in September likely reflects surveillance artifact (end-of-winter reporting lag) or true biological null period. If artifact, model's season_f factor absorbs spurious September effect; if biological, treating as fixed structural zero ignores rare-event tail risk (e.g., climate-shifted phenology).",
+      "fix_hint": "Test whether September zero-inflation is surveillance artifact via case-onset-vs-report-date analysis, or model as overdispersed Poisson rather than structural zero",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-15T05:24:40.338137Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Zero September cases across 23 years documented in Panel Oficial M1M2 and Estado_Conocimiento S50, but no formal statistical test ruling out random chance or structural break.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/02_Datos/Panel Oficial M1M2.md:snippet",
+        "obsidian_vault/04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md:snippet"
+      ],
+      "mcc_at": "2026-04-15T05:25:29.533738Z"
+    },
+    {
+      "id": "W3-20250609-12",
+      "source": "W3",
+      "severity": "LOW",
+      "taxonomy": "confounding",
+      "title": "Forest cover fraction static despite 22-year study period",
+      "evidence": "static covariates (forest cover fraction, elevation, slope)",
+      "mechanism": "Forest cover changed 2002-2024 due to fires, logging, and CONAF reforestation. Using time-invariant baseline forest cover misses temporal confounding: communes with increasing cover may have rising rodent habitat independently of FSI, biasing spatial between-commune effects.",
+      "fix_hint": "Derive annual forest cover from Landsat time series or include linear forest-cover trend as sensitivity covariate",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-15T05:24:40.338137Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior refs confirm static covariates (forest, elevation, slope) are documented in methods across multiple files, but no Q1 citation justifying 22-year static assumption nor numeric sensitivity analysis.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "obsidian_vault/03_Modelos/GLMM NB2 Final.md",
+        "obsidian_vault/04_Parte_I_EcoEpi/Auditoria_Q1_S50_cierre.md",
+        "memory/project_3_problemas_graves.md"
+      ],
+      "mcc_at": "2026-04-15T05:25:29.533738Z"
     }
   ]
 }
