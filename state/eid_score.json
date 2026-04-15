@@ -1,115 +1,115 @@
 {
   "version": 1,
-  "scored_at": "2026-04-14T23:29:38Z",
+  "scored_at": "2026-04-15T01:09:18Z",
   "manuscript_hash": "b7394b1bb2dca8f0a5af31c29aaa195f61196ff8ef1ab63b088c67387a7aa903",
-  "score": 0.4176417987800477,
+  "score": 0.43235196000304194,
   "baseline_prior": 0.28,
-  "delta_vs_baseline": 0.13764179878004767,
+  "delta_vs_baseline": 0.1523519600030419,
   "components": [
     {
       "i": 1,
       "name": "strobe",
-      "value": 0.5,
+      "value": 0.68,
       "weight": 0.1,
-      "lift": 0.012160856334590693
+      "lift": 0.007853559765906239
     },
     {
       "i": 2,
       "name": "tripod_ai",
-      "value": 0.15,
+      "value": 0.72,
       "weight": 0.09,
-      "lift": 0.018606110191923757
+      "lift": 0.006184678315651163
     },
     {
       "i": 3,
       "name": "epiforge",
       "value": 0.92,
       "weight": 0.07,
-      "lift": 0.001362015909474157
+      "lift": 0.001374372959033591
     },
     {
       "i": 4,
       "name": "stat_rigor",
       "value": 0.85,
       "weight": 0.06,
-      "lift": 0.002188954140226325
+      "lift": 0.0022088136841611297
     },
     {
       "i": 5,
       "name": "reproducibility",
-      "value": 0.9,
+      "value": 0.77,
       "weight": 0.07,
-      "lift": 0.0017025198868426967
+      "lift": 0.003951322257221576
     },
     {
       "i": 6,
       "name": "novelty",
       "value": 0.78,
       "weight": 0.09,
-      "lift": 0.0048156991084979135
+      "lift": 0.004859390105154485
     },
     {
       "i": 7,
       "name": "writing_quality",
       "value": 0.78,
       "weight": 0.07,
-      "lift": 0.003745543751053933
+      "lift": 0.003779525637342377
     },
     {
       "i": 8,
       "name": "ref_quality",
       "value": 0.87,
       "weight": 0.07,
-      "lift": 0.002213275852895506
+      "lift": 0.002233356058429587
     },
     {
       "i": 9,
       "name": "bias_coverage",
       "value": 0.0,
       "weight": 0.08,
-      "lift": 0.019457370135345108
+      "lift": 0.019633899414765597
     },
     {
       "i": 10,
       "name": "reviewer_anticipation",
       "value": 0.0,
       "weight": 0.07,
-      "lift": 0.01702519886842697
+      "lift": 0.017179661987919898
     },
     {
       "i": 11,
       "name": "journal_fit_eid",
       "value": 0.92,
       "weight": 0.07,
-      "lift": 0.001362015909474157
+      "lift": 0.001374372959033591
     },
     {
       "i": 12,
       "name": "model_descriptive_rigor",
       "value": 0.75,
       "weight": 0.08,
-      "lift": 0.004864342533836277
+      "lift": 0.004908474853691399
     },
     {
       "i": 13,
       "name": "model_predictive_rigor",
       "value": 0.75,
       "weight": 0.08,
-      "lift": 0.004864342533836277
+      "lift": 0.004908474853691399
     }
   ],
   "ranking_lift": [
     "bias_coverage",
-    "tripod_ai",
     "reviewer_anticipation",
     "strobe",
+    "tripod_ai",
     "model_descriptive_rigor",
     "model_predictive_rigor",
     "novelty",
+    "reproducibility",
     "writing_quality",
     "ref_quality",
     "stat_rigor",
-    "reproducibility",
     "epiforge",
     "journal_fit_eid"
   ],
@@ -117,17 +117,17 @@
     {
       "component": "bias_coverage",
       "action": "Cite missing M14 blindings explicitly.",
-      "expected_lift": 0.019457370135345108
-    },
-    {
-      "component": "tripod_ai",
-      "action": "Add TRIPOD+AI model card details to Methods.",
-      "expected_lift": 0.018606110191923757
+      "expected_lift": 0.019633899414765597
     },
     {
       "component": "reviewer_anticipation",
       "action": "Pre-empt top 3 reviewer attacks in Discussion.",
-      "expected_lift": 0.01702519886842697
+      "expected_lift": 0.017179661987919898
+    },
+    {
+      "component": "strobe",
+      "action": "Complete remaining STROBE items flagged by strobe-checker.",
+      "expected_lift": 0.007853559765906239
     }
   ],
   "logit_params": {
