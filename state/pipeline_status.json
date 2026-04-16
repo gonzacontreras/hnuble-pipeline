@@ -15,9 +15,9 @@
       "status": "not_yet_run"
     },
     "w3": {
-      "last_run": "2026-04-15T05:24:40.338137Z",
-      "new_candidates": 12,
-      "pending_mcc": 12
+      "last_run": "2026-04-16T05:32:08.707554Z",
+      "new_candidates": 0,
+      "pending_mcc": 0
     },
     "w4": {
       "last_run": null,
