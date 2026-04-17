@@ -143,7 +143,31 @@
       "target_section": "discussion",
       "discovered_at": "2026-04-13T13:52:50.370622Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.1016/j.lanepe.2026.101671",
+      "title": "Spatiotemporal dynamics of leptospirosis in Europe: a retrospective observational study with prospective projections",
+      "venue": null,
+      "pub_date": "2026-04-06",
+      "abstract": "Background: Leptospirosis is a widespread zoonotic disease caused by Leptospira spp., with a substantial burden on both human and animal health. Transmission occurs through contact with the urine of infected animals, with rodents serving as the main disease reservoir. Climate and environmental changes, including higher temperatures, heavy rainfall, urbanization, forest encroachment, and biodiversity loss are expected to alter rodent populations and disease dynamics, raising concerns about the increasing risk of leptospirosis in Europe. Despite this, no comprehensive risk map or modelling study has been conducted at the European scale. Given this, we aimed to quantify spatiotemporal patterns of leptospirosis risk in Europe and project future incidence rate under climate change scenarios. Me",
+      "score": 9,
+      "reason": "Rodent-borne zoonosis in Europe with climate-driven risk modeling; direct parallel to Andes HCPS methodology",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-17T03:20:07.908327Z",
+      "status": "NEW"
+    },
+    {
+      "id": "10.1038/s41598-026-47417-6",
+      "title": "An informed monotone neural network for multi-stage chronic kidney disease prediction with integrated GFR estimation",
+      "venue": null,
+      "pub_date": "2026-04-09",
+      "abstract": "Chronic kidney disease (CKD) is a progressive condition affecting over 850 million people worldwide, where timely detection and accurate staging are critical to reducing morbidity, mortality, and healthcare burden. Current machine learning approaches often treat CKD prediction as a binary task, neglecting the ordered nature of disease stages, and rarely incorporate physiological constraints or calibrated probability estimates essential for clinical decision support. We propose a multi-stage CKD prediction framework that integrates ordinal classification, probability calibration, and a serum creatinine-monotonicity constraint within a knowledge distillation paradigm. A calibrated CatBoost model serves as a teacher, transferring temperature-scaled class probabilities to an ordinal neural net",
+      "score": 7,
+      "reason": "Multi-stage disease prediction with probability calibration; extends our Brier/RPS scoring framework conceptually",
+      "target_section": "methods",
+      "discovered_at": "2026-04-17T03:20:07.908327Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-16T14:01:55.671708Z"
+  "last_run": "2026-04-17T03:20:07.908327Z"
 }
