@@ -167,7 +167,19 @@
       "target_section": "methods",
       "discovered_at": "2026-04-17T03:20:07.908327Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.1038/s41598-026-47183-5",
+      "title": "Benchmarking Q fever transmission in czech republic and serbia: A one health sub-national population study",
+      "venue": null,
+      "pub_date": "2026-04-06",
+      "abstract": "Q fever, caused by Coxiella burnetii, poses a zoonotic threat worldwide. Understanding its epidemiology in diverse settings is crucial for effective control measures. A retrospective observational study compared Q fever epidemiology in the regions of Moravia and Silesia (Czech Republic) and Srem and South Bačka districts of the Autonomous Province of Vojvodina (Serbia), from 2011 to 2018. Here, we analyzed the demographic and spatial patterns of human and animal Q fever retrieved from the human and veterinary official surveillance databases. Animal seroprevalence of Coxiella burnetii was broad but consistently high in Czech cattle (range 8.6–60.0%) and was highest in Žďár nad Sázavou, Brno-město, and Znojmo districts. Moravia and Silesia saw an increasing average Q fever seroprevalence in ",
+      "score": 7,
+      "reason": "Zoonotic disease surveillance with spatial-temporal analysis and retrospective observational design mirrors our epidemiological approach",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-17T13:43:01.242392Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-17T03:20:07.908327Z"
+  "last_run": "2026-04-17T13:43:01.242392Z"
 }
