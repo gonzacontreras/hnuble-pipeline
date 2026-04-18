@@ -129,9 +129,59 @@
       "role": "stats",
       "discovered_at": "2026-04-13T06:24:50.997600Z",
       "status": "PENDING_MCC"
+    },
+    {
+      "id": "R3-01",
+      "severity": "HIGH",
+      "title": "Temporal leakage in case assignment protocol not described in Methods",
+      "critique": "Methods 5.5.1 states cases were 'assigned to their probable commune of infection...following the case reconciliation protocol described in Supplementary Methods' but provides zero detail. Retrospective assignment of cases to geographic units creates unmeasured temporal leakage risk—assignment may have used information unavailable at prediction time. This is fatal for walk-forward validation claims.",
+      "suggested_response": "Move reconciliation protocol from Supplement to main Methods with explicit listing of temporal cutoffs and data sources used. Demonstrate that assignment criteria (symptom onset location, residence history, travel records) were available ≥5 months before model prediction time for every reassigned case, or exclude reassigned cases in sensitivity analysis.",
+      "role": "stats",
+      "discovered_at": "2026-04-18T05:47:34.063726Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R3-02",
+      "severity": "HIGH",
+      "title": "E-value 2.07 cited but unmeasured confounding structure ignored",
+      "critique": "Figure 2 annotation and prior objection R2-02 cite E-value=2.07 as weak. Worse: manuscript presents causal language ('ecological EWS', 'operational risk window', DAG in prior sessions) but provides zero quantitative bias analysis for: (i) rodent trapping effort varying with prior outbreak publicity, (ii) healthcare-seeking conditional on media coverage, (iii) Landsat overpass frequency correlating with cloud cover and case seasonality.",
+      "suggested_response": "Either remove all causal framing and present as associational prediction model, OR conduct formal quantitative bias analysis (array of bias parameters per VanderWeele 2019) for the three named confounders with realistic bounds from Chilean hantavirus literature. E-value alone is insufficient—need multi-confounder joint bias factors.",
+      "role": "stats",
+      "discovered_at": "2026-04-18T05:47:34.063726Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R3-03",
+      "severity": "MED",
+      "title": "Calibration assessment absent despite probabilistic forecast claims",
+      "critique": "Manuscript claims 'probabilistic EWS' and reports discrimination (AUC) and overall accuracy (log score, Brier) but never assesses calibration—the match between predicted probabilities and observed frequencies. For rare events, models can achieve good Brier/log scores while being systematically miscalibrated. No calibration plot, Hosmer-Lemeshow test, or calibration slope reported.",
+      "suggested_response": "Add calibration belt plot (Nattino et al. 2016 Stat Med) or logistic calibration slope/intercept with 95% CI from held-out folds. If calibration slope ≠1.0 or intercept ≠0, recalibrate predictions via Platt scaling before reporting decision curves. Acknowledge limitation if sample size prohibits stable calibration assessment at Tier 2/3.",
+      "role": "stats",
+      "discovered_at": "2026-04-18T05:47:34.063726Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R3-04",
+      "severity": "MED",
+      "title": "Bootstrap CI methodology switches between percentile and BCa without justification",
+      "critique": "Methods 5.5.5 specifies 'block bootstrap...with percentile 95% CI' for log score, but 5.5.7 specifies 'BCa bootstrap 95% CI' for AUC. Prior objection R1-01 flagged BSS percentile vs BCa inconsistency. No power/coverage simulation justifies when each method is appropriate. BCa requires more resamples for stable intervals; B=1000 may be insufficient (Efron rec: ≥2000 for BCa).",
+      "suggested_response": "Standardize on single CI method (recommend BCa with B=2000 throughout, citing Efron 1987 + Carpenter & Bithell 2000 already in text) OR provide simulation showing percentile CI achieves nominal 95% coverage for log score under your block structure. Report actual CI coverage from nested bootstrap if feasible.",
+      "role": "stats",
+      "discovered_at": "2026-04-18T05:47:34.063726Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R3-05",
+      "severity": "LOW",
+      "title": "Decision curve threshold range [0.05, 0.20] still lacks operational anchor",
+      "critique": "Prior objection R2-04 flagged lack of clinical/operational justification for DCA range. Methods 5.5.8 now states 'operational range p_t ∈ [0.05, 0.20] annotated' but provides zero derivation. What is the cost ratio (false positive vs false negative) for CONAF patrol deployment or SEREMI education campaign? DCA without grounded harm/benefit weights is un-interpretable theatre.",
+      "suggested_response": "Derive threshold range from explicit operational costs: e.g., 'CONAF patrol costs ~X USD per commune-month; expected case hospitalization cost ~Y USD; ratio Y/X implies threshold p_t = 1/(1+Y/X) = Z.' If costs unavailable, present DCA as exploratory sensitivity analysis across plausible cost ratios, not as a decision-ready tool.",
+      "role": "stats",
+      "discovered_at": "2026-04-18T05:47:34.063726Z",
+      "status": "PENDING_MCC"
     }
   ],
   "version": 1,
   "initialized_at": "2026-04-11T07:39:31.354398Z",
-  "last_w5_run": "2026-04-13T06:24:50.997600Z"
+  "last_w5_run": "2026-04-18T05:47:34.063726Z"
 }
