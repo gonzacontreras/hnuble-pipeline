@@ -179,7 +179,19 @@
       "target_section": "discussion",
       "discovered_at": "2026-04-17T13:43:01.242392Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.1038/s44298-026-00189-2",
+      "title": "Climate-driven changes in zoonotic risk of arenaviral hemorrhagic fevers in South America",
+      "venue": null,
+      "pub_date": "2026-04-15",
+      "abstract": "Climate change is expected to significantly alter the ecological dynamics of zoonotic diseases, yet its long-term impact on rodent-borne hemorrhagic fevers in South America remains poorly understood. Here, we developed a robust predictive modeling framework that integrates species distribution models with a mechanistic force-of-infection approach to evaluate the effects of climate change on zoonotic risk of New World Arenaviruses. Using climate projections under Shared Socioeconomic Pathways SSP2-4.5 (moderate) and SSP5-8.5 (severe), our models predict a substantial increase in spillover risk across endemic and non-endemic regions over the next two decades. Projected increases in spillover risk for Guanarito, Machupo, and Junin viruses are primarily driven by climate-induced shifts in temp",
+      "score": 9,
+      "reason": "Climate-driven rodent-borne viral spillover models with lagged environmental predictors, directly comparable framework",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-18T02:55:32.442362Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-17T13:43:01.242392Z"
+  "last_run": "2026-04-18T02:55:32.442362Z"
 }
