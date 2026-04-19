@@ -191,7 +191,19 @@
       "target_section": "discussion",
       "discovered_at": "2026-04-18T02:55:32.442362Z",
       "status": "NEW"
+    },
+    {
+      "id": "65859cbc86",
+      "title": "VOLTA: The Surprising Ineffectiveness of Auxiliary Losses for Calibrated Deep Learning",
+      "venue": null,
+      "pub_date": "2026-04-09",
+      "abstract": "Uncertainty quantification (UQ) is essential for deploying deep learning models in safety critical applications, yet no consensus exists on which UQ method performs best across different data modalities and distribution shifts. This paper presents a comprehensive benchmark of ten widely used UQ baselines including MC Dropout, SWAG, ensemble methods, temperature scaling, energy based OOD, Mahalanobis, hyperbolic classifiers, ENN, Taylor Sensus, and split conformal prediction against a simplified yet highly effective variant of VOLTA that retains only a deep encoder, learnable prototypes, cross entropy loss, and post hoc temperature scaling. We evaluate all methods on CIFAR 10 (in distribution), CIFAR 100, SVHN, uniform noise (out of distribution), CIFAR 10 C (corruptions), and Tiny ImageNet",
+      "score": 7,
+      "reason": "Comprehensive uncertainty quantification benchmark including temperature scaling and calibration methods",
+      "target_section": "methods",
+      "discovered_at": "2026-04-19T13:13:27.199511Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-19T03:26:59.586662Z"
+  "last_run": "2026-04-19T13:13:27.199511Z"
 }
