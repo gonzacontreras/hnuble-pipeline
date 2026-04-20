@@ -1095,6 +1095,42 @@
         "memory/project_3_problemas_graves.md"
       ],
       "mcc_at": "2026-04-15T05:25:29.533738Z"
+    },
+    {
+      "id": "W3-20250614-11",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "publication",
+      "title": "Companion clinical manuscript creates selective outcome reporting risk",
+      "evidence": "A companion clinical analysis of 34 HCPS patients treated at Hospital Clínico Herminda Martín, Chillán, 2010–2025 has been submitted separately...share no analytical methods, tables, figures, or computed metrics; only publicly available regional descriptors (total case count, case-fatality ratio, ethics approval) are common",
+      "mechanism": "Separate submission of clinical (n=34, 2010-2025) and ecological (n=136, 2002-2024) analyses from overlapping case populations raises selective reporting concern. If clinical manuscript reports null or contradictory findings for temporal patterns, readers lack cross-validation. Disclosure states 'no shared metrics' but does not address overlapping case inclusion or outcome definitions.",
+      "fix_hint": "Provide cross-tabulation of case overlap (how many of 34 clinical cases appear in 136 ecological cases); pre-register companion analysis jointly or explain why clinical temporal patterns were not incorporated as ecological predictors.",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-20T05:42:31.403415Z"
+    },
+    {
+      "id": "W3-20250614-12",
+      "source": "W3",
+      "severity": "LOW",
+      "taxonomy": "attrition",
+      "title": "FSI lag-5 structural missingness (105 obs, 1.8%) creates unbalanced panel",
+      "evidence": "FSI lag-5 was structurally unavailable for the first five months of each commune's series (105 observations, 1.8%, excluded)",
+      "mechanism": "First 5 months of each commune (21 communes × 5 months = 105 obs) systematically excluded from analysis. If early-year observations differ systematically (e.g., seasonal transition effects, New Year administrative patterns), listwise deletion creates temporal imbalance. Small fraction (1.8%) limits material impact but could interact with September structural zero.",
+      "fix_hint": "Report whether excluded 105 observations include any non-zero cases; if yes, conduct sensitivity analysis imputing lag-5 FSI via seasonal climatology to retain temporal balance.",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-20T05:42:31.403415Z"
+    },
+    {
+      "id": "W3-20250614-13",
+      "source": "W3",
+      "severity": "LOW",
+      "taxonomy": "measurement",
+      "title": "Case-fatality ratio 27.9% computed on same 136 cases used for forecasting",
+      "evidence": "Case-fatality reached 27.9% (38/136; Wilson 95% CI 21.1–36.0%)",
+      "mechanism": "Case-fatality is outcome-conditional statistic (deaths|cases) computed on same cases used for incidence forecasting. If high-CFR cases cluster temporally or spatially due to shared risk factors (e.g., delayed treatment in remote communes), CFR estimate is not independent of forecasting covariates. Minor concern given CFR reported as descriptive context, not model input.",
+      "fix_hint": "Stratify CFR by high-FSI vs low-FSI commune-months to test whether environmental risk predicts not just incidence but also severity; if no association, reinforces independence assumption.",
+      "status": "PENDING_MCC",
+      "discovered_at": "2026-04-20T05:42:31.403415Z"
     }
   ],
   "version": 1,
@@ -1102,5 +1138,5 @@
   "last_w7_run": "2026-04-20T03:37:57.623418Z",
   "last_w7_checked": 10,
   "last_w7_errors": 1,
-  "last_w3_run": "2026-04-19T05:29:49.031399Z"
+  "last_w3_run": "2026-04-20T05:42:31.403415Z"
 }
