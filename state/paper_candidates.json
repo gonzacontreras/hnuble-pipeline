@@ -203,7 +203,19 @@
       "target_section": "methods",
       "discovered_at": "2026-04-19T13:13:27.199511Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.3390/computers15040244",
+      "title": "A Calibrated Multi-Task Ensemble Architecture for Biomedical Risk Prediction",
+      "venue": null,
+      "pub_date": "2026-04-15",
+      "abstract": "Risk stratification of impaired glycemic control remains a major challenge in biomedical data analysis due to heterogeneous metabolic, behavioral, and therapeutic factors observed in large-scale populations. This study proposes a calibrated and interpretable decision–support framework, termed Calibrated Multi-Task Stacking Ensemble (CMSE), for joint modeling of clinically related glycemic outcomes. The framework integrates demographic variables, lipid profiles, renal and inflammatory biomarkers, dietary and smoking indicators, and therapy-related features within a unified predictive architecture. Robust modeling is ensured through leakage-aware preprocessing, quantile-based Winsorization, out-of-fold stacking, and isotonic calibration of probabilistic outputs. The physiological coherence b",
+      "score": 7,
+      "reason": "Calibrated ensemble with isotonic calibration for risk prediction; supports our Brier/RPS scoring methodology",
+      "target_section": "methods",
+      "discovered_at": "2026-04-21T13:56:08.420083Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-21T03:20:51.066423Z"
+  "last_run": "2026-04-21T13:56:08.420083Z"
 }
