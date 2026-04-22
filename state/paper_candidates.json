@@ -215,7 +215,19 @@
       "target_section": "methods",
       "discovered_at": "2026-04-21T13:56:08.420083Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.1007/s41666-026-00234-y",
+      "title": "Imputation Free Deep Survival Prediction with Conditional Variational Autoencoders",
+      "venue": null,
+      "pub_date": "2026-04-10",
+      "abstract": "Abstract Electronic Health Records (EHRs) provide rich opportunities for developing risk prediction tools to support clinical decision-making, yet they are inherently incomplete because data are recorded selectively during routine care. Such missingness may be informative, reflecting clinical judgment and patient status, and missing data patterns can shift between model development and real-world deployment. These challenges limit the reliability and transportability of predictive models in healthcare settings. We propose an imputation-free framework that jointly trains Conditional Variational Autoencoders with deep survival models to enable risk prediction directly from incomplete EHR data. We demonstrate the approach using the deep survival model DeSurv and evaluate its performance throu",
+      "score": 7,
+      "reason": "Imputation-free survival modeling with incomplete observational data; addresses missing covariate handling",
+      "target_section": "methods",
+      "discovered_at": "2026-04-22T03:19:35.555244Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-21T13:56:08.420083Z"
+  "last_run": "2026-04-22T03:19:35.555244Z"
 }
