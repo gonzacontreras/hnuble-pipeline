@@ -227,7 +227,31 @@
       "target_section": "methods",
       "discovered_at": "2026-04-22T03:19:35.555244Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.1002/qj.70201",
+      "title": "Statistical post‐processing of operational dual‐resolution wind‐speed ensemble forecasts",
+      "venue": null,
+      "pub_date": "2026-04-20",
+      "abstract": "Abstract Weather forecasting presents several challenges, including the chaotic nature of the atmosphere and the high computational demands of numerical weather prediction models. To achieve the most accurate predictions, the ideal scenario involves the lowest possible horizontal resolution and the largest ensemble size. This study provides a detailed comparative analysis of the forecast skill of the raw and post‐processed medium‐ and extended‐range wind‐speed ensemble forecasts of the European Centre for Medium‐Range Weather Forecasts issued at 9 km and 36 km horizontal resolutions respectively, and their various mixtures. We utilize the ensemble model output statistic approach for forecast calibration with three different spatial training data selection techniques. First, we investigate ",
+      "score": 7,
+      "reason": "EMOS post-processing and ensemble calibration methods directly applicable to our FSI-based probabilistic forecasting",
+      "target_section": "methods",
+      "discovered_at": "2026-04-23T13:57:50.172482Z",
+      "status": "NEW"
+    },
+    {
+      "id": "10.66245/jyi.v1.i2.007",
+      "title": "Playing the Odds: Agentic LLMs for Real-Time NBA Forecasting and Market Betting",
+      "venue": null,
+      "pub_date": "2026-04-10",
+      "abstract": "Predicting the outcomes of professional basketball games is a challenging problem due to the intrinsic stochastic uncertainty of sports competitions and the heterogeneity of relevant information sources. While existing approaches in sports analytics primarily rely on structured historical statistics, such methods often struggle to incorporate timely and unstructured information. In this paper, we propose a unified framework that leverages large language models for probabilistic forecasting and decision making for NBA games and their prediction markets. Our approach combines specialized information retrieval agents with multiple role-based LLM predictors, whose forecasts are aggregated into the final forecasting probabilities. These probabilities are then operationalized through a fractiona",
+      "score": 7,
+      "reason": "Probabilistic forecasting with aggregated predictions and operational decision-making; parallels our early warning tiers",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-23T13:57:50.172482Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-23T03:22:50.812934Z"
+  "last_run": "2026-04-23T13:57:50.172482Z"
 }
