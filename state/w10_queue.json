@@ -140,6 +140,223 @@
         "audit_findings.md"
       ],
       "mcc_at": "2026-04-22T05:27:24.156169Z"
+    },
+    {
+      "id": "W3-20250608-01",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "measurement",
+      "title": "Commune of probable infection vs residence classification without validation",
+      "evidence": "cases reported before that date (n = 103) were originally registered under the SEREMI Biobío regional office and were assigned to their probable commune of infection—rather than residence—following the case reconciliation protocol described in Supplementary Methods",
+      "mechanism": "Retrospective assignment of 103/136 cases (76%) to probable infection commune introduces misclassification bias. If assignment criteria differ systematically by commune characteristics (e.g., rural vs urban, forest cover), spatial risk estimates and FSI associations could be artifactually inflated or dampened. The 87% peridomestic transmission cited elsewhere doesn't validate the spatial assignment accuracy.",
+      "fix_hint": "Report sensitivity analysis comparing results using (1) residence commune, (2) infection commune, (3) cases with documented infection location only. Quantify inter-rater reliability if manual adjudication was used. Report proportion of cases with definitive vs probable spatial assignment.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Prior evidence documents the SEREMI registration issue and n=103 pre-regionalization cases in multiple locations, but no Q1 citation validates the commune-of-infection assignment protocol nor explicit calculation of misclassification rate.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "02_Datos/Crisis Datos SEREMI.md",
+        "04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md",
+        "audit_findings_red_team.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
+    },
+    {
+      "id": "W3-20250608-02",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "measurement",
+      "title": "FSI compound index weights and validation undocumented",
+      "evidence": "a custom Forest Stress Index (FSI) derived from Landsat 5/7/8 and Sentinel-2 NDMI/NDVI/NBR2 bands via Google Earth Engine...calibrated in Achibueno and frozen before migration to Ñuble",
+      "mechanism": "FSI is the primary exposure but the manuscript provides no formula, band weights, or validation metrics. 'Calibrated in Achibueno' suggests optimization on a different region without documented transferability assessment. Readers cannot reproduce the exposure or assess whether weights capitalize on chance associations in the calibration sample.",
+      "fix_hint": "Report exact FSI formula with band weights. Provide validation metrics (correlation with field-measured Chusquea flowering/rodent density) from Achibueno and Ñuble independently. Report band contribution variance decomposition. Archive GEE script with version-locked band definitions.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "FSI calibration in Achibueno and GEE pipeline documented across multiple sessions (S51, S54, S59), but no Q1 citation for the specific NDMI/NDVI/NBR2 weighting scheme nor validation statistics integrated in manuscript Methods.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md",
+        "09_Sesiones/Sesion_Code_S54.md",
+        "09_Sesiones/Sesion_Code_S59.md",
+        "10_Skills_Config/Blindajes_PreFlight_Permanente.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
+    },
+    {
+      "id": "W3-20250608-03",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "confounding",
+      "title": "No control for temporal trends in surveillance intensity post-regionalization",
+      "evidence": "Ñuble was administratively established as an independent region by Law 21,033 of 5 September 2017, effective 6 September 2018; cases reported before that date (n = 103) were originally registered under the SEREMI Biobío",
+      "mechanism": "Administrative split creating a new regional SEREMI office typically increases local diagnostic capacity, case investigation resources, and reporting completeness. The 2018 regionalization creates a natural experiment where post-2018 cases may have higher ascertainment than pre-2018 cases under the same ecological conditions, confounding the FSI association with secular surveillance trends.",
+      "fix_hint": "Include a binary covariate (pre/post-2018 regionalization) or spline term in sensitivity analysis. Compare diagnostic test volumes (IgM, RT-PCR) and case investigation completeness metrics before/after split. Test interaction between FSI and period.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Regionalization date and n=103 pre-2018 cases documented in Estado_Conocimiento and Auditoria_Q1_S50, but no temporal-trend sensitivity analysis nor Q1 citation for surveillance-intensity adjustment methodology.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "project_3_problemas_graves.md",
+        "04_Parte_I_EcoEpi/Auditoria_Q1_S50_cierre.md",
+        "04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md",
+        "audit_findings_red_team.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
+    },
+    {
+      "id": "W3-20250608-04",
+      "source": "W3",
+      "severity": "HIGH",
+      "taxonomy": "selection",
+      "title": "Active-burn veto threshold arbitrary without sensitivity analysis",
+      "evidence": "active-burn pixels vetoed (ΔNBR2 < −0.15) to prevent wildfire-scar contamination",
+      "mechanism": "The ΔNBR2 < -0.15 threshold determines which pixels are excluded as wildfire scars. If threshold is too permissive, fire scars contaminate FSI (spurious positive signal); if too stringent, legitimate forest stress is vetoed (attenuated signal). No justification or sensitivity analysis provided for this critical decision boundary.",
+      "fix_hint": "Report sensitivity of FSI-case association (IRR and CI) across ΔNBR2 thresholds {-0.10, -0.15, -0.20, -0.25}. Cite literature justifying -0.15 cutpoint for temperate Nothofagus-Chusquea forests specifically. Report proportion of pixels vetoed at each threshold.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "ΔNBR2 < −0.15 threshold mentioned in Estado_Conocimiento and Sesion_Code_S43, but no Q1 citation justifying the cutoff nor sensitivity analysis (±0.05, ±0.10) reported in manuscript.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md",
+        "09_Sesiones/Sesion_Code_S43.md",
+        "audit_findings_red_team.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
+    },
+    {
+      "id": "W3-20250608-05",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "measurement",
+      "title": "Bell-Jones within-between decomposition applied after lag structure creates NA",
+      "evidence": "All continuous predictors were Bell–Jones within–between decomposed (Bell & Jones 2015), with scaling after NA filtering of the lag structure (anti-leakage)",
+      "mechanism": "Lagging FSI by 5 months creates 105 structural NAs (1.8%) at the start of each commune series. If within-between decomposition is computed on the lag-complete subset only, the 'between' commune means exclude the first 5 months systematically—potentially biasing the between component if early-period values differ (e.g., different forest conditions 2002-2003 vs later periods).",
+      "fix_hint": "Compute commune-specific means for Bell-Jones decomposition using all available data before lagging, then apply lag structure. Report sensitivity comparing (1) means from full series vs (2) means from lag-complete subset. Verify temporal stationarity of FSI within communes.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Bell & Jones 2015 within-between decomposition cited in Manuscrito_v5_CONDENSED_S60 and Estado_Conocimiento_S50, but no explicit calculation documenting NA-removal order (lag first vs decompose first) nor anti-leakage validation.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "project_auditoria_Q1_S50_cierre_completo.md",
+        "04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md",
+        "04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md",
+        "audit_findings_red_team.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
+    },
+    {
+      "id": "W3-20250608-06",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "measurement",
+      "title": "Landsat 5/7/8 and Sentinel-2 sensor harmonization undocumented",
+      "evidence": "a custom Forest Stress Index (FSI) derived from Landsat 5/7/8 and Sentinel-2 NDMI/NDVI/NBR2 bands",
+      "mechanism": "Four satellite platforms with different spectral response functions, radiometric resolution, and temporal coverage are combined into a single index. Without documented cross-calibration, temporal trends in FSI could reflect sensor transitions rather than ecological change (e.g., Landsat 7 SLC failure 2003, Landsat 5 end 2011, Sentinel-2 start 2015).",
+      "fix_hint": "Report sensor-specific contributions by year. Apply harmonized surface reflectance products (e.g., Roy et al. 2016 HLS). Test for discontinuities in FSI time series at known sensor transition dates. Report within-year variance when multiple sensors overlap.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "GEE pipeline documented in GEE_FSI_Reconstruccion_S51 and Estado_Conocimiento_S50, but no Q1 citation for Landsat 5/7/8 ↔ Sentinel-2 harmonization method (e.g., Roy et al. 2016 transform coefficients).",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "project_GEE_FSI_reconstruccion_S51.md",
+        "04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md",
+        "04_Parte_I_EcoEpi/GEE_FSI_Reconstruccion_S51.md",
+        "audit_findings.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
+    },
+    {
+      "id": "W3-20250608-07",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "selection",
+      "title": "Ninhue structural zero excluded without contamination analysis",
+      "evidence": "Ninhue registered zero cases (structural zero)",
+      "mechanism": "Ninhue exclusion inflates effect sizes if commune differs systematically; inclusion without structural-zero modeling may dilute signal. No rationale or sensitivity provided.",
+      "fix_hint": "Report Ninhue's forest cover, population, and FSI distribution vs other communes. Conduct sensitivity analysis including Ninhue (1) as observed zero-inflation component, (2) as standard observation, (3) excluded (current). Report how exclusion affects θ and IRR estimates.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Ninhue structural zero exclusion mentioned in Estado_Conocimiento_S50 and S53_blindaje, but no quantitative contamination analysis (spatial spillover test, residual autocorrelation check) nor manuscript sentence integrated.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "project_auditoria_Q1_S50_cierre_completo.md",
+        "project_S53_blindaje_descriptivo_completo.md",
+        "04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md",
+        "audit_findings_red_team.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
+    },
+    {
+      "id": "W3-20250608-08",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "model-mis-specification",
+      "title": "Negative-binomial vs zero-inflated model selection undocumented",
+      "evidence": "The negative-binomial family (Cameron & Trivedi 2005) accommodates rare-event overdispersion in zoonotic surveillance data. ... 97.7% recorded zero cases",
+      "mechanism": "With 97.7% zeros, the data-generating process may include both structural zeros (communes with no Chusquea habitat) and count zeros (random low incidence). Standard negative-binomial assumes all zeros arise from the same process. Zero-inflated negative-binomial or hurdle models could better distinguish these mechanisms, potentially improving calibration and discrimination.",
+      "fix_hint": "Report Vuong test comparing NB2 vs ZINB. Present zero-inflation parameter estimates for communes. Test whether structural zeros correlate with forest cover or elevation. Report AIC/BIC comparison and rootogram to assess zero-count fit.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Cameron & Trivedi 2005 cited for NB2 family in GLMM_NB2_Final.md, 97.7% zero inflation documented, but no AIC/BIC table comparing NB2 vs zero-inflated alternatives (ZINB, hurdle) integrated in manuscript.",
+      "mcc_missing": "CALC_MISSING",
+      "mcc_prior_refs": [
+        "03_Modelos/GLMM NB2 Final.md",
+        "03_Modelos/Auditoria Total S32.md",
+        "audit_findings_bias_auditor.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
+    },
+    {
+      "id": "W3-20250608-09",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "ecological",
+      "title": "Commune spatial scale arbitrary relative to rodent home range",
+      "evidence": "comuna–month panel in Ñuble Region, south-central Chile (21 comunas, population ≈487,866)",
+      "mechanism": "Oligoryzomys longicaudatus home range is ~0.5-2 hectares (Silva-Rodríguez et al. 2008), while communes span 100-2000+ km². Aggregating cases and FSI to administrative units 6-7 orders of magnitude larger than the biological process scale introduces ecological fallacy and may dilute fine-scale exposure-outcome associations. Optimal spatial grain is undetermined.",
+      "fix_hint": "Report sensitivity using alternative spatial grains: (1) 1×1 km grid cells, (2) 5×5 km grid, (3) commune. Compare IRR effect sizes and CIs across scales. Discuss Modified Areal Unit Problem (MAUP). Report intra-commune variance in FSI to quantify aggregation-induced information loss.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Commune scale (21 comunas) documented in Estado_Conocimiento_S50 and Manuscrito_v5, but no Q1 citation justifying spatial resolution relative to O. longicaudatus home-range (~0.5–2 ha) nor sensitivity analysis at finer scales.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "project_auditoria_Q1_S50_cierre_completo.md",
+        "04_Parte_I_EcoEpi/Estado_Conocimiento_Serie_Ecologica_S50.md",
+        "04_Parte_I_EcoEpi/Manuscrito_v5_CONDENSED_S60.md",
+        "audit_findings_bias_auditor.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
+    },
+    {
+      "id": "W3-20250608-10",
+      "source": "W3",
+      "severity": "MED",
+      "taxonomy": "confounding",
+      "title": "Socioeconomic and occupational confounders uncontrolled",
+      "evidence": "β_log_pop = +0.614 (p = 0.002) ... Andes-virus hantavirus cardiopulmonary syndrome is classified among neglected tropical diseases linked to poverty and ecosystem disturbance",
+      "mechanism": "Population size proxies both denominator (exposure opportunity) and urbanization/poverty. Commune-level poverty, agricultural employment, and housing quality are established HCPS risk factors (Prist et al. 2021; Abramson et al. 2003) that correlate with both forest proximity (FSI exposure) and case detection, creating confounding bias. The population coefficient may reflect unmeasured socioeconomic factors rather than pure exposure opportunity.",
+      "fix_hint": "Include commune-level covariates: Social Priority Index, % agricultural employment, median household income, % rural housing. Test for residual confounding using E-values for SES-case association. Conduct stratified analysis by urban vs rural communes.",
+      "status": "PARCIAL",
+      "discovered_at": "2026-04-23T05:31:26.135867Z",
+      "mcc_classification": "PARCIAL",
+      "mcc_rationale": "Population effect β=+0.614 (p=0.002) documented in GLMM_NB2_Final.md and poverty linkage mentioned, but no Q1 citation for socioeconomic/occupational confounder control nor explicit adjustment calculation in manuscript.",
+      "mcc_missing": "CITATION_MISSING",
+      "mcc_prior_refs": [
+        "project_auditoria_Q1_S50_cierre_completo.md",
+        "03_Modelos/GLMM NB2 Final.md",
+        "09_Sesiones/Sesion_Code_S29.md",
+        "10_Skills_Config/Skills Anti-Sesgo Q1.md"
+      ],
+      "mcc_at": "2026-04-23T05:32:18.559863Z"
     }
   ]
 }
