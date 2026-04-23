@@ -179,9 +179,59 @@
       "role": "stats",
       "discovered_at": "2026-04-18T05:47:34.063726Z",
       "status": "PENDING_MCC"
+    },
+    {
+      "id": "R4-01",
+      "severity": "HIGH",
+      "title": "Case assignment to 'probable commune of infection' is outcome-dependent spatial imputation masquerading as data collection",
+      "critique": "Methods §5.5.1 states pre-2018 cases (n=103, 76% of dataset) were 'assigned to their probable commune of infection—rather than residence—following the case reconciliation protocol described in Supplementary Methods.' This is outcome-dependent spatial re-allocation after the fact. You've created a circular training loop: use cases to infer infection location, then train a spatial model on those inferred locations.",
+      "suggested_response": "Sensitivity analysis restricting to post-2018 residence-based cases (n=33) or treating pre-2018 as region-level aggregates only. If core results collapse with n=33, the entire spatial structure is an artifact of retrospective imputation. Publish the imputation algorithm in main text, not supplements.",
+      "role": "stats",
+      "discovered_at": "2026-04-23T06:13:32.891906Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R4-02",
+      "severity": "HIGH",
+      "title": "E-value 2.07 invoked without sensitivity analysis or requisite confounding DAG",
+      "critique": "Figure 2 caption annotates 'E-value = 2.07 for the FSI lag-5 coefficient' yet no DAG with unmeasured confounders appears, no prior literature quantifying unmeasured confounder strength is cited, and no sensitivity analysis varies E-value assumptions. E-value is not a talisman. VanderWeele (2019): 'E-value alone is insufficient without substantive knowledge of plausible confounders and their likely magnitudes.'",
+      "suggested_response": "Remove E-value annotation or provide: (1) DAG with ≥2 candidate unmeasured confounders (e.g., microhabitat humidity, rodent serology at t-5), (2) literature-derived bounds on U→FSI and U→HCPS associations, (3) bias formulas under VanderWeele framework showing IRR remains <1.0 under plausible U scenarios.",
+      "role": "stats",
+      "discovered_at": "2026-04-23T06:13:32.891906Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R4-03",
+      "severity": "HIGH",
+      "title": "Burn-in exclusion (folds 2011–2014, n=33 events) is post-hoc model rescue contradicting pre-specification claims",
+      "critique": "Methods §5.5.3: 'first four folds θ exceeded 1×10⁶...we pre-specified these as burn-in (Addendum v1.1, lock date 2026-04-04).' But Addendum v1.1 was written AFTER observing θ instability—classic post-hoc rationalization. Bergmeir/Cerqueira cite time-series CV literature; your model is spatial panel. Excluding 24% of events (33/136) based on nuisance-parameter behavior is outcome-driven model pruning.",
+      "suggested_response": "Report 14-fold results as primary or disclose that burn-in decision was post-hoc conditional on θ >10⁶ in early folds. If 10-fold CI width inflates >2× vs 14-fold, state so. Alternatively, use Poisson likelihood for burn-in period as pre-specified fallback. Current framing falsely implies априори design.",
+      "role": "stats",
+      "discovered_at": "2026-04-23T06:13:32.891906Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R4-04",
+      "severity": "MED",
+      "title": "Decision curve analysis threshold range [0.05,0.20] remains operationally arbitrary and unexplained",
+      "critique": "Methods §5.5.8 and Results §5.6.6 annotate p_t ∈ [0.05,0.20] as 'operational range' with zero clinical/operational justification. What cost ratio does p_t=0.05 encode? Why not [0.03,0.15] or [0.10,0.25]? Vickers et al. (2019): DCA threshold should map to harm:benefit ratio. You provide none. Annotating an arbitrary interval as 'operational' is window-dressing.",
+      "suggested_response": "Justify threshold range via explicit harm:benefit elicitation (e.g., cost of unnecessary CONAF patrol vs missed outbreak) or remove 'operational' label and present full DCA curve [0,0.30]. If no stakeholder elicitation occurred, state this and label annotated range as 'illustrative' only.",
+      "role": "stats",
+      "discovered_at": "2026-04-23T06:13:32.891906Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R4-05",
+      "severity": "MED",
+      "title": "Calibration is entirely absent despite 'probabilistic forecast' framing throughout manuscript",
+      "critique": "Title, abstract, and Discussion tout 'three-tier probabilistic early warning system' yet zero calibration metrics appear. No calibration plot, no Hosmer-Lemeshow, no calibration slope/intercept. Log score conflates calibration and discrimination; you cannot infer well-calibrated probabilities from log score alone (Van Calster et al. 2016). If p(Tier 1)=0.08 but observed rate is 0.02, your probabilities mislead despite decent log score.",
+      "suggested_response": "Add calibration plot (predicted vs observed rates in deciles) and calibration slope ± SE for Tier 1 and Tier 2. If calibration is poor (slope ≠1, intercept ≠0), recalibrate via Platt scaling or report uncalibrated status. Current omission contradicts probabilistic forecasting standards (Gneiting & Raftery 2007 §5).",
+      "role": "stats",
+      "discovered_at": "2026-04-23T06:13:32.891906Z",
+      "status": "PENDING_MCC"
     }
   ],
   "version": 1,
   "initialized_at": "2026-04-11T07:39:31.354398Z",
-  "last_w5_run": "2026-04-20T06:22:23.390593Z"
+  "last_w5_run": "2026-04-23T06:13:32.891906Z"
 }
