@@ -229,9 +229,59 @@
       "role": "stats",
       "discovered_at": "2026-04-23T06:13:32.891906Z",
       "status": "PENDING_MCC"
+    },
+    {
+      "id": "R5-01",
+      "severity": "HIGH",
+      "title": "Retrospective case assignment to 'probable commune of infection' creates circular validation",
+      "critique": "Manuscript states cases were 'assigned to their probable commune of infection—rather than residence—following the case reconciliation protocol described in Supplementary Methods' (Methods §5.5.1). This is outcome-dependent spatial imputation: the dependent variable (cases_it by commune) is itself constructed using information that post-dates exposure. Walk-forward validation is invalidated when the outcome being predicted was assembled retrospectively using auxiliary data unavailable at forecast time.",
+      "suggested_response": "Provide complete protocol in main text showing case assignment relied solely on prospectively recorded exposure history (residence during incubation period) or restrict analysis to residence-based assignment and acknowledge reduced spatial precision as a limitation. Current approach conflates prediction with retrospective reconstruction.",
+      "role": "stats",
+      "discovered_at": "2026-04-24T06:16:54.526045Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R5-02",
+      "severity": "HIGH",
+      "title": "Burn-in exclusion (folds 2011–2014) is post-hoc outcome-dependent model rescue",
+      "critique": "Authors exclude first four folds citing 'θ exceeded 1×10⁶' and cite time-series CV literature (Bergmeir, Cerqueira) for 'burn-in' justification. But: (1) negative-binomial θ→∞ is Poisson convergence under sparse data—the model is telling you there is no overdispersion to estimate, not that it needs 'burn-in'; (2) excluding folds because dispersion parameter is unstable is selecting on the dependent variable; (3) pre-specification addendum v1.1 filed same day as first script execution undermines temporal firewall.",
+      "suggested_response": "Report θ and all metrics for full 14 folds as primary analysis. If sparse-data instability invalidates inference, acknowledge inadequate sample size for confirmatory claims. Time-series burn-in does not license excluding folds where the model converges to a valid Poisson limit. Current approach is post-hoc model rescue disguised as methodological rigor.",
+      "role": "stats",
+      "discovered_at": "2026-04-24T06:16:54.526045Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R5-03",
+      "severity": "HIGH",
+      "title": "E-value 2.07 cited without requisite confounding structure or sensitivity analysis",
+      "critique": "E-value 2.07 for FSI lag-5 IRR appears in Figure 2 legend and Discussion but: (1) no DAG specifies hypothesized unmeasured confounders; (2) no sensitivity analysis explores plausible magnitudes; (3) E-value 2.07 implies unmeasured confounder must have RR≥2.07 with both exposure and outcome—far from protective. In observational ecological design with retrospective spatial imputation, this threshold is easily exceeded by unmodeled rodent migration, land-use change, or healthcare access gradients.",
+      "suggested_response": "Remove E-value or provide formal sensitivity analysis with DAG specifying candidate confounders (rodent abundance, harvest patterns, healthcare access), their plausible effect sizes, and whether E-value 2.07 is realistically protective. Current invocation is ritualistic citation without inferential weight.",
+      "role": "stats",
+      "discovered_at": "2026-04-24T06:16:54.526045Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R5-04",
+      "severity": "MED",
+      "title": "Decision curve threshold range [0.05, 0.20] remains operationally unjustified",
+      "critique": "DCA operational range p_t∈[0.05,0.20] is annotated in Methods §5.5.8 and Results §5.6.6 as 'operational range' but no clinical, resource, or policy rationale is provided. What decision does p_t=0.05 vs 0.20 correspond to? What is the harm:benefit ratio embedded in these thresholds? DCA without explicit decision context is probabilistic theater. Authors state 'Tier-1 net benefit exceeded Bortman by ≈3× at p_t=0.05' but do not justify why 5% risk threshold merits action.",
+      "suggested_response": "Justify threshold range by mapping p_t values to operational decisions (e.g., 0.05=CONAF patrol activation cost-benefit, 0.20=mass education trigger). If no such mapping exists, state DCA is exploratory sensitivity analysis across arbitrary thresholds and remove 'operational' framing. Current presentation implies decision-theoretic rigor without providing decision structure.",
+      "role": "stats",
+      "discovered_at": "2026-04-24T06:16:54.526045Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R5-05",
+      "severity": "MED",
+      "title": "Calibration entirely absent despite 'probabilistic forecast' claims throughout",
+      "critique": "Manuscript frames output as 'probabilistic early warning' (Title, Abstract, Discussion) and invokes 'strictly proper scoring rules' (Methods §5.5.5) but provides zero calibration assessment: no calibration plot, no reliability diagram, no goodness-of-fit test. Log score rewards sharpness and penalizes miscalibration but does not decompose them. Model may achieve acceptable log score while being systematically overconfident or underconfident—critical failure mode for operational EWS.",
+      "suggested_response": "Add calibration belt (Nattino et al. 2016) or binned calibration plot with confidence bands for Tier 1 and Tier 2 predictions. If model is miscalibrated, acknowledge this explicitly and discuss implications for operational deployment. Proper scoring rules are necessary but insufficient for probabilistic forecast validation.",
+      "role": "stats",
+      "discovered_at": "2026-04-24T06:16:54.526045Z",
+      "status": "PENDING_MCC"
     }
   ],
   "version": 1,
   "initialized_at": "2026-04-11T07:39:31.354398Z",
-  "last_w5_run": "2026-04-23T06:13:32.891906Z"
+  "last_w5_run": "2026-04-24T06:16:54.526045Z"
 }
