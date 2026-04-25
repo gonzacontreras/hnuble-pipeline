@@ -279,9 +279,59 @@
       "role": "stats",
       "discovered_at": "2026-04-24T06:16:54.526045Z",
       "status": "PENDING_MCC"
+    },
+    {
+      "id": "R6-01",
+      "severity": "HIGH",
+      "title": "Case assignment protocol circular with outcome—'probable commune of infection' explicitly depends on case status",
+      "critique": "Methods §5.5.1 states 'cases…were assigned to their probable commune of infection…following the case reconciliation protocol described in Supplementary Methods.' This is outcome-dependent spatial imputation: you cannot assign a case to a location *because* it is a case, then validate a model predicting cases at that location. The validation set is contaminated by the assignment rule.",
+      "suggested_response": "Report separate analyses: (1) residence-based (no imputation), (2) infection-site if prospectively recorded, (3) sensitivity analysis showing BSS under random spatial misclassification ±1 adjacent commune. If 'probable infection site' was inferred post hoc from model covariates (e.g., high FSI communes), the entire validation is circular and unpublishable.",
+      "role": "stats",
+      "discovered_at": "2026-04-25T05:54:59.865815Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R6-02",
+      "severity": "HIGH",
+      "title": "Burn-in exclusion is post-hoc rescue disguised as pre-specification—Addendum v1.1 lock date is *after* seeing fold performance",
+      "critique": "Methods §5.5.3 cites 'pre-specified burn-in (Addendum v1.1, lock date 2026-04-04)' but §5.5.9 states the Addendum commit is 40 minutes before first computation script. If you observed θ→∞ in folds 2011–2014, then wrote the Addendum, that is post-hoc outcome-dependent exclusion. Time-series CV literature (Bergmeir 2018) does not license excluding folds after seeing results.",
+      "suggested_response": "Provide Addendum v1.1 submission timestamp to *external* registry (e.g., OSF) with blinded hash of fold assignments, provably before running scripts. If unavailable, report 14-fold results as primary, 10-fold as sensitivity, and explicitly label burn-in exclusion as post-hoc data-dependent—or withdraw the pre-specification claim entirely.",
+      "role": "stats",
+      "discovered_at": "2026-04-25T05:54:59.865815Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R6-03",
+      "severity": "HIGH",
+      "title": "Calibration assessment entirely absent despite 'probabilistic forecast' framing—log score does not substitute for calibration plots",
+      "critique": "Results §5.6.3–5.6.6 report log score, BSS, PR-AUC, decision curves—but zero calibration assessment (observed vs predicted probability plots, calibration slope, intercept, Hosmer-Lemeshow). Log score penalizes miscalibration but does not visualize it. For operational EWS deployment, calibration is non-negotiable (Steyerberg 2019; Van Calster 2016).",
+      "suggested_response": "Add calibration plots (decile or flexible calibration curves with loess) for Tier 1 and Tier 2, stratified by fold if sample permits. Report calibration slope and intercept with 95% CI. If severe miscalibration exists (slope ≠1, intercept ≠0), apply Platt scaling or isotonic regression recalibration before operational deployment claims.",
+      "role": "stats",
+      "discovered_at": "2026-04-25T05:54:59.865815Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R6-04",
+      "severity": "MED",
+      "title": "E-value 2.07 for unmeasured confounding is weak and invoked without requisite DAG or sensitivity analysis structure",
+      "critique": "Figure 2 annotates 'E-value = 2.07' for FSI lag-5 IRR. E-values quantify the minimum strength of unmeasured confounding to explain away an association (VanderWeele & Ding 2017). 2.07 is modest—easily reached by uncontrolled socioeconomic, housing, or rodent-abundance variables. No DAG, no measured/unmeasured confounder list, no Monte Carlo sensitivity analysis (Ding & VanderWeele 2016).",
+      "suggested_response": "Present a causal DAG enumerating measured covariates (temperature, seasonality, population) and plausible unmeasured confounders (rodent trapping indices, household construction quality, rurality index). Conduct Rosenbaum-style sensitivity analysis or Bayesian bias analysis (Lash et al. 2021) under realistic confounding scenarios. If E-value is sole sensitivity metric, state explicitly that causal inference is speculative.",
+      "role": "stats",
+      "discovered_at": "2026-04-25T05:54:59.865815Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R6-05",
+      "severity": "MED",
+      "title": "Decision curve threshold range [0.05, 0.20] lacks operational anchor—no cost-benefit specification or stakeholder elicitation",
+      "critique": "Methods §5.5.8 and Results §5.6.6 report DCA over p_t ∈ [0.05, 0.20] as 'operational range' but provide zero justification. What is the cost of a false alarm (CONAF patrol, SEREMI education campaign)? What is the value of averting one HCPS case (CFR 28%, ICU cost)? Without cost parameters or stakeholder-elicited thresholds, the range is arbitrary (Vickers 2006 original paper).",
+      "suggested_response": "Elicit cost-benefit parameters from MINSAL, SEREMI, CONAF: (a) cost per false-positive alert, (b) value of statistical life (VSL) or disability-adjusted life year (DALY) averted, (c) acceptable false-alarm rate. Derive threshold p_t from harm:benefit ratio. If unavailable, label DCA threshold range as illustrative and defer operational deployment until cost-effectiveness analysis is complete.",
+      "role": "stats",
+      "discovered_at": "2026-04-25T05:54:59.865815Z",
+      "status": "PENDING_MCC"
     }
   ],
   "version": 1,
   "initialized_at": "2026-04-11T07:39:31.354398Z",
-  "last_w5_run": "2026-04-24T06:16:54.526045Z"
+  "last_w5_run": "2026-04-25T05:54:59.865815Z"
 }
