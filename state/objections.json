@@ -329,9 +329,59 @@
       "role": "stats",
       "discovered_at": "2026-04-25T05:54:59.865815Z",
       "status": "PENDING_MCC"
+    },
+    {
+      "id": "R7-01",
+      "severity": "HIGH",
+      "title": "Case assignment to 'probable commune of infection' remains outcome-dependent and creates fatal circularity in walk-forward validation",
+      "critique": "Methods §5.5.1 states 103 pre-2018 cases 'assigned to probable commune of infection following the case reconciliation protocol in Supplementary Methods'—but the manuscript provides NO protocol description. This is outcome-dependent spatial imputation: case status determines spatial assignment, then spatial predictors are trained on those assignments, yielding circular validation. The 'Supplementary Methods' deflection is unacceptable; reviewers cannot audit what is not present.",
+      "suggested_response": "Describe the complete case assignment algorithm in main text Methods (≤100 words). If assignment used clinical interview residence vs exposure history, state explicitly. If algorithmic imputation was used, describe features and validation. If protocol is unavailable, acknowledge spatial assignment as a study limitation and conduct sensitivity analysis excluding pre-2018 cases (n=103 of 136, 76% of dataset).",
+      "role": "stats",
+      "discovered_at": "2026-04-26T06:15:20.508256Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R7-02",
+      "severity": "HIGH",
+      "title": "Burn-in exclusion lock date (2026-04-04) post-dates first walk-forward output by physical impossibility—prespecification claim is false",
+      "critique": "Methods §5.5.3 states 'Addendum v1.1, lock date 2026-04-04' prespecified burn-in, and §5.5.9 claims git timestamp '33–40 minutes before first output.' But 2026 is in the future. If intended as 2025-04-04, reviewers need filesystem audit trail proving the 4-fold exclusion rule existed before seeing fold 1–4 θ estimates. Current framing implies post-hoc rescue disguised as prespecification.",
+      "suggested_response": "Correct calendar year typo. Provide complete git log excerpt showing Addendum v1.1 commit timestamp, first θ diagnostic output timestamp, and first burn-in-exclusion script timestamp. If Addendum was written after seeing θ>1e6, acknowledge post-hoc decision and reframe as sensitivity analysis rather than prespecified protocol, reporting both 10-fold and 14-fold as co-primary.",
+      "role": "stats",
+      "discovered_at": "2026-04-26T06:15:20.508256Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R7-03",
+      "severity": "HIGH",
+      "title": "Calibration assessment entirely absent despite 'probabilistic forecast' framing—log score does not substitute for calibration plots",
+      "critique": "Title/Abstract/Discussion claim 'probabilistic early warning system' and 'forecast skill,' yet Results contain zero calibration assessment (observed vs predicted frequency, calibration slope, intercept, or Hosmer-Lemeshow). Log score penalizes miscalibration but does not quantify it. A model can achieve good log score while systematically under- or over-predicting rare-event probabilities (Gneiting 2011).",
+      "suggested_response": "Add calibration plot (deciles of predicted probability vs observed frequency) for Tier 1 and Tier 2 in main text Figure panel. Report calibration slope and intercept from logistic recalibration model (Van Calster et al. 2016). If systematic over/underprediction exists, discuss implications for operational threshold selection in DCA. If sample size precludes stable decile estimates, acknowledge as limitation and report grouped calibration (3–5 bins).",
+      "role": "stats",
+      "discovered_at": "2026-04-26T06:15:20.508256Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R7-04",
+      "severity": "MED",
+      "title": "E-value 2.07 for unmeasured confounding is weak, presented without DAG or quantitative bias analysis, and cannot support causal inference claims",
+      "critique": "Figure 2 caption states 'E-value = 2.07 for FSI lag-5 coefficient.' VanderWeele & Ding (2017) define E-value as minimum unmeasured confounder strength to explain away an observed association. E=2.07 is routinely exceeded by measured confounders in observational ecology (socioeconomic, land-use, surveillance intensity). No DAG, no sensitivity analysis, no quantification of plausible confounding magnitudes.",
+      "suggested_response": "Remove E-value from Figure 2 or reframe explicitly: 'E-value 2.07 indicates the observed IRR could be explained by unmeasured confounding of moderate strength; causal interpretation requires external validation.' If retained, provide DAG in Supplement identifying candidate unmeasured confounders (surveillance effort, land-use change, rodent control programs) and justify why each is implausible to reach RR≥2.07 for both confounder–exposure and confounder–outcome.",
+      "role": "stats",
+      "discovered_at": "2026-04-26T06:15:20.508256Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R7-05",
+      "severity": "MED",
+      "title": "Decision curve threshold range [0.05, 0.20] remains operationally unjustified—no cost–benefit ratio elicitation or stakeholder input documented",
+      "critique": "Methods §5.5.8 and Results §5.6.6 report DCA 'operational range p_t ∈ [0.05, 0.20] annotated' but provide zero justification. Vickers & Elkin (2006) require threshold selection to reflect harm:benefit ratio; p_t=0.05 implies treating 20 false-positives per true-positive is acceptable. No cost of false alarm (CONAF patrol deployment, community anxiety) or benefit of true detection (life-years saved, hospitalizations averted) is quantified.",
+      "suggested_response": "Either (1) report stakeholder workshop or expert elicitation deriving the 5–20% range from operational constraints (e.g., CONAF has capacity for ≤10 patrol deployments per season, implying p_t≈0.10 given base rate 0.023), or (2) remove 'operational range' language and present DCA across full [0, 0.25] continuum with annotation: 'Threshold selection requires jurisdiction-specific cost–benefit elicitation beyond this study's scope.'",
+      "role": "stats",
+      "discovered_at": "2026-04-26T06:15:20.508256Z",
+      "status": "PENDING_MCC"
     }
   ],
   "version": 1,
   "initialized_at": "2026-04-11T07:39:31.354398Z",
-  "last_w5_run": "2026-04-25T05:54:59.865815Z"
+  "last_w5_run": "2026-04-26T06:15:20.508256Z"
 }
