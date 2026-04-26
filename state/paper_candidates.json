@@ -263,7 +263,31 @@
       "target_section": "methods",
       "discovered_at": "2026-04-26T03:32:00.198471Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.1016/j.ijar.2026.109685",
+      "title": "Evaluating the quality of the quantified uncertainty for (Re)calibration of data-driven regression models",
+      "venue": null,
+      "pub_date": "2026-04-15",
+      "abstract": "• First systematic benchmark of calibration metrics in uncertainty quantification • Calibration metrics frequently produce inconsistent and conflicting evaluations • Using different calibration metrics in regression allows cherry-picking of results • The ENCE and CWC emerge as most reliable metrics for miscalibration detection • Metrics need ≥ 500-1000 samples for robust evaluation in recalibration studies In safety-critical applications data-driven models must not only be accurate but also provide reliable uncertainty estimates. This property, commonly referred to as calibration, is essential for risk-aware decision-making. In regression a wide variety of calibration metrics and recalibration methods have emerged. However, these metrics differ significantly in their definitions, assumptio",
+      "score": 8,
+      "reason": "Systematic benchmark of calibration metrics (ENCE/CWC) highly relevant to our Brier/BSS/RPS evaluation",
+      "target_section": "methods",
+      "discovered_at": "2026-04-26T13:17:43.124750Z",
+      "status": "NEW"
+    },
+    {
+      "id": "10.1017/s0031182026102029",
+      "title": "Nematodes inhabiting the gastrointestinal tract and accessory organs of cricetid rodents in Argentina and Chile: a systematic review",
+      "venue": null,
+      "pub_date": "2026-04-23",
+      "abstract": "South American ecosystems harbour diverse cricetid rodents and their associated nematode parasites, with implications for ecology and zoonotic risk.We conducted a systematic review following the PRISMA guidelines to catalogue nematode taxa reported from the digestive tract and accessory organs of cricetid rodents in Argentina and Chile.Searches were carried out in five databases (PubMed, WoS, Scopus, SciELO, and Google Scholar) up to January 10, 2026.Parasitological descriptors, such as Prevalence (P), mean abundance ( M A), and mean intensity ( M I) were estimated.We analysed 53 studies examining 4400 rodents (33 species), with Abrothrix olivacea (n=1000 specimens) and Akodon azarae (n=775 specimens) most frequently sampled.Ninety-two nematode taxa were reported, with A. olivacea exhibiti",
+      "score": 7,
+      "reason": "Systematic cricetid rodent ecology in Argentina/Chile, relevant to reservoir host context",
+      "target_section": "intro",
+      "discovered_at": "2026-04-26T13:17:43.124750Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-26T03:32:00.198471Z"
+  "last_run": "2026-04-26T13:17:43.124750Z"
 }
