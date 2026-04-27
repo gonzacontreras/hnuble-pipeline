@@ -379,9 +379,59 @@
       "role": "stats",
       "discovered_at": "2026-04-26T06:15:20.508256Z",
       "status": "PENDING_MCC"
+    },
+    {
+      "id": "R8-01",
+      "severity": "HIGH",
+      "title": "Case assignment protocol remains outcome-dependent despite 'Supplementary Methods' deflection",
+      "critique": "Text states 'assigned to their probable commune of infection...following the case reconciliation protocol described in Supplementary Methods' — this is redirection, not resolution. Case location imputation that depends on case status creates circular validation when those locations become the spatial unit of outcome measurement. The walk-forward train/test split is contaminated at the root.",
+      "suggested_response": "Conduct sensitivity analysis restricting to residence-only cases (n=33 post-2018) or acknowledge the validation is internally circular and restrict claims to hypothesis-generation pending prospective deployment with pre-specified case ascertainment that does not use outcome data.",
+      "role": "stats",
+      "discovered_at": "2026-04-27T06:36:42.630350Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R8-02",
+      "severity": "HIGH",
+      "title": "Burn-in lock date 2026-04-04 remains physically impossible for test-fold output already generated",
+      "critique": "Addendum v1.1 lock timestamp (2026-04-04) cannot predate walk-forward outputs from folds 2011–2014 when those folds were computed in 2023–2024 calendar time. The manuscript claims 'git timestamps confirm addendum precedes script by 40 minutes' but does not address the physical impossibility of locking *after* seeing fold performance. This is post-hoc rescue.",
+      "suggested_response": "Acknowledge the burn-in exclusion was data-driven after observing θ→Poisson behavior in early folds. Report both 10-fold and 14-fold metrics as co-primary (not 'sensitivity') and remove prespecification language around burn-in. The decision is scientifically defensible but not pre-registered.",
+      "role": "stats",
+      "discovered_at": "2026-04-27T06:36:42.630350Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R8-03",
+      "severity": "HIGH",
+      "title": "Calibration assessment entirely absent despite repeated 'probabilistic forecast' framing",
+      "critique": "Text claims 'logarithmic score...stable in rare-event regimes' and 'probabilistic EWS' throughout, yet provides zero calibration assessment: no calibration plots, no Hosmer-Lemeshow, no reliability diagrams. Log score rewards sharpness but does not guarantee calibration. BSS vs Bortman baseline (68%) measures discrimination, not probability alignment.",
+      "suggested_response": "Add calibration belt plots (Nattino et al. 2016) or bin-level observed-vs-expected plots for each tier, stratified by walk-forward fold. If calibration is poor, acknowledge that forecasts are discriminative rankings only and remove 'probabilistic' framing or qualify it as 'uncalibrated probabilistic scores.'",
+      "role": "stats",
+      "discovered_at": "2026-04-27T06:36:42.630350Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R8-04",
+      "severity": "MED",
+      "title": "E-value 2.07 cited without requisite confounding structure or quantitative bias analysis",
+      "critique": "Figure 2 annotates 'E-value = 2.07 for FSI lag-5 coefficient' but provides no DAG, no discussion of which unmeasured confounders could plausibly reach RR=2.07, and no sensitivity analysis around the observational IRR=0.734. E-values are screening tools, not shields; invoking one without structure is ritual compliance, not causal inference.",
+      "suggested_response": "Either (1) provide DAG with candidate unmeasured confounders (rodent serology, wildfire history, human mobility) and argue why RR≥2.07 is implausible for each, or (2) remove E-value annotation and present FSI coefficient as associational predictor only, deferring causal claims to future experimental or instrumental-variable designs.",
+      "role": "stats",
+      "discovered_at": "2026-04-27T06:36:42.630350Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R8-05",
+      "severity": "MED",
+      "title": "Decision curve threshold range [0.05, 0.20] remains operationally unjustified and arbitrary",
+      "critique": "Text states 'operational range p_t ∈ [0.05, 0.20] annotated' but provides zero cost-benefit elicitation, stakeholder input, or resource-constraint modeling to anchor these thresholds. DCA is meaningless without a priori cost ratios; annotating a range post-hoc is curve-shopping. The range conveniently excludes p_t>0.20 where net benefit may collapse.",
+      "suggested_response": "Document stakeholder elicitation with MINSAL/CONAF on cost of false alarm (patrol deployment, public messaging) vs cost of missed outbreak, translate to harm:benefit ratio, and solve for implied threshold. If unavailable, state 'we explored p_t ∈ [0.05,0.20] for illustrative purposes; operational thresholds require prospective stakeholder engagement.'",
+      "role": "stats",
+      "discovered_at": "2026-04-27T06:36:42.630350Z",
+      "status": "PENDING_MCC"
     }
   ],
   "version": 1,
   "initialized_at": "2026-04-11T07:39:31.354398Z",
-  "last_w5_run": "2026-04-26T06:15:20.508256Z"
+  "last_w5_run": "2026-04-27T06:36:42.630350Z"
 }
