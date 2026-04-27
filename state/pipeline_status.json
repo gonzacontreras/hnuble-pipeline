@@ -1,8 +1,8 @@
 {
   "workflows": {
     "w0": {
-      "last_run": "2026-04-20T07:47:42.898387Z",
-      "new_findings": 15,
+      "last_run": "2026-04-27T08:01:15.935539Z",
+      "new_findings": 22,
       "pending_approvals": 0
     },
     "w1": {
