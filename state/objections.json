@@ -429,9 +429,59 @@
       "role": "stats",
       "discovered_at": "2026-04-27T06:36:42.630350Z",
       "status": "PENDING_MCC"
+    },
+    {
+      "id": "R9-01",
+      "severity": "HIGH",
+      "title": "Case assignment protocol deflection to 'Supplementary Methods' fails to resolve outcome-dependent circularity",
+      "critique": "Manuscript states cases assigned to 'probable commune of infection' per 'Supplementary Methods' but provides no detail in Methods section. Walk-forward validation requires temporal integrity: outcome assignment must precede prediction. Retrospective spatial imputation based on epidemiological investigation inherently uses case status (the outcome) to determine location (the predictor space). This is fatal circularity.",
+      "suggested_response": "Provide explicit temporal protocol: (1) Were case locations determined *before* model training for each fold? (2) Were assignment rules fixed and blinded to model output? (3) Provide sensitivity analysis restricting to residence-address cases only (no imputation). Without this, all validation metrics are uninterpretable.",
+      "role": "stats",
+      "discovered_at": "2026-04-28T06:37:37.435883Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R9-02",
+      "severity": "HIGH",
+      "title": "Burn-in lock date 2026-04-04 remains temporally impossible and prespecification claim is demonstrably false",
+      "critique": "Authors claim Addendum v1.1 locked burn-in exclusion on 2026-04-04, *before* walk-forward output. But test folds 2011–2024 produce output dated earlier than lock date by physical impossibility. Filesystem timestamps cannot rescue this: the decision to exclude folds 2011–2014 is outcome-dependent model rescue. EPV ratio calculation (19.4) is post-hoc justification.",
+      "suggested_response": "Retract prespecification claims for burn-in exclusion. Report all 14 folds as primary analysis (already in Supp Table S3). Acknowledge burn-in exclusion as post-hoc sensitivity analysis. Recalculate all CIs and BSS over full 14-fold set. If Tier 1–2 skill holds, no rescue is needed; if not, model fails confirmatory threshold.",
+      "role": "stats",
+      "discovered_at": "2026-04-28T06:37:37.435883Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R9-03",
+      "severity": "HIGH",
+      "title": "Calibration assessment entirely absent despite 'probabilistic forecast' framing throughout manuscript",
+      "critique": "Manuscript claims 'probabilistic early warning system' (Abstract, Title, Methods 5.5.5) yet provides zero calibration assessment. Log score rewards sharpness + calibration jointly but does not decompose them. Without calibration plots (reliability diagrams) or Hosmer-Lemeshow / calibration slope, readers cannot determine whether model probabilities are trustworthy for operational thresholds.",
+      "suggested_response": "Add calibration plots (predicted vs observed) for each tier, stratified by walk-forward fold. Report calibration intercept and slope with 95% CI. If model is miscalibrated, recalibrate via isotonic regression or Platt scaling and re-report decision curve analysis. Probabilistic claims require demonstrated calibration, not just discrimination.",
+      "role": "stats",
+      "discovered_at": "2026-04-28T06:37:37.435883Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R9-04",
+      "severity": "MED",
+      "title": "E-value 2.07 presented without confounding DAG, quantitative bias analysis, or unmeasured confounder candidate specification",
+      "critique": "Figure 2 annotates E-value = 2.07 for FSI coefficient, implying unmeasured confounder would need RR ≥ 2.07 with both exposure and outcome to explain away effect. But manuscript provides no DAG, no candidate unmeasured confounders, no sensitivity analysis varying confounder strength. E-value alone is insufficient; VanderWeele requires explicit bias modeling and plausible confounder structure.",
+      "suggested_response": "Provide DAG with candidate unmeasured confounders (e.g., rodent density, human behavior, housing quality). Conduct quantitative bias analysis (e.g., array of confounder–exposure and confounder–outcome RRs). Acknowledge E-value 2.07 is weak threshold and does not establish causality. Remove causal language ('trigger,' 'operational lead time') or provide requisite causal inference infrastructure.",
+      "role": "stats",
+      "discovered_at": "2026-04-28T06:37:37.435883Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R9-05",
+      "severity": "MED",
+      "title": "Decision curve threshold range [0.05, 0.20] remains operationally unjustified and arbitrary without cost–benefit elicitation",
+      "critique": "Methods 5.5.8 states DCA conducted over [0, 0.25] with 'operational range [0.05, 0.20] annotated' but provides no justification. Threshold selection requires explicit cost–benefit ratio or stakeholder-elicited harm:benefit trade-off. Claiming 'operational' range without operationalizing harm/benefit is circular. Results 5.6.6 shows net benefit at p_t=0.05 but no sensitivity to cost ratio.",
+      "suggested_response": "Either (1) elicit cost–benefit ratio from MINSAL/SEREMI stakeholders (cost of false alarm vs benefit of true positive) and derive threshold from that ratio, or (2) present DCA across full range [0, 0.25] without privileging [0.05, 0.20], and state threshold selection is deferred to operational stakeholders. Without cost structure, DCA is descriptive visualization, not decision tool.",
+      "role": "stats",
+      "discovered_at": "2026-04-28T06:37:37.435883Z",
+      "status": "PENDING_MCC"
     }
   ],
   "version": 1,
   "initialized_at": "2026-04-11T07:39:31.354398Z",
-  "last_w5_run": "2026-04-27T06:36:42.630350Z"
+  "last_w5_run": "2026-04-28T06:37:37.435883Z"
 }
