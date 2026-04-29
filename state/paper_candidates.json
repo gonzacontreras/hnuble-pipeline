@@ -311,7 +311,19 @@
       "target_section": "methods",
       "discovered_at": "2026-04-29T03:38:52.879680Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.3389/fvets.2026.1737541",
+      "title": "Spatial prediction of animal plague risk in Qinghai Province, China using MaxEnt modeling: implications for targeted control",
+      "venue": null,
+      "pub_date": "2026-04-28",
+      "abstract": "Background Plague, as a highly infectious and fatal zoonotic disease, has shown a resurgence in multiple regions worldwide in recent years. Qinghai Province, a significant natural plague focus of the plateau type in China, has experienced periodic outbreaks. However, existing research has primarily focused on the spatial prediction of marmot-suitable habitats, with relatively few studies targeting the spatial prediction of animal plague risk zones. Methods Data on animal plague occurrence sites in Qinghai Province from 1956 to 2022 were collected. Terrain features, bioclimatic variables, land use types, and human disturbance variables related to plague spatial distribution were extracted. A maximum entropy (MaxEnt) model was used to construct a spatial prediction model for animal plague ri",
+      "score": 7,
+      "reason": "MaxEnt spatial prediction for zoonotic disease; comparable eco-epidemiological modeling framework",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-29T14:11:54.847793Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-29T03:38:52.879680Z"
+  "last_run": "2026-04-29T14:11:54.847793Z"
 }
