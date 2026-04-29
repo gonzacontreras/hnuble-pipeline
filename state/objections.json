@@ -479,9 +479,59 @@
       "role": "stats",
       "discovered_at": "2026-04-28T06:37:37.435883Z",
       "status": "PENDING_MCC"
+    },
+    {
+      "id": "R10-01",
+      "severity": "HIGH",
+      "title": "Case assignment protocol circular despite 'Supplementary Methods' deflection—Methods §5.5.1 explicitly states cases assigned to 'probable commune of infection' creating outcome-dependent imputation",
+      "critique": "Methods §5.5.1 states cases 'assigned to their probable commune of infection—rather than residence—following the case reconciliation protocol described in Supplementary Methods.' This is outcome-dependent spatial imputation: case status determines case location. Walk-forward validation then predicts cases at locations defined *by* case status. Circularity is fatal regardless of where protocol is documented.",
+      "suggested_response": "Restrict analysis to residence-based geocodes only (loss of n cases acceptable), or conduct dual analysis: (1) residence-based primary, (2) imputed-location sensitivity with explicit statement that validation metrics are biased upward. Current framing is statistically inadmissible.",
+      "role": "stats",
+      "discovered_at": "2026-04-29T06:32:12.538403Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R10-02",
+      "severity": "HIGH",
+      "title": "Burn-in lock date 2026-04-04 remains temporally impossible—Addendum v1.1 finalized *after* first walk-forward test-fold output (2011) physically generated",
+      "critique": "Methods §5.5.9 states Addendum v1.1 locked 2026-04-04, defining burn-in exclusion of folds 2011–2014. Test-fold output for 2011 was generated *before* this lock date by physical necessity (walk-forward protocol runs sequentially). Burn-in exclusion is post-hoc model rescue rationalized retrospectively. Pre-specification claim is demonstrably false.",
+      "suggested_response": "Report 14-fold metrics as primary (honest), 10-fold as sensitivity, with explicit statement: 'Burn-in exclusion was defined after observing initial fold performance; primary inference rests on all 14 folds.' Current narrative is temporal fraud.",
+      "role": "stats",
+      "discovered_at": "2026-04-29T06:32:12.538403Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R10-03",
+      "severity": "HIGH",
+      "title": "Calibration assessment entirely absent despite 'probabilistic forecast' framing in Abstract, Methods §5.5.5, Results §5.6.3—log score does not substitute for calibration plots or tests",
+      "critique": "Abstract: 'three-tier early warning system…probabilistic forecast.' Methods §5.5.5: 'predicted probabilities.' Results §5.6.3: 'forecast skill.' Zero calibration assessment: no calibration plot, no Hosmer-Lemeshow, no reliability diagram. Log score rewards sharpness + calibration but does not decompose them. Probabilistic claims require calibration evidence.",
+      "suggested_response": "Add calibration plots (predicted vs observed frequency) stratified by tier and walk-forward fold, with bootstrapped calibration-in-the-large/calibration slope (Van Calster et al. 2016). If poorly calibrated, retract 'probabilistic' framing and reframe as discrimination-only risk ranking.",
+      "role": "stats",
+      "discovered_at": "2026-04-29T06:32:12.538403Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R10-04",
+      "severity": "MED",
+      "title": "E-value 2.07 cited in Figure 2 caption without confounding DAG, unmeasured confounder candidates, or quantitative bias analysis—insufficient for causal inference claims",
+      "critique": "Figure 2 annotates E-value 2.07 for FSI coefficient. E-value measures unmeasured confounding strength needed to nullify association (VanderWeele & Ding 2017). Manuscript provides zero DAG, zero unmeasured confounder candidates (e.g., rodent trapping intensity, C. culeou vs C. quila spatial overlap), zero quantitative bias analysis. E-value alone is ritual without substance.",
+      "suggested_response": "Either (1) construct explicit confounding DAG with candidate unmeasured confounders + quantitative bias analysis (VanderWeele 2019), or (2) remove E-value and reframe as associational model only. Current invocation is performative causal-inference theatre.",
+      "role": "stats",
+      "discovered_at": "2026-04-29T06:32:12.538403Z",
+      "status": "PENDING_MCC"
+    },
+    {
+      "id": "R10-05",
+      "severity": "MED",
+      "title": "Decision curve threshold range [0.05, 0.20] remains operationally unjustified—Methods §5.5.8 and Results §5.6.6 provide no cost–benefit elicitation or stakeholder input",
+      "critique": "Methods §5.5.8: 'operational range p_t ∈ [0.05, 0.20] annotated.' Results §5.6.6: 'positive net benefit across p_t ∈ [0.05, 0.20].' No justification: no false-positive cost estimate, no false-negative harm quantification, no CONAF/SEREMI stakeholder elicitation. Threshold range is arbitrary and post-hoc selected to show model superiority.",
+      "suggested_response": "Conduct formal cost–benefit elicitation with CONAF/SEREMI (e.g., patrol cost per false alarm vs. averted HCPS hospitalization cost), derive threshold from empirical harm ratio, or present full DCA curve [0, 0.25] without highlighting arbitrary range. Current annotation is results-driven specification.",
+      "role": "stats",
+      "discovered_at": "2026-04-29T06:32:12.538403Z",
+      "status": "PENDING_MCC"
     }
   ],
   "version": 1,
   "initialized_at": "2026-04-11T07:39:31.354398Z",
-  "last_w5_run": "2026-04-28T06:37:37.435883Z"
+  "last_w5_run": "2026-04-29T06:32:12.538403Z"
 }
