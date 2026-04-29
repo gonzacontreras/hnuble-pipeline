@@ -287,7 +287,31 @@
       "target_section": "intro",
       "discovered_at": "2026-04-26T13:17:43.124750Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.5187/jast.25.00442",
+      "title": "Harnessing big data for climate‑smart livestock systems: A perspective on resilient animal‑source food security",
+      "venue": null,
+      "pub_date": "2026-04-23",
+      "abstract": "Climate change is reshaping livestock production through chronic heat stress, hydrologic extremes, feed and water volatility, and shifting burdens of climate-sensitive diseases. At the same time, the sector is known as a source of methane and nitrous oxide, creating a dual imperative for adaptation and mitigation. This review synthesizes evidence on climate risks to animal health, welfare, and productivity and evaluates how big data, spanning the Internet of Things (IoT), remote sensing, cloud computing, and artificial intelligence (AI), can convert heterogeneous streams of environmental and biological data into farm-to-policy decisions timely. Drawing on international case studies, we map a practical “digital stack” for climate-smart livestock systems: (1) continuous sensing of animals an",
+      "score": 7,
+      "reason": "Big data integration for climate-sensitive disease risk; remote sensing + IoT framework applicable to FSI methodology",
+      "target_section": "discussion",
+      "discovered_at": "2026-04-29T03:38:52.879680Z",
+      "status": "NEW"
+    },
+    {
+      "id": "b6f6edb3d5",
+      "title": "Agentic Forecasting using Sequential Bayesian Updating of Linguistic Beliefs",
+      "venue": null,
+      "pub_date": "2026-04-20",
+      "abstract": "We present BLF (Bayesian Linguistic Forecaster), an agentic system for binary forecasting that achieves state-of-the-art performance on the ForecastBench benchmark. The system is built on three ideas. (1) A linguistic belief state: a semi-structured representation combining numerical probability estimates with natural-language evidence summaries, updated by the LLM at each step of an iterative tool-use loop. This contrasts with the common approach of appending all retrieved evidence to an ever-growing context. (2) Hierarchical multi-trial aggregation: running $K$ independent trials and combining them using logit-space shrinkage with a data-dependent prior. (3) Hierarchical calibration: Platt scaling with a hierarchical prior, which avoids over-shrinking extreme predictions for sources with",
+      "score": 7,
+      "reason": "Hierarchical calibration via Platt scaling with data-dependent priors; extends our calibration methodology",
+      "target_section": "methods",
+      "discovered_at": "2026-04-29T03:38:52.879680Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-28T14:29:28.221787Z"
+  "last_run": "2026-04-29T03:38:52.879680Z"
 }
