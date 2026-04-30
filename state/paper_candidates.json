@@ -323,7 +323,19 @@
       "target_section": "discussion",
       "discovered_at": "2026-04-29T14:11:54.847793Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.33774/coe-2026-v9f5w",
+      "title": "A Bayesian Hidden Markov Framework for Early Prediction of Crohn’s Disease Flares: Integrating Wearable Sensors with Clinical Biomarkers via Hitting-Time Analysis",
+      "venue": null,
+      "pub_date": "2026-04-25",
+      "abstract": "When laboratory biomarkers are collected under symptom-triggered sampling, standard methods assume observation timing is independent of disease state (missing-at-random). This assumption is false in clinical practice, as sicker patients are tested more frequently. Ignoring this dependence provably biases posterior inference. This paper shows that explicitly modeling state-dependent laboratory sampling inside the Bayesian filtering recursion materially alters posterior dynamics and flare-prediction performance. Without this correction, threshold-based or feature-engineered supervised approaches cannot in general recover unbiased state estimates. The framework formalizes flare events as first hitting times in absorbing Markov chains and integrates continuous wearables with intermittent bioma",
+      "score": 7,
+      "reason": "Bayesian HMM for early prediction with lagged sensors; methodological analogy to lagged FSI GLMM framework",
+      "target_section": "methods",
+      "discovered_at": "2026-04-30T03:39:51.839439Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-04-29T14:11:54.847793Z"
+  "last_run": "2026-04-30T03:39:51.839439Z"
 }
