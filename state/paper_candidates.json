@@ -335,7 +335,31 @@
       "target_section": "methods",
       "discovered_at": "2026-04-30T03:39:51.839439Z",
       "status": "NEW"
+    },
+    {
+      "id": "8e1accf6c1",
+      "title": "A Divergence-Based Method for Weighting and Averaging Model Predictions",
+      "venue": null,
+      "pub_date": "2026-04-27",
+      "abstract": "This paper uses a minimum divergence framework to introduce a new way of calculating model weights that can be used to average probabilistic predictions from statistical and machine learning models. The method is general and can be applied regardless of whether the models under consideration are fit to data using frequentist, Bayesian, or some other fitting method. The proposed method is motivated in two different ways and is shown empirically to perform better than or on a par with standard model averaging methods, including model stacking and model averaging that relies on Akaike-style negative exponentiated model weighting, especially when the sample size is small. Our theoretical analysis explains why the method has a small-sample advantage.",
+      "score": 8,
+      "reason": "Novel divergence-based model weighting framework; direct relevance to ensemble/stacking approaches for prediction",
+      "target_section": "methods",
+      "discovered_at": "2026-05-01T13:38:46.443746Z",
+      "status": "NEW"
+    },
+    {
+      "id": "0be8034fa3",
+      "title": "A Tale of Two Variances: When Single-Seed Benchmarks Fail in Bayesian Deep Learning",
+      "venue": null,
+      "pub_date": "2026-04-25",
+      "abstract": "In limited-data settings, a single endpoint mean of an evaluation metric such as the Continuous Ranked Probability Score (CRPS) is itself a random variable, yet it is routinely reported as if it were a stable property of the method. We study when this practice fails. Using 50 independent repetitions across six regression datasets, we show that CRPS variance trajectories differ substantially across methods and are not always well described by a smooth power-law decay. Methods with a learned heteroscedastic variance head, namely MAP and Deep Ensembles, can develop pronounced, reproducible variance peaks at intermediate training sizes on real datasets, whereas MC Dropout and Bayes by Backprop typically show smooth variance contraction. These peaks have direct practical consequences: at the va",
+      "score": 7,
+      "reason": "Variance decomposition in probabilistic scoring (CRPS); directly relevant to reliability and calibration assessment",
+      "target_section": "methods",
+      "discovered_at": "2026-05-01T13:38:46.443746Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-05-01T03:52:57.044665Z"
+  "last_run": "2026-05-01T13:38:46.443746Z"
 }
