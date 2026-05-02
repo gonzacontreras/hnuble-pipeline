@@ -359,7 +359,19 @@
       "target_section": "methods",
       "discovered_at": "2026-05-01T13:38:46.443746Z",
       "status": "NEW"
+    },
+    {
+      "id": "10.3390/info17040395",
+      "title": "Deep Learning for Credit Risk Prediction: A Survey of Methods, Applications, and Challenges",
+      "venue": null,
+      "pub_date": "2026-04-21",
+      "abstract": "Credit risk prediction is central to financial stability and regulatory compliance, guiding lending decisions and portfolio risk management. While traditional approaches such as logistic regression and tree-based models have long been the industry standard, recent advances in deep learning (DL) have introduced architectures capable of capturing complex nonlinearities, temporal dynamics, and relational dependencies in borrower data. This study provides a comprehensive review of DL methods applied to credit risk prediction, covering multi-layer perceptron, recurrent and convolutional neural networks, transformer, and graph neural networks. We examine benchmark and large-scale datasets, highlight peer-reviewed applications across corporate, consumer, and peer-to-peer lending, and evaluate the",
+      "score": 7,
+      "reason": "Comprehensive DL review for risk prediction; methods section for GLMM comparison and temporal model justification",
+      "target_section": "methods",
+      "discovered_at": "2026-05-02T03:26:03.307400Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-05-01T13:38:46.443746Z"
+  "last_run": "2026-05-02T03:26:03.307400Z"
 }
