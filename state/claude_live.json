@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "heartbeat_sequence": 1025,
-  "updated_at": "2026-05-03T08:29:45Z",
+  "heartbeat_sequence": 1027,
+  "updated_at": "2026-05-03T09:43:43Z",
   "session": "S61",
   "session_deadline": "2026-04-14T06:00:00Z",
-  "current_block": "W15",
+  "current_block": "W12",
   "current_block_label": "EID Scorer",
   "overall_status": "done",
   "agent": "Claude Opus 4.6 (1M context)",
@@ -55,7 +55,7 @@
     "Deploy Pages trigger manual · verificación URL pública",
     "HANDOFF.md con guía 5 pasos · ntfy notif final 'Sistema LIVE'"
   ],
-  "tool_calls_total": 534,
+  "tool_calls_total": 535,
   "files_touched": [
     "pipeline/repo/state/claude_live.json",
     "pipeline/repo/state/schemas/claude_live.schema.json",
