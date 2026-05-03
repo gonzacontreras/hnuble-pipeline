@@ -371,7 +371,43 @@
       "target_section": "methods",
       "discovered_at": "2026-05-02T03:26:03.307400Z",
       "status": "NEW"
+    },
+    {
+      "id": "ccfe9e3628",
+      "title": "Recipes for Calibration Checks in Safety-Critical Applications",
+      "venue": null,
+      "pub_date": "2026-04-29",
+      "abstract": "Safety-critical prediction systems, such as autonomous vehicles, weather forecasters, and medical monitors, commonly rely on probabilistic forecasters. These forecasters make predictions about possible future outcomes, and their quality and robustness needs to be validated and certified. Often, only accuracy -- the mean of the predictions -- is evaluated against true outcomes. However, for safety-critical scenarios and decision making under uncertainty, the full distributional properties of the forecasts should be checked: do the observed prediction errors actually follow the forecasted probability distributions? To this end, we introduce a framework for calibration checks: statistical tests that validate distributional properties of forecasts when measured over many samples. In order to s",
+      "score": 9,
+      "reason": "Framework for calibration checks validates distributional forecasts - directly applicable to our Brier/BSS/RPS methodology",
+      "target_section": "methods",
+      "discovered_at": "2026-05-03T13:22:45.488216Z",
+      "status": "NEW"
+    },
+    {
+      "id": "10.3390/fractalfract10050298",
+      "title": "Tempered Fractional Gradient Descent for Stacked Ensembles in Smart Grid Stability Prediction: Improving Calibration and Reliability",
+      "venue": null,
+      "pub_date": "2026-04-28",
+      "abstract": "This paper introduces a reliability-centric stacking framework for smart-grid stability prediction, considered here as the binary classification of stable versus unstable operating conditions in a benchmark smart-grid dataset. A key methodological strength of the proposed approach is its leakage-safe evaluation protocol, which combines strict outer cross-validation with out-of-fold meta-features so that performance is assessed without reusing validation information. The meta-learner is trained with Tempered Fractional Gradient Descent (TFGD), a history-aware optimizer designed to stabilize meta-level learning and improve the trustworthiness of probability estimates. On the UCI Electrical Grid Stability dataset, the proposed TFGD-stacking framework preserves strong discrimination performanc",
+      "score": 8,
+      "reason": "Reliability-centric prediction with strict cross-validation protocol - mirrors our leakage-safe evaluation and calibration focus",
+      "target_section": "methods",
+      "discovered_at": "2026-05-03T13:22:45.488216Z",
+      "status": "NEW"
+    },
+    {
+      "id": "10.71146/kjmr899",
+      "title": "TELEMETRY PRIMACY UNDER REGIME SHIFT: A CONTROLLED BENCHMARK OF COMMUNICATION-DEGRADATION EARLY WARNING FOR AUTONOMOUS AERIAL LINKS",
+      "venue": null,
+      "pub_date": "2026-04-25",
+      "abstract": "Autonomous aerial systems rely on stable wireless links for control, telemetry exchange, and mission continuity. In practice, these links can degrade under changing load, interference, and difficult operating conditions, which makes early warning important. This paper studies communication-degradation early warning using a controlled 6G telemetry benchmark, while treating UAV-assisted and autonomous aerial links as the motivating application rather than as a direct data source. We formulate the task as next-interval risk prediction from recent telemetry and client-profile information, and evaluate generalization with a leave-one-regime-out protocol across four operating regimes. To test whether added temporal complexity is truly useful, we compare strong aggregate baselines with temporal a",
+      "score": 7,
+      "reason": "Early warning under regime shift with temporal risk prediction - conceptual parallel to our FSI-lag operational warning system",
+      "target_section": "discussion",
+      "discovered_at": "2026-05-03T13:22:45.488216Z",
+      "status": "NEW"
     }
   ],
-  "last_run": "2026-05-03T03:45:07.881173Z"
+  "last_run": "2026-05-03T13:22:45.488216Z"
 }
